@@ -1,0 +1,17 @@
+/* 移除原生樣式，確保自訂箭頭有效 */
+select.form-control {
+	appearance: none; /* 移除瀏覽器內建箭頭 */
+	background-color: transparent;
+	border: none;
+	font-size: 16px;
+	color: #6c757d; /* 預設灰色 */
+}
+
+select.form-control option {
+	color: #000; /* 選項文字顏色 */
+}
+
+/* 自訂箭頭位置 */
+.position-absolute span {
+	pointer-events: none; /* 防止影響用戶點擊操作 */
+}
