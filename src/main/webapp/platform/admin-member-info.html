@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>平台管理員後台</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars - 會控制到sidebar 的卷軸-->
+    <link rel="stylesheet" href="../admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- 引入bootstrap iocn CDN方式 - sidebar 的icon 會用到 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- ================================== 針對此頁面所需引入的css ================================== -->
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <!-- Preloader 不要動-->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="../admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    </div>
+
+    <!-- Wrapper - 整頁的內容-->
+    <div class="wrapper">
+        <!-- Navbar 引入用標籤，不要動-->
+        <nav id="navbar"></nav>
+        <!-- /.Navbar End -->
+
+        <!-- Sidebar 引入用標籤，不要動-->
+        <aside id="sidebar"></aside>
+        <!-- /.Sidebar End -->
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- ============================ 個別頁面內容放在這!!!! 其他標籤不要動 ============================  -->
+            <!-- 主內容的Header - 頁面索引 & 返回鍵 -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-left">
+                                <li class="breadcrumb-item"><a href="#">一般會員管理</a></li>
+                                <li class="breadcrumb-item"><a href="#">一般會員列表</a></li>
+                                <li class="breadcrumb-item active">USR1234562</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+                <button type="button" class="btn btn-secondary" style="margin-left: 8px;">返回</button>
+            </section>
+            <!-- 主內容的Header - 頁面索引 結束 -->
+
+            <!-- 主內容的Body - 內容 -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- 主內容卡片 -->
+                            <div class="card">
+                                <!-- 卡片標頭 標題-->
+                                <div class="card-header row justify-content-center">
+                                    <h1 class="card-title" style="font-size: 20px; font-weight: bold;">一般會員</h1>
+                                </div>
+                                <!-- 卡片標頭 大頭照 & 名稱-->
+                                <div class="card-header row justify-content-center align-items-center">
+                                    <!-- Profile Image -->
+                                    <img class="profile-user-img img-fluid img-circle"
+                                        src="../admin/dist/img/user4-128x128.jpg" alt="User profile picture">
+                                    <h4 class="text-left col-sm order-2" style="padding: 0 0 0 2%;">Nina Mcintire</h4>
+                                    <p class="col-sm order-3"></p>
+                                </div>
+                                <!-- /.卡片標頭 結束-->
+
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <!-- tab 名稱 -->
+                                            <div class="card-header p-2">
+                                                <ul class="nav nav-pills">
+                                                    <li class="nav-item"><a class="nav-link active" href="#basic-info"
+                                                            data-toggle="tab">基本資料</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#addresses"
+                                                            data-toggle="tab">地址資訊</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#register-activity"
+                                                            data-toggle="tab">報名活動</a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- /.tab 名稱 結束 -->
+
+                                            <!-- 這裡要放tab 裡面各自的內容↓ -->
+                                            <!-- tab 以下的內容-->
+                                            <div class="card-body">
+                                                <div class="tab-content">
+                                                    <!-- 頁籤一 - basic info-->
+                                                    <!-- 預設顯示的要加active 在class -->
+                                                    <div class="active tab-pane" id="basic-info">
+                                                        <div class="card-body box-profile">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <ul class="list-group list-group-unbordered mb-3">
+                                                                        <li class="list-group-item"><b>會員編號</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                USR1234562</p>
+                                                                        </li>
+                                                                        <li class="list-group-item"><b>會員帳號</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                asdffgg852369</p>
+                                                                        </li>
+                                                                        <li class="list-group-item"><b>連絡電話</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                0912345678</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <ul class="list-group list-group-unbordered mb-3">
+                                                                        <li class="list-group-item left"><b>註冊日期/時間</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                2024/12/28 19:35</p>
+                                                                        </li>
+                                                                        <li class="list-group-item"><b>電子信箱</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                hsiaomingwang@example.com.tw</p>
+                                                                        </li>
+                                                                        <li class="list-group-item"><b>身分證字號</b>
+                                                                            <p class="float-right text-muted"
+                                                                                style="margin-bottom: 0;">
+                                                                                A125496387</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.頁籤一 - basic info 結束-->
+
+                                                    <!-- 頁籤二 - addresses -->
+                                                    <div class="tab-pane" id="addresses">
+                                                        <section class="content">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <table id="example2"
+                                                                            class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>地址名稱</th>
+                                                                                    <th>郵遞區號</th>
+                                                                                    <th>縣市 / 區</th>
+                                                                                    <th>地址</th>
+                                                                                    <th>預設地址</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>台北總公司</td>
+                                                                                    <td>100</td>
+                                                                                    <td>台北市中正區</td>
+                                                                                    <td>忠孝西路一段99號10樓</td>
+                                                                                    <td>是</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>新竹分公司</td>
+                                                                                    <td>300</td>
+                                                                                    <td>新竹市東區</td>
+                                                                                    <td>光復路二段500號5樓</td>
+                                                                                    <td>否</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>高雄辦事處</td>
+                                                                                    <td>802</td>
+                                                                                    <td>高雄市苓雅區</td>
+                                                                                    <td>三多路四路88號12樓</td>
+                                                                                    <td>否</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>台中物流中心</td>
+                                                                                    <td>407</td>
+                                                                                    <td>台中市西屯區</td>
+                                                                                    <td>文心路三段55號</td>
+                                                                                    <td>否</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <!-- /.頁籤二 - addresses 結束 -->
+
+                                                    <!-- 頁籤三 - register activity -->
+                                                    <div class="tab-pane" id="register-activity">
+                                                        <!-- <div class="card"> -->
+                                                        <section class="content">
+                                                            <div class="container-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <table id="example1"
+                                                                            class="table table-bordered table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>活動編號</th>
+                                                                                    <th>活動名稱</th>
+                                                                                    <th>活動分類</th>
+                                                                                    <th>活動日期</th>
+                                                                                    <th>報名人數</th>
+                                                                                    <th>活動狀態</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>ACT1234562</td>
+                                                                                    <td>打排球</td>
+                                                                                    <td>球類運動-排球</td>
+                                                                                    <td>2024/12/06</td>
+                                                                                    <td>X</td>
+                                                                                    <td>已結束</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                            <tfoot>
+                                                                                <!-- <tr>
+                                                                                    <th>活動編號</th>
+                                                                                    <th>活動名稱</th>
+                                                                                    <th>活動分類</th>
+                                                                                    <th>活動日期</th>
+                                                                                    <th>報名人數</th>
+                                                                                    <th>活動狀態</th>
+                                                                                </tr> -->
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <!-- 頁籤三 - register activity 結束 -->
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <!-- /.tab 內容結束 -->
+                                            <!-- 這裡要放tab 裡面各自的內容↑ -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.tab 所有內容結束 -->
+                            </div>
+                            <!-- /.主內容卡片 結束 -->
+                        </div>
+                        <!-- /.col-12 結束 -->
+                    </div>
+                    <!-- /.row 結束-->
+                </div>
+                <!-- /.container-fluid 結束-->
+            </section>
+            <!-- /.主內容的Body - 內容 結束 -->
+        </div>
+
+        <!-- Footer 引入用標籤，不要動-->
+        <footer id="footer"></footer>
+
+        <!-- ============================ 目前應該是用不到"右邊控制欄"，先註解起來 ============================ -->
+        <!-- Control Sidebar -->
+        <!-- <aside class="control-sidebar control-sidebar-dark"></aside> -->
+        <!-- /.control-sidebar -->
+
+    </div>
+    <!-- ./Content Wrapper. Contains page content 結束 -->
+
+
+    <!-- ============================ 以下都放JS ============================  -->
+    <!-- jQuery -->
+    <script src="../admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../admin/dist/js/adminlte.min.js"></script>
+
+    <!-- ===================== 不想一值跳出警告視窗所以先註解掉 =====================  -->
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../dist/js/demo.js"></script> -->
+
+    <!-- ===================== 因為有用fontawesome icon =====================  -->
+    <!-- import font-awesome -->
+    <script src="https://kit.fontawesome.com/775be41cdd.js" crossorigin="anonymous"></script>
+
+    <!-- ===================== 客製載入/引用各頁面 ===================== -->
+    <!-- import admin.js -->
+    <script src="js/admin.js"></script>
+
+    <!-- ================================== 針對此頁面所需引入的js ================================== -->
+    <!-- DataTables  & Plugins -->
+    <script src="../admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../admin/plugins/jszip/jszip.min.js"></script>
+    <script src="../admin/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../admin/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
