@@ -16,7 +16,12 @@ public class ActivityDaoImpl implements ActivityDao {
 	private DataSource ds;
 	
 	public ActivityDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/CHILL_PROJECT");
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chill_project");
+		if (ds != null) {
+            System.out.println("DataSource found!");
+        } else {
+            System.out.println("DataSource not found.");
+        }
 	}
 	
 	@Override
