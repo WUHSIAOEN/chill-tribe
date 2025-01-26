@@ -1,0 +1,67 @@
+/* 必填欄位的* */
+.input-required {
+    color: red;
+    font-size: medium;
+}
+
+/* 我的地址頁面-客製css  */
+table.property-table-wrap .property-container .title .table-property-tag {
+    display: inline-block;
+    background:#7da7fc;
+    color:#485467;
+    border-radius: 2px;
+    font-size: 13px;
+    margin-top: 9px;
+    padding: 2px 10px;
+}
+
+/* button 的icon (因為原本是用a 標籤，把它全部改成button 標籤)*/
+table.property-table-wrap td.action button i {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background:#f1f3f7;
+    text-align: center;
+	display: inline-block;
+    border-radius: 3px;
+}
+
+/* 預設button */
+table.property-table-wrap td.action button.set-default {
+    display: block;
+    color:#677994;
+    line-height: 20px;
+    padding: 5px 8.5px;
+    position: relative;
+    margin-left: 21px;
+}
+
+/* 該筆item 預設的時候，預設按鈕會消失 */
+.bkmark button.set-default.-on{
+    display: none !important; 
+}
+
+/* 刪除button */
+table.property-table-wrap td.action button.delete {
+    display: block;
+    color:#677994;
+    line-height: 20px;
+    padding: 3px 8px 3px 0;
+    position: relative;
+    margin-left: 21px;
+}
+
+
+/* 刪除&預設button 共用*/
+.bkmark button.delete, .bkmark button.set-default {
+    margin-top: 20px;
+    border: none;
+}
+
+
+.bkmark .action-container {
+    display: flex;
+    flex-direction: column; /* 讓元素上下排列 */
+    align-items: flex-end;  /* 將它們對齊到右邊 */
+}
+
