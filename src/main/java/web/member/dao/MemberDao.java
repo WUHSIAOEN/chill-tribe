@@ -11,6 +11,10 @@ public interface MemberDao {
 	// SQL:select * from MEMBER where USERNAME = ?
 	Member selectByUsername(String username);
 	
+	Member selectByEmail(String email);
+	
+	Member selectByPhone(String phone);
+	
 	int update(Member member);
 	
 	Member selectByUsernameAndPassword(Member member);

@@ -11,16 +11,5 @@
 	<request-character-encoding>UTF-8</request-character-encoding>
 	<response-character-encoding>UTF-8</response-character-encoding>
 
-	<servlet>
-		<servlet-name>registerSLServlet</servlet-name>
-		<servlet-class>web.servlet.RegisterSLServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>registerSLServlet</servlet-name>
-		<url-pattern>/registerSL</url-pattern>
-		<url-pattern>/REGISTER_SL</url-pattern>
-	</servlet-mapping>
-	
 
 </web-app>

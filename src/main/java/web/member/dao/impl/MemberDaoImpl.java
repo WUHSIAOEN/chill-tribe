@@ -141,4 +141,48 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return -1;
 	}
+
+		@Override
+		public Member selectByEmail(String email) {
+			String sql = "select * from MEMBERS where EMAIL = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, email);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Member member = new Member();
+						member.setMember_id(rs.getInt("MEMBER_ID"));
+						member.setMember_name(rs.getString("MEMBER_NAME"));
+						member.setPhone(rs.getString("PHONE"));
+						member.setEmail(rs.getString("EMAIL"));
+						member.setPassword(rs.getString("PASSWORD"));
+						return member;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		public Member selectByPhone(String phone) {
+			String sql = "select * from MEMBERS where PHONE = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, phone);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Member member = new Member();
+						member.setMember_id(rs.getInt("MEMBER_ID"));
+						member.setMember_name(rs.getString("MEMBER_NAME"));
+						member.setPhone(rs.getString("PHONE"));
+						member.setEmail(rs.getString("EMAIL"));
+						member.setPassword(rs.getString("PASSWORD"));
+						return member;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 }

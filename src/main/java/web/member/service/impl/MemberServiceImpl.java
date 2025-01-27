@@ -25,27 +25,31 @@ public class MemberServiceImpl implements MemberService{
 			return "此使用者名稱已被註冊";
 		}
 		
-//		if (member_name == null || member_name.length() < 2 || member_name.length() > 50) {
-//			System.out.println(member_name);
-//			return "使用者名稱長度須介於5 ~ 50";
-//		}
+		String email = member.getEmail();
+		if (memberDao.selectByEmail(email) != null) {
+			return "此Email已被註冊";
+		}
+		
+		String phone = member.getPhone();
+		if (memberDao.selectByUsername(phone) != null) {
+			return "此手機號碼已被註冊";
+		}
+		
+		if (member_name == null || member_name.length() < 2 || member_name.length() > 50) {
+			System.out.println(member_name);
+			return "使用者名稱長度須介於2 ~ 50";
+		}
 		
 		String password = member.getPassword();
-//		if (password == null || password.length() < 6 || password.length() > 12) {
-//			System.out.println(password);
-//			return "密碼長度須介於6 ~ 12";
-//		}
-//		
-//		if (!Objects.equals(password, member.getcPassword())) {
-//			System.out.println(member.getcPassword());
-//			return "密碼與確認密碼不符合";
-//		}
+		if (password == null || password.length() < 4 || password.length() > 12) {
+			System.out.println(password);
+			return "密碼長度須介於4 ~ 12";
+		}
 		
-//		String nicfkname = member.getNickname();
-//		if (nicfkname == null || nicfkname.length() < 1 || nicfkname.length() > 20) {
-//			System.out.println(nicfkname);
-//			return "匿名長度須介於1 ~ 20";
-//		}
+		if (!Objects.equals(password, member.getcPassword())) {
+			System.out.println(member.getcPassword());
+			return "密碼與確認密碼不符合";
+		}
 		
 		int resultCount =  memberDao.insert(member);
 		
