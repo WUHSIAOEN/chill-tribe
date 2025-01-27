@@ -86,7 +86,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member login(Member member) {
-//		String member_name = member.getMember_name();
 		String email = member.getEmail();
 		if (email == null || email.isEmpty()) {
 			member.setSuccessful(false);
