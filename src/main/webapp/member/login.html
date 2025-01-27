@@ -23,12 +23,12 @@
                 <form>
                 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="loginemail" placeholder="name@example.com">
                         <label>請輸入Email</label>
                     </div>
                     
                     <div class="form-floating mb-3">
-                      <input type="password" class="form-control" placeholder="Password">
+                      <input type="password" class="form-control" id="loginpassword" placeholder="Password">
                       <label>請輸入密碼</label>
                     </div>
                     
@@ -47,7 +47,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="button" class="btn btn-lg btn-primary fw-medium full-width rounded-2">登入</button>
+                        <button type="button" class="btn btn-lg btn-primary fw-medium full-width rounded-2" id="btn_login">登入</button>
                     </div>
                 
                 </form>
@@ -64,3 +64,69 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+		
+		const loginemail = document.querySelector('#loginemail');
+		const loginpassword = document.querySelector('#loginpassword');
+// 		const msg = document.querySelector('#msg');
+
+		$('button#btn_login').on('click', () => {
+			console.log("登入按鈕觸發");
+			if (!loginemail.value) {
+				alert('Email必須輸入');
+				return;
+			}
+			
+			if (!loginpassword.value) {
+				alert('密碼必須輸入');
+				return;
+			}
+			
+			
+			
+			console.log("發送的資料：", {
+			    email: loginemail.value,
+			    password: loginpassword.value,
+			});
+			console.log("發送登入請求");
+			
+			
+			fetch('login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email: loginemail.value,
+					password: loginpassword.value,
+				})
+			})
+			// console.log(resp)
+// 			 .then(resp => {
+// 				 return resp.json();
+// 			 })
+
+			.then(resp => {
+	            if (!resp.ok) {
+	                throw new Error(`HTTP error! status: ${resp.status}`);
+	            }
+	            return resp.json(); 
+	        })
+	        .then(data => {
+	            console.log("返回值:", data);
+	            if (data.successful) {
+	                console.log("登入成功");
+	                window.location.href = '/chill-tribe/member/register.html';  
+	            } else {
+	                console.log("登入失敗");
+	            }
+	        })
+	        .catch(error => {
+	            console.error("錯誤訊息:", error);
+	        });
+	    });
+
+		</script>
