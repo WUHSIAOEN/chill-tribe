@@ -2,16 +2,10 @@
 
 <Context>
  
-<<<<<<< HEAD
-  <Resource name="jdbc/chill_project" type="javax.sql.DataSource"
- driverClassName="com.mysql.cj.jdbc.Driver"
- jdbcUrl="jdbc:mysql://localhost:3306/CHILL_PROJECT"
-=======
   <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
- driverClassName="com.mysql.cj.jdbc.Driver"
- jdbcUrl="jdbc:mysql://localhost:3306/chilltribe"
->>>>>>> 3a857d102db0aac7661d4d9d84b898d35ac6c01f
-    username="root"
+ 	driverClassName="com.mysql.cj.jdbc.Driver"
+ 	jdbcUrl="jdbc:mysql://localhost:3306/chilltribe"
+ 	username="root"
     password="123456"
     factory="com.zaxxer.hikari.HikariJNDIFactory"
     dataSource.cachePrepStmts="true"
