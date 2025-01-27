@@ -1,6 +1,7 @@
 package web.activity.service.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -47,6 +48,12 @@ public class ActivityServiceImpl implements ActivityService{
 		
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";		
 
+	}
+
+	@Override
+	public List<Activity> findActivities() {
+		// TODO Auto-generated method stub
+		return dao.selectByActivityName();
 	}
 
 }
