@@ -17,7 +17,7 @@ public class MemberDaoImpl implements MemberDao {
 	private DataSource ds;
 
 	public MemberDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chill_project");
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
 	}
 
 	@Override
