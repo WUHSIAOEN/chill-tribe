@@ -1,6 +1,7 @@
 package web.activity.service.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -18,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService{
 
 	@Override
 	public String apply(Activity activity) {
-		Integer activityId = activity.getActivityId();
+//		Integer activityId = activity.getActivityId();
 		String activityPrefix = activity.getActivityPrefix(); // 活動代碼前綴
 		String activityName = activity.getActivityName(); // 活動名稱
 		Integer supplierId = activity.getSupplierId(); // 供應商編號
@@ -43,10 +44,15 @@ public class ActivityServiceImpl implements ActivityService{
 		Timestamp ticketsActivateTime = activity.getTicketsActivateTime(); // 票券啟動時間
 		Timestamp ticketsExpiredTime = activity.getTicketsExpiredTime(); // 票券過期時間
 		
-		int resultCount = dao.apply(activity);
+		int resultCount = dao.insert(activity);
 		
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";		
 
+	}
+
+	@Override
+	public List<Activity> findAll() {
+		return dao.selectAll();
 	}
 
 }

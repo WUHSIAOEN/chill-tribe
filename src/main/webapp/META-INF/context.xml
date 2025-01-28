@@ -3,9 +3,9 @@
 <Context>
  
   <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
- driverClassName="com.mysql.cj.jdbc.Driver"
- jdbcUrl="jdbc:mysql://localhost:3306/CHILLTRIBE"
-    username="root"
+ 	driverClassName="com.mysql.cj.jdbc.Driver"
+ 	jdbcUrl="jdbc:mysql://localhost:3306/chilltribe"
+ 	username="root"
     password="123456"
     factory="com.zaxxer.hikari.HikariJNDIFactory"
     dataSource.cachePrepStmts="true"
