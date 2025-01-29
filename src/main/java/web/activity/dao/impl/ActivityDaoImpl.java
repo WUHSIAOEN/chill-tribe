@@ -5,7 +5,8 @@ package web.activity.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -25,6 +26,7 @@ public class ActivityDaoImpl implements ActivityDao {
 			System.out.println("DataSource not found.");
 		}
 	}
+
 	// 新增活動
 	@Override
 	public int insert(Activity activity) {
@@ -64,30 +66,25 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 		return -1;
 	}
-	
-//	查詢活動名字
-	
+
 	@Override
-	public Activity selectByActivityName(String activityName) {
-		final String SQL = "SELECT * FROM ACTIVITIES WHERE ACTIVITY_NAME = ?";
-		try (Connection conn = ds.getConnection(); 
-			PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setString(1, activityName);
-			
-			try (
-				ResultSet rs = pstmt.executeQuery()) {
-				
-				if (rs.next()) {
+	public List<Activity> selectAll() {
+		final String SQL = "SELECT * FROM ACTIVITIES";
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+			ResultSet rs = pstmt.executeQuery();
+
+			List<Activity> list = new ArrayList<>();
+			while (rs.next()) {
 				Activity activity = new Activity();
 				activity.setActivityId(rs.getInt("activityId"));
-				activity.setActivityPrefix(rs.getString("activityPrefix")); 
+				activity.setActivityPrefix(rs.getString("activityPrefix"));
 				activity.setActivityName(rs.getString("activityName"));
 				activity.setSupplierId(rs.getInt("supplierId"));
 				activity.setAddress(rs.getString("address"));
 				activity.setUnitPrice(rs.getInt("unitPrice"));
 				activity.setMinParticipants(rs.getInt("minParticipants"));
 				activity.setMaxParticipants(rs.getInt("maxParticipants"));
-				activity.setDescription(rs.getString("description")); 
+				activity.setDescription(rs.getString("description"));
 				activity.setCategory(rs.getString("category"));
 				activity.setStartDateTime(rs.getTimestamp("startDateTime"));
 				activity.setEndDateTime(rs.getTimestamp("endDateTime"));
@@ -97,20 +94,38 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setCity(rs.getString("city"));
 				activity.setDistrict(rs.getString("district"));
 				activity.setInventoryCount(rs.getInt("inventoryCount"));
-				activity.setInventoryUpdateTime(rs.getTimestamp("inventoryUpdateTime")); 
+				activity.setInventoryUpdateTime(rs.getTimestamp("inventoryUpdateTime"));
 				activity.setCreatedTime(rs.getTimestamp("createdTime"));
 				activity.setLatitude(rs.getString("latitude"));
 				activity.setLongitude(rs.getString("longitude"));
-				activity.setTicketsActivateTime(rs.getTimestamp("ticketsActivateTime")); 
-				activity.setTicketsExpiredTime(rs.getTimestamp("ticketsExpiredTime"));  
-				
-				return activity;
-				}
+				activity.setTicketsActivateTime(rs.getTimestamp("ticketsActivateTime"));
+				activity.setTicketsExpiredTime(rs.getTimestamp("ticketsExpiredTime"));
 			}
-			
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return null;
+		}
+	}
+	
+//  更新活動
+	@Override
+	public int update(Activity activity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+//  刪除活動
+	@Override
+	public int deletById(Integer activityId) {
+		String SQL = "delete from ACTIVITIES where activityId = ?";
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+			pstmt.setInt(1, activityId);
+			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 }

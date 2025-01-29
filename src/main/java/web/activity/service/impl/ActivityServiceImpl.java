@@ -51,9 +51,8 @@ public class ActivityServiceImpl implements ActivityService{
 	}
 
 	@Override
-	public List<Activity> findActivities() {
-		// TODO Auto-generated method stub
-		return dao.selectByActivityName();
+	public List<Activity> findAll() {
+		return dao.selectAll();
 	}
 
 }
