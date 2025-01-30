@@ -2,7 +2,7 @@
 
 <Context>  
  
-   <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
+    <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
  	driverClassName="com.mysql.cj.jdbc.Driver"
  	jdbcUrl="jdbc:mysql://localhost:3306/chilltribe"
  	username="root"
