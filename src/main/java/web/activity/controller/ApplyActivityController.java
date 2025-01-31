@@ -20,7 +20,7 @@ import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.vo.Activity;
 
-@WebServlet("/activity/apply")
+@WebServlet("/supplier_dashboard/pages/activity_forms/supplier_input")
 public class ApplyActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
