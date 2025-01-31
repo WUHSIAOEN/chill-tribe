@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
@@ -66,39 +67,46 @@ public class ApplyActivityController extends HttpServlet {
 //		String ticketsExpiredTime = req.getParameter("ticketsExpiredTime"); // 票券過期時間
 		
 // 		實例化		
-		Activity activity = new Activity();
-		Timestamp testTimestamp = Timestamp.valueOf("2025-12-31 23:59:59");
-		
-		activity.setActivityPrefix("evt");  // 設定活動代碼前綴
-		activity.setActivityName("test");  // 設定活動名稱
-		activity.setSupplierId(103);  // 設定供應商編號
-		activity.setAddress("test");  // 設定活動地址
-		activity.setUnitPrice(100);  // 設定單位價格
-		activity.setMinParticipants(100);  // 設定最小參加人數
-		activity.setMaxParticipants(100);  // 設定最大參加人數
-		activity.setDescription("test");  // 設定活動描述
-		activity.setCategory("test");  // 設定活動類別
-		activity.setStartDateTime(testTimestamp);  // 設定開始時間
-		activity.setEndDateTime(testTimestamp);  // 設定結束時間
-		activity.setStatus(0);  // 設定狀態
-		activity.setNote("test");  // 設定備註
+//		Activity activity = new Activity();
+//		Timestamp testTimestamp = Timestamp.valueOf("2025-12-31 23:59:59");
+//		
+//		activity.setActivityPrefix("evt");  // 設定活動代碼前綴
+//		activity.setActivityName("test");  // 設定活動名稱
+//		activity.setSupplierId(103);  // 設定供應商編號
+//		activity.setAddress("test");  // 設定活動地址
+//		activity.setUnitPrice(100);  // 設定單位價格
+//		activity.setMinParticipants(100);  // 設定最小參加人數
+//		activity.setMaxParticipants(100);  // 設定最大參加人數
+//		activity.setDescription("test");  // 設定活動描述
+//		activity.setCategory("test");  // 設定活動類別
+//		activity.setStartDateTime(testTimestamp);  // 設定開始時間
+//		activity.setEndDateTime(testTimestamp);  // 設定結束時間
+//		activity.setStatus(0);  // 設定狀態
+//		activity.setNote("test");  // 設定備註
 //		activity.setApproved(1);  // 設定審核狀態
-		activity.setCity("test");  // 設定城市
-		activity.setDistrict("test");  // 設定地區
-		activity.setInventoryCount(12);  // 設定庫存數量
-		activity.setInventoryUpdateTime(testTimestamp);  // 設定庫存更新時間
-		activity.setCreatedTime(testTimestamp);  // 設定建立時間
-		activity.setLatitude("test");  // 設定緯度
-		activity.setLongitude("test");  // 設定經度
-		activity.setTicketsActivateTime(testTimestamp);  // 設定票券啟動時間
-		activity.setTicketsExpiredTime(testTimestamp);  // 設定票券過期時間
+//		activity.setCity("test");  // 設定城市
+//		activity.setDistrict("test");  // 設定地區
+//		activity.setInventoryCount(12);  // 設定庫存數量
+//		activity.setInventoryUpdateTime(testTimestamp);  // 設定庫存更新時間
+//		activity.setCreatedTime(testTimestamp);  // 設定建立時間
+//		activity.setLatitude("test");  // 設定緯度
+//		activity.setLongitude("test");  // 設定經度
+//		activity.setTicketsActivateTime(testTimestamp);  // 設定票券啟動時間
+//		activity.setTicketsExpiredTime(testTimestamp);  // 設定票券過期時間
 
-//		Gson gson = new Gson();
-//		Activity activity = gson.fromJson(req.getReader(), Activity.class);
+		Gson gson = new Gson();
+		Activity activity = gson.fromJson(req.getReader(), Activity.class);
 		
 //	 	在 doPost() 中，根據前端傳過來的資料創建 activity 物件，並調用 service.apply(activity) 方法。		
 		String errMsg = service.apply(activity);
 		System.out.println(errMsg);
+//		
+		JsonObject respBody = new JsonObject();
+		respBody.addProperty("successful", errMsg == null);
+		respBody.addProperty("errMsg", errMsg);
+		
+		resp.setContentType("application/json");
+		resp.getWriter().write(respBody.toString());
 		
 			
 	}
