@@ -15,11 +15,7 @@ import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
 import web.supplier.vo.Supplier;
 
-<<<<<<< HEAD
-@WebServlet("/supplier/supplierlogin")
-=======
 @WebServlet("/supplier/login")
->>>>>>> main
 public class SupplierLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
