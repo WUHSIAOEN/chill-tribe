@@ -1,35 +1,36 @@
-document.getElementById("submitBtn").addEventListener("click", function () {
+document.getElementById("submitBtn").addEventListener("click", function (event) {
+  event.preventDefault(); // 防止表單默認提交行為
   const activityName = document.getElementById("activityName")?.value || "";
   const city = document.getElementById("city")?.value || "";
   const address = document.getElementById("address")?.value || "";
   const category = document.getElementById("category")?.value || "";
-  const unitPrice =
-    parseFloat(document.getElementById("unitPrice")?.value) || 0;
-  const minParticipants =
-    parseInt(document.getElementById("minParticipants")?.value) || 0;
-  const maxParticipants =
-    parseInt(document.getElementById("maxParticipants")?.value) || 0;
+  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
+  const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 0;
+  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 0;
   const description = document.getElementById("description")?.value || "";
   const note = document.getElementById("note")?.value || "";
-  // const eventImages = document.getElementById('eventImages').value;
+
+  // 打印即將送出的 JSON 資料
+  const requestData = {
+    activityName,
+    city,
+    address,
+    category,
+    unitPrice,
+    minParticipants,
+    maxParticipants,
+    description,
+    note
+  };
+  
+  console.log("Sending JSON:", JSON.stringify(requestData)); // 輸出 JSON 格式資料
 
   fetch("apply", {
-    // 確保你的後端有對應的 API 路由
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      activityName: activityName.value,
-      city: city.value,
-      address: address.value,
-      category: category.value,
-      unitPrice: parseFloat(unitPrice.value) || 0,
-      minParticipants: parseInt(minParticipants.value) || 0,
-      maxParticipants: parseInt(maxParticipants.value) || 0,
-      description: description.value,
-      note: note.value
-    }),
+    body: JSON.stringify(requestData),
   })
     .then((resp) => resp.json())
     .then((body) => {
@@ -39,7 +40,5 @@ document.getElementById("submitBtn").addEventListener("click", function () {
     })
     .catch((error) => {
       console.error("Error:", error);
-      msg.style.color = "red";
-      msg.textContent = "提交失敗，請重試！";
     });
 });

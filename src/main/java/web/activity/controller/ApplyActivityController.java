@@ -20,7 +20,7 @@ import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.vo.Activity;
 
-@WebServlet("/supplier_dashboard/pages/activity_forms/supplier_input")
+@WebServlet("/activity/apply")
 public class ApplyActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -42,7 +42,7 @@ public class ApplyActivityController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		String activityPrefix = req.getParameter("activityPrefix"); // 活動代碼前綴
+		
 //		String activityName = req.getParameter("activityName"); // 活動名稱
 //		Integer supplierId = Integer.parseInt(req.getParameter("supplierId")); // 供應商編號
 //		String address = req.getParameter("address"); // 活動地址
@@ -70,7 +70,7 @@ public class ApplyActivityController extends HttpServlet {
 //		Activity activity = new Activity();
 //		Timestamp testTimestamp = Timestamp.valueOf("2025-12-31 23:59:59");
 //		
-//		activity.setActivityPrefix("evt");  // 設定活動代碼前綴
+		
 //		activity.setActivityName("test");  // 設定活動名稱
 //		activity.setSupplierId(103);  // 設定供應商編號
 //		activity.setAddress("test");  // 設定活動地址
@@ -93,13 +93,42 @@ public class ApplyActivityController extends HttpServlet {
 //		activity.setLongitude("test");  // 設定經度
 //		activity.setTicketsActivateTime(testTimestamp);  // 設定票券啟動時間
 //		activity.setTicketsExpiredTime(testTimestamp);  // 設定票券過期時間
+		
+		StringBuilder jsonBuilder = new StringBuilder();
+	    String line;
+	    while ((line = req.getReader().readLine()) != null) {
+	        jsonBuilder.append(line);
+	    }
+	    String jsonString = jsonBuilder.toString();
+
+	    // 打印接收到的 JSON 資料
+	    System.out.println("Received JSON: " + jsonString);
 
 		Gson gson = new Gson();
-		Activity activity = gson.fromJson(req.getReader(), Activity.class);
+		Activity activity = null;
+		
+		
+		try {
+            // 解析 JSON 並將其轉換為 Activity 物件
+            activity = gson.fromJson(req.getReader(), Activity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            sendErrorResponse(resp, "Invalid JSON format");
+            return;
+        }
+
+        // 確保 Activity 物件不為 null
+        if (activity == null) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            sendErrorResponse(resp, "Activity data is missing");
+            return;
+        }
 		
 //	 	在 doPost() 中，根據前端傳過來的資料創建 activity 物件，並調用 service.apply(activity) 方法。		
 		String errMsg = service.apply(activity);
 		System.out.println(errMsg);
+		System.out.println(activity);
 //		
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", errMsg == null);
@@ -107,7 +136,13 @@ public class ApplyActivityController extends HttpServlet {
 		
 		resp.setContentType("application/json");
 		resp.getWriter().write(respBody.toString());
-		
 			
 	}
+	// 用來返回錯誤訊息的輔助方法
+    private void sendErrorResponse(HttpServletResponse resp, String message) throws IOException {
+        JsonObject errorResponse = new JsonObject();
+        errorResponse.addProperty("successful", false);
+        errorResponse.addProperty("errMsg", message);
+        resp.getWriter().write(errorResponse.toString());
+    }
 }
