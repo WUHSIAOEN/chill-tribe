@@ -12,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import web.activity.service.ActivityService;
 import web.activity.service.ActivityService2;
-import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.service.impl.ActivityServiceImpl2;
-import web.activity.vo.Activity;
 import web.activity.vo.Activity2;
 
 @WebServlet("/activity/SearchActivities")
