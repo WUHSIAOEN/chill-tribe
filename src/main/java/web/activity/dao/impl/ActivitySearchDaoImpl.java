@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.vo.Activity2;
 //import web.activity.vo.ActivityImage;
+import web.activity.vo.ActivityImage;
 
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	private DataSource ds;
@@ -88,29 +89,29 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	
 	
 	// 查詢所有的活動圖片回來
-//	@Override
-//	public List<ActivityImage> selectAllActivityImages() {
-//		String sql = "select * from ACTIVITY_IMAGES";
-//
-//		try (Connection conn = ds.getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql);
-//				ResultSet rs = pstmt.executeQuery()) {
-//
-//			List<ActivityImage> list = new ArrayList<>();
-//			while (rs.next()) {
-//				ActivityImage activityImage = new ActivityImage();
-//				activityImage.setActivityImageId(rs.getInt("activity_image_id"));
-//				activityImage.setActivityId(rs.getInt("activity_id"));
-//				activityImage.setImageName(rs.getString("image_name"));
-//				activityImage.setImageBase64(rs.getString("image_base64"));
-//				list.add(activityImage);
+	@Override
+	public List<ActivityImage> selectAllActivityImages() {
+		String sql = "select * from ACTIVITY_IMAGES";
+
+		try (Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			List<ActivityImage> list = new ArrayList<>();
+			while (rs.next()) {
+				ActivityImage activityImage = new ActivityImage();
+				activityImage.setActivityImageId(rs.getInt("activity_image_id"));
+				activityImage.setActivityId(rs.getInt("activity_id"));
+				activityImage.setImageName(rs.getString("image_name"));
+				activityImage.setImageBase64(rs.getString("image_base64"));
+				list.add(activityImage);
 //				System.out.println(list);
-//			}
-//			return list;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
