@@ -16,13 +16,3 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 .settings/
-src/main/java/web/activity/controller/EditController.java
-src/main/java/web/activity/controller/SearchActivitiesController.java
-src/main/java/web/activity/dao/ActivitySearchDao.java
-src/main/java/web/activity/dao/impl/ActivitySearchDaoImpl.java
-src/main/java/web/activity/service/ActivitiService.java
-src/main/java/web/activity/service/impl/ActivitiServiceImpl.java
-src/main/java/web/activity/vo/Activiti.java
-src/main/webapp/activity/supplier_input.html
-src/main/webapp/activity/js/apply-activity.js
-src/main/webapp/activity/js/index.js

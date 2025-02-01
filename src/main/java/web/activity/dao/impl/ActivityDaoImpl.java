@@ -19,7 +19,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	private DataSource ds;
 
 	public ActivityDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chill_project");
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
 		if (ds != null) {
 			System.out.println("DataSource found!");
 		} else {
@@ -66,7 +66,8 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 		return -1;
 	}
-
+	
+	// 全選活動
 	@Override
 	public List<Activity> selectAll() {
 		final String SQL = "SELECT * FROM ACTIVITIES";
@@ -109,11 +110,171 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 	}
 	
-//  更新活動
+	//  更新活動
 	@Override
 	public int update(Activity activity) {
-		// TODO Auto-generated method stub
-		return 0;
+		int offset = 0;  // 用來計算偏移量，根據欄位是否有設置進行增減
+		// SET 用來指定要更新哪些欄位的值。
+	    StringBuilder sql = new StringBuilder("UPDATE Activity SET ");
+
+	    // 構建 SQL 語句，根據每個欄位是否為 null 動態添加對應的 UPDATE 項
+	    if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
+	        sql.append("ACTIVITY_NAME = ?, ");
+	    }
+	    if (activity.getSupplierId() != null) {
+	        sql.append("SUPPLIER_ID = ?, ");
+	    }
+	    if (activity.getAddress() != null && !activity.getAddress().isEmpty()) {
+	        sql.append("ADDRESS = ?, ");
+	    }
+	    if (activity.getUnitPrice() != null) {
+	        sql.append("UNIT_PRICE = ?, ");
+	    }
+	    if (activity.getMinParticipants() != null) {
+	        sql.append("MIN_PARTICIPANTS = ?, ");
+	    }
+	    if (activity.getMaxParticipants() != null) {
+	        sql.append("MAX_PARTICIPANTS = ?, ");
+	    }
+	    if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
+	        sql.append("DESCRIPTION = ?, ");
+	    }
+	    if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
+	        sql.append("CATEGORY = ?, ");
+	    }
+	    if (activity.getStartDateTime() != null) {
+	        sql.append("START_DATETIME = ?, ");
+	    }
+	    if (activity.getEndDateTime() != null) {
+	        sql.append("END_DATETIME = ?, ");
+	    }
+	    if (activity.getStatus() != null) {
+	        sql.append("STATUS = ?, ");
+	    }
+	    if (activity.getNote() != null && !activity.getNote().isEmpty()) {
+	        sql.append("NOTE = ?, ");
+	    }
+	    if (activity.getApproved() != null) {
+	        sql.append("APPROVED = ?, ");
+	    }
+	    if (activity.getCity() != null && !activity.getCity().isEmpty()) {
+	        sql.append("CITY = ?, ");
+	    }
+	    if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
+	        sql.append("DISTRICT = ?, ");
+	    }
+	    if (activity.getInventoryCount() != null) {
+	        sql.append("INVENTORY_COUNT = ?, ");
+	    }
+	    if (activity.getInventoryUpdateTime() != null) {
+	        sql.append("INVENTORY_UPDATE_TIME = ?, ");
+	    }
+	    if (activity.getCreatedTime() != null) {
+	        sql.append("CREATED_TIME = ?, ");
+	    }
+	    if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+	        sql.append("LATITUDE = ?, ");
+	    }
+	    if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+	        sql.append("LONGITUDE = ?, ");
+	    }
+	    if (activity.getTicketsActivateTime() != null) {
+	        sql.append("TICKETS_ACTIVATE_TIME = ?, ");
+	    }
+	    if (activity.getTicketsExpiredTime() != null) {
+	        sql.append("TICKETS_EXPIRED_TIME = ?, ");
+	    }
+
+	    // 刪除最後一個多餘的逗號
+	    sql.deleteCharAt(sql.length() - 2);
+
+	    // SUPPLIER_ID 作為識別條件
+	    sql.append(" WHERE SUPPLIER_ID = ?");
+
+	    try (
+	        Connection conn = ds.getConnection();
+	        PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+	    ) {
+	        // 設置參數
+	        int parameterIndex = 1;
+
+	        // 根據條件設置參數的值
+	        if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getActivityName());
+	        }
+	        if (activity.getSupplierId() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getSupplierId());
+	        }
+	        if (activity.getAddress() != null && !activity.getAddress().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getAddress());
+	        }
+	        if (activity.getUnitPrice() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getUnitPrice());
+	        }
+	        if (activity.getMinParticipants() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getMinParticipants());
+	        }
+	        if (activity.getMaxParticipants() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getMaxParticipants());
+	        }
+	        if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getDescription());
+	        }
+	        if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getCategory());
+	        }
+	        if (activity.getStartDateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getStartDateTime());
+	        }
+	        if (activity.getEndDateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getEndDateTime());
+	        }
+	        if (activity.getStatus() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getStatus());
+	        }
+	        if (activity.getNote() != null && !activity.getNote().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getNote());
+	        }
+	        if (activity.getApproved() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getApproved());
+	        }
+	        if (activity.getCity() != null && !activity.getCity().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getCity());
+	        }
+	        if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getDistrict());
+	        }
+	        if (activity.getInventoryCount() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getInventoryCount());
+	        }
+	        if (activity.getInventoryUpdateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
+	        }
+	        if (activity.getCreatedTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getCreatedTime());
+	        }
+	        if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getLatitude());
+	        }
+	        if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getLongitude());
+	        }
+	        if (activity.getTicketsActivateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getTicketsActivateTime());
+	        }
+	        if (activity.getTicketsExpiredTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
+	        }
+
+	        // 設定 WHERE 條件的參數，使用 offset
+	        pstmt.setInt(parameterIndex + 1 + offset, activity.getSupplierId());
+
+	        // 執行更新
+	        return pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
 	}
 	
 //  刪除活動
