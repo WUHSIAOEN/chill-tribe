@@ -10,6 +10,7 @@ import web.activity.service.ActivityService2;
 //import web.activity.vo.ActivityImage;
 import web.activity.vo.Activity2;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.IndexActivityCard;
 
 public class ActivityServiceImpl2 implements ActivityService2{
 private ActivitySearchDao activitySearchDao;
@@ -27,5 +28,10 @@ private ActivitySearchDao activitySearchDao;
 	@Override
 	public List<ActivityImage> searchAllActivityImages() {
 		return activitySearchDao.selectAllActivityImages();
+	}
+
+	@Override
+	public List<IndexActivityCard> searchActivityByStart() {
+		return activitySearchDao.selectActivityOrderByStart();
 	}
 }
