@@ -18,6 +18,7 @@ import web.activity.dao.ActivitySearchDao;
 import web.activity.vo.Activity2;
 //import web.activity.vo.ActivityImage;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.IndexActivityCard;
 
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	private DataSource ds;
@@ -114,4 +115,53 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 		return null;
 	}
 
+	@Override
+	public List<IndexActivityCard> selectActivityOrderByStart() {
+		String sql = "SELECT activity_id, activity_name, act.supplier_id, supplier_name, act.city_id, city_name, act.district_id, district_name, act.address, unit_price, min_participants, max_participants, category, start_date_time, end_date_time, status, approved, inventory_count, create_time"
+				+ " FROM activities AS act"
+				+ " JOIN suppliers AS spl"
+				+ " ON act.supplier_id = spl.supplier_id"
+				+ " JOIN cities AS ct"
+				+ " ON act.city_id = ct.city_id"
+				+ " JOIN districts AS dstx"
+				+ " ON act.district_id = dstx.district_id"
+				+ " WHERE approved = 1 AND status = 1"
+				+ " ORDER BY start_date_time"
+				+ " LIMIT 6;";
+		
+		try (Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			List<IndexActivityCard> list = new ArrayList<>();
+			while (rs.next()) {
+				IndexActivityCard indexActivityCard = new IndexActivityCard();
+				indexActivityCard.setActivityId(rs.getInt("activity_id"));
+				indexActivityCard.setActivityName(rs.getString("activity_name"));
+				indexActivityCard.setSupplierId(rs.getInt("supplier_id"));
+				indexActivityCard.setSupplierName(rs.getString("supplier_name"));
+				indexActivityCard.setCityId(rs.getInt("city_id"));
+				indexActivityCard.setCityName(rs.getString("city_name"));
+				indexActivityCard.setDistrictId(rs.getInt("district_id"));
+				indexActivityCard.setDistrictName(rs.getString("district_name"));
+				indexActivityCard.setAddress(rs.getString("address"));
+				indexActivityCard.setUnitPrice(rs.getInt("unit_price"));
+				indexActivityCard.setMinParticipants(rs.getInt("min_participants"));
+				indexActivityCard.setMaxParticipants(rs.getInt("max_participants"));
+				indexActivityCard.setCategory(rs.getString("category"));
+				indexActivityCard.setStartDateTime(rs.getTimestamp("start_date_time"));
+				indexActivityCard.setEndDateTime(rs.getTimestamp("end_date_time"));
+				indexActivityCard.setStatus(rs.getInt("status"));
+				indexActivityCard.setApproved(rs.getBoolean("approved"));
+				indexActivityCard.setInventoryCount(rs.getInt("inventory_count"));
+				indexActivityCard.setCreateTime(rs.getTimestamp("create_time"));
+				list.add(indexActivityCard);
+				System.out.println(list);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
