@@ -59,26 +59,67 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int update(Member member) {
-		int offset = 0;
-		StringBuilder sql = new StringBuilder("update MEMBERS set ");
-		String password = member.getPassword();
-		boolean hasPassword = password != null && !password.isEmpty();
-		if (hasPassword) {
-			sql.append("PASSWORD = ?,");
-		}
-		sql.append("MEMBER_NAME = ? ");
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-			if (hasPassword) {
-				pstmt.setString(1, member.getPassword());
-				offset++;
-			}
+		int offset = 1;  // 修改為 1，因為 PreparedStatement 參數索引從 1 開始
+	    StringBuilder sql = new StringBuilder("update MEMBERS set ");
+	    String gender = member.getGender();
+	    String date_of_birth = member.getDate_of_birth();
+	    String phone = member.getPhone();
+	    String member_name = member.getMember_name();
+	    boolean hasMembername = member_name != null && !member_name.isEmpty();
+	    boolean hasGender = gender != null && !gender.isEmpty();
+	    boolean hasDateOfBirth = date_of_birth != null && !date_of_birth.isEmpty();
+	    boolean hasPhone = phone != null && !phone.isEmpty();
 
-			pstmt.setString(2 + offset, member.getMember_name());
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+	    if (hasGender) {
+	        sql.append("GENDER = ?, ");
+	    }
+	    if (hasDateOfBirth) {
+	        sql.append("DATE_OF_BIRTH = ?, ");
+	    }
+	    if (hasPhone) {
+	        sql.append("PHONE = ?, ");
+	    }
+	    if (hasMembername) {
+	        sql.append("MEMBER_NAME = ? ");
+	    }
+
+	    // 去除 SQL 語句末尾的多餘逗號
+	    String sqlQuery = sql.toString();
+	    if (sqlQuery.endsWith(", ")) {
+	        sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
+	    }
+
+	    // 確保在更新語句中有要更新的欄位
+	    if (sqlQuery.equals("update MEMBERS set")) {
+	        return 0;  // 如果沒有任何欄位需要更新，則返回 0
+	    }
+
+	    // 加上 WHERE 條件來指定更新的會員 (假設使用 member_id 或其他識別欄位)
+	    sqlQuery += " WHERE EMAIL = ?";  // 假設 EMAIL 是更新條件
+
+	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+	        // 動態設置參數
+	        if (hasGender) {
+	            pstmt.setString(offset++, member.getGender());
+	        }
+	        if (hasDateOfBirth) {
+	            pstmt.setString(offset++, member.getDate_of_birth());
+	        }
+	        if (hasPhone) {
+	            pstmt.setString(offset++, member.getPhone());
+	        }
+	        if (hasMembername) {
+	            pstmt.setString(offset++, member.getMember_name());
+	        }
+
+	        // 假設需要使用 email 作為條件進行更新
+	        pstmt.setString(offset, member.getEmail());  // 假設 Member 類別有 getEmail() 方法
+
+	        return pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return -1;
 	}
 
 	@Override
@@ -94,6 +135,10 @@ public class MemberDaoImpl implements MemberDao {
 					member.setMember_name(rs.getString("MEMBER_NAME"));
 					member.setEmail(rs.getString("EMAIL"));
 					member.setPassword(rs.getString("PASSWORD"));
+					member.setPhone(rs.getString("PHONE"));
+					member.setDate_of_birth(rs.getString("DATE_OF_BIRTH"));
+					member.setGender(rs.getString("GENDER"));
+					member.setId_card(rs.getString("ID_CARD"));
 					return member;
 				}
 			}
@@ -117,6 +162,11 @@ public class MemberDaoImpl implements MemberDao {
 				member.setMember_name(rs.getString("MEMBER_NAME"));
 				member.setEmail(rs.getString("EMAIL"));
 				member.setPassword(rs.getString("PASSWORD"));
+				member.setDate_of_birth(rs.getString("DATE_OF_BIRTH"));
+				member.setGender(rs.getString("GENDER"));
+				member.setEmail(rs.getString("EMAIL"));
+				member.setId_card(rs.getString("ID_CARD"));
+				member.setPhone(rs.getString("PHONE"));
 				list.add(member);
 			}
 			return list;
