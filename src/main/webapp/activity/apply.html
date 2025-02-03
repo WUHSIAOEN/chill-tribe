@@ -19,15 +19,15 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="apply" method="POST">
+            <form id="activityForm">
               <div class="card-body">
                 <div class="form-group">
                   <label for="activityName">名稱 <span style="color: red;">*</span></label>
-                  <input type="text" class="form-control" name="activityName" placeholder="例子: 歡樂象山健走" required>
+                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
                 </div>
                 <div class="form-group">
                   <label for="city">舉辦的縣市 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" name="city" style="width: 100%;">
+                  <select class="form-control select2" id="city" name="city" style="width: 100%;">
                     <option value="" disabled selected>請選擇縣市</option>
                     <option value="taipei" selected="selected">台北市</option>
                     <option value="new-taipei">新北市</option>
@@ -55,11 +55,11 @@
                 </div>
                 <div class="form-group">
                   <label for="address">詳細地址 <span style="color: red;">*</span></label>
-                  <input type="text" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
+                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
                 </div>
                 <div class="form-group">
                   <label for="category">分類 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" name="category" style="width: 100%;">
+                  <select class="form-control select2" id="category" name="category" style="width: 100%;">
                     <option selected="selected" value="art">文藝</option>
                     <option value="entertainment">娛樂</option>
                     <option value="technology">科技</option>
@@ -73,31 +73,31 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <input type="text" class="form-control float-right" name="reservationtime">
+                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime">
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
                 <div class="form-group">
                   <label for="supplierId">供應商編號 <span style="color: red;">*</span></label>
-                  <input type="number" name="supplierId" class="form-control"  placeholder="供應商編號" min="0" max="1000000" required>
+                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="0" max="1000000" required>
                 </div>
                 <div class="form-group">
                   <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
-                  <input type="number" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
+                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
                 </div>
                 <div class="form-group">
                   <label for="minParticipants">成團人數 <span style="color: red;">*</span></label>
-                  <input type="number" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
+                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
                 </div>
                 <div class="form-group">
                   <label for="">人數上限 <span style="color: red;">*</span></label>
-                  <input type="number" name="" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
+                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
                 </div>
                 <!-- textarea -->
                 <div class="form-group">
                   <label for="description">介紹 <span style="color: red;">*</span></label>
-                  <textarea class="form-control" name="description" rows="3" placeholder="Enter ..." required></textarea>
+                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter ..." required></textarea>
                 </div>
                 <!-- textarea -->
                 <div class="form-group">
@@ -108,15 +108,15 @@
                     <label for="exampleInputFile">上傳活動照片 <span style="color: red;">*</span></label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input mouse-pointer" id="exampleInputFile">
-                            <label class="custom-file-label mouse-pointer" for="exampleInputFile">選擇照片</label>
+                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" multiple>
+                            <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
                         </div>
                     </div>
                 </div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary">發布</button>
+                  <button id="submitBtn" type="button" class="btn btn-primary">發布</button>
                   <button type="button" class="btn btn-secondary btn-spacing">取消</button>
               </div>
             </form>
@@ -125,14 +125,51 @@
 </div>
 <!-- ./wrapper -->
 </body>
-<style>
-	document.getElementById("myForm").addEventListener("submit", function (event) {
-    const unitPrice = document.getElementById("unitPrice").value;
 
-    if (!unitPrice || isNaN(unitPrice)) { // 檢查是否為空或不是數字
-        event.preventDefault(); // 阻止表單提交
-        document.getElementById("error").innerText = "Unit Price is required and must be a number.";
-    }
-});
-</style>
+<!-- apply activity js -->
+<script>
+document.getElementById("submitBtn").addEventListener("click", function (event) {
+	  event.preventDefault(); // 防止表單默認提交行為
+	  const activityName = document.getElementById("activityName")?.value || "";
+	  const city = document.getElementById("city")?.value || "";
+	  const address = document.getElementById("address")?.value || "";
+	  const category = document.getElementById("category")?.value || "";
+	  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
+	  const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 0;
+	  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 0;
+	  const description = document.getElementById("description")?.value || "";
+	  const note = document.getElementById("note")?.value || "";
+
+	  // 打印即將送出的 JSON 資料
+	  const requestData = {
+	    activityName,
+	    city,
+	    address,
+	    category,
+	    unitPrice,
+	    minParticipants,
+	    maxParticipants,
+	    description,
+	    note
+	  };
+	  
+	  console.log("Sending JSON:", JSON.stringify(requestData)); // 輸出 JSON 格式資料
+
+	  fetch("apply", {
+	    method: "POST",
+	    headers: {
+	      "Content-Type": "application/json",
+	    },
+	    body: JSON.stringify(requestData),
+	  })
+	    .then((resp) => resp.json())
+	    .then((body) => {
+	      const { successful, message } = body;
+	    })
+	    .catch((error) => {
+	      console.log("Something is wrong...")
+	    });
+	});
+</script>
+
 </html>
