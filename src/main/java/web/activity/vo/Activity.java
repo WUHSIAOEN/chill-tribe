@@ -3,31 +3,31 @@ package web.activity.vo;
 import java.sql.Timestamp;
 
 public class Activity {
-	private Integer activityId; // 活動編號
-	private String activityPrefix; // 活動代碼前綴
-	private String activityName; // 活動名稱
-	private Integer supplierId; // 供應商編號
-	private String address; // 活動地址
-	private Integer unitPrice; // 單位價格
-	private Integer minParticipants; // 最小參加人數
-	private Integer maxParticipants; // 最大參加人數
-	private String description; // 活動描述
-	private String precaution;
-	private String category; // 活動類別
-	private Timestamp startDateTime; // 開始時間
-	private Timestamp endDateTime; // 結束時間
-	private Integer status; // 狀態 (0: 暫定 1: 確定)
-	private String note; // 備註
-	private Integer approved; // 審核狀態 (0: 未審核 1: 已通過)
-	private String cityId; // 城市
-	private String district; // 地區
-	private Integer inventoryCount; // 庫存數量
-	private Timestamp inventoryUpdateTime; // 庫存更新時間
-	private Timestamp createdTime; // 建立時間
-	private String latitude; // 緯度
-	private String longitude; // 經度
-	private Timestamp ticketsActivateTime; // 票券啟動時間
-	private Timestamp ticketsExpiredTime; // 票券過期時間
+	private Integer activityId;
+	private String activityPrefix;
+    private String activityName;
+    private Integer supplierId;
+    private Integer cityId;
+    private Integer districtId;
+    private String address;
+    private Integer unitPrice;
+    private Integer minParticipants;
+    private Integer maxParticipants;
+    private String description;
+    private String precaution;
+    private String category;
+    private Timestamp startDateTime;
+    private Timestamp endDateTime;
+    private Integer status;
+    private String note;
+    private Boolean approved;
+    private Integer inventoryCount;
+    private String latitude;
+    private String longitude;
+    private Timestamp ticketsActivateTime;
+    private Timestamp ticketsExpiredTime;
+    private Timestamp inventoryUpdateTime;
+    private Timestamp createTime;
 
 	// Getter and Setter methods
 
@@ -151,28 +151,28 @@ public class Activity {
         this.note = note;
     }
 
-    public Integer getApproved() {
+    public Boolean getApproved() {
         return approved;
     }
 
-    public void setApproved(Integer approved) {
+    public void setApproved(Boolean approved) {
         this.approved = approved;
     }
 
-    public String getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(String cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 
-    public String getDistrict() {
-        return district;
+    public Integer getDistrictId() {
+        return districtId;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setDistrictId(Integer districtId) {
+        this.districtId = districtId;
     }
 
     public Integer getInventoryCount() {
@@ -189,14 +189,6 @@ public class Activity {
 
     public void setInventoryUpdateTime(Timestamp inventoryUpdateTime) {
         this.inventoryUpdateTime = inventoryUpdateTime;
-    }
-
-    public Timestamp getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Timestamp createdTime) {
-        this.createdTime = createdTime;
     }
 
     public String getLatitude() {
@@ -230,4 +222,12 @@ public class Activity {
     public void setTicketsExpiredTime(Timestamp ticketsExpiredTime) {
         this.ticketsExpiredTime = ticketsExpiredTime;
     }
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 }
