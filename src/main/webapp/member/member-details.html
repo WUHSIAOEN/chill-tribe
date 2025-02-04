@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Resido - Residence & Real Estate HTML Template</title>
+<title>一般會員個人檔案</title>
 
 <!-- Custom CSS -->
 <link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -82,25 +82,25 @@
 									<div class="row">
 										<div class="form-group col-md-6">
 											<label>顯示名稱</label> <span class="input-required">*</span> <input
-												type="text" class="form-control" value="王小明">
+												type="text" class="form-control" id="member_name" value="">
 										</div>
 
 										<div class="form-group col-md-6">
 											<label>帳號/Email</label> <input type="email"
-												class="form-control simple" value="preet77@gmail.com"
+												class="form-control simple" id="email" value=""
 												disabled>
 										</div>
 
 										<div class="form-group col-md-6">
 											<label>生日</label> <input type="date" name="member-birthday"
-												class="form-control" value="1998-12-13" required>
+												class="form-control" id="date_of_birth" value="">
 										</div>
 
 										<div class="form-group col-md-6">
 											<label>身分證字號</label>
 											<!-- <span class="input-required">*</span> -->
-											<input type="text" class="form-control simple"
-												value="A123456789" disabled>
+											<input type="text" class="form-control simple" id="id_card"
+												value="" disabled>
 										</div>
 
 										<div class="form-group col-md-6">
@@ -114,7 +114,7 @@
 
 										<div class="form-group col-md-6">
 											<label>手機號碼</label> <span class="input-required">*</span> <input
-												type="text" class="form-control" value="0912345678">
+												type="text" class="form-control" id="phone">
 										</div>
 									</div>
 								</div>
@@ -126,7 +126,7 @@
 
 										<div class="form-group col-lg-12 col-md-12"
 											style="display: flex; justify-content: flex-end;">
-											<button class="btn btn-primary rounded px-3" type="button">儲存變更</button>
+											<button class="btn btn-primary rounded px-3" type="button" id="editBtn">儲存變更</button>
 										</div>
 
 									</div>
@@ -208,6 +208,83 @@
 			});
 		});
 	</script>
+	
+	<script>
+	
+	const username = document.querySelector('#member_name');
+	const password = document.querySelector('#password');
+	const cPassword = document.querySelector('#cPassword');
+	const phone = document.querySelector('#phone');
+	const email = document.querySelector('#email');
+	const date_of_birth = document.querySelector('#date_of_birth');
+	const gender = document.querySelector('#gender');
+	const msg = document.querySelector('#msg');
+
+	fetch('find')
+		.then(resp => resp.json())
+		.then(member => {
+			username.value = member.member_name;
+			email.value = member.email;
+			phone.value = member.phone;
+			date_of_birth.value = member.date_of_birth;
+			gender.value = member.gender;
+			
+		});
+
+// 	document.querySelector('#logoutBtn').addEventListener('click', () => {
+// 		if (confirm('是否登出?')) {
+// 			fetch('logout')
+// 				.then(resp => resp.json())
+// 				.then(body => {
+// 					if (body.successful) {
+// 						location.href = 'login.html';
+// 					}
+// 				});
+// 		}
+// 	});
+
+	document.querySelector('#editBtn').addEventListener('click', () => {
+		console.log("綁定editBtn成功");
+// 		let len = password.value.length
+// 		if (len !== 0 && (len < 6 || len >12)) {
+// 			alert('密碼長度須介於6 ~ 12');
+// 			return;
+// 		}
+		
+// 		if (len !== 0 && password.value !== cPassword.value) {
+// 			alert('密碼與確認密碼不同');
+// 			return;
+// 		}
+		
+		fetch('memberedit', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				username: username.value,
+				phone: phone.value,
+				date_of_birth: date_of_birth.value,
+				gender: gender.value
+			})
+		})
+		// console.log(resp)
+		 .then(resp => {
+			 return resp.json();
+		 })
+		 .then(body => {
+			 msg.textContent = '';
+			 const { successful, errMsg } = body;
+			 if (body.successful) {
+				msg.textContent = `
+				   ${body.username}
+				`;
+			 }else {
+				msg.textContent = '修改失敗!';
+			 }
+		 });
+	});
+</script>
 
 </body>
 
