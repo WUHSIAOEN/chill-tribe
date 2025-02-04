@@ -12,13 +12,14 @@ public class Activity {
 	private Integer minParticipants; // 最小參加人數
 	private Integer maxParticipants; // 最大參加人數
 	private String description; // 活動描述
+	private String precaution;
 	private String category; // 活動類別
 	private Timestamp startDateTime; // 開始時間
 	private Timestamp endDateTime; // 結束時間
 	private Integer status; // 狀態 (0: 暫定 1: 確定)
 	private String note; // 備註
 	private Integer approved; // 審核狀態 (0: 未審核 1: 已通過)
-	private String city; // 城市
+	private String cityId; // 城市
 	private String district; // 地區
 	private Integer inventoryCount; // 庫存數量
 	private Timestamp inventoryUpdateTime; // 庫存更新時間
@@ -69,6 +70,14 @@ public class Activity {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    public String getPrecaution() {
+		return precaution;
+	}
+
+	public void setPrecaution(String precaution) {
+		this.precaution = precaution;
+	}
 
     public Integer getUnitPrice() {
         return unitPrice;
@@ -150,12 +159,12 @@ public class Activity {
         this.approved = approved;
     }
 
-    public String getCity() {
-        return city;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
     public String getDistrict() {
