@@ -1,8 +1,8 @@
 package web.activity.dao.impl;
 
-//import static web.util.JdbcConstant.PASSWORD;
-//import static web.util.JdbcConstant.URL;
-//import static web.util.JdbcConstant.USER;
+import static core.util.JdbcConstants.PASSWORD;
+import static core.util.JdbcConstants.URL;
+import static core.util.JdbcConstants.USER;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import web.activity.dao.ActivitySearchDao;
 import web.activity.vo.Activity2;
 //import web.activity.vo.ActivityImage;
@@ -21,27 +23,27 @@ import web.activity.vo.ActivityImage;
 import web.activity.vo.IndexActivityCard;
 
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
-	private DataSource ds;
-//	private HikariDataSource ds;
+//	private DataSource ds;
+	private HikariDataSource ds;
 
-	public ActivitySearchDaoImpl() throws NamingException{
+	public ActivitySearchDaoImpl() throws NamingException {
 		// JNDI Tomcat 會報錯先註解
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
-		if (ds != null) {
-			System.out.println("DataSource found!");
-		} else {
-			System.out.println("DataSource not found.");
-		}
+//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
+//		if (ds != null) {
+//			System.out.println("DataSource found!");
+//		} else {
+//			System.out.println("DataSource not found.");
+//		}
 
-//		ds = new HikariDataSource();
-//		ds.setJdbcUrl(URL);
-//		ds.setUsername(USER);
-//		ds.setPassword(PASSWORD);
-//		ds.addDataSourceProperty("cachePrepStmts", true);
-//		ds.addDataSourceProperty("preStmtCacheSize", 250);
-//		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
+		ds = new HikariDataSource();
+		ds.setJdbcUrl(URL);
+		ds.setUsername(USER);
+		ds.setPassword(PASSWORD);
+		ds.addDataSourceProperty("cachePrepStmts", true);
+		ds.addDataSourceProperty("preStmtCacheSize", 250);
+		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
-	
+
 	// 查詢所有的活動回來
 	@Override
 	public List<Activity2> selectAllActivities() {
@@ -87,8 +89,7 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 		}
 		return null;
 	}
-	
-	
+
 	// 查詢所有的活動圖片回來
 	@Override
 	public List<ActivityImage> selectAllActivityImages() {
@@ -118,20 +119,14 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	@Override
 	public List<IndexActivityCard> selectActivityOrderByStart() {
 		String sql = "SELECT activity_id, activity_name, act.supplier_id, supplier_name, act.city_id, city_name, act.district_id, district_name, act.address, unit_price, min_participants, max_participants, category, start_date_time, end_date_time, status, approved, inventory_count, create_time"
-				+ " FROM activities AS act"
-				+ " JOIN suppliers AS spl"
-				+ " ON act.supplier_id = spl.supplier_id"
-				+ " JOIN cities AS ct"
-				+ " ON act.city_id = ct.city_id"
-				+ " JOIN districts AS dstx"
-				+ " ON act.district_id = dstx.district_id"
-				+ " WHERE approved = 1 AND status = 1"
-				+ " ORDER BY start_date_time"
-				+ " LIMIT 6;";
-		
+				+ " FROM activities AS act" + " JOIN suppliers AS spl" + " ON act.supplier_id = spl.supplier_id"
+				+ " JOIN cities AS ct" + " ON act.city_id = ct.city_id" + " JOIN districts AS dstx"
+				+ " ON act.district_id = dstx.district_id" + " WHERE approved = 1 AND status = 1"
+				+ " ORDER BY start_date_time" + " LIMIT 6;";
+
 		try (Connection conn = ds.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery()) {
+				ResultSet rs = pstmt.executeQuery();) {
 
 			List<IndexActivityCard> list = new ArrayList<>();
 			while (rs.next()) {
@@ -156,6 +151,32 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				indexActivityCard.setInventoryCount(rs.getInt("inventory_count"));
 				indexActivityCard.setCreateTime(rs.getTimestamp("create_time"));
 				list.add(indexActivityCard);
+//				System.out.println(list);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<ActivityImage> selectActivityImageById(Integer activityId) {
+		String sql = "SELECT * FROM activity_images" + " WHERE activity_id = ?;";
+
+		try (Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			) {
+			pstmt.setInt(1, activityId);
+			List<ActivityImage> list = new ArrayList<>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ActivityImage activityImage = new ActivityImage();
+				activityImage.setActivityImageId(rs.getInt("activity_image_id"));
+				activityImage.setActivityId(rs.getInt("activity_id"));
+				activityImage.setImageName(rs.getString("image_name"));
+				activityImage.setImageBase64(rs.getString("image_base64"));
+				list.add(activityImage);
 				System.out.println(list);
 			}
 			return list;
