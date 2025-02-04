@@ -24,16 +24,22 @@ public class FindAllActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ActivityService service;
 	
+	@Override
 	public void init() throws ServletException {
-		try {
-			service = new ActivityServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		System.out.println("Initializing ApplyActivityController...");
+	    try {
+	        service = new ActivityServiceImpl(); // 初始化 service
+	        System.out.println("Service initialized successfully: " + service);
+	    } catch (NamingException e) {
+	        e.printStackTrace();
+	        throw new ServletException("Service initialization failed", e);
+	    }
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Activity> activities = service.findAll();
+		System.out.println("findAll() retrieved: " + activities);
 		Gson gson = new Gson();
 		resp.getWriter().write(gson.toJson(activities));
 	}

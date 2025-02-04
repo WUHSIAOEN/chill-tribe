@@ -2,6 +2,10 @@
 
 package web.activity.dao.impl;
 
+import static core.util.JdbcConstants.PASSWORD;
+import static core.util.JdbcConstants.URL;
+import static core.util.JdbcConstants.USER;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,19 +16,29 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activity;
 
 public class ActivityDaoImpl implements ActivityDao {
-	private DataSource ds;
+//	private DataSource ds;
+	private HikariDataSource ds;
 
 	public ActivityDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
-		if (ds != null) {
-			System.out.println("DataSource found!");
-		} else {
-			System.out.println("DataSource not found.");
-		}
+//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
+//		if (ds != null) {
+//			System.out.println("DataSource found!");
+//		} else {
+//			System.out.println("DataSource not found.");
+//		}
+		ds = new HikariDataSource();
+		ds.setJdbcUrl(URL);
+		ds.setUsername(USER);
+		ds.setPassword(PASSWORD);
+		ds.addDataSourceProperty("cachePrepStmts", true);
+		ds.addDataSourceProperty("preStmtCacheSize", 250);
+		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
 
 	// 新增活動
@@ -62,44 +76,45 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<Activity> selectAll() {
 		final String SQL = "SELECT * FROM ACTIVITIES";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+		try (Connection conn = ds.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			ResultSet rs = pstmt.executeQuery();
 
 			List<Activity> list = new ArrayList<>();
 			while (rs.next()) {
 				Activity activity = new Activity();
-				activity.setActivityId(rs.getInt("activityId"));
-				activity.setActivityPrefix(rs.getString("activityPrefix"));
-				activity.setActivityName(rs.getString("activityName"));
-				activity.setSupplierId(rs.getInt("supplierId"));
+				activity.setActivityId(rs.getInt("activity_id"));
+				activity.setActivityPrefix(rs.getString("activity_prefix"));
+				activity.setActivityName(rs.getString("activity_name"));
+				activity.setSupplierId(rs.getInt("supplier_id"));
 				activity.setAddress(rs.getString("address"));
-				activity.setUnitPrice(rs.getInt("unitPrice"));
-				activity.setMinParticipants(rs.getInt("minParticipants"));
-				activity.setMaxParticipants(rs.getInt("maxParticipants"));
+				activity.setUnitPrice(rs.getInt("unit_price"));
+				activity.setMinParticipants(rs.getInt("min_participants"));
+				activity.setMaxParticipants(rs.getInt("max_participants"));
 				activity.setDescription(rs.getString("description"));
 				activity.setCategory(rs.getString("category"));
 				activity.setPrecaution(rs.getString("precaution"));
-				activity.setStartDateTime(rs.getTimestamp("startDateTime"));
-				activity.setEndDateTime(rs.getTimestamp("endDateTime"));
+				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
 				activity.setApproved(rs.getBoolean("approved"));
-				activity.setCityId(rs.getInt("cityId"));
-				activity.setDistrictId(rs.getInt("districtId"));
-				activity.setInventoryCount(rs.getInt("inventoryCount"));
-				activity.setInventoryUpdateTime(rs.getTimestamp("inventoryUpdateTime"));
-				activity.setCreateTime(rs.getTimestamp("createTime"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
+				activity.setInventoryCount(rs.getInt("inventory_count"));
+				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
+				activity.setCreateTime(rs.getTimestamp("create_time"));
 				activity.setLatitude(rs.getString("latitude"));
 				activity.setLongitude(rs.getString("longitude"));
-				activity.setTicketsActivateTime(rs.getTimestamp("ticketsActivateTime"));
-				activity.setTicketsExpiredTime(rs.getTimestamp("ticketsExpiredTime"));
+				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
+				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
+				System.out.println(list);
 			}
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			return null;
 		}
+		return null;
 	}
 	
 	//  更新活動

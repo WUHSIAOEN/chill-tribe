@@ -120,9 +120,6 @@ public class ApplyActivityController extends HttpServlet {
             sendErrorResponse(resp, "Invalid JSON format");
             return;
         }
-		
-		Activity activity = gson.fromJson(req.getReader(), Activity.class);
-		System.out.println(activity);
 
         // 確保 Activity 物件不為 null
         if (activity == null) {
