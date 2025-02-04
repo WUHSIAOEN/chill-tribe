@@ -19,7 +19,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="apply" method="POST">
+            <form id="activityForm">
               <div class="card-body">
                 <div class="form-group">
                   <label for="activityName">名稱 <span style="color: red;">*</span></label>
@@ -116,7 +116,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer d-flex justify-content-end">
-                  <button id="submitBtn" type="submit" class="btn btn-primary">發布</button>
+                  <button id="submitBtn" type="button" class="btn btn-primary">發布</button>
                   <button type="button" class="btn btn-secondary btn-spacing">取消</button>
               </div>
             </form>
@@ -127,6 +127,49 @@
 </body>
 
 <!-- apply activity js -->
-<script src="js/apply-activity.js"></script>
+<script>
+document.getElementById("submitBtn").addEventListener("click", function (event) {
+	  event.preventDefault(); // 防止表單默認提交行為
+	  const activityName = document.getElementById("activityName")?.value || "";
+	  const city = document.getElementById("city")?.value || "";
+	  const address = document.getElementById("address")?.value || "";
+	  const category = document.getElementById("category")?.value || "";
+	  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
+	  const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 0;
+	  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 0;
+	  const description = document.getElementById("description")?.value || "";
+	  const note = document.getElementById("note")?.value || "";
+
+	  // 打印即將送出的 JSON 資料
+	  const requestData = {
+	    activityName,
+	    city,
+	    address,
+	    category,
+	    unitPrice,
+	    minParticipants,
+	    maxParticipants,
+	    description,
+	    note
+	  };
+	  
+	  console.log("Sending JSON:", JSON.stringify(requestData)); // 輸出 JSON 格式資料
+
+	  fetch("apply", {
+	    method: "POST",
+	    headers: {
+	      "Content-Type": "application/json",
+	    },
+	    body: JSON.stringify(requestData),
+	  })
+	    .then((resp) => resp.json())
+	    .then((body) => {
+	      const { successful, message } = body;
+	    })
+	    .catch((error) => {
+	      console.log("Something is wrong...")
+	    });
+	});
+</script>
 
 </html>

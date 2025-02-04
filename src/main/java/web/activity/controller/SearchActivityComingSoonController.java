@@ -14,10 +14,10 @@ import com.google.gson.Gson;
 
 import web.activity.service.ActivityService2;
 import web.activity.service.impl.ActivityServiceImpl2;
-import web.activity.vo.ActivityImage;
+import web.activity.vo.IndexActivityCard;
 
-@WebServlet("/activity/SearchActivityImages")
-public class SearchActivityImagesController extends HttpServlet{
+@WebServlet("/activity/SearchActivityComingSoon")
+public class SearchActivityComingSoonController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -33,9 +33,10 @@ public class SearchActivityImagesController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<ActivityImage> activityImages = service.searchAllActivityImages();
+		List<IndexActivityCard> indexActivityCard = service.searchActivityByStart();
 		Gson gson = new Gson();
-		resp.getWriter().write(gson.toJson(activityImages));
+		resp.getWriter().write(gson.toJson(indexActivityCard));
 	}
-
+	
+	
 }
