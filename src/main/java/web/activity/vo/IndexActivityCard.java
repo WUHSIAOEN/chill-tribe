@@ -1,6 +1,7 @@
 package web.activity.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class IndexActivityCard {
 	private Integer activityId;
@@ -16,6 +17,8 @@ public class IndexActivityCard {
     private Integer minParticipants;
     private Integer maxParticipants;
     private String category;
+    private List<String> imageName;
+	private List<String> imageBase64;
     private Timestamp startDateTime;
     private Timestamp endDateTime;
     private Integer status;
@@ -100,6 +103,18 @@ public class IndexActivityCard {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	public List<String> getImageName() {
+		return imageName;
+	}
+	public void setImageName(List<String> imageName) {
+		this.imageName = imageName;
+	}
+	public List<String> getImageBase64() {
+		return imageBase64;
+	}
+	public void setImageBase64(List<String> imageBase64) {
+		this.imageBase64 = imageBase64;
 	}
 	public Timestamp getStartDateTime() {
 		return startDateTime;

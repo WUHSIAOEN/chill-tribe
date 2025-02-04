@@ -16,4 +16,7 @@ public interface ActivitySearchDao {
 	// 查詢首頁活動卡片欄位-根據開始時間排序limit 6
 	List<IndexActivityCard> selectActivityOrderByStart();
 	
+	// 查詢活動圖片
+	List<ActivityImage> selectActivityImageById(Integer activityId);
+	
 }

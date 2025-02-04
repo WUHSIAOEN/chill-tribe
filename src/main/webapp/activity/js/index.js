@@ -169,7 +169,7 @@ $(function () {
 
                             <div class="listing-img-wrapper">
                                 <a href="single-property-2.html">
-                                    <img src="https://placehold.co/1200x800" class="img-fluid mx-auto rounded" alt="" />
+                                    <img src="${activityCard.imageBase64[0]}" class="img-fluid mx-auto rounded" alt="" />
                                 </a>
                             </div>
 
