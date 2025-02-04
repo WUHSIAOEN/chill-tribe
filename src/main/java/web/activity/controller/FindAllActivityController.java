@@ -20,7 +20,7 @@ import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
 @WebServlet("/activity/findAll")
-public class FindAllController extends HttpServlet {
+public class FindAllActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ActivityService service;
 	

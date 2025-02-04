@@ -33,12 +33,12 @@ public class ActivityServiceImpl implements ActivityService {
 		Timestamp endDateTime = activity.getEndDateTime();
 		Integer status = activity.getStatus();
 		String note = activity.getNote();
-		Integer approved = activity.getApproved(); 
-		String city = activity.getCityId(); 
-		String district = activity.getDistrict();
+		Boolean approved = activity.getApproved(); 
+		Integer city = activity.getCityId(); 
+		Integer districtId = activity.getDistrictId();
 		Integer inventoryCount = activity.getInventoryCount();
 		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
-		Timestamp createdTime = activity.getCreatedTime();
+		Timestamp createdTime = activity.getCreateTime();
 		String latitude = activity.getLatitude();
 		String longitude = activity.getLongitude();
 		Timestamp ticketsActivateTime = activity.getTicketsActivateTime();

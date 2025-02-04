@@ -38,8 +38,8 @@ public class ActivityDaoImpl implements ActivityDao {
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			pstmt.setInt(1, activity.getSupplierId());
 			pstmt.setString(2, activity.getActivityName());
-			pstmt.setString(3, activity.getCityId());
-			pstmt.setString(4, activity.getDistrict());
+			pstmt.setInt(3, activity.getCityId());
+			pstmt.setInt(4, activity.getDistrictId());
 			pstmt.setString(5, activity.getAddress());
 			pstmt.setTimestamp(6, activity.getStartDateTime());
 			pstmt.setTimestamp(7, activity.getEndDateTime());
@@ -83,12 +83,12 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setEndDateTime(rs.getTimestamp("endDateTime"));
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
-				activity.setApproved(rs.getInt("approved"));
-				activity.setCityId(rs.getString("cityId"));
-				activity.setDistrict(rs.getString("district"));
+				activity.setApproved(rs.getBoolean("approved"));
+				activity.setCityId(rs.getInt("cityId"));
+				activity.setDistrictId(rs.getInt("districtId"));
 				activity.setInventoryCount(rs.getInt("inventoryCount"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventoryUpdateTime"));
-				activity.setCreatedTime(rs.getTimestamp("createdTime"));
+				activity.setCreateTime(rs.getTimestamp("createTime"));
 				activity.setLatitude(rs.getString("latitude"));
 				activity.setLongitude(rs.getString("longitude"));
 				activity.setTicketsActivateTime(rs.getTimestamp("ticketsActivateTime"));
@@ -152,11 +152,11 @@ public class ActivityDaoImpl implements ActivityDao {
 	    if (activity.getApproved() != null) {
 	        sql.append("APPROVED = ?, ");
 	    }
-	    if (activity.getCityId() != null && !activity.getCityId().isEmpty()) {
+	    if (activity.getCityId() != null) {
 	        sql.append("CITYID = ?, ");
 	    }
-	    if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
-	        sql.append("DISTRICT = ?, ");
+	    if (activity.getDistrictId() != null) {
+	        sql.append("DISTRICTID = ?, ");
 	    }
 	    if (activity.getInventoryCount() != null) {
 	        sql.append("INVENTORY_COUNT = ?, ");
@@ -164,8 +164,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	    if (activity.getInventoryUpdateTime() != null) {
 	        sql.append("INVENTORY_UPDATE_TIME = ?, ");
 	    }
-	    if (activity.getCreatedTime() != null) {
-	        sql.append("CREATED_TIME = ?, ");
+	    if (activity.getCreateTime() != null) {
+	        sql.append("CREATE_TIME = ?, ");
 	    }
 	    if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
 	        sql.append("LATITUDE = ?, ");
@@ -234,13 +234,13 @@ public class ActivityDaoImpl implements ActivityDao {
 	            pstmt.setString(parameterIndex++, activity.getNote());
 	        }
 	        if (activity.getApproved() != null) {
-	            pstmt.setInt(parameterIndex++, activity.getApproved());
+	            pstmt.setBoolean(parameterIndex, false);
 	        }
-	        if (activity.getCityId() != null && !activity.getCityId().isEmpty()) {
-	            pstmt.setString(parameterIndex++, activity.getCityId());
+	        if (activity.getCityId() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getCityId());
 	        }
-	        if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
-	            pstmt.setString(parameterIndex++, activity.getDistrict());
+	        if (activity.getDistrictId() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getDistrictId());
 	        }
 	        if (activity.getInventoryCount() != null) {
 	            pstmt.setInt(parameterIndex++, activity.getInventoryCount());
@@ -248,8 +248,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	        if (activity.getInventoryUpdateTime() != null) {
 	            pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
 	        }
-	        if (activity.getCreatedTime() != null) {
-	            pstmt.setTimestamp(parameterIndex++, activity.getCreatedTime());
+	        if (activity.getCreateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
 	        }
 	        if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
 	            pstmt.setString(parameterIndex++, activity.getLatitude());

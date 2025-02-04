@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import web.activity.vo.Activity;
 
 @WebServlet("/activity/delete")
-public class DeleteController extends HttpServlet {
+public class DeleteActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

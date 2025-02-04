@@ -105,18 +105,24 @@ public class ApplyActivityController extends HttpServlet {
 	    System.out.println("Received JSON: " + jsonString);
 
 		Gson gson = new Gson();
-		Activity activity = null;
+		Activity activity = new Activity();
+		
+		System.out.println(req.getReader().toString());
 		
 		
 		try {
             // 解析 JSON 並將其轉換為 Activity 物件
             activity = gson.fromJson(req.getReader(), Activity.class);
+            System.out.println(activity);
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             sendErrorResponse(resp, "Invalid JSON format");
             return;
         }
+		
+		Activity activity = gson.fromJson(req.getReader(), Activity.class);
+		System.out.println(activity);
 
         // 確保 Activity 物件不為 null
         if (activity == null) {
