@@ -19,29 +19,30 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public String apply(Activity activity) {
-		String activityPrefix = activity.getActivityPrefix(); // 活動代碼前綴
-		String activityName = activity.getActivityName(); // 活動名稱
-		Integer supplierId = activity.getSupplierId(); // 供應商編號
-		String address = activity.getAddress(); // 活動地址
-		Integer unitPrice = activity.getUnitPrice(); // 單位價格
-		Integer minParticipants = activity.getMinParticipants(); // 最小參加人數
-		Integer maxParticipants = activity.getMaxParticipants(); // 最大參加人數
-		String description = activity.getDescription(); // 活動描述
-		String category = activity.getCategory(); // 活動類別
-		Timestamp startDateTime = activity.getStartDateTime(); // 開始時間
-		Timestamp endDateTime = activity.getEndDateTime(); // 結束時間
-		Integer status = activity.getStatus(); // 狀態 (0: 暫定 1: 確定)
-		String note = activity.getNote(); // 備註
-		Integer approved = activity.getApproved(); // 審核狀態 (0: 未審核 1: 已通過)
-		String city = activity.getCity(); // 城市
-		String district = activity.getDistrict(); // 地區
-		Integer inventoryCount = activity.getInventoryCount(); // 庫存數量
-		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime(); // 庫存更新時間
-		Timestamp createdTime = activity.getCreatedTime(); // 建立時間
-		String latitude = activity.getLatitude(); // 緯度
-		String longitude = activity.getLongitude(); // 經度
-		Timestamp ticketsActivateTime = activity.getTicketsActivateTime(); // 票券啟動時間
-		Timestamp ticketsExpiredTime = activity.getTicketsExpiredTime(); // 票券過期時間
+		String activityPrefix = activity.getActivityPrefix(); 
+		String activityName = activity.getActivityName();
+		Integer supplierId = activity.getSupplierId();
+		String address = activity.getAddress();
+		Integer unitPrice = activity.getUnitPrice();
+		Integer minParticipants = activity.getMinParticipants();
+		Integer maxParticipants = activity.getMaxParticipants();
+		String description = activity.getDescription();
+		String precaution = activity.getPrecaution();
+		String category = activity.getCategory();
+		Timestamp startDateTime = activity.getStartDateTime();
+		Timestamp endDateTime = activity.getEndDateTime();
+		Integer status = activity.getStatus();
+		String note = activity.getNote();
+		Integer approved = activity.getApproved(); 
+		String city = activity.getCityId(); 
+		String district = activity.getDistrict();
+		Integer inventoryCount = activity.getInventoryCount();
+		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
+		Timestamp createdTime = activity.getCreatedTime();
+		String latitude = activity.getLatitude();
+		String longitude = activity.getLongitude();
+		Timestamp ticketsActivateTime = activity.getTicketsActivateTime();
+		Timestamp ticketsExpiredTime = activity.getTicketsExpiredTime();
 
 		int resultCount = dao.insert(activity);
 
