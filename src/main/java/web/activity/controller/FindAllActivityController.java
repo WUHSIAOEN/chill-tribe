@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
@@ -38,9 +39,12 @@ public class FindAllActivityController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy/MM/dd HH:mm:ss")
+				.create();
 		List<Activity> activities = service.findAll();
-		System.out.println("findAll() retrieved: " + activities);
-		Gson gson = new Gson();
+		System.out.println("findAll() " + activities);
 		resp.getWriter().write(gson.toJson(activities));
 	}
 	

@@ -45,10 +45,10 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public int insert(Activity activity) {
 		// SQL 語句：根據 activities 表格新增資料
-		final String SQL = "INSERT INTO ACTIVITIES (SUPPLIER_ID, ACTIVITY_NAME, CITY, DISTRICT, ADDRESS, "
+		final String SQL = "INSERT INTO ACTIVITIES (SUPPLIER_ID, ACTIVITY_NAME, CITY_ID, DISTRICT_ID, ADDRESS, "
 				+ "START_DATE_TIME, END_DATE_TIME, UNIT_PRICE, MIN_PARTICIPANTS, MAX_PARTICIPANTS, "
 				+ "INVENTORY_COUNT, DESCRIPTION, CATEGORY, PRECaution) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			pstmt.setInt(1, activity.getSupplierId());
 			pstmt.setString(2, activity.getActivityName());
@@ -109,6 +109,7 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
 				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
 				System.out.println(list);
+				list.add(activity);
 			}
 			return list;
 		} catch (Exception e) {
@@ -124,7 +125,6 @@ public class ActivityDaoImpl implements ActivityDao {
 		// SET 用來指定要更新哪些欄位的值。
 	    StringBuilder sql = new StringBuilder("UPDATE Activity SET ");
 
-	    // 構建 SQL 語句，根據每個欄位是否為 null 動態添加對應的 UPDATE 項
 	    if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
 	        sql.append("ACTIVITY_NAME = ?, ");
 	    }
