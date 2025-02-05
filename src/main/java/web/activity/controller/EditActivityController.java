@@ -15,7 +15,7 @@ import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.vo.Activity;
 
-public class EditController {
+public class EditActivityController {
 	@WebServlet("/member/edit")
 	public class editController extends HttpServlet{
 		private static final long serialVersionUID = 1L;

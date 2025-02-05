@@ -21,22 +21,19 @@ public class SearchActivitiesController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
-	private ActivityService2 service;
-	
-	
-	public void init() throws ServletException {
-		try {
-			service = new ActivityServiceImpl2();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Activity2> activities = service.searchAll();
-		Gson gson = new Gson();
-		resp.getWriter().write(gson.toJson(activities));
+		ActivityService2 service;
+		try {
+			service = new ActivityServiceImpl2();
+			List<Activity2> activities = service.searchAll();
+			Gson gson = new Gson();
+			resp.getWriter().write(gson.toJson(activities));
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

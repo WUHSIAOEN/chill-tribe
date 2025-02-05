@@ -2,6 +2,10 @@
 
 package web.activity.dao.impl;
 
+import static core.util.JdbcConstants.PASSWORD;
+import static core.util.JdbcConstants.URL;
+import static core.util.JdbcConstants.USER;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,53 +16,54 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activity;
 
 public class ActivityDaoImpl implements ActivityDao {
-	private DataSource ds;
+//	private DataSource ds;
+	private HikariDataSource ds;
 
 	public ActivityDaoImpl() throws NamingException {
-		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
-		if (ds != null) {
-			System.out.println("DataSource found!");
-		} else {
-			System.out.println("DataSource not found.");
-		}
+//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
+//		if (ds != null) {
+//			System.out.println("DataSource found!");
+//		} else {
+//			System.out.println("DataSource not found.");
+//		}
+		ds = new HikariDataSource();
+		ds.setJdbcUrl(URL);
+		ds.setUsername(USER);
+		ds.setPassword(PASSWORD);
+		ds.addDataSourceProperty("cachePrepStmts", true);
+		ds.addDataSourceProperty("preStmtCacheSize", 250);
+		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
 
 	// 新增活動
 	@Override
 	public int insert(Activity activity) {
 		// SQL 語句：根據 activities 表格新增資料
-		final String SQL = "INSERT INTO ACTIVITIES (ACTIVITY_PREFIX, ACTIVITY_NAME, SUPPLIER_ID, ADDRESS, UNIT_PRICE, "
-				+ "MIN_PARTICIPANTS, MAX_PARTICIPANTS, DESCRIPTION, CATEGORY, START_DATE_TIME, END_DATE_TIME, "
-				+ "STATUS, NOTE, CITY, DISTRICT, INVENTORY_COUNT, CREATED_TIME, LATITUDE, LONGITUDE, "
-				+ "INVENTORY_UPDATE_TIME, TICKETS_ACTIVATE_TIME, TICKETS_EXPIRED_TIME) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		final String SQL = "INSERT INTO ACTIVITIES (SUPPLIER_ID, ACTIVITY_NAME, CITY, DISTRICT, ADDRESS, "
+				+ "START_DATE_TIME, END_DATE_TIME, UNIT_PRICE, MIN_PARTICIPANTS, MAX_PARTICIPANTS, "
+				+ "INVENTORY_COUNT, DESCRIPTION, CATEGORY, PRECaution) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setString(1, activity.getActivityPrefix());
+			pstmt.setInt(1, activity.getSupplierId());
 			pstmt.setString(2, activity.getActivityName());
-			pstmt.setInt(3, activity.getSupplierId());
-			pstmt.setString(4, activity.getAddress());
-			pstmt.setInt(5, activity.getUnitPrice());
-			pstmt.setInt(6, activity.getMinParticipants());
-			pstmt.setInt(7, activity.getMaxParticipants());
-			pstmt.setString(8, activity.getDescription());
-			pstmt.setString(9, activity.getCategory());
-			pstmt.setTimestamp(10, activity.getStartDateTime());
-			pstmt.setTimestamp(11, activity.getEndDateTime());
-			pstmt.setInt(12, activity.getStatus());
-			pstmt.setString(13, activity.getNote());
-			pstmt.setString(14, activity.getCity());
-			pstmt.setString(15, activity.getDistrict());
-			pstmt.setInt(16, activity.getInventoryCount());
-			pstmt.setTimestamp(17, activity.getCreatedTime());
-			pstmt.setString(18, activity.getLatitude());
-			pstmt.setString(19, activity.getLongitude());
-			pstmt.setTimestamp(20, activity.getInventoryUpdateTime());
-			pstmt.setTimestamp(21, activity.getTicketsActivateTime());
-			pstmt.setTimestamp(22, activity.getTicketsExpiredTime());
+			pstmt.setInt(3, activity.getCityId());
+			pstmt.setInt(4, activity.getDistrictId());
+			pstmt.setString(5, activity.getAddress());
+			pstmt.setTimestamp(6, activity.getStartDateTime());
+			pstmt.setTimestamp(7, activity.getEndDateTime());
+			pstmt.setInt(8, activity.getUnitPrice());
+			pstmt.setInt(9, activity.getMinParticipants());
+			pstmt.setInt(10, activity.getMaxParticipants());
+			pstmt.setInt(11, activity.getInventoryCount());
+			pstmt.setString(12, activity.getDescription());
+			pstmt.setString(13, activity.getCategory());
+			pstmt.setString(14, activity.getPrecaution());
 
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -71,43 +76,45 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<Activity> selectAll() {
 		final String SQL = "SELECT * FROM ACTIVITIES";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+		try (Connection conn = ds.getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			ResultSet rs = pstmt.executeQuery();
 
 			List<Activity> list = new ArrayList<>();
 			while (rs.next()) {
 				Activity activity = new Activity();
-				activity.setActivityId(rs.getInt("activityId"));
-				activity.setActivityPrefix(rs.getString("activityPrefix"));
-				activity.setActivityName(rs.getString("activityName"));
-				activity.setSupplierId(rs.getInt("supplierId"));
+				activity.setActivityId(rs.getInt("activity_id"));
+				activity.setActivityPrefix(rs.getString("activity_prefix"));
+				activity.setActivityName(rs.getString("activity_name"));
+				activity.setSupplierId(rs.getInt("supplier_id"));
 				activity.setAddress(rs.getString("address"));
-				activity.setUnitPrice(rs.getInt("unitPrice"));
-				activity.setMinParticipants(rs.getInt("minParticipants"));
-				activity.setMaxParticipants(rs.getInt("maxParticipants"));
+				activity.setUnitPrice(rs.getInt("unit_price"));
+				activity.setMinParticipants(rs.getInt("min_participants"));
+				activity.setMaxParticipants(rs.getInt("max_participants"));
 				activity.setDescription(rs.getString("description"));
 				activity.setCategory(rs.getString("category"));
-				activity.setStartDateTime(rs.getTimestamp("startDateTime"));
-				activity.setEndDateTime(rs.getTimestamp("endDateTime"));
+				activity.setPrecaution(rs.getString("precaution"));
+				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
-				activity.setApproved(rs.getInt("approved"));
-				activity.setCity(rs.getString("city"));
-				activity.setDistrict(rs.getString("district"));
-				activity.setInventoryCount(rs.getInt("inventoryCount"));
-				activity.setInventoryUpdateTime(rs.getTimestamp("inventoryUpdateTime"));
-				activity.setCreatedTime(rs.getTimestamp("createdTime"));
+				activity.setApproved(rs.getBoolean("approved"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
+				activity.setInventoryCount(rs.getInt("inventory_count"));
+				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
+				activity.setCreateTime(rs.getTimestamp("create_time"));
 				activity.setLatitude(rs.getString("latitude"));
 				activity.setLongitude(rs.getString("longitude"));
-				activity.setTicketsActivateTime(rs.getTimestamp("ticketsActivateTime"));
-				activity.setTicketsExpiredTime(rs.getTimestamp("ticketsExpiredTime"));
+				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
+				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
+				System.out.println(list);
 			}
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			return null;
 		}
+		return null;
 	}
 	
 	//  更新活動
@@ -139,6 +146,9 @@ public class ActivityDaoImpl implements ActivityDao {
 	    if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
 	        sql.append("DESCRIPTION = ?, ");
 	    }
+	    if (activity.getPrecaution() != null && !activity.getPrecaution().isEmpty()) {
+	    	sql.append("PRECAUTION = ?, ");
+	    }
 	    if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
 	        sql.append("CATEGORY = ?, ");
 	    }
@@ -157,11 +167,11 @@ public class ActivityDaoImpl implements ActivityDao {
 	    if (activity.getApproved() != null) {
 	        sql.append("APPROVED = ?, ");
 	    }
-	    if (activity.getCity() != null && !activity.getCity().isEmpty()) {
-	        sql.append("CITY = ?, ");
+	    if (activity.getCityId() != null) {
+	        sql.append("CITYID = ?, ");
 	    }
-	    if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
-	        sql.append("DISTRICT = ?, ");
+	    if (activity.getDistrictId() != null) {
+	        sql.append("DISTRICTID = ?, ");
 	    }
 	    if (activity.getInventoryCount() != null) {
 	        sql.append("INVENTORY_COUNT = ?, ");
@@ -169,8 +179,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	    if (activity.getInventoryUpdateTime() != null) {
 	        sql.append("INVENTORY_UPDATE_TIME = ?, ");
 	    }
-	    if (activity.getCreatedTime() != null) {
-	        sql.append("CREATED_TIME = ?, ");
+	    if (activity.getCreateTime() != null) {
+	        sql.append("CREATE_TIME = ?, ");
 	    }
 	    if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
 	        sql.append("LATITUDE = ?, ");
@@ -220,6 +230,9 @@ public class ActivityDaoImpl implements ActivityDao {
 	        if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
 	            pstmt.setString(parameterIndex++, activity.getDescription());
 	        }
+	        if (activity.getPrecaution() != null && !activity.getPrecaution().isEmpty()) {
+	            pstmt.setString(parameterIndex++, activity.getPrecaution());
+	        }
 	        if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
 	            pstmt.setString(parameterIndex++, activity.getCategory());
 	        }
@@ -236,13 +249,13 @@ public class ActivityDaoImpl implements ActivityDao {
 	            pstmt.setString(parameterIndex++, activity.getNote());
 	        }
 	        if (activity.getApproved() != null) {
-	            pstmt.setInt(parameterIndex++, activity.getApproved());
+	            pstmt.setBoolean(parameterIndex, false);
 	        }
-	        if (activity.getCity() != null && !activity.getCity().isEmpty()) {
-	            pstmt.setString(parameterIndex++, activity.getCity());
+	        if (activity.getCityId() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getCityId());
 	        }
-	        if (activity.getDistrict() != null && !activity.getDistrict().isEmpty()) {
-	            pstmt.setString(parameterIndex++, activity.getDistrict());
+	        if (activity.getDistrictId() != null) {
+	            pstmt.setInt(parameterIndex++, activity.getDistrictId());
 	        }
 	        if (activity.getInventoryCount() != null) {
 	            pstmt.setInt(parameterIndex++, activity.getInventoryCount());
@@ -250,8 +263,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	        if (activity.getInventoryUpdateTime() != null) {
 	            pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
 	        }
-	        if (activity.getCreatedTime() != null) {
-	            pstmt.setTimestamp(parameterIndex++, activity.getCreatedTime());
+	        if (activity.getCreateTime() != null) {
+	            pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
 	        }
 	        if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
 	            pstmt.setString(parameterIndex++, activity.getLatitude());

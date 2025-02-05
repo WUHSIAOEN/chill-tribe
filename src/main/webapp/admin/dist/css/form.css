@@ -1,0 +1,35 @@
+.mouse-pointer {
+  cursor: pointer;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "選擇照片";
+}
+
+.btn-spacing {
+  margin-left: 10px;
+}
+
+.image-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 1px dashed #ccc;
+  background-color: #f0f0f0;
+  text-align: center;
+  line-height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.image-upload-placeholder {
+  color: #999;
+}
+
+.custom-file-input {
+  display: none;
+}
