@@ -256,7 +256,7 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 全選活動
 	@Override
-	public List<Activity> selectAll() {
+	public List<Activity> selectAllActivity() {
 		final String SQL = "SELECT * FROM ACTIVITIES";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			ResultSet rs = pstmt.executeQuery();

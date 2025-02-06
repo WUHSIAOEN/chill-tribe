@@ -50,7 +50,7 @@ public class FindActivityByIdController extends HttpServlet {
 	    try {
 	        if (idParam != null) {
 	            Integer id = Integer.parseInt(idParam);
-	            Activity activity = service.findById(id);
+	            Activity activity = service.findActivityById(id);
 	            resp.getWriter().write(gson.toJson(activity));
 	        } else {
 	            resp.getWriter().write(gson.toJson("沒有ID"));

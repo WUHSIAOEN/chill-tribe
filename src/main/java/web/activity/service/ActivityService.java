@@ -13,7 +13,7 @@ public interface ActivityService {
 	// 刪除活動
 	boolean removeById(Integer id);
 	// 複數活動
-	List<Activity> findAll();
+	List<Activity> findAllActivity();
 	// 單一活動
-	Activity findById(Integer id);
+	Activity findActivityById(Integer id);
 }
