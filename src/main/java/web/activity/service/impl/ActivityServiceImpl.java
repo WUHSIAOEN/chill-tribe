@@ -34,7 +34,7 @@ public class ActivityServiceImpl implements ActivityService {
 		Integer status = activity.getStatus();
 		String note = activity.getNote();
 		Boolean approved = activity.getApproved(); 
-		Integer city = activity.getCityId(); 
+		Integer cityId = activity.getCityId(); 
 		Integer districtId = activity.getDistrictId();
 		Integer inventoryCount = activity.getInventoryCount();
 		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
@@ -52,7 +52,6 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public Activity edit(Activity activity) {
-		// 檢查開始時間與結束時間是否合法（結束時間必須在開始時間之後）
 	    if (activity.getStartDateTime() != null && activity.getEndDateTime() != null) {
 	        if (activity.getStartDateTime().after(activity.getEndDateTime())) {
 //	            activity.setSuccessful(false);
