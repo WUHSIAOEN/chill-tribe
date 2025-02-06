@@ -29,6 +29,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../admin/dist/css/form.css">
+  <!-- Apply_activity style -->
+  <link rel="stylesheet" href="./css/apply_activity.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -877,16 +879,15 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-            <form action="apply" id="activityForm">
+            <form>
               <div class="card-body">
                 <div class="form-group">
                   <label for="activityName">名稱 <span style="color: red;">*</span></label>
                   <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
                 </div>
                 <div class="form-group">
-                  <label for="city">舉辦的縣市 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" id="city" name="city" style="width: 100%;">
-                    <option value="" disabled selected>請選擇縣市</option>
+                  <label for="cityId">舉辦的縣市 <span style="color: red;">*</span></label>
+                  <select class="form-control select2" id="cityId" name="cityId" style="width: 100%;">
                     <option value="taipei" selected="selected">台北市</option>
                     <option value="new-taipei">新北市</option>
                     <option value="taoyuan">桃園市</option>
@@ -938,7 +939,7 @@
                 <!-- /.form group -->
                 <div class="form-group">
                   <label for="supplierId">供應商編號 <span style="color: red;">*</span></label>
-                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="0" max="1000000" required>
+                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="1" max="1000000" required>
                 </div>
                 <div class="form-group">
                   <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
@@ -949,7 +950,7 @@
                   <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
                 </div>
                 <div class="form-group">
-                  <label for="">人數上限 <span style="color: red;">*</span></label>
+                  <label for="maxParticipants">人數上限 <span style="color: red;">*</span></label>
                   <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
                 </div>
                 <!-- textarea -->
@@ -959,11 +960,10 @@
                 </div>
                 <!-- textarea -->
                 <div class="form-group">
-                  <label for="note">備註</label>
-                  <textarea class="form-control" rows="3" id="note" placeholder="Enter ..."></textarea>
+                  <label for="precaution">備註</label>
+                  <textarea class="form-control" rows="3" id="precaution" placeholder="Enter ..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">上傳活動照片 <span style="color: red;">*</span></label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input mouse-pointer" id="eventImages" multiple>
@@ -971,6 +971,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- 圖片預覽區域 -->
+                <div id="previewContainer" class="d-flex flex-wrap mt-3"></div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer d-flex justify-content-end">
@@ -1096,11 +1098,46 @@
 
   })
 </script>
+
+<!----- 接收後端的資料 ----->
 <script src="js/apply_activity.js"></script>
+
+<!----- 預覽圖片區域 ----->
 <script>
-  // 當使用者選擇日期範圍時，輸出到 console
-  $('#reservationtime').on('change', function() {
-    console.log($(this).val());  // 顯示選取的日期時間範圍
+  document.getElementById("eventImages").addEventListener("change", function (event) {
+    const previewContainer = document.getElementById("previewContainer");
+    previewContainer.innerHTML = ""; // 清空現有預覽
+
+    const files = event.target.files;
+
+    Array.from(files).forEach((file, index) => {
+      if (!file.type.startsWith("image/")) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const previewDiv = document.createElement("div");
+        previewDiv.classList.add("position-relative", "m-2");
+        previewDiv.style.width = "160px";
+        previewDiv.style.height = "120px";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("img-thumbnail", "w-100", "h-100");
+
+        const removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "✖";
+        removeBtn.classList.add("remove-btn", "position-absolute");
+
+        removeBtn.addEventListener("click", () => {
+            previewDiv.remove();
+        });
+
+        previewDiv.appendChild(img);
+        previewDiv.appendChild(removeBtn);
+        previewContainer.appendChild(previewDiv);
+      };
+        reader.readAsDataURL(file);
+    });
   });
 </script>
 </body>

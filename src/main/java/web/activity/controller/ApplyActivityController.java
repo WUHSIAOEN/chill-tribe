@@ -42,35 +42,12 @@ public class ApplyActivityController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-//		StringBuilder jsonBuilder = new StringBuilder();
-//	    String line;
-//	    while ((line = req.getReader().readLine()) != null) {
-//	        jsonBuilder.append(line);
-//	    }
-//	    String jsonString = jsonBuilder.toString();
-//
-//	    // 打印接收到的 JSON 資料
-//	    System.out.println("Received JSON: " + jsonString);
 
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
-//		Activity activity = new Activity();
-		
-//		System.out.println(req.getReader().toString());
-		
-		
-//		try {
-            // 解析 JSON 並將其轉換為 Activity 物件
-            Activity activity = gson.fromJson(req.getReader(), Activity.class);
-            System.out.println(activity + "It's here");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//            sendErrorResponse(resp, "Invalid JSON format");
-//            return;
-//        }
+
+        Activity activity = gson.fromJson(req.getReader(), Activity.class);
 
         // 確保 Activity 物件不為 null
         if (activity == null) {
@@ -83,13 +60,12 @@ public class ApplyActivityController extends HttpServlet {
 		String errMsg = service.apply(activity);
 		System.out.println(errMsg);
 		System.out.println(activity);
-//		
+		
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", errMsg == null);
 		respBody.addProperty("errMsg", errMsg);
 		
 		resp.setContentType("application/json");
-//		resp.getWriter().write(respBody.toString());
 			
 	}
 	// 用來返回錯誤訊息的輔助方法
