@@ -19,7 +19,8 @@ public class IndexActivityCard {
     private String category;
     private List<String> imageName;
 	private List<String> imageBase64;
-    private Timestamp startDateTime;
+	private List<ActivityComment> activityComment;
+	private Timestamp startDateTime;
     private Timestamp endDateTime;
     private Integer status;
     private Boolean approved;
@@ -151,6 +152,12 @@ public class IndexActivityCard {
 	}
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}
+	public List<ActivityComment> getActivityComment() {
+		return activityComment;
+	}
+	public void setActivityComment(List<ActivityComment> activityComment) {
+		this.activityComment = activityComment;
 	}
 	
 }

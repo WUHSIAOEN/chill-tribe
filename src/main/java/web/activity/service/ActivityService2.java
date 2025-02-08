@@ -16,4 +16,7 @@ public interface ActivityService2 {
 		
 		// 首頁查詢活動卡片 - 根據最近開始排序(顯示6 筆)
 		List<IndexActivityCard> searchActivityByStart();
+		
+		// 查詢活動卡片 - 根據搜尋條件
+		List<IndexActivityCard> searchActivityByFilter(String actname, String category, String region);
 }
