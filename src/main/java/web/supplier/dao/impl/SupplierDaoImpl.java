@@ -22,12 +22,13 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	@Override
 	public int insert(Supplier supplier) {
-		String sql = "insert into SUPPLIERS(SUPPLIER_NAME, PHONE, EMAIL, PASSWORD) values(?, ?, ?, ?)";
+		String sql = "insert into SUPPLIERS(SUPPLIER_NAME, PHONE, EMAIL, PASSWORD, ID_NUMBER) values(?, ?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, supplier.getSupplier_name());
 			pstmt.setString(2, supplier.getPhone());
 			pstmt.setString(3, supplier.getEmail());
 			pstmt.setString(4, supplier.getPassword());
+			pstmt.setString(5, supplier.getId_number());
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

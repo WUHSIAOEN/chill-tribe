@@ -19,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public String apply(Activity activity) {
-		String activityPrefix = activity.getActivityPrefix(); 
+		String activityPrefix = activity.getActivityPrefix();
 		String activityName = activity.getActivityName();
 		Integer supplierId = activity.getSupplierId();
 		String address = activity.getAddress();
@@ -33,8 +33,8 @@ public class ActivityServiceImpl implements ActivityService {
 		Timestamp endDateTime = activity.getEndDateTime();
 		Integer status = activity.getStatus();
 		String note = activity.getNote();
-		Boolean approved = activity.getApproved(); 
-		Integer city = activity.getCityId(); 
+		Boolean approved = activity.getApproved();
+		Integer cityId = activity.getCityId();
 		Integer districtId = activity.getDistrictId();
 		Integer inventoryCount = activity.getInventoryCount();
 		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
@@ -52,41 +52,40 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Override
 	public Activity edit(Activity activity) {
-		// 檢查開始時間與結束時間是否合法（結束時間必須在開始時間之後）
-	    if (activity.getStartDateTime() != null && activity.getEndDateTime() != null) {
-	        if (activity.getStartDateTime().after(activity.getEndDateTime())) {
+		if (activity.getStartDateTime() != null && activity.getEndDateTime() != null) {
+			if (activity.getStartDateTime().after(activity.getEndDateTime())) {
 //	            activity.setSuccessful(false);
 //	            activity.setMessage("活動結束時間不能早於開始時間");
-	            return activity;
-	        }
-	    }
+				return activity;
+			}
+		}
 
-	    // 檢查活動名稱長度是否符合要求
-	    String activityName = activity.getActivityName();
-	    if (activityName == null || activityName.isEmpty()) {
+		// 檢查活動名稱長度是否符合要求
+		String activityName = activity.getActivityName();
+		if (activityName == null || activityName.isEmpty()) {
 //	        activity.setSuccessful(false);
 //	        activity.setMessage("活動名稱不可為空");
-	        return activity;
-	    }
+			return activity;
+		}
 
-	    // 檢查單位價格是否合理（假設價格必須大於0）
-	    if (activity.getUnitPrice() != null && activity.getUnitPrice() < 0) {
+		// 檢查單位價格是否合理（假設價格必須大於0）
+		if (activity.getUnitPrice() != null && activity.getUnitPrice() < 0) {
 //	        activity.setSuccessful(false);
 //	        activity.setMessage("單位價格必須大於 0");
-	        return activity;
-	    }
+			return activity;
+		}
 
-	    // 檢查最小參加人數和最大參加人數是否合法（最小參加人數應小於最大參加人數）
-	    if (activity.getMinParticipants() != null && activity.getMaxParticipants() != null) {
-	        if (activity.getMinParticipants() > activity.getMaxParticipants()) {
+		// 檢查最小參加人數和最大參加人數是否合法（最小參加人數應小於最大參加人數）
+		if (activity.getMinParticipants() != null && activity.getMaxParticipants() != null) {
+			if (activity.getMinParticipants() > activity.getMaxParticipants()) {
 //	            activity.setSuccessful(false);
 //	            activity.setMessage("最小參加人數不能大於最大參加人數");
-	            return activity;
-	        }
-	    }
-	    
-	    int resultCount = dao.update(activity);
-	    // 要新增一個判斷 resultCount 的程式碼
+				return activity;
+			}
+		}
+
+		int resultCount = dao.update(activity);
+		// 要新增一個判斷 resultCount 的程式碼
 		return activity;
 	}
 
@@ -99,10 +98,16 @@ public class ActivityServiceImpl implements ActivityService {
 		return dao.deletById(id) > 0;
 	}
 
-	// 查詢
+	// 查詢所有活動
 	@Override
-	public List<Activity> findAll() {
-		return dao.selectAll();
+	public List<Activity> findAllActivity() {
+		return dao.selectAllActivity();
+	}
+
+	// 查詢單一活動
+	@Override
+	public Activity findActivityById(Integer id) {
+		return dao.selectByActivityId(id);
 	}
 
 }
