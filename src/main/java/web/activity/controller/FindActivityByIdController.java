@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
@@ -20,8 +21,8 @@ import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
-@WebServlet("/activity/findAll")
-public class FindAllActivityController extends HttpServlet {
+@WebServlet("/activity/findActivityById")
+public class FindActivityByIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ActivityService service;
 	
@@ -40,12 +41,22 @@ public class FindAllActivityController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy/MM/dd HH:mm:ss")
-				.create();
-		List<Activity> activities = service.findAllActivity();
-		System.out.println("findAll() " + activities);
-		resp.getWriter().write(gson.toJson(activities));
+		String idParam = req.getParameter("id");
+
+	    Gson gson = new GsonBuilder()
+	            .setDateFormat("yyyy/MM/dd HH:mm:ss")
+	            .create();
+
+	    try {
+	        if (idParam != null) {
+	            Integer id = Integer.parseInt(idParam);
+	            Activity activity = service.findActivityById(id);
+	            resp.getWriter().write(gson.toJson(activity));
+	        } else {
+	            resp.getWriter().write(gson.toJson("沒有ID"));
+	        }
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
 	}
-	
 }

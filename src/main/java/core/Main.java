@@ -19,8 +19,20 @@ public class Main {
 //		for(ActivityImage activityImage : activityImages) {
 //			System.out.println(activityImage.getImageBase64());
 //		}
+//		ActivityServiceImpl2 as2 = new ActivityServiceImpl2();
+//		as2.searchActivityByStart();
+		
+		
+//		List<IndexActivityCard> indexActivityCards = new ActivitySearchDaoImpl().selectByNameCatgoryRegion("", "運動", "北部");
+//		for(IndexActivityCard indexActivityCard : indexActivityCards) {
+//			System.out.println(indexActivityCard.getActivityName());
+//		}
+		
 		ActivityServiceImpl2 as2 = new ActivityServiceImpl2();
-		as2.searchActivityByStart();
+		List<IndexActivityCard> cards = as2.searchActivityByFilter("健行", "all", "all");
+		for(IndexActivityCard card : cards) {
+			System.out.println(card.getActivityName());
+		}
 		
 	}	
 }
