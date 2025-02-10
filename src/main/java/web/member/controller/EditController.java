@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
+// 修改
 @WebServlet("/member/memberedit")
 public class EditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +33,11 @@ public class EditController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Gson gson = new Gson();
+//		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy/MM/dd")
+				.create();
+		
 		Member member = gson.fromJson(req.getReader(), Member.class);
 		
 		member = service.edit(member);

@@ -78,12 +78,12 @@ public class MemberServiceImpl implements MemberService{
 //			member.setMessage("匿名長度須介於1 ~ 20");
 //		}
 		
-		String member_name = member.getMember_name();
-		if (member_name == null || member_name.length() < 1 || member_name.length() > 20) {
-			System.out.println(member_name);
-			member.setSuccessful(false);
-			member.setMessage("匿名長度須介於1 ~ 20");
-		}
+//		String member_name = member.getMember_name();
+//		if (member_name == null || member_name.length() < 1 || member_name.length() > 20) {
+//			System.out.println(member_name);
+//			member.setSuccessful(false);
+//			member.setMessage("匿名長度須介於1 ~ 20");
+//		}
 		
 		int resultCount =  memberDao.update(member);
 		member.setSuccessful(resultCount > 0);

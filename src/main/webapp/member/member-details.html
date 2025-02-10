@@ -96,19 +96,19 @@
 												class="form-control" id="date_of_birth" value="">
 										</div>
 
-										<div class="form-group col-md-6">
-											<label>身分證字號</label>
-											<!-- <span class="input-required">*</span> -->
-											<input type="text" class="form-control simple" id="id_card"
-												value="" disabled>
-										</div>
+<!-- 										<div class="form-group col-md-6"> -->
+<!-- 											<label>身分證字號</label> -->
+<!-- 											<span class="input-required">*</span> -->
+<!-- 											<input type="text" class="form-control simple" id="id_card" -->
+<!-- 												value="" disabled> -->
+<!-- 										</div> -->
 
 										<div class="form-group col-md-6">
 											<label>性別</label> <select name="gender" id="gender"
 												class="form-control">
-												<option value="male">男生</option>
-												<option value="female">女生</option>
-												<option value="other">其他</option>
+												<option value="1">男生</option>
+												<option value="2">女生</option>
+												<option value="3">請選擇</option>
 											</select>
 										</div>
 
@@ -223,10 +223,15 @@
 	fetch('find')
 		.then(resp => resp.json())
 		.then(member => {
+			console.log(member);
 			username.value = member.member_name;
 			email.value = member.email;
 			phone.value = member.phone;
-			date_of_birth.value = member.date_of_birth;
+
+			let date = new Date(member.date_of_birth);
+		    let formattedDate = date.toISOString().split('T')[0]; 
+		    date_of_birth.value = formattedDate;
+// 			date_of_birth.value = member.date_of_birth;
 			gender.value = member.gender;
 			
 		});
@@ -262,10 +267,10 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				username: username.value,
-				phone: phone.value,
+				member_name: username.value,
+// 				phone: phone.value,
 				date_of_birth: date_of_birth.value,
-				gender: gender.value
+// 				gender: gender.value
 			})
 		})
 		// console.log(resp)
