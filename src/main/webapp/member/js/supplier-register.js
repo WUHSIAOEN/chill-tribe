@@ -24,7 +24,7 @@
 			return;
 		}
 		
-		fetch('register', {
+		fetch('../supplier/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

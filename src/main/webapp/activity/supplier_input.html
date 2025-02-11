@@ -852,7 +852,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>客服中心</h1>
+            <h1>活動上架申請</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -865,63 +865,121 @@
     </section>
 
     <!-- Main content -->
-    
-    <!-- left column -->
-    <div class="col-md-12">
-      <!-- general form elements -->
-      <div class="card card-primary">
-        <div class="card-header">
-          <h3 class="card-title">Quick Example</h3>
-        </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-        <form>
-          <div class="card-body">
-            <div class="form-group">
-              <label for="caseNumber">案件編號</label>
-              <input type="text" class="form-control" id="caseNumber" value="自動生成的編號" readonly>
-            </div>
-            <div class="form-group">
-              <label for="caseTitle">案件標題</label>
-              <input type="text" class="form-control" id="caseTitle" value="此處輸入標題" readonly>
-            </div>
-            <div class="form-group">
-              <label for="applicationTitle">申請標題</label>
-              <input type="text" class="form-control" id="applicationTitle" value="此處輸入申請標題" readonly>
-            </div>
-            <div class="form-group">
-              <label for="applicationEmail">申請信箱</label>
-              <input type="text" class="form-control" id="applicationEmail" value="此處輸入申請信箱" readonly>
-            </div>
-            <div class="form-group">
-              <label for="applicationDate">申請日期</label>
-              <input type="text" class="form-control" id="applicationDate" value="" readonly>
-            </div>
-            <!-- textarea -->
-            <div class="form-group">
-              <label>申請內容</label>
-              <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-            </div>
-            <div class="form-group">
-              <label>回復</label>
-              <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-            </div>
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary">發布</button>
-            <button type="button" class="btn btn-secondary btn-spacing">取消</button>
-          </div>
-        </form>
-      </div>
-      <!-- /.card -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form action="apply" method="POST">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="activityName">名稱 <span style="color: red;">*</span></label>
+                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
+                </div>
+                <div class="form-group">
+                  <label for="city">舉辦的縣市 <span style="color: red;">*</span></label>
+                  <select class="form-control select2" id="city" name="city" style="width: 100%;">
+                    <option value="" disabled selected>請選擇縣市</option>
+                    <option value="taipei" selected="selected">台北市</option>
+                    <option value="new-taipei">新北市</option>
+                    <option value="taoyuan">桃園市</option>
+                    <option value="taichung">台中市</option>
+                    <option value="tainan">台南市</option>
+                    <option value="kaohsiung">高雄市</option>
+                    <option value="keelung">基隆市</option>
+                    <option value="hsinchu">新竹市</option>
+                    <option value="hsinchu-county">新竹縣</option>
+                    <option value="miaoli">苗栗縣</option>
+                    <option value="changhua">彰化縣</option>
+                    <option value="nantou">南投縣</option>
+                    <option value="yunlin">雲林縣</option>
+                    <option value="chiayi-city">嘉義市</option>
+                    <option value="chiayi-county">嘉義縣</option>
+                    <option value="pingtung">屏東縣</option>
+                    <option value="yilan">宜蘭縣</option>
+                    <option value="hualien">花蓮縣</option>
+                    <option value="taitung">台東縣</option>
+                    <option value="penghu">澎湖縣</option>
+                    <option value="kinmen">金門縣</option>
+                    <option value="lienchiang">連江縣</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="address">詳細地址 <span style="color: red;">*</span></label>
+                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
+                </div>
+                <div class="form-group">
+                  <label for="category">分類 <span style="color: red;">*</span></label>
+                  <select class="form-control select2" id="category" name="category" style="width: 100%;">
+                    <option selected="selected" value="art">文藝</option>
+                    <option value="entertainment">娛樂</option>
+                    <option value="technology">科技</option>
+                    <option value="sport">運動</option>
+                  </select>
+                </div>
+                <!-- Date and time range -->
+                <div class="form-group">
+                  <label>日期與時間 <span style="color: red;"></span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    </div>
+                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <div class="form-group">
+                  <label for="supplierId">供應商編號 <span style="color: red;">*</span></label>
+                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="0" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
+                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="minParticipants">成團人數 <span style="color: red;">*</span></label>
+                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="">人數上限 <span style="color: red;">*</span></label>
+                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                  <label for="description">介紹 <span style="color: red;">*</span></label>
+                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter ..." required></textarea>
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                  <label for="note">備註</label>
+                  <textarea class="form-control" rows="3" id="note" placeholder="Enter ..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上傳活動照片 <span style="color: red;">*</span></label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" multiple>
+                            <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            <!-- /.card -->
              
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
 <!-- ./wrapper -->
 
 <!-- jQuery -->

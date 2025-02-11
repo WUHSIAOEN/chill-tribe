@@ -65,7 +65,7 @@
                                     <div class="position-relative">
                                         <input type="text" class="form-control border-0 ps-5 pl-4"
                                             style="padding-left: 8px;" placeholder="輸入活動名稱..."
-                                            id="search-activity-name-input">
+                                            id="search-activity-name">
                                         <div class="position-absolute top-50 start-0 translate-middle-y ms-2">
                                             <span class="svg-icon text-primary svg-icon-2hx">
                                                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none"
@@ -87,11 +87,12 @@
                                 <div class="form-group borders border-start">
                                     <div class="position-relative ps-5">
                                         <select id="category" class="form-control">
-                                            <option value="1" selected>運動</option>
-                                            <option value="2">文藝</option>
-                                            <option value="3">娛樂</option>
-                                            <option value="4">音樂</option>
-                                            <option value="5">宗教</option>
+                                            <option value="all" selected>全部</option>
+                                            <option value="運動">運動</option>
+                                            <option value="文藝">文藝</option>
+                                            <option value="娛樂">娛樂</option>
+                                            <option value="音樂">音樂</option>
+                                            <option value="美食">美食</option>
                                         </select>
                                         <div class="position-absolute top-50 end-0 translate-middle-y me-3">
                                             <span class="svg-icon text-primary svg-icon-2hx">
@@ -110,13 +111,14 @@
                             <div class="col-lg-3 col-md-3 col-sm-12">
                                 <div class="form-group borders border-start">
                                     <div class="position-relative ps-5">
-                                        <select id="category" class="form-control"
+                                        <select id="region" class="form-control"
                                             style="appearance: none; padding-right: 2.5rem;">
-                                            <option value="1" selected>北部</option>
-                                            <option value="2">中部</option>
-                                            <option value="3">南部</option>
-                                            <option value="4">東部</option>
-                                            <option value="4">離島</option>
+                                            <option value="all" selected>全部</option>
+                                            <option value="北部">北部</option>
+                                            <option value="中部">中部</option>
+                                            <option value="南部">南部</option>
+                                            <option value="東部">東部</option>
+                                            <option value="離島">離島</option>
                                         </select>
                                         <div class="position-absolute top-50 end-0 translate-middle-y me-3">
                                             <span class="svg-icon text-primary svg-icon-2hx">
@@ -134,7 +136,7 @@
 
                             <div class="col-lg-2 col-md-2 col-sm-12">
                                 <div class="form-group">
-                                    <button type="button" href="#" class="btn btn-dark fw-medium full-width">搜尋</button>
+                                    <button id="index-search-button" type="button" class="btn btn-dark fw-medium full-width">搜尋</button>
                                 </div>
                             </div>
 
@@ -972,14 +974,13 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-7 col-md-10 text-center">
                         <div class="sec-heading center">
-                            <h2>Featured Property For Sale</h2>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque corrupti quos dolores</p>
+                            <h2>即將開始活動</h2>
+                            <p>倒數計時，趕快參加！</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="row list-layout">
+                <div id="coming-soon-activities" class="row list-layout">
 
                     <!-- Single Property Start -->
                     <div class="col-xl-6 col-lg-6 col-md-12">
@@ -1297,9 +1298,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 col-md-10 text-center">
                     <div class="sec-heading center">
-                        <h2>Featured Property For Sale</h2>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                            voluptatum deleniti atque corrupti quos dolores</p>
+                        <h2>探索台灣各地</h2>
+                        <p>選擇你的城市，開啟一場難忘的體驗</p>
                     </div>
                 </div>
             </div>
@@ -1317,8 +1317,7 @@
                             <div class="listing-item-grid_title">
                                 <h3><a href="listing.html">台北</a></h3>
                                 <p>
-                                    Constant care and attention to the patients makes good
-                                    record
+                                    多元活力交匯，找到志同道合的夥伴
                                 </p>
                             </div>
                         </div>
@@ -1335,8 +1334,7 @@
                             <div class="listing-item-grid_title">
                                 <h3><a href="listing.html">台中</a></h3>
                                 <p>
-                                    Constant care and attention to the patients makes good
-                                    record
+                                    創意與熱情匯聚，參與精彩活動一起成長
                                 </p>
                             </div>
                         </div>
@@ -1353,8 +1351,7 @@
                             <div class="listing-item-grid_title">
                                 <h3><a href="listing.html">台南</a></h3>
                                 <p>
-                                    Constant care and attention to the patients makes good
-                                    record
+                                    歷史與創新並存，體驗豐富多元的交流
                                 </p>
                             </div>
                         </div>
@@ -1371,8 +1368,7 @@
                             <div class="listing-item-grid_title">
                                 <h3><a href="listing.html">高雄</a></h3>
                                 <p>
-                                    Constant care and attention to the patients makes good
-                                    record
+                                    南台灣的熱情舞台，和夥伴一起開創新體驗
                                 </p>
                             </div>
                         </div>
@@ -1389,8 +1385,7 @@
                             <div class="listing-item-grid_title">
                                 <h3><a href="listing.html">九份</a></h3>
                                 <p>
-                                    Constant care and attention to the patients makes good
-                                    record
+                                    山海間的獨特聚會，探索屬於你的精彩時刻
                                 </p>
                             </div>
                         </div>
@@ -1422,6 +1417,12 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+    
+    <script src="vendors/jquery/jquery-3.7.1.min.js"></script>
+
+    <!-- 自己刻 -->
+    <script src="activity/js/index.js"></script>
+    <!-- 自己刻↑ -->
 
     <!-- ============================================================== -->
     <!-- All Jquery -->
@@ -1441,7 +1442,7 @@
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
-
+    
 
     <!-- ============================================================== -->
     <!-- 客製js↓ -->
@@ -1465,6 +1466,8 @@
             }
         });
     </script>
+
+    
 </body>
 
 </html>

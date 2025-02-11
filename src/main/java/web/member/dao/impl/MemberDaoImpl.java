@@ -3,7 +3,9 @@ package web.member.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -20,6 +22,7 @@ public class MemberDaoImpl implements MemberDao {
 		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
 	}
 
+	// 註冊會員資料
 	@Override
 	public int insert(Member member) {
 		String sql = "insert into MEMBERS(MEMBER_NAME, PHONE, EMAIL, PASSWORD) values(?, ?, ?, ?)";
@@ -35,6 +38,7 @@ public class MemberDaoImpl implements MemberDao {
 		return -1;
 	}
 
+	// 使用member_name查詢相關資料
 	@Override
 	public Member selectByUsername(String member_name) {
 		String sql = "select * from MEMBERS where MEMBER_NAME = ?";
@@ -57,30 +61,66 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 
+	// 更新資料
 	@Override
 	public int update(Member member) {
-		int offset = 0;
-		StringBuilder sql = new StringBuilder("update MEMBERS set ");
-		String password = member.getPassword();
-		boolean hasPassword = password != null && !password.isEmpty();
-		if (hasPassword) {
-			sql.append("PASSWORD = ?,");
-		}
-		sql.append("MEMBER_NAME = ? ");
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-			if (hasPassword) {
-				pstmt.setString(1, member.getPassword());
-				offset++;
-			}
+	    int offset = 1;  
+	    StringBuilder sql = new StringBuilder("UPDATE MEMBERS SET ");
+	    String gender = member.getGender();
+	    Date date_of_birth = member.getDate_of_birth();
+	    String phone = member.getPhone();
+	    String member_name = member.getMember_name();
+	    
+	    boolean hasMembername = member_name != null && !member_name.isEmpty();
+	    boolean hasGender = gender != null && !gender.isEmpty();
+	    boolean hasDateOfBirth = date_of_birth != null;
+	    boolean hasPhone = phone != null && !phone.isEmpty();
 
-			pstmt.setString(2 + offset, member.getMember_name());
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+	    if (hasGender) {
+	        sql.append("GENDER = ?, ");
+	    }
+	    if (hasDateOfBirth) {
+	        sql.append("DATE_OF_BIRTH = ?, ");
+	    }
+	    if (hasPhone) {
+	        sql.append("PHONE = ?, ");
+	    }
+	    if (hasMembername) {
+	        sql.append("MEMBER_NAME = ?, ");
+	    }
+	    
+	    if (sql.charAt(sql.length() - 2) == ',') {
+	        sql.delete(sql.length() - 2, sql.length());
+	    }
+
+	    // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+	    sql.append("WHERE MEMBER_ID = ?");
+
+	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+	        if (hasGender) {
+	            pstmt.setString(offset++, member.getGender());
+	        }
+	        if (hasDateOfBirth) {
+	        	pstmt.setDate(offset++, member.getDate_of_birth());
+	        }
+	        if (hasPhone) {
+	            pstmt.setString(offset++, member.getPhone());
+	        }
+	        if (hasMembername) {
+	            pstmt.setString(offset++, member.getMember_name());
+	        }
+
+	        // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+	        pstmt.setInt(offset, member.getMember_id());
+	        
+	        return pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return -1;
 	}
 
+	// 查詢帳號 密碼
 	@Override
 	public Member selectByUsernameAndPassword(Member member) {
 		String sql = "select * from MEMBERS where EMAIL = ? and PASSWORD = ?";
@@ -94,6 +134,10 @@ public class MemberDaoImpl implements MemberDao {
 					member.setMember_name(rs.getString("MEMBER_NAME"));
 					member.setEmail(rs.getString("EMAIL"));
 					member.setPassword(rs.getString("PASSWORD"));
+					member.setPhone(rs.getString("PHONE"));
+					member.setDate_of_birth(rs.getDate("DATE_OF_BIRTH"));
+					member.setGender(rs.getString("GENDER"));
+					member.setId_card(rs.getString("ID_CARD"));
 					return member;
 				}
 			}
@@ -117,6 +161,11 @@ public class MemberDaoImpl implements MemberDao {
 				member.setMember_name(rs.getString("MEMBER_NAME"));
 				member.setEmail(rs.getString("EMAIL"));
 				member.setPassword(rs.getString("PASSWORD"));
+				member.setDate_of_birth(rs.getDate("DATE_OF_BIRTH"));
+				member.setGender(rs.getString("GENDER"));
+				member.setEmail(rs.getString("EMAIL"));
+				member.setId_card(rs.getString("ID_CARD"));
+				member.setPhone(rs.getString("PHONE"));
 				list.add(member);
 			}
 			return list;
@@ -126,7 +175,7 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 	
-		
+		// 刪除使用者
 		@Override
 		public Integer deletById(Integer member_id) {
 			String sql = "delete from MEMBERS where  MEMBER_ID = ?"; 
@@ -142,6 +191,7 @@ public class MemberDaoImpl implements MemberDao {
 		return -1;
 	}
 
+		// 查詢Email
 		@Override
 		public Member selectByEmail(String email) {
 			String sql = "select * from MEMBERS where EMAIL = ?";
@@ -164,6 +214,7 @@ public class MemberDaoImpl implements MemberDao {
 			return null;
 		}
 
+		// 查詢手機
 		@Override
 		public Member selectByPhone(String phone) {
 			String sql = "select * from MEMBERS where PHONE = ?";

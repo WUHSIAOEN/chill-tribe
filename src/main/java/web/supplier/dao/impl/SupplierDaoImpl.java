@@ -22,12 +22,13 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	@Override
 	public int insert(Supplier supplier) {
-		String sql = "insert into SUPPLIERS(SUPPLIER_NAME, PHONE, EMAIL, PASSWORD) values(?, ?, ?, ?)";
+		String sql = "insert into SUPPLIERS(SUPPLIER_NAME, PHONE, EMAIL, PASSWORD, ID_NUMBER) values(?, ?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, supplier.getSupplier_name());
 			pstmt.setString(2, supplier.getPhone());
 			pstmt.setString(3, supplier.getEmail());
 			pstmt.setString(4, supplier.getPassword());
+			pstmt.setString(5, supplier.getId_number());
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,6 +95,7 @@ public class SupplierDaoImpl implements SupplierDao {
 					supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
 					supplier.setEmail(rs.getString("EMAIL"));
 					supplier.setPassword(rs.getString("PASSWORD"));
+					supplier.setPhone(rs.getString("PHONE"));
 					return supplier;
 				}
 			}
@@ -112,12 +114,14 @@ public class SupplierDaoImpl implements SupplierDao {
 			List<Supplier> list = new ArrayList<>();
 
 			while (rs.next()) {
-				Supplier member = new Supplier();
-				member.setSupplier_id(rs.getInt("SUPPLIER_ID"));
-				member.setSupplier_name(rs.getString("SUPPLIER_NAME"));
-				member.setEmail(rs.getString("EMAIL"));
-				member.setPassword(rs.getString("PASSWORD"));
-				list.add(member);
+				Supplier supplier = new Supplier();
+				supplier.setSupplier_id(rs.getInt("SUPPLIER_ID"));
+				supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
+				supplier.setEmail(rs.getString("EMAIL"));
+				supplier.setPassword(rs.getString("PASSWORD"));
+				supplier.setId_number(rs.getString("ID_NUMBER"));
+				supplier.setPhone(rs.getString("PHONE"));
+				list.add(supplier);
 			}
 			return list;
 		} catch (Exception e) {

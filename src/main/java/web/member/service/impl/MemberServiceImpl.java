@@ -58,22 +58,29 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member edit(Member member) {
-		String password = member.getPassword();
-		if (password != null && !password.isEmpty()  && (password.length() < 6 || password.length() > 12)) {
-			member.setSuccessful(false);
-			member.setMessage("密碼長度須介於6 ~ 12");
-			System.out.println(password);
-		}
-		
-		if (!Objects.equals(password, member.getcPassword())) {
-			System.out.println(member.getcPassword());
-			member.setSuccessful(false);
-			member.setMessage("密碼與確認密碼不符合");
-		}
+//		String password = member.getPassword();
+//		if (password != null && !password.isEmpty()  && (password.length() < 6 || password.length() > 12)) {
+//			member.setSuccessful(false);
+//			member.setMessage("密碼長度須介於6 ~ 12");
+//			System.out.println(password);
+//		}
+//		
+//		if (!Objects.equals(password, member.getcPassword())) {
+//			System.out.println(member.getcPassword());
+//			member.setSuccessful(false);
+//			member.setMessage("密碼與確認密碼不符合");
+//		}
 		
 //		String nicfkname = member.getNickname();
 //		if (nicfkname == null || nicfkname.length() < 1 || nicfkname.length() > 20) {
 //			System.out.println(nicfkname);
+//			member.setSuccessful(false);
+//			member.setMessage("匿名長度須介於1 ~ 20");
+//		}
+		
+//		String member_name = member.getMember_name();
+//		if (member_name == null || member_name.length() < 1 || member_name.length() > 20) {
+//			System.out.println(member_name);
 //			member.setSuccessful(false);
 //			member.setMessage("匿名長度須介於1 ~ 20");
 //		}

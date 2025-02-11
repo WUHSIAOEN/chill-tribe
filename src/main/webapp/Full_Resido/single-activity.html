@@ -130,10 +130,10 @@
 						
 							<div class="property_block_wrap style-2 p-4">
 								<div class="prt-detail-title-desc">
-									<span class="label text-light bg-success">運動</span>
-									<h3>一起來打羽球吧!</h3>
-									<span><i class="lni-map-marker"></i> 大安公園</span>
-									<h3 class="prt-price-fix text-primary"><sub>$</sub>50<sub>/人</sub></h3>
+									<span class="label text-light bg-success" id="category-2">運動</span>
+									<h3 id="activityName-1">一起來打羽球吧!</h3>
+									<span id="districtId"><i class="lni-map-marker"></i> 大安公園</span>
+									<h3 class="prt-price-fix text-primary"><sub>$</sub id="unitPrice">50<sub>/人</sub></h3>
 								</div>
 							</div>
 							
@@ -141,12 +141,15 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true"><h4 class="property_block_title">活動內容</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true">
+										<h4 class="property_block_title">活動內容</h4></a>
 								</div>
 								<div id="clTwo" class="panel-collapse collapse show">
 									<div class="block-body">
-										<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-										<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+										<p id="description">There are many variations of passages of Lorem Ipsum available, 
+											but the majority have suffered alteration in some form, by injected humour, 
+											or randomised words which don't look even slightly believable.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -155,7 +158,9 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#floor"  data-bs-target="#clFive" aria-controls="clFive" href="javascript:void(0);" aria-expanded="true" class="collapsed"><h4 class="property_block_title">活動細節</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#floor"  data-bs-target="#clFive" 
+									aria-controls="clFive" href="javascript:void(0);" aria-expanded="true" 
+									class="collapsed"><h4 class="property_block_title">活動細節</h4></a>
 								</div>
 								
 								<div id="clFive" class="panel-collapse collapse">
@@ -165,7 +170,11 @@
 											<div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed activity" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">活動名稱<span>一起來打羽球吧!</span></button>
+														<button type="button" class="btn btn-link collapsed activity" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" 
+														style="cursor: default; user-select: text;">
+														活動名稱<span id="activityName-2">一起來打羽球吧!</span>
+														</button>
 													</h2>
 												</div>
 											</div>
@@ -173,7 +182,9 @@
 											<div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">活動地點<span>大安公園</span></button>
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">活動分類<span id="category-1">運動</span></button>
 													</h2>
 												</div>
 											</div>
@@ -181,7 +192,49 @@
 											<div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">日期<span>2025/04/10</span></button>
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">活動地區<span id="districtId">北部</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">活動城市<span id="cityId">大安公園</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">詳細地址<span id="address">大安公園</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">開始時間<span id="startDateTime">2025/04/10</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">結束時間<span id="endDateTime">2025/04/10</span></button>
 													</h2>
 												</div>
 											</div>
@@ -189,7 +242,9 @@
                       <div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">參加費用<span>50/人</span></button>
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">參加費用<span id="unitPrice">50</span>/人</button>
 													</h2>
 												</div>
 											</div>
@@ -197,7 +252,9 @@
                       <div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">成團人數<span>4</span></button>
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">成團人數<span id="minParticipants">4</span></button>
 													</h2>
 												</div>
 											</div>
@@ -205,15 +262,9 @@
                       <div class="card">
 												<div class="card-header" id="seconfFloor">
 													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">人數上限<span>9</span></button>
-													</h2>
-												</div>
-											</div>
-
-                      <div class="card">
-												<div class="card-header" id="seconfFloor">
-													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; user-select: text;">活動分類<span>運動</span></button>
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">人數上限<span id="maxParticipants">9</span></button>
 													</h2>
 												</div>
 											</div>
@@ -228,13 +279,19 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#loca"  data-bs-target="#clSix" aria-controls="clSix" href="javascript:void(0);" aria-expanded="true" class="collapsed" style="cursor: default; user-select: text;"><h4 class="property_block_title">地點</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#loca"  data-bs-target="#clSix" 
+									aria-controls="clSix" href="javascript:void(0);" aria-expanded="true" class="collapsed" 
+									style="cursor: default; user-select: text;"><h4 class="property_block_title">地點</h4></a>
 								</div>
 								
 								<div id="clSix" class="panel-collapse collapse">
 									<div class="block-body">
 										<div class="map-container">
-											<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.3838103135677!2d80.87929001488125!3d26.827742183164247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfe8bc34b51bb%3A0xa3ca86eec63f6f8!2sINFOSYS%20DIGITAL%20COMPUTER%20(Prabhat%20Computer%20Classes)!5e0!3m2!1sen!2sin!4v1680238790732!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+											<iframe 
+											src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.3838103135677!2d80.87929001488125!3d26.827742183164247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfe8bc34b51bb%3A0xa3ca86eec63f6f8!2sINFOSYS%20DIGITAL%20COMPUTER%20(Prabhat%20Computer%20Classes)!5e0!3m2!1sen!2sin!4v1680238790732!5m2!1sen!2sin" 
+											width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
+											referrerpolicy="no-referrer-when-downgrade">
+											</iframe>
 										</div>
 
 									</div>
@@ -246,29 +303,43 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#clSev"  data-bs-target="#clSev" aria-controls="clOne" href="javascript:void(0);" aria-expanded="true" class="collapsed"><h4 class="property_block_title">活動照片圖庫</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#clSev"  data-bs-target="#clSev" 
+									aria-controls="clOne" href="javascript:void(0);" aria-expanded="true" 
+									class="collapsed"><h4 class="property_block_title">活動照片圖庫</h4></a>
 								</div>
 								
 								<div id="clSev" class="panel-collapse collapse">
 									<div class="block-body">
 										<ul class="list-gallery-inline">
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 											<li>
-												<a href="https://placehold.co/1200x800" class="mfp-gallery"><img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" /></a>
+												<a href="https://placehold.co/1200x800" class="mfp-gallery">
+													<img src="https://placehold.co/1200x800" class="img-fluid mx-auto" alt="" />
+												</a>
 											</li>
 										</ul>
 									</div>
@@ -280,12 +351,17 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true"><h4 class="property_block_title">活動備註</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" 
+									aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true">
+									<h4 class="property_block_title">活動注意事項</h4></a>
 								</div>
 								<div id="clTwo" class="panel-collapse collapse show">
 									<div class="block-body">
-										<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-										<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+										<p id="precaution">There are many variations of passages of Lorem Ipsum available, but the majority have suffered 
+											alteration in some form, by injected humour, or randomised words which don't look even slightly 
+											believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there 
+											isn't anything embarrassing hidden in the middle of text.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -296,7 +372,9 @@
 									<span class="rating-overview-box-total">4.2</span>
 									<span class="rating-overview-box-percent">out of 5.0</span>
 									<div class="star-rating" data-rating="5">
-										<i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i>
+										<i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i>
+										<i class="fas fa-star fs-xs mx-1"></i><i class="fas fa-star fs-xs mx-1"></i>
+										<i class="fas fa-star fs-xs mx-1"></i>
 									</div>
 								</div>
 
@@ -345,7 +423,9 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#rev"  data-bs-target="#clEight" aria-controls="clEight" href="javascript:void(0);" aria-expanded="true"><h4 class="property_block_title">102 Reviews</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#rev"  data-bs-target="#clEight" 
+									aria-controls="clEight" href="javascript:void(0);" aria-expanded="true">
+									<h4 class="property_block_title">102 Reviews</h4></a>
 								</div>
 								
 								<div id="clEight" class="panel-collapse collapse show">
@@ -366,7 +446,8 @@
 																	</div>
 																</div>
 																<div class="comment-text">
-																	<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+																	<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+																		deserunt mollit anim laborumab.
 																		perspiciatis unde omnis iste natus error.</p>
 																</div>
 															</div>
@@ -385,7 +466,8 @@
 																	</div>
 																</div>
 																<div class="comment-text">
-																	<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+																	<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+																		officia deserunt mollit anim laborumab.
 																		perspiciatis unde omnis iste natus error.</p>
 																</div>
 															</div>
@@ -394,7 +476,9 @@
 												</ul>
 											</div>
 										</div>
-										<a href="#" class="reviews-checked text-primary"><i class="fas fa-arrow-alt-circle-down mr-2"></i>See More Reviews</a>
+										<a href="#" class="reviews-checked text-primary"><i class="fas fa-arrow-alt-circle-down mr-2">
+
+										</i>See More Reviews</a>
 									</div>
 								</div>
 								
@@ -404,7 +488,9 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#comment" data-bs-target="#clTen" aria-controls="clTen" href="javascript:void(0);" aria-expanded="true"><h4 class="property_block_title">Write a Review</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#comment" data-bs-target="#clTen" 
+									aria-controls="clTen" href="javascript:void(0);" aria-expanded="true">
+									<h4 class="property_block_title">Write a Review</h4></a>
 								</div>
 								
 								<div id="clTen" class="panel-collapse collapse show">
@@ -414,7 +500,9 @@
 												
 												<div class="col-lg-12 col-md-12 col-sm-12">
 													<div class="form-group">
-														<textarea class="form-control ht-80" placeholder="Messages"></textarea>
+														<textarea class="form-control ht-80" placeholder="Messages">
+
+														</textarea>
 													</div>
 												</div>
 												
@@ -433,7 +521,9 @@
 												
 												<div class="col-lg-12 col-md-12 col-sm-12">
 													<div class="form-group">
-														<button class="btn btn-primary fw-medium px-lg-5 rounded" type="submit">Submit Review</button>
+														<button class="btn btn-primary fw-medium px-lg-5 rounded" type="submit">
+															Submit Review
+														</button>
 													</div>
 												</div>
 												
@@ -451,8 +541,8 @@
 							
 							<!-- 剩餘人數、票券張數、購物車、收藏 -->
 							<div class="like_share_wrap b-0">
-								<div id="remaining">
-									活動剩餘人數: 19
+								<div>
+									活動剩餘人數: <span id="inventoryCount">19</span>
 								</div>
 							</br>
 								<form>
@@ -473,8 +563,10 @@
 									</div>
 								</form>
 								<ul class="like_share_list">
-									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" data-original-title="Share"><i class="fas fa-shopping-cart"></i>加入購物車</a></li>
-									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" data-original-title="Save"><i class="fas fa-heart"></i>收藏</a></li>
+									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
+										data-original-title="Share"><i class="fas fa-shopping-cart"></i>加入購物車</a></li>
+									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
+										data-original-title="Save"><i class="fas fa-heart"></i>收藏</a></li>
 								</ul>
 							</div>
 							
@@ -504,7 +596,9 @@
 											<label>Description</label>
 											<textarea class="form-control">I'm interested in this property.</textarea>
 										</div>
-										<button class="btn btn-light-primary fw-medium rounded full-width">Send Message</button>
+										<button class="btn btn-light-primary fw-medium rounded full-width">
+											Send Message
+										</button>
 									</div>
 								</div>	
 								</div>
@@ -650,6 +744,58 @@
 		<script src="./_html/assets/js/imagesloaded.js"></script>
 		 
 		<script src="./_html/assets/js/custom.js"></script>
+
+		<script>
+			function getActivityIdFromURL() {
+				const params = new URLSearchParams(window.location.search);
+				return params.get("id");
+      }
+
+			function fetchActivityById(id) {
+				fetch(`/chill-tribe/activity/findActivityById?id=${id}`)
+				.then(response => response.json())
+				.then(data => {
+					console.log("從 Servlet 獲取的數據:", data);
+					// 更新 HTML 內容
+					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
+					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
+					document.getElementById("address").innerHTML = data.address || "暫無";
+					document.getElementById("unitPrice").innerHTML = data.unitPrice || "暫無";
+					document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
+					document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
+					document.getElementById("description").innerHTML = data.description || "暫無";
+					document.getElementById("precaution").innerHTML = data.precaution || "暫無";
+					document.getElementById("category-1").innerHTML = data.category || "暫無";
+					document.getElementById("category-2").innerHTML = data.category || "暫無";
+					document.getElementById("startDateTime").innerHTML = data.startDateTime || "暫無";
+					document.getElementById("endDateTime").innerHTML = data.endDateTime || "暫無";
+					document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
+					
+					// ----------------------------------------------------------------------------
+					// document.getElementById("supplierId").innerHTML = data.supplierId;
+					// document.getElementById("cityId").innerHTML = data.cityId;
+					// document.getElementById("districtId").innerHTML = data.districtId;
+					// document.getElementById("activityId").innerHTML = data.activityId;
+					// document.getElementById("activityPrefix").innerHTML = data.activityPrefix;
+					// document.getElementById("latitude").innerHTML = data.latitude;
+					// document.getElementById("longitude").innerHTML = data.longitude;
+					// document.getElementById("note").innerText = data.note;
+					// document.getElementById("approved").innerHTML = data.approved;
+					// document.getElementById("status").innerHTML = data.status;
+					// document.getElementById("ticketsActivateTime").innerHTML = data.ticketsActivateTime;
+					// document.getElementById("ticketsExpiredTime").innerHTML = data.ticketsExpiredTime;
+					// document.getElementById("inventoryUpdateTime").innerHTML = data.inventoryUpdateTime;
+					// document.getElementById("createTime").innerHTML = data.createTime;
+				})
+			}
+			const activityId = getActivityIdFromURL();
+        if (activityId) {
+            fetchActivityById(activityId);
+        } else {
+            console.log("你要的活動找不到喔!")
+      }
+			
+		</script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
 		<!-- ============================================================== -->
