@@ -893,39 +893,39 @@
                   <!-- Text input -->
                   <div class="form-group">
                     <label for="">負責人 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="contact_person" value="">
                   </div>
                   <div class="form-group">
                     <label for="">供應商名稱 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="supplier_name" value="">
                   </div>
                   <div class="form-group">
                     <label for="">統一編號 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="id_number" value="">
                   </div>
                   <div class="form-group">
                     <label for="">登記地址 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="address" value="">
                   </div>
                   <!-- /.form group -->
                   <div class="form-group">
                     <label for="">連絡電話 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="phone" value="">
                   </div>
                   <div class="form-group">
                     <label for="">Email <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" required>
+                    <input type="text" class="form-control" id="email" value="">
                   </div>
                   <!-- textarea -->
                   <div class="form-group">
                     <label>介紹 <span style="color: red;">*</span></label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                    <textarea class="form-control" id="about" rows="3" placeholder="Enter ..." required></textarea>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">發布</button>
-                    <button type="button" class="btn btn-secondary btn-spacing">取消</button>
+                    <button type="submit" class="btn btn-primary" id="btn_put">發布</button>
+                    <button type="button" class="btn btn-secondary btn-spacing" id="btn_close">取消</button>
                 </div>
               </form>
             </div>
@@ -996,5 +996,80 @@
     });
   });
 </script>
+
+<script>
+	const username = document.querySelector('#supplier_name');
+	const phone = document.querySelector('#phone');
+	const email = document.querySelector('#email');
+	const contact_person = document.querySelector('contact_person');
+// 	const msg = document.querySelector('#msg');
+
+	fetch('supplierfind')
+		.then(resp => resp.json())
+		.then(supplier => {
+			console.log(supplier);
+			username.value = supplier.supplier_name;
+			email.value = supplier.email;
+			phone.value = supplier.phone;
+			
+			
+		});
+
+// 	document.querySelector('#logoutBtn').addEventListener('click', () => {
+// 		if (confirm('是否登出?')) {
+// 			fetch('logout')
+// 				.then(resp => resp.json())
+// 				.then(body => {
+// 					if (body.successful) {
+// 						location.href = 'login.html';
+// 					}
+// 				});
+// 		}
+// 	});
+
+// 	document.querySelector('#editBtn').addEventListener('click', () => {
+// 		console.log("綁定editBtn成功");
+// 		let len = password.value.length
+// 		if (len !== 0 && (len < 6 || len >12)) {
+// 			alert('密碼長度須介於6 ~ 12');
+// 			return;
+// 		}
+		
+// 		if (len !== 0 && password.value !== cPassword.value) {
+// 			alert('密碼與確認密碼不同');
+// 			return;
+// 		}
+		
+// 		fetch('memberedit', {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json'
+// 			},
+// 			body: JSON.stringify({
+// 				member_name: username.value,
+// 				phone: phone.value,
+// 				date_of_birth: date_of_birth.value,
+// 				gender: gender.value
+// 			})
+// 		})
+		// console.log(resp)
+// 		 .then(resp => {
+// 			 return resp.json();
+// 		 })
+// 		 .then(body => {
+// // 			 msg.textContent = '';
+// 			 const { successful, errMsg } = body;
+// 			 if (body.successful) {
+// 				msg.textContent = `
+// 				   ${body.username}
+// 				`;
+// 			 }else {
+// 				msg.textContent = '修改失敗!';
+// 			 }
+// 		 });
+// 	});
+
+</script>
+
 </body>
 </html>
