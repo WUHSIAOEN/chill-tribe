@@ -75,9 +75,10 @@ public class ActivityDaoImpl implements ActivityDao {
 	// 更新活動
 	@Override
 	public int update(Activity activity) {
-		int offset = 0; // 用來計算偏移量，根據欄位是否有設置進行增減
-		// SET 用來指定要更新哪些欄位的值。
-		StringBuilder sql = new StringBuilder("UPDATE Activity SET ");
+		
+		int parameterIndex = 1; // 偏移量
+		
+		StringBuilder sql = new StringBuilder("UPDATE Activities SET ");
 
 		if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
 			sql.append("ACTIVITY_NAME = ?, ");
@@ -122,10 +123,10 @@ public class ActivityDaoImpl implements ActivityDao {
 			sql.append("APPROVED = ?, ");
 		}
 		if (activity.getCityId() != null) {
-			sql.append("CITYID = ?, ");
+			sql.append("CITY_ID = ?, ");
 		}
 		if (activity.getDistrictId() != null) {
-			sql.append("DISTRICTID = ?, ");
+			sql.append("DISTRICT_ID = ?, ");
 		}
 		if (activity.getInventoryCount() != null) {
 			sql.append("INVENTORY_COUNT = ?, ");
@@ -148,18 +149,22 @@ public class ActivityDaoImpl implements ActivityDao {
 		if (activity.getTicketsExpiredTime() != null) {
 			sql.append("TICKETS_EXPIRED_TIME = ?, ");
 		}
+		
+		String sqlQuery = sql.toString();
+	    if (sqlQuery.endsWith(", ")) {
+	        sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
+	    }
 
-		// 刪除最後一個多餘的逗號
-		sql.deleteCharAt(sql.length() - 2);
+	    // 確保在更新語句中有要更新的欄位
+	    if (sqlQuery.equals("UPDATE ACTIVITIES SET")) {
+	        return 0;  // 如果沒有任何欄位需要更新，則返回 0
+	    }
 
-		// SUPPLIER_ID 作為識別條件
-		sql.append(" WHERE SUPPLIER_ID = ?");
+	    // 加上 WHERE 條件來指定更新的會員 (假設使用 ACTIVITY_ID 或其他識別欄位)
+	    sqlQuery += " WHERE ACTIVITY_ID = ?";  // 假設 ACTIVITY_ID 是更新條件
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			// 設置參數
-			int parameterIndex = 1;
 
-			// 根據條件設置參數的值
 			if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
 				pstmt.setString(parameterIndex++, activity.getActivityName());
 			}
@@ -200,7 +205,7 @@ public class ActivityDaoImpl implements ActivityDao {
 				pstmt.setString(parameterIndex++, activity.getNote());
 			}
 			if (activity.getApproved() != null) {
-				pstmt.setBoolean(parameterIndex, false);
+				pstmt.setBoolean(parameterIndex, activity.getApproved());
 			}
 			if (activity.getCityId() != null) {
 				pstmt.setInt(parameterIndex++, activity.getCityId());
@@ -230,20 +235,19 @@ public class ActivityDaoImpl implements ActivityDao {
 				pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
 			}
 
-			// 設定 WHERE 條件的參數，使用 offset
-			pstmt.setInt(parameterIndex + 1 + offset, activity.getSupplierId());
+			pstmt.setInt(parameterIndex, activity.getActivityId());
 
-			// 執行更新
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			
 		}
+		return -1;
 	}
 
 //  刪除活動
 	@Override
-	public int deletById(Integer activityId) {
+	public int deletActivityById(Integer activityId) {
 		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			pstmt.setInt(1, activityId);
@@ -342,4 +346,6 @@ public class ActivityDaoImpl implements ActivityDao {
 
 		return null;
 	}
+
+	
 }

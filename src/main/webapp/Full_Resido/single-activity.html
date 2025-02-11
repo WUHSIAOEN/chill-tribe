@@ -130,10 +130,10 @@
 						
 							<div class="property_block_wrap style-2 p-4">
 								<div class="prt-detail-title-desc">
-									<span class="label text-light bg-success" id="category">運動</span>
-									<h3 id="activityName">一起來打羽球吧!</h3>
+									<span class="label text-light bg-success" id="category-2">運動</span>
+									<h3 id="activityName-1">一起來打羽球吧!</h3>
 									<span id="districtId"><i class="lni-map-marker"></i> 大安公園</span>
-									<h3 class="prt-price-fix text-primary" id="unitPrice"><sub>$</sub>50<sub>/人</sub></h3>
+									<h3 class="prt-price-fix text-primary"><sub>$</sub id="unitPrice">50<sub>/人</sub></h3>
 								</div>
 							</div>
 							
@@ -148,11 +148,7 @@
 									<div class="block-body">
 										<p id="description">There are many variations of passages of Lorem Ipsum available, 
 											but the majority have suffered alteration in some form, by injected humour, 
-											or randomised words which don't look even slightly believable. If you are going 
-											to use a passage of Lorem Ipsum, you need to be sure there isn't anything 
-											embarrassing hidden in the middle of text. All the Lorem Ipsum generators 
-											on the Internet tend to repeat predefined chunks as necessary, making this 
-											the first true generator on the Internet.
+											or randomised words which don't look even slightly believable.
 										</p>
 									</div>
 								</div>
@@ -162,7 +158,9 @@
 							<div class="property_block_wrap style-2">
 								
 								<div class="property_block_wrap_header">
-									<a data-bs-toggle="collapse" data-parent="#floor"  data-bs-target="#clFive" aria-controls="clFive" href="javascript:void(0);" aria-expanded="true" class="collapsed"><h4 class="property_block_title">活動細節</h4></a>
+									<a data-bs-toggle="collapse" data-parent="#floor"  data-bs-target="#clFive" 
+									aria-controls="clFive" href="javascript:void(0);" aria-expanded="true" 
+									class="collapsed"><h4 class="property_block_title">活動細節</h4></a>
 								</div>
 								
 								<div id="clFive" class="panel-collapse collapse">
@@ -175,7 +173,8 @@
 														<button type="button" class="btn btn-link collapsed activity" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" 
 														style="cursor: default; user-select: text;">
-														活動名稱<span id="activityName">一起來打羽球吧!</span></button>
+														活動名稱<span id="activityName-2">一起來打羽球吧!</span>
+														</button>
 													</h2>
 												</div>
 											</div>
@@ -185,7 +184,7 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">活動地點<span id="districtId">大安公園</span></button>
+														user-select: text;">活動分類<span id="category-1">運動</span></button>
 													</h2>
 												</div>
 											</div>
@@ -195,7 +194,47 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">日期<span id="startDateTime">2025/04/10</span></button>
+														user-select: text;">活動地區<span id="districtId">北部</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">活動城市<span id="cityId">大安公園</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">詳細地址<span id="address">大安公園</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">開始時間<span id="startDateTime">2025/04/10</span></button>
+													</h2>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="card-header" id="seconfFloor">
+													<h2 class="mb-0">
+														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
+														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
+														user-select: text;">結束時間<span id="endDateTime">2025/04/10</span></button>
 													</h2>
 												</div>
 											</div>
@@ -205,7 +244,7 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">參加費用<span id="unitPrice">50/人</span></button>
+														user-select: text;">參加費用<span id="unitPrice">50</span>/人</button>
 													</h2>
 												</div>
 											</div>
@@ -226,16 +265,6 @@
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
 														user-select: text;">人數上限<span id="maxParticipants">9</span></button>
-													</h2>
-												</div>
-											</div>
-
-                      <div class="card">
-												<div class="card-header" id="seconfFloor">
-													<h2 class="mb-0">
-														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
-														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">活動分類<span id="category">運動</span></button>
 													</h2>
 												</div>
 											</div>
@@ -324,11 +353,11 @@
 								<div class="property_block_wrap_header">
 									<a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" 
 									aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true">
-									<h4 class="property_block_title">活動備註</h4></a>
+									<h4 class="property_block_title">活動注意事項</h4></a>
 								</div>
 								<div id="clTwo" class="panel-collapse collapse show">
 									<div class="block-body">
-										<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered 
+										<p id="precaution">There are many variations of passages of Lorem Ipsum available, but the majority have suffered 
 											alteration in some form, by injected humour, or randomised words which don't look even slightly 
 											believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there 
 											isn't anything embarrassing hidden in the middle of text.
@@ -512,8 +541,8 @@
 							
 							<!-- 剩餘人數、票券張數、購物車、收藏 -->
 							<div class="like_share_wrap b-0">
-								<div id="inventoryCount">
-									活動剩餘人數: 19
+								<div>
+									活動剩餘人數: <span id="inventoryCount">19</span>
 								</div>
 							</br>
 								<form>
@@ -726,35 +755,37 @@
 				fetch(`/chill-tribe/activity/findActivityById?id=${id}`)
 				.then(response => response.json())
 				.then(data => {
-					console.log("從 Servlet 獲取的數據:", data); // 顯示在 console
-					console.log(data.description);
-					console.log(document.getElementById("description"));
+					console.log("從 Servlet 獲取的數據:", data);
 					// 更新 HTML 內容
-					// document.getElementById("activityId").innerText = data.activityId;
-					// document.getElementById("activityPrefix").innerText = data.activityPrefix;
-					document.getElementById("activityName").innerText = data.activityName;
-					// document.getElementById("supplierId").innerText = data.supplierId;
-					// document.getElementById("cityId").innerText = data.cityId;
-					// document.getElementById("districtId").innerText = data.districtId;
-					// document.getElementById("address").innerText = data.address;
-					// document.getElementById("unitPrice").innerText = data.unitPrice;
-					// document.getElementById("minParticipants").innerText = data.minParticipants;
-					// document.getElementById("maxParticipants").innerText = data.maxParticipants;
-					document.getElementById("description").innerHTML = data.description || "沒有描述";
-					// document.getElementById("precaution").innerText = data.precaution;
-					// document.getElementById("category").innerText = data.category;
-					// document.getElementById("startDateTime").innerText = data.startDateTime;
-					// document.getElementById("endDateTime").innerText = data.endDateTime;
-					// document.getElementById("status").innerText = data.status;
+					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
+					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
+					document.getElementById("address").innerHTML = data.address || "暫無";
+					document.getElementById("unitPrice").innerHTML = data.unitPrice || "暫無";
+					document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
+					document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
+					document.getElementById("description").innerHTML = data.description || "暫無";
+					document.getElementById("precaution").innerHTML = data.precaution || "暫無";
+					document.getElementById("category-1").innerHTML = data.category || "暫無";
+					document.getElementById("category-2").innerHTML = data.category || "暫無";
+					document.getElementById("startDateTime").innerHTML = data.startDateTime || "暫無";
+					document.getElementById("endDateTime").innerHTML = data.endDateTime || "暫無";
+					document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
+					
+					// ----------------------------------------------------------------------------
+					// document.getElementById("supplierId").innerHTML = data.supplierId;
+					// document.getElementById("cityId").innerHTML = data.cityId;
+					// document.getElementById("districtId").innerHTML = data.districtId;
+					// document.getElementById("activityId").innerHTML = data.activityId;
+					// document.getElementById("activityPrefix").innerHTML = data.activityPrefix;
+					// document.getElementById("latitude").innerHTML = data.latitude;
+					// document.getElementById("longitude").innerHTML = data.longitude;
 					// document.getElementById("note").innerText = data.note;
-					// document.getElementById("approved").innerText = data.approved;
-					// document.getElementById("inventoryCount").innerText = data.inventoryCount;
-					// document.getElementById("latitude").innerText = data.latitude;
-					// document.getElementById("longitude").innerText = data.longitude;
-					// document.getElementById("ticketsActivateTime").innerText = data.ticketsActivateTime;
-					// document.getElementById("ticketsExpiredTime").innerText = data.ticketsExpiredTime;
-					// document.getElementById("inventoryUpdateTime").innerText = data.inventoryUpdateTime;
-					// document.getElementById("createTime").innerText = data.createTime;
+					// document.getElementById("approved").innerHTML = data.approved;
+					// document.getElementById("status").innerHTML = data.status;
+					// document.getElementById("ticketsActivateTime").innerHTML = data.ticketsActivateTime;
+					// document.getElementById("ticketsExpiredTime").innerHTML = data.ticketsExpiredTime;
+					// document.getElementById("inventoryUpdateTime").innerHTML = data.inventoryUpdateTime;
+					// document.getElementById("createTime").innerHTML = data.createTime;
 				})
 			}
 			const activityId = getActivityIdFromURL();
