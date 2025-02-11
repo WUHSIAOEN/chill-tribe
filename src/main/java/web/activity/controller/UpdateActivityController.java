@@ -49,7 +49,7 @@ public class UpdateActivityController extends HttpServlet {
 			if (idParam != null) {
 				Integer id = Integer.parseInt(idParam);
 				Activity updatedActivity = gson.fromJson(req.getReader(), Activity.class);
-				updatedActivity = service.update(updatedActivity);
+				// updatedActivity = service.update(updatedActivity);
 				resp.setContentType("application/json");
 	            resp.getWriter().write(gson.toJson(updatedActivity));
 			} else {
