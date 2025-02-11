@@ -227,11 +227,7 @@
 			username.value = member.member_name;
 			email.value = member.email;
 			phone.value = member.phone;
-
-			let date = new Date(member.date_of_birth);
-		    let formattedDate = date.toISOString().split('T')[0]; 
-		    date_of_birth.value = formattedDate;
-// 			date_of_birth.value = member.date_of_birth;
+			date_of_birth.value = member.date_of_birth;
 			gender.value = member.gender;
 			
 		});
@@ -268,9 +264,9 @@
 			},
 			body: JSON.stringify({
 				member_name: username.value,
-// 				phone: phone.value,
+				phone: phone.value,
 				date_of_birth: date_of_birth.value,
-// 				gender: gender.value
+				gender: gender.value
 			})
 		})
 		// console.log(resp)
@@ -278,7 +274,7 @@
 			 return resp.json();
 		 })
 		 .then(body => {
-			 msg.textContent = '';
+// 			 msg.textContent = '';
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
 				msg.textContent = `
