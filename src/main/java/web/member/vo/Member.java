@@ -1,10 +1,11 @@
 package web.member.vo;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 
 import core.util.Core;
 
-	// 一般會員VO
+// 一般會員VO
 public class Member extends Core {
 
 	private Integer member_id;
@@ -14,13 +15,12 @@ public class Member extends Core {
 	private String id_card;
 	private String password;
 	private String cPassword;
-	private String date_of_birth;
+	private Date date_of_birth;
 	private String gender;
 	private String creator;
 	private Timestamp registration_date;
 	private String updater;
 	private Timestamp lastUpdatedDate;
-	private Integer roleID;
 
 	public Integer getMember_id() {
 		return member_id;
@@ -78,14 +78,6 @@ public class Member extends Core {
 		this.id_card = id_card;
 	}
 
-	public String getDate_of_birth() {
-		return date_of_birth;
-	}
-
-	public void setDate_of_birth(String date_of_birth) {
-		this.date_of_birth = date_of_birth;
-	}
-
 	public String getGender() {
 		return gender;
 	}
@@ -126,12 +118,12 @@ public class Member extends Core {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
-	public Integer getRoleID() {
-		return roleID;
+	public Date getDate_of_birth() {
+		return date_of_birth;
 	}
 
-	public void setRoleID(Integer roleID) {
-		this.roleID = roleID;
+	public void setDate_of_birth(Date date_of_birth) {
+		this.date_of_birth = date_of_birth;
 	}
 
 }

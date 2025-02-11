@@ -10,7 +10,7 @@
                     fill="currentColor" />
             </svg>
         </span>
-        <h5 class="fs-3 fw-bold ms-1 my-0">Resido</h5>
+        <h5 class="fs-3 fw-bold ms-1 my-0">ChillTribe</h5>
     </a>
     <div class="nav-toggle"></div>
     <div class="mobile_nav">
@@ -33,7 +33,7 @@
 <div class="nav-menus-wrapper" style="transition-property: none;">
     <ul class="nav-menu">
 
-        <li class="active"><a href="#">首頁<span class="submenu-indicator"></span></a>
+        <li class="active"><a href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a>
         </li>
 
         <li><a href="JavaScript:Void(0);">活動列表<span class="submenu-indicator"></span></a>
@@ -59,13 +59,25 @@
             <div class="btn-group account-drop">
                 <button type="button" class="btn btn-order-by-filt dropdown-toggle" id="showbutton"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://placehold.co/500x500" class="avater-img" alt="">您好, Admin
+                    <img src="https://placehold.co/500x500" class="avater-img" alt="">您好！<span id="member_name"> </span>
                 </button>
                 <div class="dropdown-menu pull-right animated flipInX" id="showing">
-                    <a href=""><i class="fa-solid fa-gauge"></i>個人資料</a>
+                    <a href="./member-details.html"><i class="fa-solid fa-gauge"></i>個人資料</a>
                     <a href=""><i class="fa-solid fa-power-off"></i>登出</a>
                 </div>
             </div>
         </li>
     </ul>
 </div>
+
+<script>
+	const username = document.querySelector('#member_name');
+
+
+	fetch('find')
+	.then(resp => resp.json())
+	.then(member => {
+		username.innerText = member.member_name;
+		
+	});
+</script>

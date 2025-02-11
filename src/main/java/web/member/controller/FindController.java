@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 //import web.test.member.dao.MemberDao;
 //import web.test.member.dao.impl.MemberDaoImpl;
 import web.member.vo.Member;
 
+// 查詢
 @WebServlet("/member/find")
 public class FindController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -23,7 +25,10 @@ public class FindController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 配合登入功能修改
 		Member member = (Member) req.getSession().getAttribute("member");
-		Gson gson = new Gson();
+//		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd")
+				.create();
 		resp.getWriter().write(gson.toJson(member));
 //		// 暫時寫法
 //		MemberDao dao;

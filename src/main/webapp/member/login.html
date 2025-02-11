@@ -41,7 +41,7 @@
                                 </div>	
                             </div>
                             <div class="flex-shrink-0 flex-first">
-                                <a href="#" class="link fw-medium">忘記密碼?</a>	
+                                <a href="/chill-tribe/member/forgot-password.html" class="link fw-medium">忘記密碼?</a>	
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                 </ul>
             </div>
             <div class="text-center">
-                <p class="mt-4">還沒有任何帳戶？<a href="create-account.html" class="link fw-medium">建立帳戶</a></p>
+                <p class="mt-4">還沒有任何帳戶？<a href="/chill-tribe/member/member-register.html" class="link fw-medium">建立帳戶</a></p>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
 			});
 			console.log("發送登入請求");
 			
-			
+			// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
 			fetch('login', {
 				method: 'POST',
 				headers: {
@@ -119,7 +119,7 @@
 	            console.log("返回值:", data);
 	            if (data.successful) {
 	                console.log("登入成功");
-	                window.location.href = '/chill-tribe/member/register.html';  
+	                window.location.href = '/chill-tribe/chilltribe.html';  
 	            } else {
 	                console.log("登入失敗");
 	            }
