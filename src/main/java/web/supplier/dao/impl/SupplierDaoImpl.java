@@ -95,6 +95,7 @@ public class SupplierDaoImpl implements SupplierDao {
 					supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
 					supplier.setEmail(rs.getString("EMAIL"));
 					supplier.setPassword(rs.getString("PASSWORD"));
+					supplier.setPhone(rs.getString("PHONE"));
 					return supplier;
 				}
 			}
@@ -119,6 +120,7 @@ public class SupplierDaoImpl implements SupplierDao {
 				supplier.setEmail(rs.getString("EMAIL"));
 				supplier.setPassword(rs.getString("PASSWORD"));
 				supplier.setId_number(rs.getString("ID_NUMBER"));
+				supplier.setPhone(rs.getString("PHONE"));
 				list.add(supplier);
 			}
 			return list;
