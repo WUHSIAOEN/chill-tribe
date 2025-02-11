@@ -29,6 +29,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../admin/dist/css/form.css">
+  <!-- 引入 Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Apply_activity style -->
   <link rel="stylesheet" href="./css/apply_activity.css">
 </head>
@@ -882,42 +884,25 @@
             <form>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="activityName">名稱 <span style="color: red;">*</span></label>
+                  <label for="activityName">活動名稱 <span style="color: red;">*</span></label>
                   <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
                 </div>
-                <div class="form-group">
-                  <label for="cityId">舉辦的縣市 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" id="cityId" name="cityId" style="width: 100%;">
-                    <option value="taipei" selected="selected">台北市</option>
-                    <option value="new-taipei">新北市</option>
-                    <option value="taoyuan">桃園市</option>
-                    <option value="taichung">台中市</option>
-                    <option value="tainan">台南市</option>
-                    <option value="kaohsiung">高雄市</option>
-                    <option value="keelung">基隆市</option>
-                    <option value="hsinchu">新竹市</option>
-                    <option value="hsinchu-county">新竹縣</option>
-                    <option value="miaoli">苗栗縣</option>
-                    <option value="changhua">彰化縣</option>
-                    <option value="nantou">南投縣</option>
-                    <option value="yunlin">雲林縣</option>
-                    <option value="chiayi-city">嘉義市</option>
-                    <option value="chiayi-county">嘉義縣</option>
-                    <option value="pingtung">屏東縣</option>
-                    <option value="yilan">宜蘭縣</option>
-                    <option value="hualien">花蓮縣</option>
-                    <option value="taitung">台東縣</option>
-                    <option value="penghu">澎湖縣</option>
-                    <option value="kinmen">金門縣</option>
-                    <option value="lienchiang">連江縣</option>
-                  </select>
+                <div class="mb-3">
+                  <label for="zipcode" class="form-label">舉辦縣市 <span class="text-danger">*</span></label>
+                  <div class="d-flex">
+                    <input type="text" id="zipcode" class="form-control" readonly style="width: 80px; border-right: 0; border-radius: 8px 0 0 8px;" />
+                    
+                    <select id="city" class="form-select" style="border-radius: 0;"></select>
+                    
+                    <select id="area" class="form-select" style="border-radius: 0 8px 8px 0;"></select>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="address">詳細地址 <span style="color: red;">*</span></label>
                   <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
                 </div>
                 <div class="form-group">
-                  <label for="category">分類 <span style="color: red;">*</span></label>
+                  <label for="category">活動分類 <span style="color: red;">*</span></label>
                   <select class="form-control select2" id="category" name="category" style="width: 100%;">
                     <option selected="selected" value="art">文藝</option>
                     <option value="entertainment">娛樂</option>
@@ -1019,6 +1004,9 @@
 <script src="../admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../admin/dist/js/demo.js"></script>
+<!-- Bootstrap CSS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -1139,6 +1127,67 @@
         reader.readAsDataURL(file);
     });
   });
+</script>
+
+<!----- 載入地址和郵遞區號 ----->
+<script src="./address.js"></script>
+<script>
+  // 跑回圈，抓資料
+  function addr_init(){
+    $.each(addrData, function(i, item){
+      // console.log(item);
+      // console.log(item.cityId);
+      // console.log(item.city);
+
+      let city_str = `
+        <option value="${item.cityId}">${item.city}</option>
+      `;
+      $("#city").append(city_str);
+
+      if(item.cityId == 2){
+        area_init(item.area);
+      }
+    });
+  }
+  // 執行涵式
+  addr_init();
+
+  function area_init(areas){
+    // console.log(areas);
+    $.each(areas, function(k, area){
+      // console.log(area);
+      let area_str = `
+        <option value="${area.zipcode}">${area.name}</option>
+      `;
+      $("#area").append(area_str);
+      if(k == 0) {
+        $("#zipcode").val(area.zipcode);
+      }
+    });
+  }
+  
+  // 1. 針對"區"的部分，做change事件上的綁定
+  $("#area").on("change", function(){
+    // console.log($("#zipcode").val($(this).val()));
+    $("#zipcode").val($(this).val());     
+  });
+
+  // 2. 放到郵遞區號的欄位上
+  // 3. 對縣市的下拉選單綁定change事件
+  // 4. 跑addrData迴圈，用"縣市資料"抓"區"的資料，
+  //    放到新的下拉選單 (area_init())
+  $("#city").on("change", function(){
+    // console.log($(this).val());
+    $("#area").empty();
+    $.each(addrData, (i, item) => {
+      // console.log(item);
+      if(item.cityId == $(this).val()){
+        // console.log(item.area)
+        area_init(item.area);
+      }
+    })
+  });
+
 </script>
 </body>
 </html>

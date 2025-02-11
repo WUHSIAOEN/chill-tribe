@@ -95,6 +95,7 @@ public class SupplierDaoImpl implements SupplierDao {
 					supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
 					supplier.setEmail(rs.getString("EMAIL"));
 					supplier.setPassword(rs.getString("PASSWORD"));
+					supplier.setPhone(rs.getString("PHONE"));
 					return supplier;
 				}
 			}
@@ -113,12 +114,14 @@ public class SupplierDaoImpl implements SupplierDao {
 			List<Supplier> list = new ArrayList<>();
 
 			while (rs.next()) {
-				Supplier member = new Supplier();
-				member.setSupplier_id(rs.getInt("SUPPLIER_ID"));
-				member.setSupplier_name(rs.getString("SUPPLIER_NAME"));
-				member.setEmail(rs.getString("EMAIL"));
-				member.setPassword(rs.getString("PASSWORD"));
-				list.add(member);
+				Supplier supplier = new Supplier();
+				supplier.setSupplier_id(rs.getInt("SUPPLIER_ID"));
+				supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
+				supplier.setEmail(rs.getString("EMAIL"));
+				supplier.setPassword(rs.getString("PASSWORD"));
+				supplier.setId_number(rs.getString("ID_NUMBER"));
+				supplier.setPhone(rs.getString("PHONE"));
+				list.add(supplier);
 			}
 			return list;
 		} catch (Exception e) {

@@ -29,6 +29,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../admin/dist/css/form.css">
+  <!-- Apply_activity style -->
+  <link rel="stylesheet" href="./css/apply_activity.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -315,25 +317,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../charts/chartjs.html" class="nav-link">
+                <a href="../admin/pages/charts/chartjs.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>ChartJS</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/flot.html" class="nav-link">
+                <a href="../admin/pages/charts/flot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Flot</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/inline.html" class="nav-link">
+                <a href="../admin/pages/charts/inline.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inline</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/uplot.html" class="nav-link">
+                <a href="../admin/pages/charts/uplot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>uPlot</p>
                 </a>
@@ -852,12 +854,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>帳號/ 檔案管理</h1>
+            <h1>活動上架申請</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">後台首頁</a></li>
-              <li class="breadcrumb-item active">帳號管理</li>
+              <li class="breadcrumb-item active">活動管理</li>
             </ol>
           </div>
         </div>
@@ -872,64 +874,115 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example</h3>
+              </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
-                <div class="card-body">
-                  <!-- Upload event photo -->
-                  <div class="form-group mb-4">
-                    <label for="imageUploadBtn">更換大頭貼 <span style="color: red;">*</span></label>
-                    <!-- Preview box -->
-                    <div class="image-upload-wrapper">
-                      <span class="image-upload-placeholder" id="imagePlaceholder">未選擇圖片</span>
-                      <!-- Hidden file input -->
-                      <input type="file" class="custom-file-input" id="imageUpload" accept="image/*">
-                    </div>
-                    <!-- Button below the preview box -->
-                    <div class="text-center mt-2">
-                      <button type="button" class="btn btn-primary" id="imageUploadBtn">選擇照片</button>
-                    </div>
-                  </div>
-                  <!-- Text input -->
-                  <div class="form-group">
-                    <label for="">負責人 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="contact_person" value="">
-                  </div>
-                  <div class="form-group">
-                    <label for="">供應商名稱 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="supplier_name" value="">
-                  </div>
-                  <div class="form-group">
-                    <label for="">統一編號 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="id_number" value="">
-                  </div>
-                  <div class="form-group">
-                    <label for="">登記地址 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="address" value="">
-                  </div>
-                  <!-- /.form group -->
-                  <div class="form-group">
-                    <label for="">連絡電話 <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="phone" value="">
-                  </div>
-                  <div class="form-group">
-                    <label for="">Email <span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" id="email" value="">
-                  </div>
-                  <!-- textarea -->
-                  <div class="form-group">
-                    <label>介紹 <span style="color: red;">*</span></label>
-                    <textarea class="form-control" id="about" rows="3" placeholder="Enter ..." required></textarea>
-                  </div>
+            <form>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="activityName">名稱 <span style="color: red;">*</span></label>
+                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
                 </div>
-                <!-- /.card-body -->
-                <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary" id="btn_put">發布</button>
-                    <button type="button" class="btn btn-secondary btn-spacing" id="btn_close">取消</button>
+                <div class="form-group">
+                  <label for="cityId">舉辦的縣市 <span style="color: red;">*</span></label>
+                  <select class="form-control select2" id="cityId" name="cityId" style="width: 100%;">
+                    <option value="taipei" selected="selected">台北市</option>
+                    <option value="new-taipei">新北市</option>
+                    <option value="taoyuan">桃園市</option>
+                    <option value="taichung">台中市</option>
+                    <option value="tainan">台南市</option>
+                    <option value="kaohsiung">高雄市</option>
+                    <option value="keelung">基隆市</option>
+                    <option value="hsinchu">新竹市</option>
+                    <option value="hsinchu-county">新竹縣</option>
+                    <option value="miaoli">苗栗縣</option>
+                    <option value="changhua">彰化縣</option>
+                    <option value="nantou">南投縣</option>
+                    <option value="yunlin">雲林縣</option>
+                    <option value="chiayi-city">嘉義市</option>
+                    <option value="chiayi-county">嘉義縣</option>
+                    <option value="pingtung">屏東縣</option>
+                    <option value="yilan">宜蘭縣</option>
+                    <option value="hualien">花蓮縣</option>
+                    <option value="taitung">台東縣</option>
+                    <option value="penghu">澎湖縣</option>
+                    <option value="kinmen">金門縣</option>
+                    <option value="lienchiang">連江縣</option>
+                  </select>
                 </div>
-              </form>
-            </div>
-            
+                <div class="form-group">
+                  <label for="address">詳細地址 <span style="color: red;">*</span></label>
+                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
+                </div>
+                <div class="form-group">
+                  <label for="category">分類 <span style="color: red;">*</span></label>
+                  <select class="form-control select2" id="category" name="category" style="width: 100%;">
+                    <option selected="selected" value="art">文藝</option>
+                    <option value="entertainment">娛樂</option>
+                    <option value="technology">科技</option>
+                    <option value="sport">運動</option>
+                  </select>
+                </div>
+                <!-- Date and time range -->
+                <div class="form-group">
+                  <label>日期與時間 <span style="color: red;"></span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    </div>
+                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+                <div class="form-group">
+                  <label for="supplierId">供應商編號 <span style="color: red;">*</span></label>
+                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="1" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
+                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="minParticipants">成團人數 <span style="color: red;">*</span></label>
+                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
+                </div>
+                <div class="form-group">
+                  <label for="maxParticipants">人數上限 <span style="color: red;">*</span></label>
+                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                  <label for="description">介紹 <span style="color: red;">*</span></label>
+                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter ..." required></textarea>
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                  <label for="precaution">備註</label>
+                  <textarea class="form-control" rows="3" id="precaution" placeholder="Enter ..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" multiple>
+                            <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- 圖片預覽區域 -->
+                <div id="previewContainer" class="d-flex flex-wrap mt-3"></div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer d-flex justify-content-end">
+                  <button id="submitBtn" type="button" class="btn btn-primary">更新</button>
+                  <button id="removeBtn" type="button" class="btn btn-primary">刪除</button>
+                  <button type="button" class="btn btn-secondary btn-spacing">取消</button>
+              </div>
+           </form>
+          </div>
+          <!-- /.card -->
             <!-- /.card -->
              
   <!-- Control Sidebar -->
@@ -970,105 +1023,123 @@
 
 <!-- Page specific script -->
 <script>
-  $(document).ready(function() {
-    // 當按鈕被點擊，觸發隱藏的 file input 元素
-    $('#imageUploadBtn').on('click', function() {
-      $('#imageUpload').click();
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
     });
 
-    // 當用戶選擇文件時，顯示預覽圖片
-    $('#imageUpload').on('change', function(event) {
-      var file = event.target.files[0];
-      var previewContainer = $('#imagePlaceholder');
+    //Date and time picker
+    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
 
-      // 如果有選擇文件
-      if (file) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-          previewContainer.html('<img src="' + e.target.result + '" alt="預覽圖片" style="width: 100%; height: 100%; object-fit: contain;" />');
-        };
-
-        reader.readAsDataURL(file);
-      } else {
-        previewContainer.html('<span style="color: #999;">未選擇圖片</span>');
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
       }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    })
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
+
+  })
+</script>
+
+<!----- 預覽圖片區域 ----->
+<script>
+  document.getElementById("eventImages").addEventListener("change", function (event) {
+    const previewContainer = document.getElementById("previewContainer");
+    previewContainer.innerHTML = ""; // 清空現有預覽
+
+    const files = event.target.files;
+
+    Array.from(files).forEach((file, index) => {
+      if (!file.type.startsWith("image/")) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const previewDiv = document.createElement("div");
+        previewDiv.classList.add("position-relative", "m-2");
+        previewDiv.style.width = "160px";
+        previewDiv.style.height = "120px";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("img-thumbnail", "w-100", "h-100");
+
+        const removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "✖";
+        removeBtn.classList.add("remove-btn", "position-absolute");
+
+        removeBtn.addEventListener("click", () => {
+            previewDiv.remove();
+        });
+
+        previewDiv.appendChild(img);
+        previewDiv.appendChild(removeBtn);
+        previewContainer.appendChild(previewDiv);
+      };
+        reader.readAsDataURL(file);
     });
   });
 </script>
 
-<script>
-	const username = document.querySelector('#supplier_name');
-	const phone = document.querySelector('#phone');
-	const email = document.querySelector('#email');
-	const contact_person = document.querySelector('contact_person');
-// 	const msg = document.querySelector('#msg');
-
-	fetch('supplierfind')
-		.then(resp => resp.json())
-		.then(supplier => {
-			console.log(supplier);
-			username.value = supplier.supplier_name;
-			email.value = supplier.email;
-			phone.value = supplier.phone;
-			
-		});
-
-// 	document.querySelector('#logoutBtn').addEventListener('click', () => {
-// 		if (confirm('是否登出?')) {
-// 			fetch('logout')
-// 				.then(resp => resp.json())
-// 				.then(body => {
-// 					if (body.successful) {
-// 						location.href = 'login.html';
-// 					}
-// 				});
-// 		}
-// 	});
-
-// 	document.querySelector('#editBtn').addEventListener('click', () => {
-// 		console.log("綁定editBtn成功");
-// 		let len = password.value.length
-// 		if (len !== 0 && (len < 6 || len >12)) {
-// 			alert('密碼長度須介於6 ~ 12');
-// 			return;
-// 		}
-		
-// 		if (len !== 0 && password.value !== cPassword.value) {
-// 			alert('密碼與確認密碼不同');
-// 			return;
-// 		}
-		
-// 		fetch('memberedit', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json'
-// 			},
-// 			body: JSON.stringify({
-// 				member_name: username.value,
-// 				phone: phone.value,
-// 				date_of_birth: date_of_birth.value,
-// 				gender: gender.value
-// 			})
-// 		})
-		// console.log(resp)
-// 		 .then(resp => {
-// 			 return resp.json();
-// 		 })
-// 		 .then(body => {
-// // 			 msg.textContent = '';
-// 			 const { successful, errMsg } = body;
-// 			 if (body.successful) {
-// 				msg.textContent = `
-// 				   ${body.username}
-// 				`;
-// 			 }else {
-// 				msg.textContent = '修改失敗!';
-// 			 }
-// 		 });
-// 	});
-
-</script>
-
+<!----- 接收後端的資料 ----->
+<script src="js/remove_activity.js"></script>
 </body>
 </html>

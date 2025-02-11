@@ -66,6 +66,6 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
 			if (!resp.ok) {
 				throw new Error(`HTTP error! Status: ${resp.status}`);
 			}
-			return resp.text(); // 先讀取回應作為文字
+			return resp.text();
 		});
 });

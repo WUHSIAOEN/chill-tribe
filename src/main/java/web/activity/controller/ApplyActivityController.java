@@ -1,6 +1,3 @@
-// 測試用，先不用 JSON
-// 回傳的值我先用 String and Integer ，
-
 package web.activity.controller;
 
 import java.io.IOException;
@@ -25,7 +22,7 @@ import web.activity.vo.Activity;
 public class ApplyActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-//	呼叫　Service 以便使用它的方法，來處理業務邏輯（例如處理來自前端的資料）。
+//	呼叫　Service
 	private ActivityService service;
 	
 	@Override
@@ -48,15 +45,7 @@ public class ApplyActivityController extends HttpServlet {
 				.create();
 
         Activity activity = gson.fromJson(req.getReader(), Activity.class);
-
-        // 確保 Activity 物件不為 null
-        if (activity == null) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            sendErrorResponse(resp, "Activity data is missing");
-            return;
-        }
-		
-//	 	在 doPost() 中，根據前端傳過來的資料創建 activity 物件，並調用 service.apply(activity) 方法。		
+			
 		String errMsg = service.apply(activity);
 		System.out.println(errMsg);
 		System.out.println(activity);
@@ -68,11 +57,4 @@ public class ApplyActivityController extends HttpServlet {
 		resp.setContentType("application/json");
 			
 	}
-	// 用來返回錯誤訊息的輔助方法
-    private void sendErrorResponse(HttpServletResponse resp, String message) throws IOException {
-        JsonObject errorResponse = new JsonObject();
-        errorResponse.addProperty("successful", false);
-        errorResponse.addProperty("errMsg", message);
-        resp.getWriter().write(errorResponse.toString());
-    }
 }
