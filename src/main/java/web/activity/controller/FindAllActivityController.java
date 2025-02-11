@@ -43,7 +43,7 @@ public class FindAllActivityController extends HttpServlet {
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
-		List<Activity> activities = service.findAll();
+		List<Activity> activities = service.findAllActivity();
 		System.out.println("findAll() " + activities);
 		resp.getWriter().write(gson.toJson(activities));
 	}

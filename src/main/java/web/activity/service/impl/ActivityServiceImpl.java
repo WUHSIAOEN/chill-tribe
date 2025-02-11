@@ -100,13 +100,13 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 查詢所有活動
 	@Override
-	public List<Activity> findAll() {
-		return dao.selectAll();
+	public List<Activity> findAllActivity() {
+		return dao.selectAllActivity();
 	}
 
 	// 查詢單一活動
 	@Override
-	public Activity findById(Integer id) {
+	public Activity findActivityById(Integer id) {
 		return dao.selectByActivityId(id);
 	}
 

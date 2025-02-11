@@ -14,7 +14,7 @@ public interface ActivityDao{
 	int deletById(Integer id);
 	
 	// 查詢所有活動
-	List<Activity> selectAll();
+	List<Activity> selectAllActivity();
 	
 	// 只查詢單一活動ID
 	Activity selectByActivityId(Integer id);

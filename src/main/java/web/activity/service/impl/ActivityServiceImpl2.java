@@ -55,4 +55,23 @@ public class ActivityServiceImpl2 implements ActivityService2 {
 		}
 		return activityCards;
 	}
+
+	@Override
+	public List<IndexActivityCard> searchActivityByFilter(String actname, String category, String region) {
+
+		List<IndexActivityCard> activityCards = activitySearchDao.selectByNameCatgoryRegion(actname, category, region);
+		for (IndexActivityCard activityCard : activityCards) {
+			List<ActivityImage> activityImages = activitySearchDao
+					.selectActivityImageById(activityCard.getActivityId());
+			List<String> imageNames = new ArrayList<String>();
+			List<String> imageBase64 = new ArrayList<String>();
+			for (ActivityImage image : activityImages) {
+				imageNames.add(image.getImageName());
+				imageBase64.add(image.getImageBase64());
+			}
+			activityCard.setImageName(imageNames);
+			activityCard.setImageBase64(imageBase64);
+		}
+		return activityCards;
+	}
 }

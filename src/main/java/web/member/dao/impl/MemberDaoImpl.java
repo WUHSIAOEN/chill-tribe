@@ -3,7 +3,9 @@ package web.member.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -20,6 +22,7 @@ public class MemberDaoImpl implements MemberDao {
 		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
 	}
 
+	// 註冊會員資料
 	@Override
 	public int insert(Member member) {
 		String sql = "insert into MEMBERS(MEMBER_NAME, PHONE, EMAIL, PASSWORD) values(?, ?, ?, ?)";
@@ -35,6 +38,7 @@ public class MemberDaoImpl implements MemberDao {
 		return -1;
 	}
 
+	// 使用member_name查詢相關資料
 	@Override
 	public Member selectByUsername(String member_name) {
 		String sql = "select * from MEMBERS where MEMBER_NAME = ?";
@@ -57,64 +61,52 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 
+	// 更新資料
 	@Override
 	public int update(Member member) {
-		int offset = 1;  // 修改為 1，因為 PreparedStatement 參數索引從 1 開始
-	    StringBuilder sql = new StringBuilder("update MEMBERS set ");
+	    int offset = 1;  
+	    StringBuilder sql = new StringBuilder("UPDATE MEMBERS SET ");
 	    String gender = member.getGender();
-	    String date_of_birth = member.getDate_of_birth();
+	    Date date_of_birth = member.getDate_of_birth();
 	    String phone = member.getPhone();
 	    String member_name = member.getMember_name();
+	    
 	    boolean hasMembername = member_name != null && !member_name.isEmpty();
 	    boolean hasGender = gender != null && !gender.isEmpty();
-	    boolean hasDateOfBirth = date_of_birth != null && !date_of_birth.isEmpty();
+	    boolean hasDateOfBirth = date_of_birth != null;
 	    boolean hasPhone = phone != null && !phone.isEmpty();
 
-	    if (hasGender) {
-	        sql.append("GENDER = ?, ");
-	    }
+//	    if (hasGender) {
+//	        sql.append("GENDER = ?, ");
+//	    }
 	    if (hasDateOfBirth) {
-	        sql.append("DATE_OF_BIRTH = ?, ");
+	        sql.append("DATE_OF_BIRTH = ? ");
 	    }
-	    if (hasPhone) {
-	        sql.append("PHONE = ?, ");
-	    }
-	    if (hasMembername) {
-	        sql.append("MEMBER_NAME = ? ");
-	    }
+//	    if (hasPhone) {
+//	        sql.append("PHONE = ?, ");
+//	    }
+//	    if (hasMembername) {
+//	        sql.append("MEMBER_NAME = ? ");
+//	    }
 
-	    // 去除 SQL 語句末尾的多餘逗號
-	    String sqlQuery = sql.toString();
-	    if (sqlQuery.endsWith(", ")) {
-	        sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
-	    }
+	    sql.append("WHERE MEMBER_NAME = ?");
 
-	    // 確保在更新語句中有要更新的欄位
-	    if (sqlQuery.equals("update MEMBERS set")) {
-	        return 0;  // 如果沒有任何欄位需要更新，則返回 0
-	    }
-
-	    // 加上 WHERE 條件來指定更新的會員 (假設使用 member_id 或其他識別欄位)
-	    sqlQuery += " WHERE EMAIL = ?";  // 假設 EMAIL 是更新條件
-
-	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
-	        // 動態設置參數
-	        if (hasGender) {
-	            pstmt.setString(offset++, member.getGender());
-	        }
+	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+//	        if (hasGender) {
+//	            pstmt.setString(offset++, member.getGender());
+//	        }
 	        if (hasDateOfBirth) {
-	            pstmt.setString(offset++, member.getDate_of_birth());
+	        	pstmt.setDate(1, member.getDate_of_birth());
 	        }
-	        if (hasPhone) {
-	            pstmt.setString(offset++, member.getPhone());
-	        }
-	        if (hasMembername) {
-	            pstmt.setString(offset++, member.getMember_name());
-	        }
+//	        if (hasPhone) {
+//	            pstmt.setString(offset++, member.getPhone());
+//	        }
+//	        if (hasMembername) {
+//	            pstmt.setString(offset++, member.getMember_name());
+//	        }
 
-	        // 假設需要使用 email 作為條件進行更新
-	        pstmt.setString(offset, member.getEmail());  // 假設 Member 類別有 getEmail() 方法
-
+	        pstmt.setString(2, member.getMember_name());
+	        
 	        return pstmt.executeUpdate();
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -122,6 +114,7 @@ public class MemberDaoImpl implements MemberDao {
 	    return -1;
 	}
 
+	// 查詢帳號 密碼
 	@Override
 	public Member selectByUsernameAndPassword(Member member) {
 		String sql = "select * from MEMBERS where EMAIL = ? and PASSWORD = ?";
@@ -136,7 +129,7 @@ public class MemberDaoImpl implements MemberDao {
 					member.setEmail(rs.getString("EMAIL"));
 					member.setPassword(rs.getString("PASSWORD"));
 					member.setPhone(rs.getString("PHONE"));
-					member.setDate_of_birth(rs.getString("DATE_OF_BIRTH"));
+					member.setDate_of_birth(rs.getDate("DATE_OF_BIRTH"));
 					member.setGender(rs.getString("GENDER"));
 					member.setId_card(rs.getString("ID_CARD"));
 					return member;
@@ -162,7 +155,7 @@ public class MemberDaoImpl implements MemberDao {
 				member.setMember_name(rs.getString("MEMBER_NAME"));
 				member.setEmail(rs.getString("EMAIL"));
 				member.setPassword(rs.getString("PASSWORD"));
-				member.setDate_of_birth(rs.getString("DATE_OF_BIRTH"));
+				member.setDate_of_birth(rs.getDate("DATE_OF_BIRTH"));
 				member.setGender(rs.getString("GENDER"));
 				member.setEmail(rs.getString("EMAIL"));
 				member.setId_card(rs.getString("ID_CARD"));
@@ -176,7 +169,7 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 	
-		
+		// 刪除使用者
 		@Override
 		public Integer deletById(Integer member_id) {
 			String sql = "delete from MEMBERS where  MEMBER_ID = ?"; 
@@ -192,6 +185,7 @@ public class MemberDaoImpl implements MemberDao {
 		return -1;
 	}
 
+		// 查詢Email
 		@Override
 		public Member selectByEmail(String email) {
 			String sql = "select * from MEMBERS where EMAIL = ?";
@@ -214,6 +208,7 @@ public class MemberDaoImpl implements MemberDao {
 			return null;
 		}
 
+		// 查詢手機
 		@Override
 		public Member selectByPhone(String phone) {
 			String sql = "select * from MEMBERS where PHONE = ?";
