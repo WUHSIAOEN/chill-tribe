@@ -81,13 +81,13 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
 		
-		int resultCount = dao.update(activity);
-		
-		activity.setSuccessful(resultCount > 0);
-		
-		activity.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
-		
-		return activity;
+//		int resultCount = dao.update(activity);
+//		
+//		activity.setSuccessful(resultCount > 0);
+//		
+//		activity.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+//		
+		return null;
 	}
 
 	// 刪除
