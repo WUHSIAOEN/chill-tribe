@@ -2,7 +2,9 @@ package web.activity.vo;
 
 import java.sql.Timestamp;
 
-public class Activity {
+import core.util.Core;
+
+public class Activity extends Core{
 	private Integer activityId;
 	private String activityPrefix;
     private String activityName;

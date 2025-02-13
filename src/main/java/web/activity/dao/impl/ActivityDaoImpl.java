@@ -75,9 +75,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	// 更新活動
 	@Override
 	public int update(Activity activity) {
-		int offset = 0; // 用來計算偏移量，根據欄位是否有設置進行增減
-		// SET 用來指定要更新哪些欄位的值。
-		StringBuilder sql = new StringBuilder("UPDATE Activity SET ");
+		
+		StringBuilder sql = new StringBuilder("UPDATE Activities SET ");
 
 		if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
 			sql.append("ACTIVITY_NAME = ?, ");
@@ -112,54 +111,62 @@ public class ActivityDaoImpl implements ActivityDao {
 		if (activity.getEndDateTime() != null) {
 			sql.append("END_DATETIME = ?, ");
 		}
-		if (activity.getStatus() != null) {
-			sql.append("STATUS = ?, ");
-		}
-		if (activity.getNote() != null && !activity.getNote().isEmpty()) {
-			sql.append("NOTE = ?, ");
-		}
-		if (activity.getApproved() != null) {
-			sql.append("APPROVED = ?, ");
-		}
 		if (activity.getCityId() != null) {
-			sql.append("CITYID = ?, ");
+			sql.append("CITY_ID = ?, ");
 		}
 		if (activity.getDistrictId() != null) {
-			sql.append("DISTRICTID = ?, ");
+			sql.append("DISTRICT_ID = ?, ");
 		}
 		if (activity.getInventoryCount() != null) {
 			sql.append("INVENTORY_COUNT = ?, ");
 		}
-		if (activity.getInventoryUpdateTime() != null) {
-			sql.append("INVENTORY_UPDATE_TIME = ?, ");
+		if (activity.getNote() != null && !activity.getNote().isEmpty()) {
+			sql.append("NOTE = ?, ");
 		}
-		if (activity.getCreateTime() != null) {
-			sql.append("CREATE_TIME = ?, ");
-		}
-		if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
-			sql.append("LATITUDE = ?, ");
-		}
-		if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
-			sql.append("LONGITUDE = ?, ");
-		}
-		if (activity.getTicketsActivateTime() != null) {
-			sql.append("TICKETS_ACTIVATE_TIME = ?, ");
-		}
-		if (activity.getTicketsExpiredTime() != null) {
-			sql.append("TICKETS_EXPIRED_TIME = ?, ");
-		}
+//		if (activity.getStatus() != null) {
+//			sql.append("STATUS = ?, ");
+//		}
 
-		// 刪除最後一個多餘的逗號
-		sql.deleteCharAt(sql.length() - 2);
+//		if (activity.getApproved() != null) {
+//			sql.append("APPROVED = ?, ");
+//		}
 
-		// SUPPLIER_ID 作為識別條件
-		sql.append(" WHERE SUPPLIER_ID = ?");
+//		if (activity.getInventoryUpdateTime() != null) {
+//			sql.append("INVENTORY_UPDATE_TIME = ?, ");
+//		}
+//		if (activity.getCreateTime() != null) {
+//			sql.append("CREATE_TIME = ?, ");
+//		}
+//		if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+//			sql.append("LATITUDE = ?, ");
+//		}
+//		if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+//			sql.append("LONGITUDE = ?, ");
+//		}
+//		if (activity.getTicketsActivateTime() != null) {
+//			sql.append("TICKETS_ACTIVATE_TIME = ?, ");
+//		}
+//		if (activity.getTicketsExpiredTime() != null) {
+//			sql.append("TICKETS_EXPIRED_TIME = ?, ");
+//		}
+		
+		String sqlQuery = sql.toString();
+	    if (sqlQuery.endsWith(", ")) {
+	        sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
+	    }
+
+	    // 確保在更新語句中有要更新的欄位
+	    if (sqlQuery.equals("UPDATE ACTIVITIES SET")) {
+	        return 0;  // 如果沒有任何欄位需要更新，則返回 0
+	    }
+
+	    // 加上 WHERE 條件來指定更新的會員 (假設使用 ACTIVITY_ID 或其他識別欄位)
+	    sqlQuery += " WHERE ACTIVITY_ID = ?";  // 假設 ACTIVITY_ID 是更新條件
+	    
+	    int parameterIndex = 1; // 偏移量
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			// 設置參數
-			int parameterIndex = 1;
 
-			// 根據條件設置參數的值
 			if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
 				pstmt.setString(parameterIndex++, activity.getActivityName());
 			}
@@ -193,57 +200,57 @@ public class ActivityDaoImpl implements ActivityDao {
 			if (activity.getEndDateTime() != null) {
 				pstmt.setTimestamp(parameterIndex++, activity.getEndDateTime());
 			}
-			if (activity.getStatus() != null) {
-				pstmt.setInt(parameterIndex++, activity.getStatus());
-			}
 			if (activity.getNote() != null && !activity.getNote().isEmpty()) {
 				pstmt.setString(parameterIndex++, activity.getNote());
 			}
 			if (activity.getApproved() != null) {
-				pstmt.setBoolean(parameterIndex, false);
+				pstmt.setBoolean(parameterIndex, activity.getApproved());
 			}
 			if (activity.getCityId() != null) {
 				pstmt.setInt(parameterIndex++, activity.getCityId());
 			}
-			if (activity.getDistrictId() != null) {
-				pstmt.setInt(parameterIndex++, activity.getDistrictId());
-			}
 			if (activity.getInventoryCount() != null) {
 				pstmt.setInt(parameterIndex++, activity.getInventoryCount());
 			}
-			if (activity.getInventoryUpdateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
-			}
-			if (activity.getCreateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
-			}
-			if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getLatitude());
-			}
-			if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getLongitude());
-			}
-			if (activity.getTicketsActivateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getTicketsActivateTime());
-			}
-			if (activity.getTicketsExpiredTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
-			}
+//			if (activity.getStatus() != null) {
+//				pstmt.setInt(parameterIndex++, activity.getStatus());
+//			}
+//			if (activity.getDistrictId() != null) {
+//				pstmt.setInt(parameterIndex++, activity.getDistrictId());
+//			}
 
-			// 設定 WHERE 條件的參數，使用 offset
-			pstmt.setInt(parameterIndex + 1 + offset, activity.getSupplierId());
+//			if (activity.getInventoryUpdateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
+//			}
+//			if (activity.getCreateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
+//			}
+//			if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+//				pstmt.setString(parameterIndex++, activity.getLatitude());
+//			}
+//			if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+//				pstmt.setString(parameterIndex++, activity.getLongitude());
+//			}
+//			if (activity.getTicketsActivateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getTicketsActivateTime());
+//			}
+//			if (activity.getTicketsExpiredTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
+//			}
 
-			// 執行更新
+			pstmt.setInt(parameterIndex, activity.getActivityId());
+
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			
 		}
+		return -1;
 	}
 
 //  刪除活動
 	@Override
-	public int deletById(Integer activityId) {
+	public int deletActivityById(Integer activityId) {
 		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			pstmt.setInt(1, activityId);
@@ -342,4 +349,6 @@ public class ActivityDaoImpl implements ActivityDao {
 
 		return null;
 	}
+
+	
 }

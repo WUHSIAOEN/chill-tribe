@@ -15,7 +15,8 @@ import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
-@WebServlet("/member/login")
+// 登入
+@WebServlet({"/member/login", "/login"})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

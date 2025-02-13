@@ -33,7 +33,7 @@
 				password: password.value,
 				cPassword: cPassword.value,
 				phone: phone.value,
-				email: email.value
+				email: email.value,
 			})
 		})
 		// console.log(resp)

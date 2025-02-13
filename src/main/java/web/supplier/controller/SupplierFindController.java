@@ -1,4 +1,4 @@
-package web.member.controller;
+package web.supplier.controller;
 
 import java.io.IOException;
 
@@ -14,22 +14,22 @@ import com.google.gson.GsonBuilder;
 
 //import web.test.member.dao.MemberDao;
 //import web.test.member.dao.impl.MemberDaoImpl;
-import web.member.vo.Member;
+import web.supplier.vo.Supplier;
 
 // 查詢
-@WebServlet("/member/find")
-public class FindController extends HttpServlet{
+@WebServlet("/supplier/supplierfind")
+public class SupplierFindController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 配合登入功能修改
-		Member member = (Member) req.getSession().getAttribute("member");
+		Supplier supplier = (Supplier) req.getSession().getAttribute("supplier");
 //		Gson gson = new Gson();
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy-MM-dd")
 				.create();
-		resp.getWriter().write(gson.toJson(member));
+		resp.getWriter().write(gson.toJson(supplier));
 //		// 暫時寫法
 //		MemberDao dao;
 //		try {

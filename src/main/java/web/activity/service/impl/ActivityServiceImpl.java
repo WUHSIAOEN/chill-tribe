@@ -2,6 +2,7 @@ package web.activity.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import javax.naming.NamingException;
 
@@ -16,7 +17,8 @@ public class ActivityServiceImpl implements ActivityService {
 	public ActivityServiceImpl() throws NamingException {
 		dao = new ActivityDaoImpl();
 	}
-
+	
+	// 申請活動
 	@Override
 	public String apply(Activity activity) {
 		String activityPrefix = activity.getActivityPrefix();
@@ -49,44 +51,42 @@ public class ActivityServiceImpl implements ActivityService {
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 
 	}
-
+	
+	// 更新活動
 	@Override
-	public Activity edit(Activity activity) {
-		if (activity.getStartDateTime() != null && activity.getEndDateTime() != null) {
-			if (activity.getStartDateTime().after(activity.getEndDateTime())) {
-//	            activity.setSuccessful(false);
-//	            activity.setMessage("活動結束時間不能早於開始時間");
-				return activity;
-			}
-		}
-
-		// 檢查活動名稱長度是否符合要求
-		String activityName = activity.getActivityName();
-		if (activityName == null || activityName.isEmpty()) {
-//	        activity.setSuccessful(false);
-//	        activity.setMessage("活動名稱不可為空");
-			return activity;
-		}
-
-		// 檢查單位價格是否合理（假設價格必須大於0）
-		if (activity.getUnitPrice() != null && activity.getUnitPrice() < 0) {
-//	        activity.setSuccessful(false);
-//	        activity.setMessage("單位價格必須大於 0");
-			return activity;
-		}
-
-		// 檢查最小參加人數和最大參加人數是否合法（最小參加人數應小於最大參加人數）
-		if (activity.getMinParticipants() != null && activity.getMaxParticipants() != null) {
-			if (activity.getMinParticipants() > activity.getMaxParticipants()) {
-//	            activity.setSuccessful(false);
-//	            activity.setMessage("最小參加人數不能大於最大參加人數");
-				return activity;
-			}
-		}
-
+	public String update(Activity activity) {
+		
+//		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
+//		activity.setActivityName(oActivity.getActivityName());
+//		activity.setAddress(oActivity.getAddress());
+//		activity.setPrecaution(oActivity.getPrecaution());
+//		activity.setUnitPrice(oActivity.getUnitPrice());
+//		activity.setMinParticipants(oActivity.getMinParticipants());
+//		activity.setMaxParticipants(oActivity.getMaxParticipants());
+//		activity.setDescription(oActivity.getDescription());
+//		activity.setCategory(oActivity.getCategory());
+//		activity.setStartDateTime(oActivity.getStartDateTime());
+//		activity.setEndDateTime(oActivity.getEndDateTime());
+//		activity.setNote(oActivity.getNote());
+//		activity.setStatus(oActivity.getStatus());
+//		activity.setApproved(oActivity.getApproved());
+//		activity.setCityId(oActivity.getCityId());
+//		activity.setDistrictId(oActivity.getDistrictId());
+//		activity.setInventoryCount(oActivity.getInventoryCount());
+//		activity.setInventoryUpdateTime(oActivity.getInventoryUpdateTime());
+//		activity.setLatitude(oActivity.getLatitude());
+//		activity.setLongitude(oActivity.getLongitude());
+//		activity.setTicketsActivateTime(oActivity.getTicketsActivateTime());
+//		activity.setTicketsExpiredTime(oActivity.getTicketsExpiredTime());
+//		activity.setApproved(oActivity.getApproved());
+//		activity.setCreateTime(oActivity.getCreateTime());
+		
 		int resultCount = dao.update(activity);
-		// 要新增一個判斷 resultCount 的程式碼
-		return activity;
+		
+		activity.setSuccessful(resultCount > 0);
+		
+		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+		
 	}
 
 	// 刪除
@@ -95,7 +95,7 @@ public class ActivityServiceImpl implements ActivityService {
 		if (id == null) {
 			return false;
 		}
-		return dao.deletById(id) > 0;
+		return dao.deletActivityById(id) > 0;
 	}
 
 	// 查詢所有活動
