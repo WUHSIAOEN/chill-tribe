@@ -157,6 +157,8 @@
 			class="ti-arrow-up"></i></a>
 
 	</div>
+	
+	<input type="hidden" id="member_id" value="">
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
@@ -219,6 +221,7 @@
 	const date_of_birth = document.querySelector('#date_of_birth');
 	const gender = document.querySelector('#gender');
 	const msg = document.querySelector('#msg');
+	const member_id = document.querySelector('#member_id');
 
 	fetch('find')
 		.then(resp => resp.json())
@@ -229,6 +232,7 @@
 			phone.value = member.phone;
 			date_of_birth.value = member.date_of_birth;
 			gender.value = member.gender;
+			member_id.value = member.member_id;
 			
 		});
 
@@ -245,7 +249,7 @@
 // 	});
 
 	document.querySelector('#editBtn').addEventListener('click', () => {
-		console.log("綁定editBtn成功");
+		console.log("觸發儲存變更按鈕囉！");
 // 		let len = password.value.length
 // 		if (len !== 0 && (len < 6 || len >12)) {
 // 			alert('密碼長度須介於6 ~ 12');
@@ -266,7 +270,8 @@
 				member_name: username.value,
 				phone: phone.value,
 				date_of_birth: date_of_birth.value,
-				gender: gender.value
+				gender: gender.value,
+				member_id: member_id.value
 			})
 		})
 		// console.log(resp)
@@ -274,14 +279,11 @@
 			 return resp.json();
 		 })
 		 .then(body => {
-// 			 msg.textContent = '';
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
-				msg.textContent = `
-				   ${body.username}
-				`;
+				console.log("恭喜，個資修改成功囉！！！");
 			 }else {
-				msg.textContent = '修改失敗!';
+				 console.log("OH~NO...您個資修改失敗了！！！");
 			 }
 		 });
 	});

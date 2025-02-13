@@ -76,36 +76,42 @@ public class MemberDaoImpl implements MemberDao {
 	    boolean hasDateOfBirth = date_of_birth != null;
 	    boolean hasPhone = phone != null && !phone.isEmpty();
 
-//	    if (hasGender) {
-//	        sql.append("GENDER = ?, ");
-//	    }
-	    if (hasDateOfBirth) {
-	        sql.append("DATE_OF_BIRTH = ? ");
+	    if (hasGender) {
+	        sql.append("GENDER = ?, ");
 	    }
-//	    if (hasPhone) {
-//	        sql.append("PHONE = ?, ");
-//	    }
-//	    if (hasMembername) {
-//	        sql.append("MEMBER_NAME = ? ");
-//	    }
+	    if (hasDateOfBirth) {
+	        sql.append("DATE_OF_BIRTH = ?, ");
+	    }
+	    if (hasPhone) {
+	        sql.append("PHONE = ?, ");
+	    }
+	    if (hasMembername) {
+	        sql.append("MEMBER_NAME = ?, ");
+	    }
+	    
+	    if (sql.charAt(sql.length() - 2) == ',') {
+	        sql.delete(sql.length() - 2, sql.length());
+	    }
 
-	    sql.append("WHERE MEMBER_NAME = ?");
+	    // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+	    sql.append("WHERE MEMBER_ID = ?");
 
 	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-//	        if (hasGender) {
-//	            pstmt.setString(offset++, member.getGender());
-//	        }
-	        if (hasDateOfBirth) {
-	        	pstmt.setDate(1, member.getDate_of_birth());
+	        if (hasGender) {
+	            pstmt.setString(offset++, member.getGender());
 	        }
-//	        if (hasPhone) {
-//	            pstmt.setString(offset++, member.getPhone());
-//	        }
-//	        if (hasMembername) {
-//	            pstmt.setString(offset++, member.getMember_name());
-//	        }
+	        if (hasDateOfBirth) {
+	        	pstmt.setDate(offset++, member.getDate_of_birth());
+	        }
+	        if (hasPhone) {
+	            pstmt.setString(offset++, member.getPhone());
+	        }
+	        if (hasMembername) {
+	            pstmt.setString(offset++, member.getMember_name());
+	        }
 
-	        pstmt.setString(2, member.getMember_name());
+	        // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+	        pstmt.setInt(offset, member.getMember_id());
 	        
 	        return pstmt.executeUpdate();
 	    } catch (Exception e) {
