@@ -10,7 +10,7 @@ public interface ActivityService {
 	// 因為它代表servlet回傳的東西，具體的訊息，告訴使用者操作是成功還是失敗
 	String apply(Activity activity);
 	// 更新活動
-	Activity update(Integer id);
+	String update(Activity activity);
 	// 刪除活動
 	boolean removeById(Integer id);
 	// 複數活動
