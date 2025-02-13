@@ -27,23 +27,8 @@ if (activityId) {
   console.log("你要的活動找不到喔!");
 }
 
+
 // 更新
-document
-  .getElementById("updateBtn")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const activityId = getActivityIdFromURL();
-    if (activityId) {
-      updateActivity(activityId);
-      console.log("更新成功");
-      } 
-      console.log("更新失敗");
-    }
-);
-
-
-
 function updateActivity(id) {
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
@@ -100,11 +85,20 @@ function updateActivity(id) {
     // not required
   };
 
-  fetch(`/chill-tribe/activity/updateActivity?id=${id}`, {
-    method: "PUT",
+  fetch('/chill-tribe/activity/updateActivity', {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(requestData),
   });
+
+  document
+  .getElementById("updateBtn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const activityId = getActivityIdFromURL();
+    updateActivity(activityId);
+    }
+  );
 }
