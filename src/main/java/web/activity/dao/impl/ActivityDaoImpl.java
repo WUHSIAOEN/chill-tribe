@@ -76,8 +76,6 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public int update(Activity activity) {
 		
-		int parameterIndex = 1; // 偏移量
-		
 		StringBuilder sql = new StringBuilder("UPDATE Activities SET ");
 
 		if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
@@ -113,15 +111,6 @@ public class ActivityDaoImpl implements ActivityDao {
 		if (activity.getEndDateTime() != null) {
 			sql.append("END_DATETIME = ?, ");
 		}
-		if (activity.getStatus() != null) {
-			sql.append("STATUS = ?, ");
-		}
-		if (activity.getNote() != null && !activity.getNote().isEmpty()) {
-			sql.append("NOTE = ?, ");
-		}
-		if (activity.getApproved() != null) {
-			sql.append("APPROVED = ?, ");
-		}
 		if (activity.getCityId() != null) {
 			sql.append("CITY_ID = ?, ");
 		}
@@ -131,24 +120,35 @@ public class ActivityDaoImpl implements ActivityDao {
 		if (activity.getInventoryCount() != null) {
 			sql.append("INVENTORY_COUNT = ?, ");
 		}
-		if (activity.getInventoryUpdateTime() != null) {
-			sql.append("INVENTORY_UPDATE_TIME = ?, ");
+		if (activity.getNote() != null && !activity.getNote().isEmpty()) {
+			sql.append("NOTE = ?, ");
 		}
-		if (activity.getCreateTime() != null) {
-			sql.append("CREATE_TIME = ?, ");
-		}
-		if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
-			sql.append("LATITUDE = ?, ");
-		}
-		if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
-			sql.append("LONGITUDE = ?, ");
-		}
-		if (activity.getTicketsActivateTime() != null) {
-			sql.append("TICKETS_ACTIVATE_TIME = ?, ");
-		}
-		if (activity.getTicketsExpiredTime() != null) {
-			sql.append("TICKETS_EXPIRED_TIME = ?, ");
-		}
+//		if (activity.getStatus() != null) {
+//			sql.append("STATUS = ?, ");
+//		}
+
+//		if (activity.getApproved() != null) {
+//			sql.append("APPROVED = ?, ");
+//		}
+
+//		if (activity.getInventoryUpdateTime() != null) {
+//			sql.append("INVENTORY_UPDATE_TIME = ?, ");
+//		}
+//		if (activity.getCreateTime() != null) {
+//			sql.append("CREATE_TIME = ?, ");
+//		}
+//		if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+//			sql.append("LATITUDE = ?, ");
+//		}
+//		if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+//			sql.append("LONGITUDE = ?, ");
+//		}
+//		if (activity.getTicketsActivateTime() != null) {
+//			sql.append("TICKETS_ACTIVATE_TIME = ?, ");
+//		}
+//		if (activity.getTicketsExpiredTime() != null) {
+//			sql.append("TICKETS_EXPIRED_TIME = ?, ");
+//		}
 		
 		String sqlQuery = sql.toString();
 	    if (sqlQuery.endsWith(", ")) {
@@ -162,6 +162,8 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	    // 加上 WHERE 條件來指定更新的會員 (假設使用 ACTIVITY_ID 或其他識別欄位)
 	    sqlQuery += " WHERE ACTIVITY_ID = ?";  // 假設 ACTIVITY_ID 是更新條件
+	    
+	    int parameterIndex = 1; // 偏移量
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 
@@ -198,9 +200,6 @@ public class ActivityDaoImpl implements ActivityDao {
 			if (activity.getEndDateTime() != null) {
 				pstmt.setTimestamp(parameterIndex++, activity.getEndDateTime());
 			}
-			if (activity.getStatus() != null) {
-				pstmt.setInt(parameterIndex++, activity.getStatus());
-			}
 			if (activity.getNote() != null && !activity.getNote().isEmpty()) {
 				pstmt.setString(parameterIndex++, activity.getNote());
 			}
@@ -210,30 +209,34 @@ public class ActivityDaoImpl implements ActivityDao {
 			if (activity.getCityId() != null) {
 				pstmt.setInt(parameterIndex++, activity.getCityId());
 			}
-			if (activity.getDistrictId() != null) {
-				pstmt.setInt(parameterIndex++, activity.getDistrictId());
-			}
 			if (activity.getInventoryCount() != null) {
 				pstmt.setInt(parameterIndex++, activity.getInventoryCount());
 			}
-			if (activity.getInventoryUpdateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
-			}
-			if (activity.getCreateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
-			}
-			if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getLatitude());
-			}
-			if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getLongitude());
-			}
-			if (activity.getTicketsActivateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getTicketsActivateTime());
-			}
-			if (activity.getTicketsExpiredTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
-			}
+//			if (activity.getStatus() != null) {
+//				pstmt.setInt(parameterIndex++, activity.getStatus());
+//			}
+//			if (activity.getDistrictId() != null) {
+//				pstmt.setInt(parameterIndex++, activity.getDistrictId());
+//			}
+
+//			if (activity.getInventoryUpdateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getInventoryUpdateTime());
+//			}
+//			if (activity.getCreateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getCreateTime());
+//			}
+//			if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
+//				pstmt.setString(parameterIndex++, activity.getLatitude());
+//			}
+//			if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
+//				pstmt.setString(parameterIndex++, activity.getLongitude());
+//			}
+//			if (activity.getTicketsActivateTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getTicketsActivateTime());
+//			}
+//			if (activity.getTicketsExpiredTime() != null) {
+//				pstmt.setTimestamp(parameterIndex++, activity.getTicketsExpiredTime());
+//			}
 
 			pstmt.setInt(parameterIndex, activity.getActivityId());
 

@@ -54,7 +54,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 更新活動
 	@Override
-	public Activity update(Integer id) {
+	public String update(Activity activity) {
 		
 //		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
 //		activity.setActivityName(oActivity.getActivityName());
@@ -81,13 +81,12 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
 		
-//		int resultCount = dao.update(activity);
-//		
-//		activity.setSuccessful(resultCount > 0);
-//		
-//		activity.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
-//		
-		return null;
+		int resultCount = dao.update(activity);
+		
+		activity.setSuccessful(resultCount > 0);
+		
+		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+		
 	}
 
 	// 刪除
