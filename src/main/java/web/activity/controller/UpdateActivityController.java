@@ -37,7 +37,7 @@ public class UpdateActivityController extends HttpServlet {
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String idParam = req.getParameter("id");
 		
