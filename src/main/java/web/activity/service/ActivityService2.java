@@ -19,5 +19,5 @@ public interface ActivityService2 {
 		List<Activities> searchActivityByStart();
 		
 		// 查詢活動卡片 - 根據搜尋條件
-		List<IndexActivityCard> searchActivityByFilter(String actname, String category, String region);
+		List<Activities> searchActivityByFilter(String actname, String category, String region);
 }

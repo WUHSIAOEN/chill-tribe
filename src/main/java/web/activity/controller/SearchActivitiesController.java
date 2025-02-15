@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import web.activity.service.ActivityService2;
 import web.activity.service.impl.ActivityServiceImpl2;
+import web.activity.vo.Activities;
 import web.activity.vo.IndexActivityCard;
 
 @WebServlet("/activity/SearchActivities")
@@ -42,7 +43,7 @@ public class SearchActivitiesController extends HttpServlet{
 		if(region.equals("all")) {
 			region = "";
 		}
-		List<IndexActivityCard> indexActivityCard = service.searchActivityByFilter(actname, category, region);
+		List<Activities> indexActivityCard = service.searchActivityByFilter(actname, category, region);
 		Gson gson = new Gson();
 		resp.getWriter().write(gson.toJson(indexActivityCard));
 	}

@@ -197,7 +197,7 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	}
 
 	@Override
-	public List<IndexActivityCard> selectByNameCatgoryRegion(String actname, String catgory, String region) {
+	public List<Activities> selectByNameCatgoryRegion(String actname, String catgory, String region) {
 		// 要判斷有哪些查詢條件
 		int offset = 0; // 用偏移量
 		StringBuilder sql = new StringBuilder("SELECT * FROM activities AS act"
@@ -242,30 +242,42 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				}
 			}
 //			System.out.println(pstmt);
-			List<IndexActivityCard> list = new ArrayList<>();
+			List<Activities> list = new ArrayList<>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				IndexActivityCard indexActivityCard = new IndexActivityCard();
-				indexActivityCard.setActivityId(rs.getInt("activity_id"));
-				indexActivityCard.setActivityName(rs.getString("activity_name"));
-				indexActivityCard.setSupplierId(rs.getInt("supplier_id"));
-				indexActivityCard.setSupplierName(rs.getString("supplier_name"));
-				indexActivityCard.setCityId(rs.getInt("city_id"));
-				indexActivityCard.setCityName(rs.getString("city_name"));
-				indexActivityCard.setDistrictId(rs.getInt("district_id"));
-				indexActivityCard.setDistrictName(rs.getString("district_name"));
-				indexActivityCard.setAddress(rs.getString("address"));
-				indexActivityCard.setUnitPrice(rs.getInt("unit_price"));
-				indexActivityCard.setMinParticipants(rs.getInt("min_participants"));
-				indexActivityCard.setMaxParticipants(rs.getInt("max_participants"));
-				indexActivityCard.setCategory(rs.getString("category"));
-				indexActivityCard.setStartDateTime(rs.getTimestamp("start_date_time"));
-				indexActivityCard.setEndDateTime(rs.getTimestamp("end_date_time"));
-				indexActivityCard.setStatus(rs.getInt("status"));
-				indexActivityCard.setApproved(rs.getBoolean("approved"));
-				indexActivityCard.setInventoryCount(rs.getInt("inventory_count"));
-				indexActivityCard.setCreateTime(rs.getTimestamp("create_time"));
-				list.add(indexActivityCard);
+				Activities activity = new Activities();
+				Supplier supplier = new Supplier();
+				City city = new City();
+				District district = new District();
+				activity.setActivityId(rs.getInt("activity_id"));
+				activity.setActivityName(rs.getString("activity_name"));
+				supplier.setSupplier_id(rs.getInt("supplier_id"));
+				supplier.setSupplier_name(rs.getString("supplier_name"));
+				activity.setSupplier(supplier);
+//				activity.setSupplierId(rs.getInt("supplier_id"));
+//				activity.setSupplierName(rs.getString("supplier_name"));
+				city.setCityId(rs.getInt("city_id"));
+				city.setCityName(rs.getString("city_name"));
+				activity.setCity(city);
+				district.setDistrictId(rs.getInt("district_id"));
+				district.setDistricName(rs.getString("district_name"));
+				activity.setDistrict(district);
+//				activity.setCityId(rs.getInt("city_id"));
+//				activity.setCityName(rs.getString("city_name"));
+//				activity.setDistrictId(rs.getInt("district_id"));
+//				activity.setDistrictName(rs.getString("district_name"));
+				activity.setAddress(rs.getString("address"));
+				activity.setUnitPrice(rs.getInt("unit_price"));
+				activity.setMinParticipants(rs.getInt("min_participants"));
+				activity.setMaxParticipants(rs.getInt("max_participants"));
+				activity.setCategory(rs.getString("category"));
+				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
+				activity.setStatus(rs.getInt("status"));
+				activity.setApproved(rs.getBoolean("approved"));
+				activity.setInventoryCount(rs.getInt("inventory_count"));
+				activity.setCreateTime(rs.getTimestamp("create_time"));
+				list.add(activity);
 			}
 //			System.out.println(list.size());
 			return list;
