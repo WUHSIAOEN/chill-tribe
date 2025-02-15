@@ -1,152 +1,228 @@
 <div class="search-sidebar_header">
-    <h4 class="ssh_heading">關閉側邊攔</h4>
-    <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i
-            class="fa-regular fa-circle-xmark fs-5 text-muted-2"></i></button>
+	<h4 class="ssh_heading">關閉側邊攔</h4>
+	<button onclick="closeFilterSearch()"
+		class="w3-bar-item w3-button w3-large">
+		<i class="fa-regular fa-circle-xmark fs-5 text-muted-2"></i>
+	</button>
 </div>
 
 <div class="sidebar-widgets">
-    <div class="dashboard-navbar">
+	<div class="dashboard-navbar">
 
-        <div class="d-user-avater">
-       
-            <img src="https://placehold.co/500x500" class="img-fluid avater" alt="">
-			<label for="upload-avatar" class="btn btn-primary mt-2">上傳圖片</label>
-            <input type="file" id="upload-avatar" class="d-none" accept="image/*" onchange="previewImage(event)">
-            <!-- Image preview -->
-            <div id="image-preview" class="mt-3">
-                <img id="preview" src="" alt="預覽圖片" class="img-fluid d-none">
-            </div>
+		<div class="d-user-avater">
+
+			<img id="photo_base64" src="https://placehold.co/500x500"
+				class="img-fluid avater" alt=""> <label
+				for="upload-avatar" class="btn btn-primary mt-2">上傳圖片</label> <input
+				type="file" id="upload-avatar" class="d-none" accept="image/*"
+				onchange="previewImage(event)">
+			<!-- Image preview -->
+<!-- 			<div id="image-preview" class="mt-3"> -->
+<!-- 				<img id="preview" src="" alt="預覽圖片" class="img-fluid d-none"> -->
+<!-- 			</div> -->
 
 
-<!--             <h4>Adam Harshvardhan</h4> -->
-<!--             <span>Canada USA</span> -->
-				 
-        </div>
+			<!--             <h4>Adam Harshvardhan</h4> -->
+			<!--             <span>Canada USA</span> -->
 
-        <!-- Navigation Start -->
-        <div class="d-navigation">
-            <ul>
-                <div class="widget-boxed-header">
+		</div>
 
-                    <h4>
-                        <a href="#myprofile" data-bs-toggle="collapse" aria-expanded="false"
-                            role="button" class="collapsed"><i
-                                class="fa-solid fa-house"></i>我的帳戶</a>
-                    </h4>
+		<!-- Navigation Start -->
+		<div class="d-navigation">
+			<ul>
+				<div class="widget-boxed-header">
 
-                </div>
-                <div class="widget-boxed-body collapse" id="myprofile"
-                    data-parent="#myprofile">
-                    <div class="side-list no-border">
+					<h4>
+						<a href="#myprofile" data-bs-toggle="collapse"
+							aria-expanded="false" role="button" class="collapsed"><i
+							class="fa-solid fa-house"></i>我的帳戶</a>
+					</h4>
 
-                        <!-- Single Navigation Card -->
-                        <div class="single_filter_card">
-                            <div class="card-body pt-0">
-                                <div class="inner_widget_link">
-                                    <ul class="no-ul-list navigation-list">
-                                        <li><a href="./member-details.html">個人資料</a></li>
-                                        <li><a href="">我的地址</a></li>
-                                        <li><a href="">更改密碼</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
+				</div>
+				<div class="widget-boxed-body collapse" id="myprofile"
+					data-parent="#myprofile">
+					<div class="side-list no-border">
 
-        <div class="d-navigation">
-            <ul>
-                <div class="widget-boxed-header">
+						<!-- Single Navigation Card -->
+						<div class="single_filter_card">
+							<div class="card-body pt-0">
+								<div class="inner_widget_link">
+									<ul class="no-ul-list navigation-list">
+										<li><a href="./member-details.html">個人資料</a></li>
+										<li><a href="">我的地址</a></li>
+										<li><a href="">更改密碼</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
 
-                    <h4>
-                        <a href="#historyorder" data-bs-toggle="collapse"
-                            aria-expanded="false" role="button" class="collapsed"><i
-                                class="fa-solid fa-building-circle-check"></i>歷史訂單</a>
-                    </h4>
+		<div class="d-navigation">
+			<ul>
+				<div class="widget-boxed-header">
 
-                </div>
-                <div class="widget-boxed-body collapse" id="historyorder"
-                    data-parent="#historyorder">
-                    <div class="side-list no-border">
+					<h4>
+						<a href="#historyorder" data-bs-toggle="collapse"
+							aria-expanded="false" role="button" class="collapsed"><i
+							class="fa-solid fa-building-circle-check"></i>歷史訂單</a>
+					</h4>
 
-                        <!-- Single Navigation Card -->
-                        <div class="single_filter_card">
-                            <div class="card-body pt-0">
-                                <div class="inner_widget_link">
-                                    <ul class="no-ul-list navigation-list">
-                                        <li><a href="home-2.html">訂單資訊</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
+				</div>
+				<div class="widget-boxed-body collapse" id="historyorder"
+					data-parent="#historyorder">
+					<div class="side-list no-border">
 
-        <div class="d-navigation">
-            <ul>
-                <div class="widget-boxed-header">
+						<!-- Single Navigation Card -->
+						<div class="single_filter_card">
+							<div class="card-body pt-0">
+								<div class="inner_widget_link">
+									<ul class="no-ul-list navigation-list">
+										<li><a href="home-2.html">訂單資訊</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
 
-                    <h4>
-                        <a href="#collection" data-bs-toggle="collapse"
-                            aria-expanded="false" role="button" class="collapsed"><i
-                                class="fa-solid fa-bookmark"></i>收藏</a>
-                    </h4>
+		<div class="d-navigation">
+			<ul>
+				<div class="widget-boxed-header">
 
-                </div>
-                <div class="widget-boxed-body collapse" id="collection"
-                    data-parent="#collection">
-                    <div class="side-list no-border">
+					<h4>
+						<a href="#collection" data-bs-toggle="collapse"
+							aria-expanded="false" role="button" class="collapsed"><i
+							class="fa-solid fa-bookmark"></i>收藏</a>
+					</h4>
 
-                        <!-- Single Navigation Card -->
-                        <div class="single_filter_card">
-                            <div class="card-body pt-0">
-                                <div class="inner_widget_link">
-                                    <ul class="no-ul-list navigation-list">
-                                        <li><a href="">我的收藏</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
+				</div>
+				<div class="widget-boxed-body collapse" id="collection"
+					data-parent="#collection">
+					<div class="side-list no-border">
 
-        <div class="d-navigation">
-            <ul>
-                <div class="widget-boxed-header">
+						<!-- Single Navigation Card -->
+						<div class="single_filter_card">
+							<div class="card-body pt-0">
+								<div class="inner_widget_link">
+									<ul class="no-ul-list navigation-list">
+										<li><a href="">我的收藏</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
 
-                    <h4>
-                        <a href="#notification" data-bs-toggle="collapse"
-                            aria-expanded="false" role="button" class="collapsed"><i
-                                class="fa-solid fa-gauge"></i>通知中心</a>
-                    </h4>
+		<div class="d-navigation">
+			<ul>
+				<div class="widget-boxed-header">
 
-                </div>
-                <div class="widget-boxed-body collapse" id="notification"
-                    data-parent="#notification">
-                    <div class="side-list no-border">
+					<h4>
+						<a href="#notification" data-bs-toggle="collapse"
+							aria-expanded="false" role="button" class="collapsed"><i
+							class="fa-solid fa-gauge"></i>通知中心</a>
+					</h4>
 
-                        <!-- Single Navigation Card -->
-                        <div class="single_filter_card">
-                            <div class="card-body pt-0">
-                                <div class="inner_widget_link">
-                                    <ul class="no-ul-list navigation-list">
-                                        <li><a href="">訂單通知</a></li>
-                                        <li><a href="">系統通知</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-        </div>
-    </div>
+				</div>
+				<div class="widget-boxed-body collapse" id="notification"
+					data-parent="#notification">
+					<div class="side-list no-border">
+
+						<!-- Single Navigation Card -->
+						<div class="single_filter_card">
+							<div class="card-body pt-0">
+								<div class="inner_widget_link">
+									<ul class="no-ul-list navigation-list">
+										<li><a href="">訂單通知</a></li>
+										<li><a href="">系統通知</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
+	</div>
 </div>
 
+<input type="hidden" id="member_id" value="">
+
+<script>
+
+	const photo_base64 = document.getElementById('photo_base64');
+// 	console.log(member_img);
+
+	
+	fetch('find')
+		.then(resp => resp.json())
+		.then(member => {
+			console.log(member);
+			member_id.value = member.member_id;
+			if (member.photo_base64 == null) {
+				photo_base64.src = 'https://placehold.co/500x500';
+				console.log("照片是空的");
+				} else {
+			photo_base64.src = 'data:image/png;base64,' + member.photo_base64;	
+			console.log("77777有照片囉");				
+					}
+			
+		});
+
+	
+
+			//更換上傳後圖片
+// 			member_img.src = 'data:image/png;base64,' + 'base64Image';
+//             photo_base64.src = `data:image/png;base64, ${photo_base64.value} `;
+	
+    // 預覽圖片並轉成Base64
+    function previewImage(event) {
+        const file = event.target.files[0];
+        
+
+        const reader = new FileReader();
+        
+        reader.onloadend = function () {
+            // Base64圖片去掉Base64前綴部分
+            const base64Image = reader.result.split(',')[1]; 
+                        
+            // 將Base64圖片傳後端
+            sendImageToServer(base64Image);
+        };
+        
+        // 將圖片轉成Base64
+        reader.readAsDataURL(file);
+    }
+
+    // Base64值傳到後端
+    function sendImageToServer(base64Image) {
+        
+        const member_id = document.querySelector('#member_id');
+
+        fetch('memberimg', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            	member_id: member_id.value,
+                photo_base64: base64Image
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('圖片上傳成功囉:', data);
+        })
+        .catch(error => {
+            console.error('OH~NO上傳失敗:', error);
+        });
+    }
+</script>
 

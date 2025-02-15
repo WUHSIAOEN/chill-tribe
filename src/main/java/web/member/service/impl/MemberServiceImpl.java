@@ -130,4 +130,13 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return memberDao.deletById(id) > 0;
 	}
+
+	@Override
+	public Member updateimg(Member member) {
+		int resultCount =  memberDao.updateimg(member);
+		member.setSuccessful(resultCount > 0);
+		member.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+		System.out.println("service" + member);
+		return member;
+	}
 }

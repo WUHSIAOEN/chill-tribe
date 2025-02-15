@@ -8,18 +8,22 @@ import core.util.Core;
 // 一般會員VO
 public class Member extends Core {
 
+	// 會員五寶
 	private Integer member_id;
 	private String member_name;
-	private String phone;
 	private String email;
-	private String id_card;
 	private String password;
 	private String cPassword;
-	private Date date_of_birth;
+	// 會員基本資料
+	private String phone;
+	private String id_card;
 	private String gender;
-	private String creator;
-	private Timestamp registration_date;
+	private Date date_of_birth;
 	private String updater;
+	private String photo_base64;
+	private String creator;
+	// 年薪500萬工程師查日期用
+	private Timestamp registration_date;
 	private Timestamp lastUpdatedDate;
 
 	public Integer getMember_id() {
@@ -124,6 +128,14 @@ public class Member extends Core {
 
 	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
+	}
+
+	public String getPhoto_base64() {
+		return photo_base64;
+	}
+
+	public void setPhoto_base64(String photo_base64) {
+		this.photo_base64 = photo_base64;
 	}
 
 }
