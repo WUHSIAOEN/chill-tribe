@@ -9,8 +9,12 @@ public class Supplier extends Core {
 
 	private Integer supplier_id;
 	private String supplier_name;
+	private String contact_person;
 	private String phone;
 	private String email;
+	private String address;
+	private String about;
+	private String image;
 	private String id_number;
 	private String password;
 	private String cPassword;
@@ -105,6 +109,38 @@ public class Supplier extends Core {
 
 	public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
+	}
+
+	public String getContact_person() {
+		return contact_person;
+	}
+
+	public void setContact_person(String contact_person) {
+		this.contact_person = contact_person;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
