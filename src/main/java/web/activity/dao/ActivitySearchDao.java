@@ -4,9 +4,7 @@ import java.util.List;
 
 import web.activity.vo.Activities;
 import web.activity.vo.Activity2;
-//import web.activity.vo.ActivityImage;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.IndexActivityCard;
 
 public interface ActivitySearchDao {
 	// 首頁查詢活動

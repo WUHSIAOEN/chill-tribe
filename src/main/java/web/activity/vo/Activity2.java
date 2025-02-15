@@ -1,5 +1,7 @@
 package web.activity.vo;
 
+
+// 確認是否為測試用 可刪除
 import java.sql.Timestamp;
 
 public class Activity2 {
