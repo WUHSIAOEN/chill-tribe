@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import web.activity.service.ActivityService2;
 import web.activity.service.impl.ActivityServiceImpl2;
+import web.activity.vo.Activities;
 import web.activity.vo.IndexActivityCard;
 
 @WebServlet("/activity/SearchActivityComingSoon")
@@ -33,7 +34,7 @@ public class SearchActivityComingSoonController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<IndexActivityCard> indexActivityCard = service.searchActivityByStart();
+		List<Activities> indexActivityCard = service.searchActivityByStart();
 		Gson gson = new Gson();
 		resp.getWriter().write(gson.toJson(indexActivityCard));
 	}
