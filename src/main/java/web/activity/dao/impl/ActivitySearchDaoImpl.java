@@ -21,9 +21,7 @@ import core.vo.District;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.vo.Activities;
 import web.activity.vo.Activity2;
-//import web.activity.vo.ActivityImage;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.IndexActivityCard;
 import web.supplier.vo.Supplier;
 
 public class ActivitySearchDaoImpl implements ActivitySearchDao {

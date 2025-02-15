@@ -10,7 +10,6 @@ import web.activity.service.impl.ActivityServiceImpl2;
 import web.activity.vo.Activities;
 import web.activity.vo.Activity;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.IndexActivityCard;
 
 public class Main {
 
