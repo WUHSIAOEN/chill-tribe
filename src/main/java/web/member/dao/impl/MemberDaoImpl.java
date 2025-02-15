@@ -206,6 +206,7 @@ public class MemberDaoImpl implements MemberDao {
 						member.setPhone(rs.getString("PHONE"));
 						member.setEmail(rs.getString("EMAIL"));
 						member.setPassword(rs.getString("PASSWORD"));
+						member.setPhoto_base64(rs.getString("PHOTO_BASE64"));
 						return member;
 					}
 				}
@@ -237,7 +238,7 @@ public class MemberDaoImpl implements MemberDao {
 			}
 			return null;
 		}
-
+		
 		// 大頭照
 		@Override
 		public int updateimg(Member member) {
@@ -255,7 +256,7 @@ public class MemberDaoImpl implements MemberDao {
 		 // 如果沒有任何欄位需要更新，直接返回0
 		    if (sql.toString().equals("UPDATE MEMBERS SET ")) {
 		    	System.out.println("沒有任何值" + photo_base64);
-		        return 0;  // 沒有任何更新，返回0
+		        return 0;  
 		    }
 		 
 
@@ -277,5 +278,28 @@ public class MemberDaoImpl implements MemberDao {
 		        e.printStackTrace();
 		    }
 		    return -1;
+		}
+
+		
+		// 查詢大頭照
+		@Override
+		public Member selectimg(String photo_base64) {
+			String sql = "select * from MEMBERS where PHOTO_BASE64 = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, photo_base64);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Member member = new Member();
+						member.setMember_id(rs.getInt("MEMBER_ID"));
+						member.setMember_name(rs.getString("MEMBER_NAME"));
+						member.setEmail(rs.getString("EMAIL"));
+						member.setPhoto_base64(rs.getString("PHOTO_BASE64"));
+						return member;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 }
