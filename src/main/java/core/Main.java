@@ -7,9 +7,9 @@ import javax.naming.NamingException;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.dao.impl.ActivitySearchDaoImpl;
 import web.activity.service.impl.ActivityServiceImpl2;
+import web.activity.vo.Activities;
 import web.activity.vo.Activity;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.IndexActivityCard;
 
 public class Main {
 
@@ -29,8 +29,8 @@ public class Main {
 //		}
 		
 		ActivityServiceImpl2 as2 = new ActivityServiceImpl2();
-		List<IndexActivityCard> cards = as2.searchActivityByFilter("健行", "all", "all");
-		for(IndexActivityCard card : cards) {
+		List<Activities> cards = as2.searchActivityByFilter("健行", "all", "all");
+		for(Activities card : cards) {
 			System.out.println(card.getActivityName());
 		}
 		
