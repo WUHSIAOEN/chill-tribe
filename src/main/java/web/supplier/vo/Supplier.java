@@ -7,21 +7,24 @@ import core.util.Core;
 // 供應商VO
 public class Supplier extends Core {
 
+	// 供應商五寶
 	private Integer supplier_id;
 	private String supplier_name;
+	private String email;
+	private String password;
+	private String cPassword;
+	// 供應商基本資料
 	private String contact_person;
 	private String phone;
-	private String email;
 	private String address;
 	private String about;
 	private String image;
 	private String id_number;
-	private String password;
-	private String cPassword;
 	private String creator;
+	// 年薪1000萬工程師查日期用
 	private Timestamp registration_date;
-	private String updater;
 	private Timestamp lastUpdatedDate;
+	private String updater;
 
 	public Integer getSupplier_id() {
 		return supplier_id;

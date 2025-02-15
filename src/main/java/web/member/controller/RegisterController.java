@@ -17,7 +17,7 @@ import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
-// 註冊
+// 一般會員註冊
 @WebServlet("/member/register")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
