@@ -37,7 +37,7 @@ public class UpdateActivityController extends HttpServlet {
 	}
 
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String idParam = req.getParameter("id");
 		
@@ -47,11 +47,11 @@ public class UpdateActivityController extends HttpServlet {
 		
 		try {
 			if (idParam != null) {
-				Integer id = Integer.parseInt(idParam);
-				Activity updatedActivity = gson.fromJson(req.getReader(), Activity.class);
+				// Integer id = Integer.parseInt(idParam);
+				Activity activity = gson.fromJson(req.getReader(), Activity.class);
 				// updatedActivity = service.update(updatedActivity);
 				resp.setContentType("application/json");
-	            resp.getWriter().write(gson.toJson(updatedActivity));
+	            resp.getWriter().write(gson.toJson(activity));
 			} else {
 				JsonObject respBody = new JsonObject();
 	    		respBody.addProperty("errMsg", "沒有ID");

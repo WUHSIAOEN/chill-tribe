@@ -218,42 +218,44 @@
             <th>狀態</th>
           </tr>
           </thead>
-          <tbody>
-          <tr>
-            <td>#0001</td>
-            <td>大安森林公園野餐</td>
-            <td>2025/01/01</td>
-            <td>
-              <a href="#"> 
-              <i class="bi bi-pencil-square"></i>
-              </a>
-            </td>
-            <td>已成團</td>
-          </tr>
+          <tbody id="activityTableBody">
 
-          <tr>
-            <td>#0002</td>
-            <td>躲避球</td>
-            <td>2025/01/02</td>
-            <td>
-              <a href="#"> 
-              <i class="bi bi-pencil-square"></i>
-              </a>
-            </td>
-            <td>待成團</td>
-          </tr>
+            <tr>
+              <td>#0001</td>
+              <td>大安森林公園野餐</td>
+              <td>2025/01/01</td>
+              <td>
+                <a href="#"> 
+                <i class="bi bi-pencil-square"></i>
+                </a>
+              </td>
+              <td>已成團</td>
+            </tr>
 
-          <tr>
-            <td>#0003</td>
-            <td>鬼抓人</td>
-            <td>2025/01/03</td>
-            <td>
-              <a href="#"> 
-              <i class="bi bi-pencil-square"></i>
-              </a>
-            </td>
-            <td>已成團</td>
-          </tr>
+            <tr>
+              <td>#0002</td>
+              <td>躲避球</td>
+              <td>2025/01/02</td>
+              <td>
+                <a href="#"> 
+                <i class="bi bi-pencil-square"></i>
+                </a>
+              </td>
+              <td>待成團</td>
+            </tr>
+
+            <tr>
+              <td>#0003</td>
+              <td>鬼抓人</td>
+              <td>2025/01/03</td>
+              <td>
+                <a href="#"> 
+                <i class="bi bi-pencil-square"></i>
+                </a>
+              </td>
+              <td>已成團</td>
+            </tr> 
+
           </tbody>
           <tfoot>
           </tfoot>
@@ -321,7 +323,7 @@
 <!-- <script src="../dist/js/demo-ernie.js"></script> -->
 <script src="./js/demo-ernie.js"></script>
 <!-- Page specific script -->
-<script>
+<!-- <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -336,10 +338,164 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
+  }); -->
 </script>
 <!-- import index.js -->
 <!-- <script src="../dist/js/supplierIndex.js"></script> -->
 <script src="./js/supplierIndex.js"></script>
+
+$(function () {
+    // 初始化 DataTable
+    var table = $("#example2").DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+
+    fetchAllActivity(table); // 傳遞 DataTable 實例
+
+  });
+  function fetchAllActivity() {
+    
+    let tbody = document.getElementById("activityTableBody");
+
+    fetch("/chill-tribe/activity/findAll")
+    .then(response => response.json())
+    .then(
+      data => {
+        // console.log("從 Servlet 獲取的數據:", data);
+        // 若沒有活動
+
+        if (data.length === 0) {
+          let tr = document.createElement("tr");
+          
+          tr.innerHTML = `
+          <td colspan="5" style="text-align: center; color: gray;">
+            目前還沒有活動，趕快創建一個吧！
+          </td>
+          `;
+          tbody.appendChild(tr);
+          return;
+        };
+    
+        data.forEach(activity => {
+        let tr = document.createElement("tr");
+        let statusText = "";
+
+        switch(activity.status) {
+          case 0:
+            statusText = "已取消";
+            break;
+          case 1:
+            statusText = "已成團";
+            break;
+          case 2:
+            statusText = "待成團";
+            break;
+          default:
+            statusText = "錯誤狀態";
+        };
+
+        tr.innerHTML = `
+          <td>#${String(activity.activityId).padStart(4, '0')}</td>
+            <td>${activity.activityName}</td>
+            <td>${activity.startDateTime}</td>
+            <td>
+              <a href="#"> 
+                <i class="bi bi-pencil-square"></i>
+              </a>
+            </td>
+          <td>${statusText}</td>
+        `;
+        table.row.add($(tr));
+        });
+      }
+      table.draw()
+      )
+    .catch(error => console.error("發生錯誤:", error));
+  }
+
+  // fetchAllActivity();
+  
+</script> -->
+
+<script>
+  $(function () {
+    var table = $("#example2").DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+
+    fetchAllActivity(table); // 傳遞 DataTable 實例
+  });
+
+  // 動態抓取資料並加入 DataTable
+  function fetchAllActivity(table) {
+    fetch("/chill-tribe/activity/findAll")
+    .then(response => response.json())
+    .then(data => {
+      console.log("從 Servlet 獲取的數據:", data);
+
+      table.clear();
+
+      // 若沒有活動
+      if (data.length === 0) {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td colspan="5" style="text-align: center; color: gray;">
+            目前還沒有活動，趕快創建一個吧！
+          </td>
+        `;
+        table.row.add($(tr));
+      } else {
+        data.forEach(activity => {
+          let statusText = "";
+
+          switch(activity.status) {
+            case 0:
+              statusText = "已取消";
+              break;
+            case 1:
+              statusText = "已成團";
+              break;
+            case 2:
+              statusText = "待成團";
+              break;
+            default:
+              statusText = "錯誤狀態";
+          }
+
+          let tr = `
+            <tr>
+              <td>#${String(activity.activityId).padStart(4, '0')}</td>
+              <td>${activity.activityName}</td>
+              <td>${activity.startDateTime}</td>
+              <td>
+                <a href="#"> 
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+              </td>
+              <td>${statusText}</td>
+            </tr>
+          `;
+          
+          table.row.add($(tr));
+        });
+      }
+
+      table.draw();
+    })
+    .catch(error => console.error("發生錯誤:", error));
+  }
+</script>
 </body>
 </html>
