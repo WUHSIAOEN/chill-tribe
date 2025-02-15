@@ -155,7 +155,7 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
 				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
-				activity.setApproved(rs.getBoolean("approved"));
+				activity.setApproved(rs.getInt("approved"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
 				list.add(activity);
@@ -272,7 +272,7 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
 				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
-				activity.setApproved(rs.getBoolean("approved"));
+				activity.setApproved(rs.getInt("approved"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
 				list.add(activity);
