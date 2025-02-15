@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 //import web.test.member.dao.impl.MemberDaoImpl;
 import web.member.vo.Member;
 
-// 查詢
+// 一般會員查詢
 @WebServlet("/member/find")
 public class FindController extends HttpServlet{
 	private static final long serialVersionUID = 1L;

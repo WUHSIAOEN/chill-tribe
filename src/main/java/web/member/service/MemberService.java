@@ -15,4 +15,7 @@ public interface MemberService {
 	List<Member> findAll();
 	
 	boolean removeById(Integer id);
+	
+	Member updateimg(Member member);
+	
 }
