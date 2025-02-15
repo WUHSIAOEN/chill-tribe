@@ -282,8 +282,10 @@
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
 				console.log("恭喜，個資修改成功囉！！！");
+				alert('個資修改成功囉！');
 			 }else {
 				 console.log("OH~NO...您個資修改失敗了！！！");
+				 alert('OH~不，個資修改失敗...');
 			 }
 		 });
 	});
