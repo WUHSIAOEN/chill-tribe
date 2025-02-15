@@ -21,6 +21,6 @@ public interface ActivitySearchDao {
 	List<ActivityImage> selectActivityImageById(Integer activityId);
 	
 	// 活動首頁三種條件查詢
-	List<IndexActivityCard> selectByNameCatgoryRegion(String actname, String catgory, String region);
+	List<Activities> selectByNameCatgoryRegion(String actname, String catgory, String region);
 	
 }
