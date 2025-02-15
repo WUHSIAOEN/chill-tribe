@@ -153,7 +153,7 @@
 	</div>
 </div>
 
-<input type="hidden" id="member_id" value="">
+<input type="hidden" id="img_member_id" value="">
 
 <script>
 
@@ -166,6 +166,8 @@
 		.then(member => {
 			console.log(member);
 			member_id.value = member.member_id;
+			debugger;
+			img_member_id.value = member.member_id;
 			if (member.photo_base64 == null) {
 				photo_base64.src = 'https://placehold.co/500x500';
 				console.log("照片是空的");
@@ -182,7 +184,7 @@
 // 			member_img.src = 'data:image/png;base64,' + 'base64Image';
 //             photo_base64.src = `data:image/png;base64, ${photo_base64.value} `;
 	
-    // 預覽圖片並轉成Base64
+    // 預覽圖片&轉成Base64的值
     function previewImage(event) {
         const file = event.target.files[0];
         
@@ -190,7 +192,7 @@
         const reader = new FileReader();
         
         reader.onloadend = function () {
-            // Base64圖片去掉Base64前綴部分
+            // Base64圖片去掉Base64前綴字
             const base64Image = reader.result.split(',')[1]; 
                         
             // 將Base64圖片傳後端
@@ -203,26 +205,34 @@
 
     // Base64值傳到後端
     function sendImageToServer(base64Image) {
-        
-        const member_id = document.querySelector('#member_id');
 
+        debugger;
+        const img_member_id = document.querySelector('#img_member_id');
+//         const member_id = document.getElementById('member_id');
+        console.log(img_member_id.value);
+        
         fetch('memberimg', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-            	member_id: member_id.value,
+            	member_id: img_member_id.value,
                 photo_base64: base64Image
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('圖片上傳成功囉:', data);
-        })
-        .catch(error => {
-            console.error('OH~NO上傳失敗:', error);
-        });
+        
+        .then(resp => {
+        	debugger;
+			 return resp.json();
+		 })
+		 .then(body => {
+			 const { successful, errMsg } = body;
+		 	 alert(successful ? '圖片上傳成功囉' : errMsg);
+		 	 // to do list 按下上傳照片後要可以馬上更換新的照片
+			// 	console.log(base64Image);
+		 	photo_base64.src = 'data:image/png;base64,' + base64Image;
+		 })
     }
 </script>
 
