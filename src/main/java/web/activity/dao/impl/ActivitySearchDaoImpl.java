@@ -16,11 +16,15 @@ import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import core.vo.City;
+import core.vo.District;
 import web.activity.dao.ActivitySearchDao;
+import web.activity.vo.Activities;
 import web.activity.vo.Activity2;
 //import web.activity.vo.ActivityImage;
 import web.activity.vo.ActivityImage;
 import web.activity.vo.IndexActivityCard;
+import web.supplier.vo.Supplier;
 
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
 //	private DataSource ds;
@@ -117,7 +121,7 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	}
 
 	@Override
-	public List<IndexActivityCard> selectActivityOrderByStart() {
+	public List<Activities> selectActivityOrderByStart() {
 		String sql = "SELECT activity_id, activity_name, act.supplier_id, supplier_name, act.city_id, city_name, act.district_id, district_name, act.address, unit_price, min_participants, max_participants, category, start_date_time, end_date_time, status, approved, inventory_count, create_time"
 				+ " FROM activities AS act" + " JOIN suppliers AS spl" + " ON act.supplier_id = spl.supplier_id"
 				+ " JOIN cities AS ct" + " ON act.city_id = ct.city_id" + " JOIN districts AS dstx"
@@ -128,29 +132,35 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery();) {
 
-			List<IndexActivityCard> list = new ArrayList<>();
+			List<Activities> list = new ArrayList<>();
 			while (rs.next()) {
-				IndexActivityCard indexActivityCard = new IndexActivityCard();
-				indexActivityCard.setActivityId(rs.getInt("activity_id"));
-				indexActivityCard.setActivityName(rs.getString("activity_name"));
-				indexActivityCard.setSupplierId(rs.getInt("supplier_id"));
-				indexActivityCard.setSupplierName(rs.getString("supplier_name"));
-				indexActivityCard.setCityId(rs.getInt("city_id"));
-				indexActivityCard.setCityName(rs.getString("city_name"));
-				indexActivityCard.setDistrictId(rs.getInt("district_id"));
-				indexActivityCard.setDistrictName(rs.getString("district_name"));
-				indexActivityCard.setAddress(rs.getString("address"));
-				indexActivityCard.setUnitPrice(rs.getInt("unit_price"));
-				indexActivityCard.setMinParticipants(rs.getInt("min_participants"));
-				indexActivityCard.setMaxParticipants(rs.getInt("max_participants"));
-				indexActivityCard.setCategory(rs.getString("category"));
-				indexActivityCard.setStartDateTime(rs.getTimestamp("start_date_time"));
-				indexActivityCard.setEndDateTime(rs.getTimestamp("end_date_time"));
-				indexActivityCard.setStatus(rs.getInt("status"));
-				indexActivityCard.setApproved(rs.getBoolean("approved"));
-				indexActivityCard.setInventoryCount(rs.getInt("inventory_count"));
-				indexActivityCard.setCreateTime(rs.getTimestamp("create_time"));
-				list.add(indexActivityCard);
+				Activities activity = new Activities();
+				Supplier supplier = new Supplier();
+				City city = new City();
+				District district = new District();
+				activity.setActivityId(rs.getInt("activity_id"));
+				activity.setActivityName(rs.getString("activity_name"));
+				supplier.setSupplier_id(rs.getInt("supplier_id"));
+				supplier.setSupplier_name(rs.getString("supplier_name"));
+				activity.setSupplier(supplier);
+				city.setCityId(rs.getInt("city_id"));
+				city.setCityName(rs.getString("city_name"));
+				activity.setCity(city);
+				district.setDistrictId(rs.getInt("district_id"));
+				district.setDistricName(rs.getString("district_name"));
+				activity.setDistrict(district);
+				activity.setAddress(rs.getString("address"));
+				activity.setUnitPrice(rs.getInt("unit_price"));
+				activity.setMinParticipants(rs.getInt("min_participants"));
+				activity.setMaxParticipants(rs.getInt("max_participants"));
+				activity.setCategory(rs.getString("category"));
+				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
+				activity.setStatus(rs.getInt("status"));
+				activity.setApproved(rs.getBoolean("approved"));
+				activity.setInventoryCount(rs.getInt("inventory_count"));
+				activity.setCreateTime(rs.getTimestamp("create_time"));
+				list.add(activity);
 //				System.out.println(list);
 			}
 			return list;
