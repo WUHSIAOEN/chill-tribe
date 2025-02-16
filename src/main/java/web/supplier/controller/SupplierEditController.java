@@ -16,7 +16,7 @@ import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
 import web.supplier.vo.Supplier;
 
-// 修改
+// 供應商修改
 @WebServlet("/supplier/supplieredit")
 public class SupplierEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

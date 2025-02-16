@@ -7,17 +7,24 @@ import core.util.Core;
 // 供應商VO
 public class Supplier extends Core {
 
+	// 供應商五寶
 	private Integer supplier_id;
 	private String supplier_name;
-	private String phone;
 	private String email;
-	private String id_number;
 	private String password;
 	private String cPassword;
+	// 供應商基本資料
+	private String contact_person;
+	private String phone;
+	private String address;
+	private String about;
+	private String image;
+	private String id_number;
 	private String creator;
+	// 年薪1000萬工程師查日期用
 	private Timestamp registration_date;
-	private String updater;
 	private Timestamp lastUpdatedDate;
+	private String updater;
 
 	public Integer getSupplier_id() {
 		return supplier_id;
@@ -105,6 +112,38 @@ public class Supplier extends Core {
 
 	public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
+	}
+
+	public String getContact_person() {
+		return contact_person;
+	}
+
+	public void setContact_person(String contact_person) {
+		this.contact_person = contact_person;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 //import web.test.member.dao.impl.MemberDaoImpl;
 import web.supplier.vo.Supplier;
 
-// 查詢
+// 供應商查詢
 @WebServlet("/supplier/supplierfind")
 public class SupplierFindController extends HttpServlet{
 	private static final long serialVersionUID = 1L;

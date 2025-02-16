@@ -233,6 +233,7 @@
 			date_of_birth.value = member.date_of_birth;
 			gender.value = member.gender;
 			member_id.value = member.member_id;
+			photo_base64.value = member.photo_base64;
 			
 		});
 
@@ -282,8 +283,10 @@
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
 				console.log("恭喜，個資修改成功囉！！！");
+				alert('個資修改成功囉！');
 			 }else {
 				 console.log("OH~NO...您個資修改失敗了！！！");
+				 alert('OH~不，個資修改失敗...');
 			 }
 		 });
 	});
