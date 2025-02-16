@@ -138,6 +138,7 @@ public class MemberDaoImpl implements MemberDao {
 					member.setDate_of_birth(rs.getDate("DATE_OF_BIRTH"));
 					member.setGender(rs.getString("GENDER"));
 					member.setId_card(rs.getString("ID_CARD"));
+					member.setPhoto_base64(rs.getString("PHOTO_BASE64"));
 					return member;
 				}
 			}
@@ -205,6 +206,7 @@ public class MemberDaoImpl implements MemberDao {
 						member.setPhone(rs.getString("PHONE"));
 						member.setEmail(rs.getString("EMAIL"));
 						member.setPassword(rs.getString("PASSWORD"));
+						member.setPhoto_base64(rs.getString("PHOTO_BASE64"));
 						return member;
 					}
 				}
@@ -228,6 +230,70 @@ public class MemberDaoImpl implements MemberDao {
 						member.setPhone(rs.getString("PHONE"));
 						member.setEmail(rs.getString("EMAIL"));
 						member.setPassword(rs.getString("PASSWORD"));
+						return member;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		// 大頭照
+		@Override
+		public int updateimg(Member member) {
+			int offset = 1;  
+		    StringBuilder sql = new StringBuilder("UPDATE MEMBERS SET ");
+		    String photo_base64 = member.getPhoto_base64();
+		    
+		    boolean hasPhoto_base64 = photo_base64 != null && !photo_base64.isEmpty();
+		    
+		    if (hasPhoto_base64) {
+		        sql.append("PHOTO_BASE64 = ? ");
+		    }
+		    
+		    
+		 // 如果沒有任何欄位需要更新，直接返回0
+		    if (sql.toString().equals("UPDATE MEMBERS SET ")) {
+		    	System.out.println("沒有任何值" + photo_base64);
+		        return 0;  
+		    }
+		 
+
+		    // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+		    sql.append("WHERE MEMBER_ID = ?");
+
+		    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+		        if (hasPhoto_base64) {
+		            pstmt.setString(offset++, member.getPhoto_base64());
+		            System.out.println("要回傳" + photo_base64);
+		        }
+		        
+		       
+		        // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+		        pstmt.setInt(offset, member.getMember_id());
+		        
+		        return pstmt.executeUpdate();
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return -1;
+		}
+
+		
+		// 查詢大頭照
+		@Override
+		public Member selectimg(String photo_base64) {
+			String sql = "select * from MEMBERS where PHOTO_BASE64 = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, photo_base64);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Member member = new Member();
+						member.setMember_id(rs.getInt("MEMBER_ID"));
+						member.setMember_name(rs.getString("MEMBER_NAME"));
+						member.setEmail(rs.getString("EMAIL"));
+						member.setPhoto_base64(rs.getString("PHOTO_BASE64"));
 						return member;
 					}
 				}

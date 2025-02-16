@@ -7,9 +7,13 @@ import javax.naming.NamingException;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.dao.impl.ActivitySearchDaoImpl;
 import web.activity.service.impl.ActivityServiceImpl2;
+import web.activity.vo.Activities;
 import web.activity.vo.Activity;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.IndexActivityCard;
+import web.order.dao.OrderDao;
+import web.order.dao.impl.OrderDaoImpl;
+import web.order.vo.Order;
+import web.order.vo.Orders;
 
 public class Main {
 
@@ -28,11 +32,21 @@ public class Main {
 //			System.out.println(indexActivityCard.getActivityName());
 //		}
 		
-		ActivityServiceImpl2 as2 = new ActivityServiceImpl2();
-		List<IndexActivityCard> cards = as2.searchActivityByFilter("健行", "all", "all");
-		for(IndexActivityCard card : cards) {
-			System.out.println(card.getActivityName());
-		}
+//		ActivityServiceImpl2 as2 = new ActivityServiceImpl2();
+//		List<Activities> cards = as2.searchActivityByFilter("健行", "all", "all");
+//		for(Activities card : cards) {
+//			System.out.println(card.getActivityName());
+//		}
+		
+		OrderDao Od = new OrderDaoImpl();
+		Orders order = new Orders();
+		order.setActivityId(1);
+		order.setMemberId(2);
+		order.setQuantity(2);
+		order.setOrderStatus("no_payment_required");
+		order.setPaymentMethod("none");
+		Od.insert(order);
+		
 		
 	}	
 }

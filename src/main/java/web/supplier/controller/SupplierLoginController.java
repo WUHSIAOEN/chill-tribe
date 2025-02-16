@@ -15,7 +15,7 @@ import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
 import web.supplier.vo.Supplier;
 
-
+// 供應商登入
 @WebServlet("/supplier/supplierlogin")
 public class SupplierLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

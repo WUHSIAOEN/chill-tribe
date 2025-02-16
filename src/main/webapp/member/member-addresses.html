@@ -82,7 +82,9 @@
 							<div class="form-submit"
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<h4 style="margin: 0;">我的地址</h4>
-								<button class="btn btn-primary rounded px-3" type="button">新增地址</button>
+								<a href="./member-add-address.html">
+								<button class="btn btn-primary rounded px-3" type="button" id="add_addresses">新增地址</button>
+								</a>
 							</div>
 
 
@@ -236,6 +238,13 @@
 				$("#showing").slideToggle("slow");
 			});
 		});
+	</script>
+	
+	<script>
+	$("#add_addresses").on("click", function() {
+	console.log("新增地址按鈕觸發");
+		});
+	
 	</script>
 
 </body>

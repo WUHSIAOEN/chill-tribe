@@ -16,12 +16,12 @@ import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
 
-// 一般會員修改
-@WebServlet("/member/memberedit")
-public class EditController extends HttpServlet {
+// 一般會員大頭照
+@WebServlet("/member/memberimg")
+public class FileImgController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService service;
-	
+
 	@Override
 	public void init() throws ServletException {
 		 try {
@@ -40,7 +40,7 @@ public class EditController extends HttpServlet {
 		
 		Member member = gson.fromJson(req.getReader(), Member.class);
 		
-		member = service.edit(member);
+		member = service.updateimg(member);
 		
 		member.setcPassword(null);
 		resp.setContentType("application/json");

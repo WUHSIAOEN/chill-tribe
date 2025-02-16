@@ -16,6 +16,7 @@ import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
 import web.supplier.vo.Supplier;
 
+// 供應商註冊
 @WebServlet("/supplier/register")
 public class SupplierRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

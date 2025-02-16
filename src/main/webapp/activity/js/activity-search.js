@@ -21,7 +21,7 @@ $(function () {
     });
 
     let urlParams = new URLSearchParams(window.location.search);
-    // console.log(urlParams.toString());
+    console.log(urlParams.toString());
 
     fetch(`SearchActivities?${urlParams.toString()}`)
         .then(resp => {
@@ -35,8 +35,12 @@ $(function () {
         .then(activityCards => {
             $("#search-activities").empty();
             const [firstActivityCard, ...restActivityCards] = activityCards;
+            // console.log(activityCards.forEach(activityCard => {activityCard.activityImages[0]}))
+
+            let no_image_base64 = "data:image/jpeg;base64,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";
+
             activityCards.forEach(activityCard => {
-                console.log(activityCard.activityName);
+                // console.log(activityCard.activityImages[0].imageName);
 
                 let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -82,15 +86,15 @@ $(function () {
                                 </div>
                                 <!-- 活動圖片放這裡 -->
                                 <div class="list-img-slide">
-                                    <div class="clior">
+                                    <div class="clior" id="imageContainer">
                                         <div><a href="#"><img
-                                                    src="${activityCard.imageBase64[0]}"
+                                                    src="${activityCard?.activityImages?.[0]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                     class="img-fluid mx-auto" alt="" /></a></div>
                                         <div><a href="#"><img
-                                                    src="${activityCard.imageBase64[1]}"
+                                                    src="${activityCard?.activityImages?.[1]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                     class="img-fluid mx-auto" alt="" /></a></div>
                                         <div><a href="#"><img
-                                                    src="${activityCard.imageBase64[2]}"
+                                                    src="${activityCard?.activityImages?.[2]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                     class="img-fluid mx-auto" alt="" /></a></div>
                                     </div>
                                 </div>
@@ -119,10 +123,10 @@ $(function () {
                                 <div class="price-features-wrapper">
                                     <div class="list-fx-features d-flex align-items-center justify-content-between">
                                         <div class="listing-card d-flex align-items-center">
-                                            <div class="square--30 text-muted-2 fs-sm circle gray-simple me-2"><i class="fa-solid fa-building-shield fs-sm"></i></div><span class="text-muted-2">${activityCard.cityName}</span>
+                                            <div class="square--30 text-muted-2 fs-sm circle gray-simple me-2"><i class="fa-solid fa-building-shield fs-sm"></i></div><span class="text-muted-2">${activityCard.city.cityName}</span>
                                         </div>
                                         <div class="listing-card d-flex align-items-center">
-                                            <div class="square--30 text-muted-2 fs-sm circle gray-simple me-2"><i class="fa-solid fa-bed fs-sm"></i></div><span class="text-muted-2">${activityCard.supplierName}</span>
+                                            <div class="square--30 text-muted-2 fs-sm circle gray-simple me-2"><i class="fa-solid fa-bed fs-sm"></i></div><span class="text-muted-2">${activityCard.supplier.supplier_name}</span>
                                         </div>
                                         <div class="listing-card d-flex align-items-center">
                                             <div class="square--30 text-muted-2 fs-sm circle gray-simple me-2"><i class="fa-solid fa-clone fs-sm"></i></div><span class="text-muted-2">1800 SQFT</span>
@@ -156,6 +160,9 @@ $(function () {
                 `;
 
                 $("#search-activities").append(activity_card_html);
+
+
+                
             });
         })
         .catch(({ message }) => console.log(message));

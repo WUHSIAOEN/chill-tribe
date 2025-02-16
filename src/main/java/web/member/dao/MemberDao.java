@@ -22,4 +22,8 @@ public interface MemberDao {
 	List<Member> selectAll();
 	
 	Integer deletById(Integer id);
+	
+	int updateimg(Member member);
+	
+	Member selectimg(String photo_base64);
 }
