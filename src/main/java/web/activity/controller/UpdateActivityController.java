@@ -1,5 +1,6 @@
 package web.activity.controller;
 
+import java.io.IOException;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -20,45 +21,30 @@ import web.member.vo.Member;
 @WebServlet("/activity/updateActivity")
 public class UpdateActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 //	呼叫　Service 以便使用它的方法
 	private ActivityService service;
-	
+
 	@Override
 	public void init() throws ServletException {
-	    System.out.println("Initializing UpdateActivityController...");
-	    try {
-	        service = new ActivityServiceImpl(); // 初始化 service
-	        System.out.println("Service initialized successfully: " + service);
-	    } catch (NamingException e) {
-	        e.printStackTrace();
-	        throw new ServletException("Service initialization failed", e);
-	    }
+		System.out.println("Initializing UpdateActivityController...");
+		try {
+			service = new ActivityServiceImpl(); // 初始化 service
+			System.out.println("Service initialized successfully: " + service);
+		} catch (NamingException e) {
+			e.printStackTrace();
+			throw new ServletException("Service initialization failed", e);
+		}
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-		
-		String idParam = req.getParameter("id");
-		
-		Gson gson = new GsonBuilder()
-	            .setDateFormat("yyyy/MM/dd HH:mm:ss")
-	            .create();
-		
-		try {
-			if (idParam != null) {
-				// Integer id = Integer.parseInt(idParam);
-				Activity activity = gson.fromJson(req.getReader(), Activity.class);
-				// updatedActivity = service.update(updatedActivity);
-				resp.setContentType("application/json");
-	            resp.getWriter().write(gson.toJson(activity));
-			} else {
-				JsonObject respBody = new JsonObject();
-	    		respBody.addProperty("errMsg", "沒有ID");
-	            resp.getWriter().write(gson.toJson(respBody));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
+
+		Activity updatedActivity = gson.fromJson(req.getReader(), Activity.class);
+		service.update(updatedActivity);
+
+
 	}
 }

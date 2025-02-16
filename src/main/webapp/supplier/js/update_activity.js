@@ -29,7 +29,7 @@ if (activityId) {
 
 
 // 更新
-function updateActivity(id) {
+function newActivityData() {
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("cityId")?.value) || 1;
@@ -67,7 +67,8 @@ function updateActivity(id) {
   const startDateTime = formatDateTime(startRaw);
   const endDateTime = formatDateTime(endRaw);
 
-  const requestData = {
+  return {
+    activityId,
     // supplierId,
     activityName,
     // cityId,
@@ -83,7 +84,14 @@ function updateActivity(id) {
     category,
     precaution,
     // not required
-  };
+  };  
+}
+
+document
+.getElementById("updateBtn")
+.addEventListener("click", function (event) {
+  event.preventDefault();
+  const requestData = newActivityData();
 
   fetch('/chill-tribe/activity/updateActivity', {
     method: "POST",
@@ -92,13 +100,4 @@ function updateActivity(id) {
     },
     body: JSON.stringify(requestData),
   });
-
-  document
-  .getElementById("updateBtn")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    const activityId = getActivityIdFromURL();
-    updateActivity(activityId);
-    }
-  );
-}
+});

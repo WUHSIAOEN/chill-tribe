@@ -22,6 +22,10 @@ public class Member extends Core {
 	private String updater;
 	private String photo_base64;
 	private String creator;
+	// 地址
+	private String address_id;
+	private String city_id;
+	private String district_id;
 	// 年薪500萬工程師查日期用
 	private Timestamp registration_date;
 	private Timestamp lastUpdatedDate;
