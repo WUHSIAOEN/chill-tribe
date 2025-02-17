@@ -12,15 +12,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
-import web.activity.vo.Activity;
 
 public class ActivityDaoImpl implements ActivityDao {
 //	private DataSource ds;
@@ -217,7 +214,7 @@ public class ActivityDaoImpl implements ActivityDao {
 				parameterIndex++;
 			}
 			if (activity.getApproved() != null) {
-				pstmt.setBoolean(parameterIndex, activity.getApproved());
+				pstmt.setInt(parameterIndex, activity.getApproved());
 				parameterIndex++;
 			}
 			if (activity.getCity_id() != null) {
@@ -280,14 +277,14 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 全選活動
 	@Override
-	public List<Activity> selectAllActivity() {
+	public List<Activities> selectAllActivity() {
 		final String SQL = "SELECT * FROM ACTIVITIES";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 			ResultSet rs = pstmt.executeQuery();
 
-			List<Activity> list = new ArrayList<>();
+			List<Activities> list = new ArrayList<>();
 			while (rs.next()) {
-				Activity activity = new Activity();
+				Activities activity = new Activities();
 				activity.setActivityId(rs.getInt("activity_id"));
 				activity.setActivityPrefix(rs.getString("activity_prefix"));
 				activity.setActivityName(rs.getString("activity_name"));
@@ -303,9 +300,9 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
-				activity.setApproved(rs.getBoolean("approved"));
-				activity.setCityId(rs.getInt("city_id"));
-				activity.setDistrictId(rs.getInt("district_id"));
+				activity.setApproved(rs.getInt("approved"));
+				activity.setCity_id(rs.getInt("city_id"));
+				activity.setDistrict_id(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
@@ -325,14 +322,14 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// 只用活動ID搜尋，傳回其他活動內容
 	@Override
-	public Activity selectByActivityId(Integer activityId) {
+	public Activities selectByActivityId(Integer activityId) {
 		final String SQL = "SELECT * FROM ACTIVITIES WHERE ACTIVITY_ID = ?";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL);) {
 			pstmt.setInt(1, activityId);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				Activity activity = new Activity();
+				Activities activity = new Activities();
 				activity.setActivityId(rs.getInt("activity_id"));
 				activity.setActivityPrefix(rs.getString("activity_prefix"));
 				activity.setActivityName(rs.getString("activity_name"));
@@ -348,9 +345,9 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
-				activity.setApproved(rs.getBoolean("approved"));
-				activity.setCityId(rs.getInt("city_id"));
-				activity.setDistrictId(rs.getInt("district_id"));
+				activity.setApproved(rs.getInt("approved"));
+				activity.setCity_id(rs.getInt("city_id"));
+				activity.setDistrict_id(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));

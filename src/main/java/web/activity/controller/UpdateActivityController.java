@@ -11,12 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
-import web.activity.vo.Activity;
-import web.member.vo.Member;
+import web.activity.vo.Activities;
 
 @WebServlet("/activity/updateActivity")
 public class UpdateActivityController extends HttpServlet {
@@ -42,7 +40,7 @@ public class UpdateActivityController extends HttpServlet {
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
 
-		Activity updatedActivity = gson.fromJson(req.getReader(), Activity.class);
+		Activities updatedActivity = gson.fromJson(req.getReader(), Activities.class);
 		service.update(updatedActivity);
 
 
