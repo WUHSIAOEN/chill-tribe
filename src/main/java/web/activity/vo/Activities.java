@@ -54,6 +54,7 @@ public class Activities extends Core{
 	private Timestamp endDateTime;
 	private Integer status;
 	private String note;
+	private String precaution;
 	private Integer approved;
 	private Integer inventoryCount;
 	private Timestamp inventoryUpdateTime;

@@ -165,52 +165,67 @@ public class ActivityDaoImpl implements ActivityDao {
 	    
 	    int parameterIndex = 1; // 偏移量
 
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlQuery);) {
 
 			if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getActivityName());
+				pstmt.setString(parameterIndex, activity.getActivityName());
+				parameterIndex++;
 			}
 			if (activity.getSupplierId() != null) {
-				pstmt.setInt(parameterIndex++, activity.getSupplierId());
+				pstmt.setInt(parameterIndex, activity.getSupplierId());
+				parameterIndex++;
 			}
 			if (activity.getAddress() != null && !activity.getAddress().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getAddress());
+				pstmt.setString(parameterIndex, activity.getAddress());
+				parameterIndex++;
 			}
 			if (activity.getUnitPrice() != null) {
-				pstmt.setInt(parameterIndex++, activity.getUnitPrice());
+				pstmt.setInt(parameterIndex, activity.getUnitPrice());
+				parameterIndex++;
 			}
 			if (activity.getMinParticipants() != null) {
-				pstmt.setInt(parameterIndex++, activity.getMinParticipants());
+				pstmt.setInt(parameterIndex, activity.getMinParticipants());
+				parameterIndex++;
 			}
 			if (activity.getMaxParticipants() != null) {
-				pstmt.setInt(parameterIndex++, activity.getMaxParticipants());
+				pstmt.setInt(parameterIndex, activity.getMaxParticipants());
+				parameterIndex++;
 			}
 			if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getDescription());
+				pstmt.setString(parameterIndex, activity.getDescription());
+				parameterIndex++;
 			}
 			if (activity.getPrecaution() != null && !activity.getPrecaution().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getPrecaution());
+				pstmt.setString(parameterIndex, activity.getPrecaution());
+				parameterIndex++;
 			}
 			if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getCategory());
+				pstmt.setString(parameterIndex, activity.getCategory());
+				parameterIndex++;
 			}
 			if (activity.getStartDateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getStartDateTime());
+				pstmt.setTimestamp(parameterIndex, activity.getStartDateTime());
+				parameterIndex++;
 			}
 			if (activity.getEndDateTime() != null) {
-				pstmt.setTimestamp(parameterIndex++, activity.getEndDateTime());
+				pstmt.setTimestamp(parameterIndex, activity.getEndDateTime());
+				parameterIndex++;
 			}
 			if (activity.getNote() != null && !activity.getNote().isEmpty()) {
-				pstmt.setString(parameterIndex++, activity.getNote());
+				pstmt.setString(parameterIndex, activity.getNote());
+				parameterIndex++;
 			}
 			if (activity.getApproved() != null) {
 				pstmt.setBoolean(parameterIndex, activity.getApproved());
+				parameterIndex++;
 			}
 			if (activity.getCityId() != null) {
-				pstmt.setInt(parameterIndex++, activity.getCityId());
+				pstmt.setInt(parameterIndex, activity.getCityId());
+				parameterIndex++;
 			}
 			if (activity.getInventoryCount() != null) {
-				pstmt.setInt(parameterIndex++, activity.getInventoryCount());
+				pstmt.setInt(parameterIndex, activity.getInventoryCount());
+				parameterIndex++;
 			}
 //			if (activity.getStatus() != null) {
 //				pstmt.setInt(parameterIndex++, activity.getStatus());
@@ -239,6 +254,7 @@ public class ActivityDaoImpl implements ActivityDao {
 //			}
 
 			pstmt.setInt(parameterIndex, activity.getActivityId());
+			parameterIndex++;
 
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
