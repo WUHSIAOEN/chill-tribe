@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import web.member.vo.Member;
 import web.supplier.dao.SupplierDao;
 import web.supplier.vo.Supplier;
 
@@ -49,6 +50,9 @@ public class SupplierDaoImpl implements SupplierDao {
 					supplier.setPhone(rs.getString("PHONE"));
 					supplier.setEmail(rs.getString("EMAIL"));
 					supplier.setPassword(rs.getString("PASSWORD"));
+					supplier.setAbout(rs.getString("ABOUT"));
+					supplier.setId_number(rs.getString("ID_NUMBER"));
+					supplier.setAddress(rs.getString("ADDRESS"));
 					return supplier;
 				}
 			}
@@ -60,21 +64,88 @@ public class SupplierDaoImpl implements SupplierDao {
 
 	@Override
 	public int update(Supplier supplier) {
-		int offset = 0;
-		StringBuilder sql = new StringBuilder("update SUPPLIERS set ");
-		String password = supplier.getPassword();
-		boolean hasPassword = password != null && !password.isEmpty();
-		if (hasPassword) {
-			sql.append("PASSWORD = ?,");
+		int offset = 1;
+		StringBuilder sql = new StringBuilder("UPDATE SUPPLIERS SET ");
+		String contact_person = supplier.getContact_person();
+		String supplier_name = supplier.getSupplier_name();
+		String id_number = supplier.getId_number();
+		String address = supplier.getAddress();
+		String phone = supplier.getPhone();
+		String email = supplier.getEmail();
+		String about = supplier.getAbout();
+		
+		boolean hasContact_person = contact_person != null && !contact_person.isEmpty();
+		boolean hasSupplier_name = supplier_name != null && !supplier_name.isEmpty();
+		boolean hasId_number = id_number != null && !id_number.isEmpty();
+		boolean hasAddress = address != null && !address.isEmpty();
+		boolean hasPhone = phone != null && !phone.isEmpty();
+		boolean hasEmail = email != null && !email.isEmpty();
+		boolean hasAbout = about != null && !about.isEmpty();
+		
+		if (hasContact_person) {
+			sql.append("CONTACT_PERSON = ?, ");
 		}
-		sql.append("SUPPLIER_NAME = ? ");
+		
+		if (hasSupplier_name) {
+			sql.append("SUPPLIER_NAME = ?, ");
+		}
+		
+		if (hasId_number) {
+			sql.append("ID_NUMBER = ?, ");
+		}
+		
+		if (hasAddress) {
+			sql.append("ADDRESS = ?, ");
+		}
+		
+		if (hasPhone) {
+			sql.append("PHONE = ?, ");
+		}
+		
+		if (hasEmail) {
+			sql.append("EMAIL = ?, ");
+		}
+		
+		if (hasAbout) {
+			sql.append("ABOUT = ?, ");
+		}
+		
+		if (sql.charAt(sql.length() - 2) == ',') {
+	        sql.delete(sql.length() - 2, sql.length());
+	    }
+		
+		sql.append(" WHERE SUPPLIER_ID = ?");
+		
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-			if (hasPassword) {
-				pstmt.setString(1, supplier.getPassword());
-				offset++;
+			if (hasContact_person) {
+				pstmt.setString(offset++, supplier.getContact_person());
+			}
+			
+			if (hasSupplier_name) {
+				pstmt.setString(offset++, supplier.getSupplier_name());
+			}
+			
+			if (hasId_number) {
+				pstmt.setString(offset++, supplier.getId_number());
+			}
+			
+			if (hasAddress) {
+				pstmt.setString(offset++, supplier.getAddress());
+			}
+			
+			if (hasPhone) {
+				pstmt.setString(offset++, supplier.getPhone());
+			}
+			
+			if (hasEmail) {
+				pstmt.setString(offset++, supplier.getEmail());
+			}
+			
+			if (hasAbout) {
+				pstmt.setString(offset++, supplier.getAbout());
 			}
 
-			pstmt.setString(2 + offset, supplier.getSupplier_name());
+			pstmt.setInt(offset, supplier.getSupplier_id());
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,6 +167,11 @@ public class SupplierDaoImpl implements SupplierDao {
 					supplier.setEmail(rs.getString("EMAIL"));
 					supplier.setPassword(rs.getString("PASSWORD"));
 					supplier.setPhone(rs.getString("PHONE"));
+					supplier.setAbout(rs.getString("ABOUT"));
+					supplier.setId_number(rs.getString("ID_NUMBER"));
+					supplier.setAddress(rs.getString("ADDRESS"));
+					supplier.setContact_person(rs.getString("CONTACT_PERSON"));
+					supplier.setImage(rs.getString("IMAGE"));
 					return supplier;
 				}
 			}
@@ -121,6 +197,10 @@ public class SupplierDaoImpl implements SupplierDao {
 				supplier.setPassword(rs.getString("PASSWORD"));
 				supplier.setId_number(rs.getString("ID_NUMBER"));
 				supplier.setPhone(rs.getString("PHONE"));
+				supplier.setAbout(rs.getString("ABOUT"));
+				supplier.setId_number(rs.getString("ID_NUMBER"));
+				supplier.setAddress(rs.getString("ADDRESS"));
+				supplier.setContact_person(rs.getString("CONTACT_PERSON"));
 				list.add(supplier);
 			}
 			return list;
@@ -181,6 +261,70 @@ public class SupplierDaoImpl implements SupplierDao {
 						supplier.setPhone(rs.getString("PHONE"));
 						supplier.setEmail(rs.getString("EMAIL"));
 						supplier.setPassword(rs.getString("PASSWORD"));
+						return supplier;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		
+		// 大頭照
+				@Override
+				public int updateimg(Supplier supplier) {
+					int offset = 1;  
+				    StringBuilder sql = new StringBuilder("UPDATE SUPPLIERS SET ");
+				    String image = supplier.getImage();
+				    
+				    boolean hasImage = image != null && !image.isEmpty();
+				    
+				    if (hasImage) {
+				        sql.append("IMAGE = ? ");
+				    }
+				    
+				    
+				 // 如果沒有任何欄位需要更新，直接返回0
+				    if (sql.toString().equals("UPDATE SUPPLERS SET ")) {
+				    	System.out.println("沒有任何值" + image);
+				        return 0;  
+				    }
+				 
+
+				    // to do list 修改成supplier_id 因為使用supplier_name會導致你如果修改的是supplier_name會抓不到
+				    sql.append("WHERE SUPPLIER_ID = ?");
+
+				    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+				        if (hasImage) {
+				            pstmt.setString(offset++, supplier.getImage());
+				            System.out.println("要回傳" + image);
+				        }
+				        
+				       
+				        // to do list 修改成supplier_id 因為使用supplier_name會導致你如果修改的是supplier_name會抓不到
+				        pstmt.setInt(offset, supplier.getSupplier_id());
+				        
+				        return pstmt.executeUpdate();
+				    } catch (Exception e) {
+				        e.printStackTrace();
+				    }
+				    return -1;
+				}
+		
+
+		@Override
+		public Supplier selectimg(String image) {
+			String sql = "select * from SUPPLIERS where IMAGE = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, image);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Supplier supplier = new Supplier();
+						supplier.setSupplier_id(rs.getInt("SUPPLIER_ID"));
+						supplier.setSupplier_name(rs.getString("SUPPLIER_NAME"));
+						supplier.setEmail(rs.getString("EMAIL"));
+						supplier.setImage(rs.getString("IMAGE"));
 						return supplier;
 					}
 				}

@@ -2,6 +2,7 @@ package web.supplier.dao;
 
 import java.util.List;
 
+import web.member.vo.Member;
 import web.supplier.vo.Supplier;
 
 public interface SupplierDao {
@@ -22,4 +23,8 @@ public interface SupplierDao {
 	List<Supplier> selectAll();
 	
 	Integer deletById(Integer id);
+	
+	int updateimg(Supplier supplier);
+	
+	Supplier selectimg(String image);
 }
