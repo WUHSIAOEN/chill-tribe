@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>供應商個人資料</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -924,7 +924,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary" id="btn_put">發布</button>
+                    <button type="submit" class="btn btn-primary" id="btn_update">更新</button>
                     <button type="button" class="btn btn-secondary btn-spacing" id="btn_close">取消</button>
                 </div>
               </form>
@@ -939,6 +939,9 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+<input type="hidden" id="supplier_id" value="">
+<input type="hidden" id="img_supplier_id" value="">
 
 <!-- jQuery -->
 <script src="../admin/plugins/jquery/jquery.min.js"></script>
@@ -972,9 +975,14 @@
 <script>
   $(document).ready(function() {
     // 當按鈕被點擊，觸發隱藏的 file input 元素
-    $('#imageUploadBtn').on('click', function() {
-      $('#imageUpload').click();
-    });
+//     $('#imageUploadBtn').on('click', function() {
+//       $('#imageUpload').click();
+//     });
+    $('#imageUploadBtn').on('click', function(){
+        console.log("上傳圖片按鈕觸發");
+        $('#imageUpload').click();
+        console.log("imageUpload觸發");
+        });
 
     // 當用戶選擇文件時，顯示預覽圖片
     $('#imageUpload').on('change', function(event) {
@@ -987,6 +995,10 @@
 
         reader.onload = function(e) {
           previewContainer.html('<img src="' + e.target.result + '" alt="預覽圖片" style="width: 100%; height: 100%; object-fit: contain;" />');
+          const image = reader.result.split(',')[1]; 
+          
+          // 將Base64圖片傳後端
+          sendImageToServer(image);
         };
 
         reader.readAsDataURL(file);
@@ -998,81 +1010,112 @@
 </script>
 
 <script>
-	const username = document.querySelector('#supplier_name');
-	const phone = document.querySelector('#phone');
-	const email = document.querySelector('#email');
-	const contact_person = document.querySelector('contact_person');
-// 	const msg = document.querySelector('#msg');
+  const username = document.querySelector('#supplier_name');
+  const phone = document.querySelector('#phone');
+  const email = document.querySelector('#email');
+  const contact_person = document.querySelector('#contact_person');
+  const id_number = document.querySelector('#id_number');
+  const address = document.querySelector('#address');
+  const about = document.querySelector('#about');
+  const supplier_id = document.querySelector('#supplier_id');
 
-	fetch('supplierfind')
-		.then(resp => resp.json())
-		.then(supplier => {
-			console.log(supplier);
-			username.value = supplier.supplier_name;
-			email.value = supplier.email;
-			phone.value = supplier.phone;
-			id_number.value = supplier.id_number;
-			contact_person.value = supplier.contact_person;
-			address.value = supplier.address;
-			about.value = supplier.about;
-			
-		});
+  fetch('supplierfind')
+    .then(resp => resp.json())
+    .then(supplier => {
+      console.log(supplier);
+      username.value = supplier.supplier_name;
+      email.value = supplier.email;
+      phone.value = supplier.phone;
+      id_number.value = supplier.id_number;
+      contact_person.value = supplier.contact_person;
+      address.value = supplier.address;
+      about.value = supplier.about;
+      supplier_id.value = supplier.supplier_id;
+      img_supplier_id.value = supplier.supplier_id
 
-// 	document.querySelector('#logoutBtn').addEventListener('click', () => {
-// 		if (confirm('是否登出?')) {
-// 			fetch('logout')
-// 				.then(resp => resp.json())
-// 				.then(body => {
-// 					if (body.successful) {
-// 						location.href = 'login.html';
-// 					}
-// 				});
-// 		}
-// 	});
+      const imagePlaceholder = document.getElementById('imagePlaceholder');
+      if (supplier.image != null) {
+        imagePlaceholder.innerHTML = '<img src="data:image/png;base64,' + supplier.image + '" alt="供應商圖片" style="width: 100%; height: 100%; object-fit: contain;" />';
+		console.log("資料庫有照片");
+        } else {
+        imagePlaceholder.innerHTML = '<span style="color: #999;">未選擇圖片</span>';
+        console.log("資料庫沒有照片");
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error); // 增加錯誤處理，便於除錯
+    });
 
-// 	document.querySelector('#editBtn').addEventListener('click', () => {
-// 		console.log("綁定editBtn成功");
-// 		let len = password.value.length
-// 		if (len !== 0 && (len < 6 || len >12)) {
-// 			alert('密碼長度須介於6 ~ 12');
-// 			return;
-// 		}
+  function sendImageToServer(image) {
+
+      const img_supplier_id = document.querySelector('#img_supplier_id');
+      console.log(img_supplier_id.value);
+
+  
+  fetch('supplierimg', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      	supplier_id: img_supplier_id.value,
+          image: image
+      })
+  })
+  
+  .then(resp => {
+		 return resp.json();
+	 })
+	 .then(body => {
+		 const { successful, errMsg } = body;
+	 	 alert(successful ? '圖片上傳成功囉' : errMsg);
+	 	 // to do list 按下上傳照片後要可以馬上更換新的照片
+			console.log(image);
+// 	 	photo_base64.src = 'data:image/png;base64,' + image;
+	 });
+   }
+
+
+//   document.querySelector('#btn_update').addEventListener('click', () => {
 		
-// 		if (len !== 0 && password.value !== cPassword.value) {
-// 			alert('密碼與確認密碼不同');
-// 			return;
-// 		}
-		
-// 		fetch('memberedit', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json'
-// 			},
-// 			body: JSON.stringify({
-// 				member_name: username.value,
-// 				phone: phone.value,
-// 				date_of_birth: date_of_birth.value,
-// 				gender: gender.value
-// 			})
-// 		})
+
+		$('#btn_update').on("click", function(){
+			console.log("觸發更新按鈕囉！");
+			event.preventDefault();
+		fetch('supplieredit', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				contact_person: contact_person.value,
+				supplier_name: username.value,
+				id_number: id_number.value,
+				address: address.value,
+				phone: phone.value,
+				email: email.value,
+				about: about.value,
+				supplier_id: supplier_id.value
+			})
+		})
 		// console.log(resp)
-// 		 .then(resp => {
-// 			 return resp.json();
-// 		 })
-// 		 .then(body => {
-// // 			 msg.textContent = '';
-// 			 const { successful, errMsg } = body;
-// 			 if (body.successful) {
-// 				msg.textContent = `
-// 				   ${body.username}
-// 				`;
-// 			 }else {
-// 				msg.textContent = '修改失敗!';
-// 			 }
-// 		 });
-// 	});
+		 .then(resp => {
+			 return resp.json();
+		 })
+		 .then(body => {
+			 const { successful, errMsg } = body;
+			 if (body.successful) {
+				console.log("恭喜，個資修改成功囉！！！");
+				alert('個資修改成功囉！');
+			 }else {
+				 console.log("OH~NO...您個資修改失敗了！！！");
+				 alert('OH~不，個資修改失敗...');
+			 }
+		 });
+	});
 
+
+  
 </script>
-
 </body>
 </html>

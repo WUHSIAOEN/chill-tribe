@@ -166,7 +166,6 @@
 		.then(member => {
 			console.log(member);
 			member_id.value = member.member_id;
-			debugger;
 			img_member_id.value = member.member_id;
 			if (member.photo_base64 == null) {
 				photo_base64.src = 'https://placehold.co/500x500';
@@ -206,7 +205,6 @@
     // Base64值傳到後端
     function sendImageToServer(base64Image) {
 
-        debugger;
         const img_member_id = document.querySelector('#img_member_id');
 //         const member_id = document.getElementById('member_id');
         console.log(img_member_id.value);
@@ -223,7 +221,6 @@
         })
         
         .then(resp => {
-        	debugger;
 			 return resp.json();
 		 })
 		 .then(body => {
