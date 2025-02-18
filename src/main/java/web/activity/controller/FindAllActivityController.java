@@ -15,10 +15,7 @@ import com.google.gson.GsonBuilder;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
-import web.activity.vo.Activity;
-import web.member.service.MemberService;
-import web.member.service.impl.MemberServiceImpl;
-import web.member.vo.Member;
+import web.activity.vo.Activities;
 
 @WebServlet("/activity/findAll")
 public class FindAllActivityController extends HttpServlet {
@@ -43,7 +40,7 @@ public class FindAllActivityController extends HttpServlet {
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
-		List<Activity> activities = service.findAllActivity();
+		List<Activities> activities = service.findAllActivity();
 		System.out.println("findAll() " + activities);
 		resp.getWriter().write(gson.toJson(activities));
 	}

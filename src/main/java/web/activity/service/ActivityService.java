@@ -2,19 +2,19 @@ package web.activity.service;
 
 import java.util.List;
 
-import web.activity.vo.Activity;
+import web.activity.vo.Activities;
 
 public interface ActivityService {
 	
 	// 這裡可以是字串，或其他型態，
 	// 因為它代表servlet回傳的東西，具體的訊息，告訴使用者操作是成功還是失敗
-	String apply(Activity activity);
+	String apply(Activities activity);
 	// 更新活動
-	String update(Activity activity);
+	String update(Activities activity);
 	// 刪除活動
 	boolean removeById(Integer id);
 	// 複數活動
-	List<Activity> findAllActivity();
+	List<Activities> findAllActivity();
 	// 單一活動
-	Activity findActivityById(Integer id);
+	Activities findActivityById(Integer id);
 }

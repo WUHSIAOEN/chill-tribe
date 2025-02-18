@@ -2,14 +2,13 @@ package web.activity.service.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 
 import javax.naming.NamingException;
 
 import web.activity.dao.ActivityDao;
 import web.activity.dao.impl.ActivityDaoImpl;
 import web.activity.service.ActivityService;
-import web.activity.vo.Activity;
+import web.activity.vo.Activities;
 
 public class ActivityServiceImpl implements ActivityService {
 	private ActivityDao dao;
@@ -20,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 申請活動
 	@Override
-	public String apply(Activity activity) {
+	public String apply(Activities activity) {
 		String activityPrefix = activity.getActivityPrefix();
 		String activityName = activity.getActivityName();
 		Integer supplierId = activity.getSupplierId();
@@ -35,9 +34,9 @@ public class ActivityServiceImpl implements ActivityService {
 		Timestamp endDateTime = activity.getEndDateTime();
 		Integer status = activity.getStatus();
 		String note = activity.getNote();
-		Boolean approved = activity.getApproved();
-		Integer cityId = activity.getCityId();
-		Integer districtId = activity.getDistrictId();
+		Integer approved = activity.getApproved();
+		Integer cityId = activity.getCity_id();
+		Integer districtId = activity.getDistrict_id();
 		Integer inventoryCount = activity.getInventoryCount();
 		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
 		Timestamp createdTime = activity.getCreateTime();
@@ -54,7 +53,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 更新活動
 	@Override
-	public String update(Activity activity) {
+	public String update(Activities activity) {
 		
 //		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
 //		activity.setActivityName(oActivity.getActivityName());
@@ -100,13 +99,13 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 查詢所有活動
 	@Override
-	public List<Activity> findAllActivity() {
+	public List<Activities> findAllActivity() {
 		return dao.selectAllActivity();
 	}
 
 	// 查詢單一活動
 	@Override
-	public Activity findActivityById(Integer id) {
+	public Activities findActivityById(Integer id) {
 		return dao.selectByActivityId(id);
 	}
 
