@@ -30,6 +30,7 @@ if (activityId) {
 
 // 更新
 function newActivityData() {
+  const activityId = getActivityIdFromURL();
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("cityId")?.value) || 1;
@@ -99,5 +100,8 @@ document
       "Content-Type": "application/json",
     },
     body: JSON.stringify(requestData),
+  })
+  .then((data) => {
+    console.log("從 前端送出的數據:", data);
   });
 });

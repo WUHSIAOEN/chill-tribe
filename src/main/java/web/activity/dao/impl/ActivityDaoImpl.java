@@ -104,10 +104,10 @@ public class ActivityDaoImpl implements ActivityDao {
 			sql.append("CATEGORY = ?, ");
 		}
 		if (activity.getStartDateTime() != null) {
-			sql.append("START_DATETIME = ?, ");
+			sql.append("START_DATE_TIME = ?, ");
 		}
 		if (activity.getEndDateTime() != null) {
-			sql.append("END_DATETIME = ?, ");
+			sql.append("END_DATE_TIME = ?, ");
 		}
 		if (activity.getCity_id() != null) {
 			sql.append("CITY_ID = ?, ");
