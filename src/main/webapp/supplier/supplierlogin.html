@@ -88,8 +88,30 @@
   const loginemail = document.querySelector('#loginemail');
   const loginpassword = document.querySelector('#loginpassword');
 // 		const msg = document.querySelector('#msg');
+	
+	// to do list 完成被勾選要記住帳號密碼&沒被勾選要清空cookie session內的key
+	 window.onload = function () {
+    if (localStorage.getItem("email") && localStorage.getItem("password")) {
+      loginemail.value = localStorage.getItem("email");
+      loginpassword.value = localStorage.getItem("password");
+      remember.checked = true;
+    }
+  }
+	
+	
+	$('#remember').on('change', () => {
+    if (remember.checked) {
+        console.log('Checkbox 被勾選了');
+      } else {
+        console.log('Checkbox 被取消勾選了');
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+      }
+	});
+
 
   $('button#btn_login').on('click', () => {
+	 event.preventDefault();
     console.log("登入按鈕觸發");
     if (!loginemail.value) {
       alert('Email必須輸入');
