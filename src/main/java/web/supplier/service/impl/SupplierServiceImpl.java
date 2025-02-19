@@ -58,18 +58,18 @@ public class SupplierServiceImpl implements SupplierService{
 
 	@Override
 	public Supplier edit(Supplier supplier) {
-		String password = supplier.getPassword();
-		if (password != null && !password.isEmpty()  && (password.length() < 6 || password.length() > 12)) {
-			supplier.setSuccessful(false);
-			supplier.setMessage("密碼長度須介於6 ~ 12");
-			System.out.println(password);
-		}
-		
-		if (!Objects.equals(password, supplier.getcPassword())) {
-			System.out.println(supplier.getcPassword());
-			supplier.setSuccessful(false);
-			supplier.setMessage("密碼與確認密碼不符合");
-		}
+//		String password = supplier.getPassword();
+//		if (password != null && !password.isEmpty()  && (password.length() < 6 || password.length() > 12)) {
+//			supplier.setSuccessful(false);
+//			supplier.setMessage("密碼長度須介於6 ~ 12");
+//			System.out.println(password);
+//		}
+//		
+//		if (!Objects.equals(password, supplier.getcPassword())) {
+//			System.out.println(supplier.getcPassword());
+//			supplier.setSuccessful(false);
+//			supplier.setMessage("密碼與確認密碼不符合");
+//		}
 		
 		
 		int resultCount =  supplierDao.update(supplier);
@@ -117,4 +117,15 @@ public class SupplierServiceImpl implements SupplierService{
 		}
 		return supplierDao.deletById(id) > 0;
 	}
-}
+
+	@Override
+	public Supplier updateimg(Supplier supplier) {
+		int resultCount =  supplierDao.updateimg(supplier);
+		
+		supplier.setSuccessful(resultCount > 0);
+		supplier.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+		return supplier;
+		
+	}
+	}
+

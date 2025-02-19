@@ -1,7 +1,6 @@
 package web.activity.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,10 +15,7 @@ import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
-import web.activity.vo.Activity;
-import web.member.service.MemberService;
-import web.member.service.impl.MemberServiceImpl;
-import web.member.vo.Member;
+import web.activity.vo.Activities;
 
 @WebServlet("/activity/findActivityById")
 public class FindActivityByIdController extends HttpServlet {
@@ -50,7 +46,7 @@ public class FindActivityByIdController extends HttpServlet {
 	    try {
 	        if (idParam != null) {
 	            Integer id = Integer.parseInt(idParam);
-	            Activity activity = service.findActivityById(id);
+	            Activities activity = service.findActivityById(id);
 	            resp.getWriter().write(gson.toJson(activity));
 	        } else {
 	        	// jsonobject
