@@ -1,7 +1,6 @@
 package web.activity.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
-import web.activity.vo.Activity;
+import web.activity.vo.Activities;
 
 @WebServlet("/activity/apply")
 public class ApplyActivityController extends HttpServlet {
@@ -44,7 +43,7 @@ public class ApplyActivityController extends HttpServlet {
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
 
-        Activity activity = gson.fromJson(req.getReader(), Activity.class);
+		Activities activity = gson.fromJson(req.getReader(), Activities.class);
 			
 		String errMsg = service.apply(activity);
 		System.out.println(errMsg);
