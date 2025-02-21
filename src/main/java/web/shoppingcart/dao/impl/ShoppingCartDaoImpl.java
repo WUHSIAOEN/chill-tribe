@@ -36,19 +36,19 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 		final String SQL = "INSERT INTO SHOPPING_CART_ITEMS (ACTIVITY_ID, QUANTITY, TOTAL_PRICE, MEMBER_ID) "
 				+ "VALUES (?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			
-			pstmt.setInt(1, shoppingCart.getActivity_Id());
-	        pstmt.setInt(2, shoppingCart.getQuantity());
-	        pstmt.setInt(3, shoppingCart.getTotal_Price());
-	        pstmt.setInt(4, shoppingCart.getMember_Id());
-	        
-	        int result = pstmt.executeUpdate();
-	        if (result > 0) {
-	        	List<ShoppingCart> list = new ArrayList<>();
+
+			pstmt.setInt(1, shoppingCart.getActivityId());
+			pstmt.setInt(2, shoppingCart.getQuantity());
+			pstmt.setInt(3, shoppingCart.getTotal_price());
+			pstmt.setInt(4, shoppingCart.getMember_od());
+
+			int result = pstmt.executeUpdate();
+			if (result > 0) {
+				List<ShoppingCart> list = new ArrayList<>();
 				list.add(shoppingCart);
 				return list;
-	        }
-			
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

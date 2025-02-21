@@ -133,7 +133,7 @@
 									<span class="label text-light bg-success" id="category-2">運動</span>
 									<h3 id="activityName-1">一起來打羽球吧!</h3>
 									<span id="districtId"><i class="lni-map-marker"></i> 大安公園</span>
-									<h3 class="prt-price-fix text-primary"><sub>$</sub id="unitPrice">50<sub>/人</sub></h3>
+									<h3 class="prt-price-fix text-primary"><sub>$</sub>50<sub>/人</sub></h3>
 								</div>
 							</div>
 							
@@ -244,7 +244,7 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">參加費用<span id="unitPrice">50</span>/人</button>
+														user-select: text;">參加費用<span id="unitPrice-2">50</span>/人</button>
 													</h2>
 												</div>
 											</div>
@@ -760,7 +760,8 @@
 					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
 					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
 					document.getElementById("address").innerHTML = data.address || "暫無";
-					document.getElementById("unitPrice").innerHTML = data.unitPrice || "暫無";
+					// document.getElementById("unitPrice-1").innerHTML = data.unitPrice || "暫無";
+					document.getElementById("unitPrice-2").textContent = data.unitPrice || 1;
 					document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
 					document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
 					document.getElementById("description").innerHTML = data.description || "暫無";
@@ -788,38 +789,36 @@
 					// document.getElementById("createTime").innerHTML = data.createTime;
 				})
 			}
-			const activityId = getActivityIdFromURL();
-        if (activityId) {
-            fetchActivityById(activityId);
+			const activity_id = getActivityIdFromURL();
+        if (activity_id) {
+            fetchActivityById(activity_id);
         } else {
             console.log("你要的活動找不到喔!")
       }
 			
-		</script>
-
-		<script>
-			console.log("HI");
+			// 新增活動商品到購物車
 			function ShoppingCartItems() {
-				const activityId = getActivityIdFromURL();
-				const quantity = parseInt(document.getElementById("quantity")?.value) || 1;
-				const total_price = parseInt(document.getElementById("unitPrice")) * quantity;
+				const activity_id = parseInt(getActivityIdFromURL()) || 1;
+				const quantity = parseInt(document.getElementById("quantity")?.textContent) || 1;
+				const unitPrice = parseInt(document.getElementById("unitPrice-2").textContent);
+				const total_price = quantity * unitPrice;
 				const member_id = parseInt(document.getElementById("member_id")?.value) || 1;
-
+				console.log(activity_id, quantity, unitPrice);
 				return {
-					activityId,
+					activity_id,
 					quantity,
 					total_price,
 					member_id
 				};
 			};
-			
+
 			document
 			.getElementById("addToCartBtn")
 			.addEventListener("click", function (event) {
 				event.preventDefault();
-				console.log("add!");
-				const requestData = ShoppingCartItems();
 
+				const requestData = ShoppingCartItems();
+				console.log("送出的資料:", requestData);
 				fetch('/chill-tribe/shoppingCart/addToCart', {
 					method: "POST",
 					headers: {
@@ -827,9 +826,6 @@
 					},
 					body: JSON.stringify(requestData),
 				})
-				.then((data) => {
-					console.log("從 前端送出的數據:", data);
-				});
 			});
 		</script>
 		<!-- ============================================================== -->
