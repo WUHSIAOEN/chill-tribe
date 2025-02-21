@@ -548,7 +548,7 @@
 								<form>
 									<div class="form-group">
 										<h6 for="exampleFormControlSelect1">選擇票券張數</h6>
-										<select id="tickets_number" class="form-control">
+										<select id="quantity" class="form-control">
 											<option selected value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -563,7 +563,7 @@
 									</div>
 								</form>
 								<ul class="like_share_list">
-									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
+									<li id="addToCartBtn"><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
 										data-original-title="Share"><i class="fas fa-shopping-cart"></i>加入購物車</a></li>
 									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
 										data-original-title="Save"><i class="fas fa-heart"></i>收藏</a></li>
@@ -795,6 +795,42 @@
             console.log("你要的活動找不到喔!")
       }
 			
+		</script>
+
+		<script>
+			console.log("HI");
+			function ShoppingCartItems() {
+				const activityId = getActivityIdFromURL();
+				const quantity = parseInt(document.getElementById("quantity")?.value) || 1;
+				const total_price = parseInt(document.getElementById("unitPrice")) * quantity;
+				const member_id = parseInt(document.getElementById("member_id")?.value) || 1;
+
+				return {
+					activityId,
+					quantity,
+					total_price,
+					member_id
+				};
+			};
+			
+			document
+			.getElementById("addToCartBtn")
+			.addEventListener("click", function (event) {
+				event.preventDefault();
+				console.log("add!");
+				const requestData = ShoppingCartItems();
+
+				fetch('/chill-tribe/shoppingCart/addToCart', {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(requestData),
+				})
+				.then((data) => {
+					console.log("從 前端送出的數據:", data);
+				});
+			});
 		</script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
