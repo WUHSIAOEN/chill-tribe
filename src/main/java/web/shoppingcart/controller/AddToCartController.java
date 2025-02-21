@@ -37,8 +37,8 @@ public class AddToCartController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
-
+		Gson gson = new Gson();
+		
 		ShoppingCart shoppingItems = gson.fromJson(req.getReader(), ShoppingCart.class);
 		service.AddToCart(shoppingItems);
 	}
