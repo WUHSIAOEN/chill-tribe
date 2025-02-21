@@ -18,9 +18,9 @@ import lombok.Setter;
 
 public class ShoppingCart extends Core{
 	private Integer shopping_cart_item_id;
-	private Integer activityId;
+	private Integer activity_id;
 	private Integer quantity;
 	private Integer total_price;
-	private Integer member_od;
+	private Integer member_id;
 	private Timestamp added_time;
 }
