@@ -17,10 +17,10 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class ShoppingCart extends Core{
-	private Integer Shopping_Cart_Item_Id;
-	private Integer Activity_Id;
-	private Integer Quantity;
-	private Integer Total_Price;
-	private Integer Member_Id;
-	private Timestamp Added_Time;
+	private Integer shopping_cart_item_id;
+	private Integer activityId;
+	private Integer quantity;
+	private Integer total_price;
+	private Integer member_od;
+	private Timestamp added_time;
 }

@@ -17,9 +17,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public List<ShoppingCart> AddToCart(ShoppingCart shppingCart) {
+	public List<ShoppingCart> AddToCart(ShoppingCart shoppingCart) {
 		// TODO Auto-generated method stub
-		return dao.insertToCart(shppingCart);
+		return dao.insertToCart(shoppingCart);
 	}
 
 }
