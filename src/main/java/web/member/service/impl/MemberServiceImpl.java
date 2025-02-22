@@ -140,4 +140,13 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 		
 	}
+
+	@Override
+	public Member selectaddress(Member member) {
+//		int resultCount =  memberDao.selectaddress(member);
+//		
+//		member.setSuccessful(resultCount > 0);
+//		member.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+		return member;
+	}
 }
