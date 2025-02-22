@@ -75,125 +75,107 @@
 						<!-- ======================== 頁面內容放這裡 ======================== -->
 						<div class="dashboard-wraper">
 
-							<!-- Location -->
-							<div class="col-12">
-
-								<!-- Single Block Wrap -->
-								<div class="block-wrap">
-
-									<div class="block-header">
-										<h4 class="block-title">購物車</h4>
-									</div>
-
-									<div class="block-body">
-										<div class="text-start py-3 px-4">
-											<button class="btn btn-secondary rounded px-5" type="button">清空購物車</button>
-										</div>
-										<div class="p-3">
-											<div class="table-responsive">
-												<table class="property-table-wrap responsive-table bkmark">
-													<!-- <thead class="table-dark">
-														<tr>
-															<th class="py-3">圖片</th>
-															<th class="py-3">名稱</th>
-															<th class="py-3">數量</th>
-															<th class="py-3">單價</th>
-															<th class="py-3">操作</th>
-														</tr>
-													</thead> -->
-													<tbody>
-														<tr>
-															<th><i class="fa fa-file-text"></i> 購物車列表</th>
-															<th></th>
-														</tr>
-
-														<!-- Item #1 -->
-														<tr>
-															<td class="property-container">
-																<img src="https://placehold.co/1200x800" alt="">
-																<div class="title">
-																	<h4><a href="#">Serene Uptown</a></h4>
-																	<span>6 Bishop Ave. Perkasie, PA </span>
-																	<span class="table-property-price">$900 /
-																		monthly</span>
-																</div>
-															</td>
-															<td class="action">
-																<a href="#" class="delete"><i
-																		class="fa-solid fa-trash-can"></i> Delete</a>
-															</td>
-														</tr>
-
-														<!-- Item #2 -->
-														<tr>
-															<td class="property-container">
-																<img src="https://placehold.co/1200x800" alt="">
-																<div class="title">
-																	<h4><a href="#">Oak Tree Villas</a></h4>
-																	<span>71 Lower River Dr. Bronx, NY</span>
-																	<span class="table-property-price">$535,000</span>
-																</div>
-															</td>
-															<td class="action">
-																<a href="#" class="delete"><i
-																		class="fa-solid fa-trash-can"></i> Delete</a>
-															</td>
-														</tr>
-
-														<!-- Item #3 -->
-														<tr>
-															<td class="property-container">
-																<img src="https://placehold.co/1200x800" alt="">
-																<div class="title">
-																	<h4><a href="#">Selway Villas</a></h4>
-																	<span>33 William St. Northbrook, IL </span>
-																	<span class="table-property-price">$420,000</span>
-																</div>
-															</td>
-															<td class="action">
-																<a href="#" class="delete"><i
-																		class="fa-solid fa-trash-can"></i> Delete</a>
-															</td>
-														</tr>
-
-														<!-- Item #4 -->
-														<tr>
-															<td class="property-container">
-																<img src="https://placehold.co/1200x800" alt="">
-																<div class="title">
-																	<h4><a href="#">Town Manchester</a></h4>
-																	<span> 7843 Durham Avenue, MD </span>
-																	<span class="table-property-price">$420,000</span>
-																</div>
-															</td>
-															<td class="action">
-																<a href="#" class="delete"><i
-																		class="fa-solid fa-trash-can"></i> Delete</a>
-															</td>
-														</tr>
-
-													</tbody>
-												</table>
-											</div>
-
-											<div class="bg-light text-end py-3 px-4">
-												<h4 class="text-success" id="total_price">總計: NT$ 3000</h4>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between p-3">
-											<button class="btn btn-primary rounded px-4" type="button">
-												<i class="fa fa-arrow-circle-left pr-2" aria-hidden="true">
-													繼續選購</i></button>
-											<button class="btn btn-primary rounded px-4" type="button">
-												<i class="fa fa-arrow-circle-right pr-2" aria-hidden="true">
-													前往結帳</i></button>
-										</div>
-									</div>
-
-								</div>
-
+							<!-- Single Block Wrap -->
+							<div class="form-submit"
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<h4 class="block-title">購物車</h4>
+								<button class="btn btn-primary rounded px-3" type="button">
+									<i class="fa-solid fa-trash-can me-4"></i> 清空購物車
+								</button>
 							</div>
 
+							<div class="block-body">
+								<div class="p-3">
+									<div class="table-responsive">
+										<table class="property-table-wrap responsive-table bkmark">
+											<thead>
+												<tr>
+													<th class="py-3" style="width: 1%;"></th>
+													<th class="py-3 text-center fs-5 fw-bold">活動</th>
+													<th class="py-3 text-center fs-5 fw-bold">單價</th>
+													<th class="py-3 text-center fs-5 fw-bold">數量</th>
+													<th class="py-3 text-center fs-5 fw-bold">操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- Item #1 -->
+												<tr>
+													<td class="action text-center">
+														<input type="radio" class="form-check-input" name="shopping-cart-item">
+													</td>
+													<td class="property-container">
+														<img src="https://placehold.co/1200x800" alt="">
+														<div class="title">
+															<h4><a href="#">Serene Uptown</a></h4>
+															<span>6 Bishop Ave. Perkasie, PA </span>
+														</div>
+													</td>
+													<td>
+														<span class="table-property-price">$900 /
+															人</span>
+													</td>
+													<td>
+														<input type="number" class="form-control text-center mx-2"
+															value="1" min="1" max="10" />
+													</td>
+													<td class="action">
+														<a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
+															Delete</a>
+													</td>
+												</tr>
+
+												<!-- Item #2 -->
+												<tr>
+													<td class="action text-center">
+														<input type="radio" class="form-check-input" name="shopping-cart-item">
+													</td>
+													<td class="property-container">
+														<img src="https://placehold.co/1200x800" alt="">
+														<div class="title">
+															<h4><a href="#">Serene Uptown</a></h4>
+															<span>6 Bishop Ave. Perkasie, PA </span>
+														</div>
+													</td>
+													<td>
+														<span class="table-property-price">$900 /
+															人</span>
+													</td>
+													<td>
+														<input type="number" class="form-control text-center mx-2"
+															value="1" min="1" max="10" />
+													</td>
+													<td class="action">
+														<a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
+															Delete</a>
+													</td>
+												</tr>
+
+											</tbody>
+											<tfoot class="table-primary text-end">
+													<tr>
+														<td colspan="5">
+															<div>
+																<h4 class="text-primary" id="total_price">總計: NT$ 3000</h4>
+															</div>
+														</td>
+													</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<!-- <div class="bg-light text-end py-3 px-4">
+										<h4 class="text-success" id="total_price">總計: NT$ 3000</h4>
+									</div> -->
+								</div>
+								<div class="d-flex justify-content-between p-3">
+									<button class="btn btn-primary rounded px-4" type="button">
+										<i class="fa fa-arrow-circle-left pr-2" aria-hidden="true">
+											繼續選購</i></button>
+									<button class="btn btn-primary rounded px-4" type="button">
+										<i class="fa fa-arrow-circle-right pr-2" aria-hidden="true">
+											前往結帳</i></button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
