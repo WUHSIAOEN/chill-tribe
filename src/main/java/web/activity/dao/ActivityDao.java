@@ -15,5 +15,4 @@ public interface ActivityDao{
 	List<Activities> selectAllActivity();
 	// 只查詢單一活動ID
 	Activities selectByActivityId(Integer id);
-
 }

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>Resido - Residence & Real Estate HTML Template</title>
+
+<!-- Custom CSS -->
+<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
+
+<!-- chill-header css -->
+<link href="../Full_Resido/_html/assets/css/chill-header.css" rel="stylesheet">
+
+<!-- Custom Color Option -->
+<link href="../Full_Resido/_html/assets/css/colors.css" rel="stylesheet">
+
+<!-- Custom CSS - 不是模板提供的 -->
+<link href="css/front-desk.css" rel="stylesheet">
+
+</head>
+
+<body class="blue-skin">
+
+	<!-- ============================================================== -->
+	<!-- Preloader - style you can find in spinners.css -->
+	<!-- ============================================================== -->
+	<div id="preloader">
+		<div class="preloader">
+			<span></span><span></span>
+		</div>
+	</div>
+
+	<!-- ============================================================== -->
+	<!-- Main wrapper - style you can find in pages.scss -->
+	<!-- ============================================================== -->
+	<div id="main-wrapper">
+
+		<!-- ============================================================== -->
+		<!-- Top header  -->
+		<!-- ============================================================== -->
+		<!-- Start Navigation -->
+		<div class="header header-light head-shadow">
+			<div class="container">
+				<nav id="navigation" class="navigation navigation-landscape"></nav>
+			</div>
+		</div>
+
+		<!-- End Navigation -->
+		<div class="clearfix"></div>
+		<!-- ============================================================== -->
+		<!-- Top header  -->
+		<!-- ============================================================== -->
+
+		<!-- ============================ Page Title Start================================== -->
+		<div id="page-title" class="page-title"></div>
+		<!-- ============================ Page Title End ================================== -->
+
+		<!-- ============================ User Dashboard ================================== -->
+		<section class="bg-light">
+			<div class="container-fluid">
+
+				<div id="narrow-view" class="row"></div>
+
+				<div class="row">
+					<!-- ========================= 最大頁面的sidebar ========================= -->
+					<div class="col-lg-3 col-md-12">
+
+						<div class="simple-sidebar sm-sidebar" id="filter_search"></div>
+					</div>
+
+					<!-- ============================ Main Content ================================== -->
+					<div class="col-lg-9 col-md-12">
+						<!-- ======================== 頁面內容放這裡 ======================== -->
+						<div class="dashboard-wraper">
+							
+              <!-- 我的最愛 -->
+              <div class="form-submit">	
+                <h4>我的最愛</h4>
+              </div>
+              
+              <table class="property-table-wrap responsive-table bkmark">
+
+                <tbody>
+                  <tr>
+                    <th><i class="fa fa-file-text"></i> 活動</th>
+                    <th></th>
+                  </tr>
+
+                  <!-- Item #1 -->
+                  <tr>
+                    <td class="property-container">
+                      <img src="https://placehold.co/1200x800" alt="">
+                      <div class="title">
+                        <h4><a href="#">Serene Uptown</a></h4>
+                        <span>6 Bishop Ave. Perkasie, PA </span>
+                        <span class="table-property-price">$900 / monthly</span>
+                      </div>
+                    </td>
+                    <td class="action">
+                      <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> 刪除</a>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              
+            </div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ============================ Main Content End ================================== -->
+
+		<!-- ============================ Call To Action ================================== -->
+		<section id="cta" class="bg-primary call-to-act-wrap"></section>
+		<!-- ============================ Call To Action End ================================== -->
+
+		<!-- ============================ Footer Start ================================== -->
+		<footer id="footer" class="dark-footer skin-dark-footer"></footer>
+		<!-- ============================ Footer End ================================== -->
+
+		<!-- Log In Modal -->
+		<div class="modal fade" id="login" tabindex="-1" role="dialog"
+			aria-labelledby="registermodal" aria-hidden="true"></div>
+		<!-- End Modal -->
+
+		<!-- ============================ 目前還找不到這個按鍵 ============================ -->
+		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i
+			class="ti-arrow-up"></i></a>
+
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Wrapper -->
+	<!-- ============================================================== -->
+
+
+	<!-- ============================================================== -->
+	<!-- All Jquery -->
+	<!-- ============================================================== -->
+	<script src="../Full_Resido/_html/assets/js/jquery.min.js"></script>
+	<script src="../Full_Resido/_html/assets/js/popper.min.js"></script>
+	<script src="../Full_Resido/_html/assets/js/bootstrap.min.js"></script>
+	<script src="../Full_Resido/_html/assets/js/rangeslider.js"></script>
+	<script src="../Full_Resido/_html/assets/js/select2.min.js"></script>
+	<script src="../Full_Resido/_html/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="../Full_Resido/_html/assets/js/slick.js"></script>
+	<script src="../Full_Resido/_html/assets/js/slider-bg.js"></script>
+	<script src="../Full_Resido/_html/assets/js/lightbox.js"></script>
+	<script src="../Full_Resido/_html/assets/js/imagesloaded.js"></script>
+
+	<script>
+		// navbar load
+		$("#navigation").load("fixed-member-navbar.html");
+		$("#page-title").load("fixed-member-page-title.html");
+		$("#narrow-view").load("fixed-member-narrow-view.html");
+		$("#filter_search").load("fixed-member-sidebar.html");
+		$("#cta").load("fixed-member-cta.html");
+		$("#footer").load("fixed-member-footer.html");
+		$("#login").load("fixed-member-login.html");
+	</script>
+
+	<script src="../Full_Resido/_html/assets/js/custom.js"></script>
+	<!-- ============================================================== -->
+	<!-- This page plugins -->
+	<!-- ============================================================== -->
+
+	<script>
+		function openFilterSearch() {
+			document.getElementById("filter_search").style.display = "block";
+		}
+		function closeFilterSearch() {
+			document.getElementById("filter_search").style.display = "none";
+		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#showbutton").click(function() {
+				$("#showing").slideToggle("slow");
+			});
+		});
+	</script>
+
+	<!-- ============================地址選單的js============================== -->
+	<script src="../member/js/address_form.js"></script>
+
+	<script src="../_html/assets/js/dropzone.js"></script>
+	<!-- New Js -->
+
+</body>
+
+</html>
