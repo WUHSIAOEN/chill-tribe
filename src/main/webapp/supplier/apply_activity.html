@@ -203,7 +203,7 @@
                   <div class="d-flex">
                     <input type="text" id="zipcode" class="form-control" readonly style="width: 80px; border-right: 0; border-radius: 8px 0 0 8px;" />
                     
-                    <select id="city" class="form-select" style="border-radius: 0;"></select>
+                    <select id="city_id" class="form-select" style="border-radius: 0;"></select>
                     
                     <select id="area" class="form-select" style="border-radius: 0 8px 8px 0;"></select>
                   </div>
@@ -453,11 +453,11 @@
       // console.log(item.city);
 
       let city_str = `
-        <option value="${item.cityId}">${item.city}</option>
+        <option value="${item.city_id}">${item.city}</option>
       `;
-      $("#city").append(city_str);
+      $("#city_id").append(city_str);
 
-      if(item.cityId == 2){
+      if(item.city_id == 2){
         area_init(item.area);
       }
     });
@@ -489,12 +489,12 @@
   // 3. 對縣市的下拉選單綁定change事件
   // 4. 跑addrData迴圈，用"縣市資料"抓"區"的資料，
   //    放到新的下拉選單 (area_init())
-  $("#city").on("change", function(){
+  $("#city_id").on("change", function(){
     // console.log($(this).val());
     $("#area").empty();
     $.each(addrData, (i, item) => {
       // console.log(item);
-      if(item.cityId == $(this).val()){
+      if(item.city_id == $(this).val()){
         // console.log(item.area)
         area_init(item.area);
       }
