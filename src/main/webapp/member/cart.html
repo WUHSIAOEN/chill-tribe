@@ -107,7 +107,7 @@
                               <td>
                                 <div></div>
                               </td>
-                              <td id="activity_name" class="fw-bold text-truncate" style="max-width: 60px;">古典音樂</td>
+                              <td id="activity_name" class="fw-bold text-truncate" style="max-width: 60px;">古典音樂1</td>
                               <td style="max-width: 120px;">
                                 <div class="quantity-control d-flex justify-content-center align-items-center">
                                   <button
@@ -117,6 +117,7 @@
                                   <label></label>
                                   <input
                                     type="number"
+                                    id="count_number"
                                     class="form-control text-center mx-2"
                                     value="1"
                                     min="1"
@@ -143,14 +144,15 @@
                       </div>
   
                       <div class="bg-light text-end py-3 px-4">
-                        <h4 class="text-success" id="total_price">總計: NT$ 3000</h4>
+                      <h4><p class="text-success">總計: NT$ </p></h4>
+                        <h4 class="text-success" id="total_price">3000</h4>
                       </div>
                     </div>
                     <div class="d-flex justify-content-between p-3">
                       <button class="btn btn-primary rounded px-4" type="button">
                         <i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"> 繼續選購</i></button>
                       <button class="btn btn-primary rounded px-4" type="button">
-                        <i class="fa fa-arrow-circle-right pr-2" aria-hidden="true"> 前往結帳</i></button>
+                        <i class="fa fa-arrow-circle-right pr-2" id="btn_gobuy" aria-hidden="true"> 前往結帳</i></button>
                     </div>
                   </div>
                   
@@ -186,7 +188,7 @@
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
-
+	<section id = "aaa"></section>
 
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
@@ -254,6 +256,42 @@
 				});
 		};
 	</script>
+	<!-- 購物車開始 -->
+	<script>
+    let data = {
+        activity_name: document.getElementById('activity_name').innerText,
+        count_number: parseInt(document.getElementById('count_number').value), 
+        total_price: parseInt(document.getElementById('total_price').innerText) 
+    }
+
+    console.log(data);
+
+    $('#btn_gobuy').on("click", function(){
+        console.log("結帳按鈕被觸發");
+
+        console.log("document.URL : "+document.URL);
+        console.log("document.location.href : "+document.location.href);
+        console.log("document.location.origin : "+document.location.origin);
+        console.log("document.location.hostname : "+document.location.hostname);
+        console.log("document.location.host : "+document.location.host);
+        console.log("document.location.pathname : "+document.location.pathname);
+        console.log("domain : "+document.domain);
+        
+        fetch("/chill-tribe/order/buy", { 
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json' 
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            $("#aaa").html(result.successful ? "結帳成功" : result.errMsg);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+	<!-- 購物車結束 -->
 </body>
 
 </html>

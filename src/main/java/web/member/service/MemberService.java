@@ -18,4 +18,6 @@ public interface MemberService {
 	
 	Member updateimg(Member member);
 	
+	Member selectaddress(Member member);
+	
 }
