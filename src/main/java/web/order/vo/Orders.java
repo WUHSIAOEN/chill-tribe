@@ -28,6 +28,10 @@ public class Orders extends Core{
     private Integer quantity;
     private String orderStatus;
     private String paymentMethod;
+    private String orderContact;
+    private String contactMail;
+    private String contactPhone;
+    private String requirement;
     private String merchantTradeNo;
     private String tradeNo;
     private Timestamp orderUpdateDatetime;
