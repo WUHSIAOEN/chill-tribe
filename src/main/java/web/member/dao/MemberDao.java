@@ -26,4 +26,6 @@ public interface MemberDao {
 	int updateimg(Member member);
 	
 	Member selectimg(String photo_base64);
+	
+	Member selectaddress(Member member);
 }
