@@ -31,12 +31,12 @@ public class OrderforpayServiceImpl implements OrderforpayService{
         // 訂單編號一定要英文+數字 不然會出錯~~~
         // 綠界要的資料
         AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
-        aioCheckOutALL.setMerchantTradeNo("Order" + "t04"); // 訂單ID
+        aioCheckOutALL.setMerchantTradeNo("Order" + "t07"); // 訂單ID
         aioCheckOutALL.setMerchantTradeDate(orderDate); // 訂單日期
         aioCheckOutALL.setTotalAmount(String.valueOf(total_price)); // 訂單總金額
         aioCheckOutALL.setTradeDesc("購物網站支付"); // 訂單描述
         aioCheckOutALL.setItemName(activity_name); // 商品名稱
-        aioCheckOutALL.setClientBackURL("http://localhost:8080/chill-tribe/index.html"); // 客戶端返回的 URL
+        aioCheckOutALL.setClientBackURL("http://localhost:8080/chill-tribe/chilltribe.html"); // 客戶端返回的 URL
         aioCheckOutALL.setReturnURL("http://localhost:8080/chill-tribe/member/member-register.html"); // 返回的URL
         aioCheckOutALL.setNeedExtraPaidInfo("N"); // 不需要額外支付資訊
 
