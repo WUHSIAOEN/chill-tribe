@@ -302,4 +302,31 @@ public class MemberDaoImpl implements MemberDao {
 			}
 			return null;
 		}
+
+		// 地址查詢
+		@Override
+		public Member selectaddress(Member address) {
+			String sql = "select * from ADDRESSES where MEMBER_ID = ?";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, address.getMember_id());
+				try (ResultSet rs = pstmt.executeQuery()) {
+					if (rs.next()) {
+						Member member = new Member();
+						member.setMember_id(rs.getInt("MEMBER_ID"));
+						member.setMember_name(rs.getString("MEMBER_NAME"));
+						member.setEmail(rs.getString("EMAIL"));
+						member.setCity_id(rs.getString("CITY_ID"));
+						member.setDistrict_id(rs.getString("DISTRICT_ID"));
+						member.setAddress_id(rs.getString("ADDRESS_ID"));
+						member.setAddress(rs.getString("ADDRESS"));
+						member.setTag(rs.getString("TAG"));
+						member.setAddress_default(rs.getInt("ADDRESS_DEFAULT"));
+						return member;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 }

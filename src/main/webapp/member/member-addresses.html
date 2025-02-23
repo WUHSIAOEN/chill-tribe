@@ -98,8 +98,8 @@
 										<td class="property-container">
 
 											<div class="title">
-												<span class="zip-code">104</span> <span
-													class="city-district">台北市中山區</span> <span>南京東路三段219號4F</span>
+												<span class="zip-code" id="zip_code">104</span> <span
+													class="city-district" id="city_district">台北市中山區</span> <span id="address">南京東路三段219號4F</span>
 												<span class="table-property-price">公司</span> <span
 													class="table-property-tag">預設</span>
 											</div>
@@ -191,7 +191,7 @@
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
-
+	<input type="hidden" id="address_member_id" value="">
 
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
@@ -241,6 +241,28 @@
 	</script>
 	
 	<script>
+	const zip_code = document.getElementById("zip_code");
+	console.log(zip_code);
+	const city_district = document.getElementById("city_district");
+	console.log(city_district);
+	const address = document.getElementById("address");
+	console.log(address);
+	const member_id = document.getElementById("member_id");
+
+
+
+	fetch('findaddress')
+	.then(resp => resp.json())
+	.then(member => {
+		console.log(member);
+		member_id.value = member.member_id;
+		address_member_id.value = member.member_id;
+		zip_code.value = member.city_id;
+		city_district.value = member.city.id
+		address.value = member.address;
+	});
+	
+	
 	$("#add_addresses").on("click", function() {
 	console.log("新增地址按鈕觸發");
 		});
