@@ -1,6 +1,6 @@
 const addrData = [
   { 
-    "cityId": 1,
+    "city_id": 1,
     "city": "基隆市",
     "area": [
       { "name": "仁愛區", "zipcode": "200" },
@@ -13,7 +13,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 2,
+    "city_id": 2,
     "city": "台北市",
     "area": [
       { "name": "中正區", "zipcode": "100" },
@@ -31,7 +31,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 3,
+    "city_id": 3,
     "city": "新北市",
     "area": [
       { "name": "萬里區", "zipcode": "207" },
@@ -66,7 +66,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 4,
+    "city_id": 4,
     "city": "桃園市",
     "area": [
       { "name": "中壢區", "zipcode": "320" },
@@ -85,7 +85,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 5,
+    "city_id": 5,
     "city": "新竹市",
     "area": [
       { "name": "東區", "zipcode": "300" },
@@ -94,7 +94,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 6,
+    "city_id": 6,
     "city": "新竹縣",
     "area": [
       { "name": "竹北市", "zipcode": "302" },
@@ -113,7 +113,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 7,
+    "city_id": 7,
     "city": "苗栗縣",
     "area": [
       { "name": "竹南鎮", "zipcode": "350" },
@@ -137,7 +137,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 8,
+    "city_id": 8,
     "city": "台中市",
     "area": [
       { "name": "中區", "zipcode": "400" },
@@ -172,7 +172,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 9,
+    "city_id": 9,
     "city": "彰化縣",
     "area": [
       { "name": "彰化市", "zipcode": "500" },
@@ -202,7 +202,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 10,
+    "city_id": 10,
     "city": "南投縣",
     "area": [
       { "name": "南投市", "zipcode": "540" },
@@ -221,7 +221,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 11,
+    "city_id": 11,
     "city": "雲林縣",
     "area": [
       { "name": "斗南鎮", "zipcode": "630" },
@@ -235,7 +235,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 12,
+    "city_id": 12,
     "city": "嘉義市",
     "area": [
       { "name": "東區", "zipcode": "600" },
@@ -243,7 +243,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 13,
+    "city_id": 13,
     "city": "嘉義縣",
     "area": [
       { "name": "番路鄉", "zipcode": "602" },
@@ -267,7 +267,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 14,
+    "city_id": 14,
     "city": "台南市",
     "area": [
       { "name": "中西區", "zipcode": "700" },
@@ -310,7 +310,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 15,
+    "city_id": 15,
     "city": "高雄市",
     "area": [
       { "name": "新興區", "zipcode": "800" },
@@ -354,7 +354,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 16,
+    "city_id": 16,
     "city": "屏東縣",
     "area": [
       { "name": "屏東市", "zipcode": "900" },
@@ -393,7 +393,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 17,
+    "city_id": 17,
     "city": "宜蘭縣",
     "area": [
       { "name": "宜蘭市", "zipcode": "260" },
@@ -412,7 +412,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 18,
+    "city_id": 18,
     "city": "花蓮縣",
     "area": [
       { "name": "花蓮市", "zipcode": "970" },
@@ -431,7 +431,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 19,
+    "city_id": 19,
     "city": "臺東縣",
     "area": [
       { "name": "臺東市", "zipcode": "950" },
@@ -453,7 +453,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 20,
+    "city_id": 20,
     "city": "澎湖縣",
     "area": [
       { "name": "馬公市", "zipcode": "880" },
@@ -465,7 +465,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 21,
+    "city_id": 21,
     "city": "金門縣",
     "area": [
       { "name": "金沙鎮", "zipcode": "890" },
@@ -477,7 +477,7 @@ const addrData = [
     ]
   },
   {
-    "cityId": 22,
+    "city_id": 22,
     "city": "馬祖縣",
     "area": [
       { "name": "南竿鄉", "zipcode": "209" },
@@ -487,12 +487,12 @@ const addrData = [
     ]
   },
   {
-    "cityId": 23,
+    "city_id": 23,
     "city": "蘭嶼縣",
     "area": [{ "name": "蘭嶼鄉", "zipcode": "952" }]
   },
   {
-    "cityId": 24,
+    "city_id": 24,
     "city": "連江縣",
     "area": [
       { "name": "南竿鄉", "zipcode": "209" },
