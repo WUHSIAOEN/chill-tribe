@@ -107,7 +107,7 @@
                               <td>
                                 <div></div>
                               </td>
-                              <td class="fw-bold text-truncate" style="max-width: 60px;">古典音樂</td>
+                              <td id="activity_name" class="fw-bold text-truncate" style="max-width: 60px;">古典音樂</td>
                               <td style="max-width: 120px;">
                                 <div class="quantity-control d-flex justify-content-center align-items-center">
                                   <button
@@ -129,7 +129,7 @@
                                   </button>
                                 </div>
                               </td>
-                              <td>NT$ 3000</td>
+                              <td id="unit_price">NT$ 3000</td>
                               <td>
                                 <button
                                   class="btn btn-sm"
@@ -143,7 +143,7 @@
                       </div>
   
                       <div class="bg-light text-end py-3 px-4">
-                        <h4 class="text-success">總計: NT$ 3000</h4>
+                        <h4 class="text-success" id="total_price">總計: NT$ 3000</h4>
                       </div>
                     </div>
                     <div class="d-flex justify-content-between p-3">
@@ -240,7 +240,20 @@
 
 	<script src="../_html/assets/js/dropzone.js"></script>
 	<!-- New Js -->
-
+	<script>
+		findAllProducts();
+		
+		function findAllProducts() {
+			fetch('/chill-tribe/shoppingCart/findAllProducts')
+				.then(response => response.json())
+				.then(data => {
+					console.log("從 Servlet 獲取的數據:", data);
+					// document.getElementById("quantity").textContent = data.quantity || 1;
+					// document.getElementById("activity_name").innerHTML = data.activity_name || "暫無";
+					// document.getElementById("unit_price").innerHTML = data.unit_price || 0;
+				});
+		};
+	</script>
 </body>
 
 </html>

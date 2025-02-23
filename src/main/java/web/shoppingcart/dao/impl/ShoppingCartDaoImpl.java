@@ -6,6 +6,7 @@ import static core.util.JdbcConstants.USER;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +47,9 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 			List<ShoppingCart> list = new ArrayList<>();
 			list.add(shoppingCart);
 			if (result > 0) {
-				
+
 				System.out.println(list);
-				
+
 			}
 			return list;
 
@@ -57,6 +58,37 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 		}
 		return null;
 
+	}
+
+	@Override
+	public List<ShoppingCart> selectAllCart() {
+		final String SQL = "SELECT * FROM SHOPPING_CART_ITEMS";
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+			ResultSet rs = pstmt.executeQuery();
+
+			List<ShoppingCart> list = new ArrayList<>();
+			while (rs.next()) {
+				ShoppingCart prodcutItems = new ShoppingCart();
+				prodcutItems.setActivity_id(rs.getInt("activity_id"));
+				prodcutItems.setQuantity(rs.getInt("quantity"));
+				prodcutItems.setTotal_price(rs.getInt("total_price"));
+				prodcutItems.setMember_id(rs.getInt("member_id"));
+				// prodcutItems.setActivityImages(null);
+//				prodcutItems.setActivity_name(rs.getString("activity_name"));
+//				prodcutItems.setUnit_price(rs.getInt("unit_price"));
+				list.add(prodcutItems);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public int deleteCart(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

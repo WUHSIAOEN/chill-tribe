@@ -22,4 +22,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return dao.insertToCart(shoppingCart);
 	}
 
+	@Override
+	public List<ShoppingCart> findAllProducts() {
+		return dao.selectAllCart();
+	}
+
 }
