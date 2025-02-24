@@ -13,9 +13,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const inventoryCount = parseInt(document.getElementById("inventoryCount")?.value) || 10;
   const description = document.getElementById("description")?.value || "";
   const precaution = document.getElementById("precaution")?.value || "";
-  const note = document.getElementById("note")?.value || "";
-  
   const selectedRange = document.getElementById("reservationtime")?.value || "";
+  const images = window.base64Images;
 
   function formatDateTime(input) {
     if (!input) return "";
@@ -50,6 +49,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     description,
     category,
     precaution,
+    images
     // not required
   };
 
