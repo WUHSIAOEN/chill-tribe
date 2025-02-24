@@ -262,7 +262,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" multiple>
+                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" accept="image/*" multiple>
                             <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
                         </div>
                     </div>
@@ -314,7 +314,7 @@
 <!-- AdminLTE App -->
 <script src="../admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../admin/dist/js/demo.js"></script>
+<!-- <script src="../admin/dist/js/demo.js"></script> -->
 <!-- Bootstrap CSS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -405,17 +405,21 @@
 
 <!----- 預覽圖片區域 ----->
 <script>
+  window.base64Images = [];
+
   document.getElementById("eventImages").addEventListener("change", function (event) {
     const previewContainer = document.getElementById("previewContainer");
-    previewContainer.innerHTML = ""; // 清空現有預覽
-
+    //  files 是用戶選擇的所有圖片檔案
     const files = event.target.files;
-
+    // 遍歷用戶選擇的所有檔案，轉成陣列
     Array.from(files).forEach((file, index) => {
-      if (!file.type.startsWith("image/")) return;
-
       const reader = new FileReader();
+
       reader.onload = function (e) {
+        const base64String = e.target.result; // 獲取Base64字串
+        window.base64Images.push(base64String);
+
+        // 創建一個 div 來顯示圖片預覽
         const previewDiv = document.createElement("div");
         previewDiv.classList.add("position-relative", "m-2");
         previewDiv.style.width = "160px";
@@ -430,9 +434,14 @@
         removeBtn.classList.add("remove-btn", "position-absolute");
 
         removeBtn.addEventListener("click", () => {
-            previewDiv.remove();
+          let removeImages = window.base64Images.indexOf(base64String);
+          if (removeImages !== -1) {
+              window.base64Images.splice(removeImages, 1); // 刪除對應的 Base64 資料
+          }
+          previewDiv.remove();
         });
 
+        // 將 img 和 removeBtn 加入 previewDiv
         previewDiv.appendChild(img);
         previewDiv.appendChild(removeBtn);
         previewContainer.appendChild(previewDiv);
@@ -443,7 +452,7 @@
 </script>
 
 <!----- 載入地址和郵遞區號 ----->
-<script src="./address.js"></script>
+<script src="./js/address.js"></script>
 <script>
   // 跑回圈，抓資料
   function addr_init(){
