@@ -7,6 +7,8 @@ import web.activity.vo.Activities;
 public interface ActivityDao{
 	// 新增是活動，回傳整數
 	int insert(Activities activity);
+	// 新增活動圖片
+	int insertActivityImages(Activities activity);
 	// 更新活動
 	int update(Activities activity);
 	// 刪除單一活動

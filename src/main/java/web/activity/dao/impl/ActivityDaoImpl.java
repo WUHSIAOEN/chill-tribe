@@ -18,6 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 public class ActivityDaoImpl implements ActivityDao {
 //	private DataSource ds;
@@ -69,6 +70,26 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 		return -1;
 	}
+	
+	// 新增多張活動圖片
+	@Override
+	public int insertActivityImages(Activities activity) {
+		final String SQL = "INSERT INTO activity_images (activity_id, image_name, image_base64) VALUES (?, ?, ?)";
+		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+			List<ActivityImage> activityImages = activity.getActivityImages();
+			for (ActivityImage image : activityImages) {
+	            pstmt.setInt(1, image.getActivityId());
+	            pstmt.setString(2, image.getImageName());
+	            pstmt.setString(3, image.getImageBase64());
+	            pstmt.addBatch();
+	        }
+			return pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return -1;
+	    }
+	}
+	
 
 	// 更新活動
 	@Override
@@ -364,5 +385,4 @@ public class ActivityDaoImpl implements ActivityDao {
 		return null;
 	}
 
-	
 }

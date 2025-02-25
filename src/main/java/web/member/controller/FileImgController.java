@@ -24,26 +24,49 @@ public class FileImgController extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		 try {
+		try {
 			service = new MemberServiceImpl();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		Gson gson = new Gson();
-		Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy/MM/dd")
-				.create();
-		
-		Member member = gson.fromJson(req.getReader(), Member.class);
-		
-		member = service.updateimg(member);
-		
-		member.setcPassword(null);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
+
+		// 舊的session資料
+		Member sessionMember = (Member) req.getSession().getAttribute("member");
+		// edit後更新的session資料
+		Member updateMember = gson.fromJson(req.getReader(), Member.class);
+
+		// to do list 更新了session的資料但是如果沒有異動的會沒資料所以要做判斷是否有異動
+		if (updateMember.getMember_name() != null) {
+			sessionMember.setMember_name(updateMember.getMember_name());
+		}
+		if (updateMember.getEmail() != null) {
+			sessionMember.setEmail(updateMember.getEmail());
+		}
+		if (updateMember.getPhone() != null) {
+			sessionMember.setPhone(updateMember.getPhone());
+		}
+		if (updateMember.getDate_of_birth() != null) {
+			sessionMember.setDate_of_birth(updateMember.getDate_of_birth());
+		}
+		if (updateMember.getGender() != null) {
+			sessionMember.setGender(updateMember.getGender());
+		}
+		if (updateMember.getPhoto_base64() != null) {
+			sessionMember.setPhoto_base64(updateMember.getPhoto_base64());
+		}
+
+		sessionMember = service.updateimg(sessionMember);
+
+		req.getSession().setAttribute("member", sessionMember);
+
+		sessionMember.setcPassword(null);
 		resp.setContentType("application/json");
-		resp.getWriter().write(gson.toJson(member));
+		resp.getWriter().write(gson.toJson(sessionMember));
 	}
 }

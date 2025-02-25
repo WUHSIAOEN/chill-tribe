@@ -9,6 +9,7 @@ import web.activity.dao.ActivityDao;
 import web.activity.dao.impl.ActivityDaoImpl;
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 public class ActivityServiceImpl implements ActivityService {
 	private ActivityDao dao;
@@ -49,6 +50,13 @@ public class ActivityServiceImpl implements ActivityService {
 
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 
+	}
+	
+	@Override
+	public String addImages(Activities activity) {
+		int resultCount = dao.insertActivityImages(activity);
+		
+		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 	}
 	
 	// 更新活動

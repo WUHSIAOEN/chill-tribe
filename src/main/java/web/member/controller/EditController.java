@@ -37,13 +37,39 @@ public class EditController extends HttpServlet {
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd")
 				.create();
+		// 舊的session資料
+		Member sessionMember = (Member) req.getSession().getAttribute("member");
+		// edit後更新的session資料
+		Member updateMember = gson.fromJson(req.getReader(), Member.class);
 		
-		Member member = gson.fromJson(req.getReader(), Member.class);
+		// to do list 更新了session的資料但是如果沒有異動的會沒資料所以要做判斷是否有異動
+		if (updateMember.getMember_name() != null) {
+            sessionMember.setMember_name(updateMember.getMember_name());
+        }
+        if (updateMember.getEmail() != null) {
+            sessionMember.setEmail(updateMember.getEmail());
+        }
+        if (updateMember.getPhone() != null) {
+            sessionMember.setPhone(updateMember.getPhone());
+        }
+        if (updateMember.getDate_of_birth() != null) {
+            sessionMember.setDate_of_birth(updateMember.getDate_of_birth());
+        }
+        if (updateMember.getGender() != null) {
+            sessionMember.setGender(updateMember.getGender());
+        }
+        if (updateMember.getPhoto_base64() != null) {
+            sessionMember.setPhoto_base64(updateMember.getPhoto_base64());
+        }
 		
-		member = service.edit(member);
 		
-		member.setcPassword(null);
+		
+        sessionMember = service.edit(sessionMember);
+		
+		req.getSession().setAttribute("member", sessionMember);
+		
+		sessionMember.setcPassword(null);
 		resp.setContentType("application/json");
-		resp.getWriter().write(gson.toJson(member));
+		resp.getWriter().write(gson.toJson(sessionMember));
 	}
 }
