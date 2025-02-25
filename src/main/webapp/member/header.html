@@ -7,7 +7,8 @@
 	<div class="container">
 		<nav id="navigation" class="navigation navigation-landscape">
 			<div class="nav-header">
-				<a class="nav-brand text-logo" id="logo_href" href="/chilltribe.html"> <span
+				<a class="nav-brand text-logo" id="logo_href"
+					href="/chilltribe.html"> <span
 					class="svg-icon text-primary svg-icon-2hx"> <svg width="50"
 							height="50" viewBox="0 0 24 24" fill="none"
 							xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +20,7 @@
 								fill="currentColor" />
 									</svg>
 				</span>
-				<h5 class="fs-3 fw-bold ms-1 my-0">ChillTribe</h5>
+					<h5 class="fs-3 fw-bold ms-1 my-0">ChillTribe</h5>
 				</a>
 				<div class="nav-toggle"></div>
 				<div class="mobile_nav">
@@ -46,7 +47,7 @@
 			<div class="nav-menus-wrapper" style="transition-property: none;">
 				<ul class="nav-menu">
 
-					<li class="active"><a href="../chilltribe.html">首頁<span
+					<li class="active"><a id="index_href" href="../chilltribe.html">首頁<span
 							class="submenu-indicator"></span></a></li>
 
 					<li><a href="JavaScript:Void(0);">活動列表<span
@@ -87,7 +88,8 @@
 					</a></li>
 				</ul>
 
-				<ul class="nav-menu nav-menu-social align-to-right" id="logout-menu" style="display:none;">
+				<ul class="nav-menu nav-menu-social align-to-right" id="logout-menu"
+					style="display: none;">
 					<li>
 						<div class="btn-group account-drop">
 							<button type="button"
@@ -99,8 +101,9 @@
 							</button>
 							<div class="dropdown-menu pull-right animated flipInX"
 								id="showing">
-								<a href="./member/member-details.html"><i class="fa-solid fa-gauge"></i>個人資料</a>
-								<a href=""><i class="fa-solid fa-power-off"></i>登出</a>
+								<a href="./member/member-details.html"><i
+									class="fa-solid fa-gauge"></i>個人資料</a> <a href=""><i
+									class="fa-solid fa-power-off"></i>登出</a>
 							</div>
 						</div>
 					</li>
@@ -203,6 +206,7 @@
 			const loginRegisterMenu = document.querySelector('#login-register-menu');
 			const logoutMenu = document.querySelector('#logout-menu');
 			const logo_href = document.querySelector('#logo_href');
+			const index_href = document.querySelector('#index_href');
 			
 			
 			// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
@@ -220,7 +224,11 @@
 
 			// 拼接路徑字串，塞回去標籤內
 			 let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
-			 console.log(baseUrl);
-			 logo_href = ``
+	 		 console.log(baseUrl);
+			 let chilltribeLink = baseUrl + '/chilltribe.html';
+			 let indexhref = baseUrl + '/chilltribe.html';
+			 console.log(chilltribeLink);
+			 logo_href.setAttribute('href', chilltribeLink);
+			 index_href.setAttribute('href', chilltribeLink);
 			
 		</script>

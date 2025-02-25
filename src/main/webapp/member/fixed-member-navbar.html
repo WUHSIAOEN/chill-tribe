@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a class="nav-brand text-logo" href="#">
+    <a class="nav-brand text-logo" id="member_logo_href" href="#">
         <span class="svg-icon text-primary svg-icon-2hx">
             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -33,7 +33,7 @@
 <div class="nav-menus-wrapper" style="transition-property: none;">
     <ul class="nav-menu">
 
-        <li class="active"><a href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a>
+        <li class="active"><a id="member_index_href" href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a>
         </li>
 
         <li><a href="JavaScript:Void(0);">活動列表<span class="submenu-indicator"></span></a>
@@ -72,7 +72,8 @@
 
 <script>
 	const username = document.querySelector('#member_name');
-
+	const member_logo_href = document.querySelector('#member_logo_href');
+	const member_index_href = document.querySelector('#member_index_href');
 
 	fetch('find')
 	.then(resp => resp.json())
@@ -80,4 +81,13 @@
 		username.innerText = member.member_name;
 		
 	});
+
+
+	let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
+	 console.log(baseUrl);
+	 let chilltribeLink = baseUrl + '/chilltribe.html';
+	 let indexhref = baseUrl + '/chilltribe.html';
+	 console.log(chilltribeLink);
+	 member_logo_href.setAttribute('href', chilltribeLink);
+	 member_index_href.setAttribute('href', chilltribeLink);
 </script>
