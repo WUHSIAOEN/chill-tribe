@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a class="nav-brand text-logo" href="#">
+    <a class="nav-brand text-logo" id="member_logo_href" href="#">
         <span class="svg-icon text-primary svg-icon-2hx">
             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -33,7 +33,7 @@
 <div class="nav-menus-wrapper" style="transition-property: none;">
     <ul class="nav-menu">
 
-        <li class="active"><a href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a>
+        <li class="active"><a id="member_index_href" href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a>
         </li>
 
         <li><a href="JavaScript:Void(0);">活動列表<span class="submenu-indicator"></span></a>
@@ -59,7 +59,7 @@
             <div class="btn-group account-drop">
                 <button type="button" class="btn btn-order-by-filt dropdown-toggle" id="showbutton"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://placehold.co/500x500" class="avater-img" alt="">您好！<span id="member_name"> </span>
+                    <img id="member_navbar_photo_base64" src="https://placehold.co/500x500" class="avater-img" alt="">您好！<span id="member_name"> </span>
                 </button>
                 <div class="dropdown-menu pull-right animated flipInX" id="showing">
                     <a href="./member-details.html"><i class="fa-solid fa-gauge"></i>個人資料</a>
@@ -69,15 +69,34 @@
         </li>
     </ul>
 </div>
+<input type="hidden" id="img_member_navbar_id" value="">
 
 <script>
+	const member_navbar_photo_base64 = document.getElementById('member_navbar_photo_base64');
 	const username = document.querySelector('#member_name');
-
+	const member_logo_href = document.querySelector('#member_logo_href');
+	const member_index_href = document.querySelector('#member_index_href');
 
 	fetch('find')
 	.then(resp => resp.json())
 	.then(member => {
 		username.innerText = member.member_name;
-		
+		img_member_navbar_id.value = member.member_id;
+		if (member.photo_base64 == null) {
+			member_navbar_photo_base64.src = 'https://placehold.co/500x500';
+			console.log("照片是空的");
+			} else {
+		member_navbar_photo_base64.src = 'data:image/png;base64,' + member.photo_base64;	
+		console.log("77777有照片囉");				
+				}
 	});
+
+
+	let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
+	 console.log(baseUrl);
+	 let chilltribeLink = baseUrl + '/chilltribe.html';
+	 let indexhref = baseUrl + '/chilltribe.html';
+	 console.log(chilltribeLink);
+	 member_logo_href.setAttribute('href', chilltribeLink);
+	 member_index_href.setAttribute('href', chilltribeLink);
 </script>
