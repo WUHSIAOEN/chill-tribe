@@ -133,7 +133,8 @@
 									<span class="label text-light bg-success" id="category-2">運動</span>
 									<h3 id="activityName-1">一起來打羽球吧!</h3>
 									<span id="districtId"><i class="lni-map-marker"></i> 大安公園</span>
-									<h3 class="prt-price-fix text-primary"><sub>$</sub>50<sub>/人</sub></h3>
+									<h3 class="prt-price-fix text-primary"><sub>$</sub>
+										<span id="unitPrice-1">50</span><sub>/人</sub></h3>
 								</div>
 							</div>
 							
@@ -194,7 +195,7 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">活動地區<span id="districtId">北部</span></button>
+														user-select: text;">活動城市<span id="cityId">大安公園</span></button>
 													</h2>
 												</div>
 											</div>
@@ -204,7 +205,7 @@
 													<h2 class="mb-0">
 														<button type="button" class="btn btn-link collapsed" data-bs-toggle="collapse" 
 														data-bs-target="#secondfloor" aria-controls="secondfloor" style="cursor: default; 
-														user-select: text;">活動城市<span id="cityId">大安公園</span></button>
+														user-select: text;">活動地區<span id="districtId">北部</span></button>
 													</h2>
 												</div>
 											</div>
@@ -570,7 +571,7 @@
 										加入購物車
 										</a>
 									</li>
-									<li><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
+									<li id="addToFavoritesBtn"><a href="JavaScript:Void(0);" class="btn btn-likes" data-toggle="tooltip" 
 										data-original-title="Save"><i class="fas fa-heart"></i>收藏</a></li>
 								</ul>
 							</div>
@@ -750,7 +751,11 @@
 		 
 		<script src="./_html/assets/js/custom.js"></script>
 
+		<!----- 載入地址和郵遞區號 ----->
+		<script src="./js/address.js"></script>
+
 		<script>
+			// 取得 ID
 			function getActivityIdFromURL() {
 				const params = new URLSearchParams(window.location.search);
 				return params.get("id");
@@ -765,8 +770,8 @@
 					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
 					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
 					document.getElementById("address").innerHTML = data.address || "暫無";
-					// document.getElementById("unitPrice-1").innerHTML = data.unitPrice || "暫無";
-					document.getElementById("unitPrice-2").textContent = data.unitPrice || 1;
+					document.getElementById("unitPrice-1").textContent = data.unitPrice || "暫無";
+					document.getElementById("unitPrice-2").textContent = data.unitPrice || "暫無";
 					document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
 					document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
 					document.getElementById("description").innerHTML = data.description || "暫無";
@@ -776,11 +781,16 @@
 					document.getElementById("startDateTime").innerHTML = data.startDateTime || "暫無";
 					document.getElementById("endDateTime").innerHTML = data.endDateTime || "暫無";
 					document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
-					
+
+					const city = addrData.find(item => item.city_id === data.city_id);
+					const district = city.area.find(area => area.zipcode === data.district_id);
+					console.log(city)
+					console.log(district)
+					document.getElementById("cityId").innerHTML = city.city;
+					// document.getElementById("districtId").innerHTML = district.name;
+
 					// ----------------------------------------------------------------------------
 					// document.getElementById("supplierId").innerHTML = data.supplierId;
-					// document.getElementById("cityId").innerHTML = data.cityId;
-					// document.getElementById("districtId").innerHTML = data.districtId;
 					// document.getElementById("activityId").innerHTML = data.activityId;
 					// document.getElementById("activityPrefix").innerHTML = data.activityPrefix;
 					// document.getElementById("latitude").innerHTML = data.latitude;
@@ -830,6 +840,34 @@
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify(requestData),
+				})
+			});
+
+			// 新增活動商品到我的最愛
+			function MyFavoritesItems() {
+				const activity_id = parseInt(getActivityIdFromURL()) || 1;
+				const member_id = parseInt(document.getElementById("member_id")?.value) || 1;
+				console.log(activity_id, member_id);
+
+				return {
+					activity_id,
+					member_id
+				};
+			};
+
+			document
+			.getElementById("addToFavoritesBtn")
+			.addEventListener("click", function (event) {
+				event.preventDefault();
+
+				const requestMyforitesData = MyFavoritesItems();
+				console.log("送出的資料:", requestMyforitesData);
+				fetch('/chill-tribe/myfavorites/addtomyfavorites', {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(requestMyforitesData),
 				})
 			});
 		</script>

@@ -13,9 +13,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const inventoryCount = parseInt(document.getElementById("inventoryCount")?.value) || 10;
   const description = document.getElementById("description")?.value || "";
   const precaution = document.getElementById("precaution")?.value || "";
-  const note = document.getElementById("note")?.value || "";
-  
   const selectedRange = document.getElementById("reservationtime")?.value || "";
+  const images = window.base64Images;
 
   function formatDateTime(input) {
     if (!input) return "";
@@ -53,19 +52,32 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     // not required
   };
 
-  console.log("Sending JSON:", JSON.stringify(requestData)); // 輸出 JSON 格式資料
+  const requestImages = {
+    images
+  }
 
-  fetch("/chill-tribe/activity/apply", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(requestData),
-	})
-		.then((resp) => {
-			if (!resp.ok) {
-				throw new Error(`HTTP error! Status: ${resp.status}`);
-			}
-			return resp.text();
-		});
+  console.log("Sending JSON:", JSON.stringify(requestData, requestImages)); // 輸出 JSON 格式資料
+
+  Promise.all([
+    fetch("/chill-tribe/activity/apply", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    }).catch(error => {
+      console.error("Activity created failed:", error)}),
+
+    fetch("/chill-tribe/activity/applyimages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestImages),
+    })
+    .catch(error => {
+      console.error("Image upload failed:", error);
+    })
+  ])
+
 });
