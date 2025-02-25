@@ -177,6 +177,7 @@
 	<script src="../Full_Resido/_html/assets/js/slider-bg.js"></script>
 	<script src="../Full_Resido/_html/assets/js/lightbox.js"></script>
 	<script src="../Full_Resido/_html/assets/js/imagesloaded.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<script>
 		// navbar load
@@ -283,10 +284,20 @@
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
 				console.log("恭喜，個資修改成功囉！！！");
-				alert('個資修改成功囉！');
+// 				alert('個資修改成功囉！');
+				Swal.fire({
+					  icon: "success",
+					  title: "恭喜",
+					  text: "個資修改成功囉！",
+					});
 			 }else {
 				 console.log("OH~NO...您個資修改失敗了！！！");
-				 alert('OH~不，個資修改失敗...');
+// 				 alert('OH~不，個資修改失敗...');
+				 Swal.fire({
+					  icon: "error",
+					  title: "Oh...糟糕",
+					  text: "個資修改失敗...",
+					});
 			 }
 		 });
 	});
