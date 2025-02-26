@@ -14,6 +14,8 @@ public interface ActivityService {
 	String addImages(Activities activity);
 	// 更新活動
 	String update(Activities activity);
+	// 改變活動的狀態-移除活動
+	String cancelById(Activities activity);
 	// 刪除活動
 	boolean removeById(Integer id);
 	// 複數活動
