@@ -8,22 +8,22 @@ const email = document.querySelector('#email');
 document.querySelector('button#build').addEventListener('click', () => {
 	console.log("觸發");
 	event.preventDefault();
-	if (username.value.length < 5 || username.value.length > 50) {
-		//			alert('使用者名稱長度須介於5 ~ 50');
+	if (username.value.length < 2 || username.value.length > 50) {
+		//			alert('使用者名稱長度須介於2 ~ 50');
 		Swal.fire({
 			icon: "error",
 			title: "Oh...糟糕",
-			text: "使用者名稱長度須介於5 ~ 50",
+			text: "使用者名稱長度須介於2 ~ 50",
 		});
 		return;
 	}
 
-	if (password.value.length < 6 || password.value.length > 12) {
+	if (password.value.length < 4 || password.value.length > 12) {
 //		alert('密碼長度須介於6 ~ 12');
 		Swal.fire({
 					icon: "error",
 					title: "Oh...糟糕",
-					text: "密碼長度須介於6 ~ 12",
+					text: "密碼長度須介於4 ~ 12",
 				});
 		return;
 	}
