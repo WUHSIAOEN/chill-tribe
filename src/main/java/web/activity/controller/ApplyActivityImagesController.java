@@ -1,6 +1,7 @@
 package web.activity.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import com.google.gson.JsonObject;
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 @WebServlet("/activity/applyimages")
 public class ApplyActivityImagesController extends HttpServlet{
@@ -45,13 +47,12 @@ private static final long serialVersionUID = 1L;
 
 		Activities activity = gson.fromJson(req.getReader(), Activities.class);
 			
-		String errMsg = service.addImages(activity);
+		List<ActivityImage> errMsg = service.addImages(activity);
 		System.out.println(errMsg);
 		System.out.println(activity);
 		
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", errMsg == null);
-		respBody.addProperty("errMsg", errMsg);
 		
 		resp.setContentType("application/json");
 			

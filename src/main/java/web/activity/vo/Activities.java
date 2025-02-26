@@ -3,8 +3,14 @@ package web.activity.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.aspectj.org.eclipse.jdt.internal.compiler.ast.FalseLiteral;
 
@@ -23,20 +29,21 @@ import web.supplier.vo.Supplier;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Activities extends Core{
+	@Column(name = "activity_id")
 	private Integer activityId;
 	private String activityPrefix;
 	private String activityName;
 	private Integer supplierId;
-//	要加上@OneToOne, @JoinColumn
-//	@JoinColumn(name = "supplier_id", insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "supplier_id", insertable = false, updatable = false)
 	private Supplier supplier;
 	private Integer city_id;
-//	要加上@OneToOne, @JoinColumn
-//	@JoinColumn(name = "city_id", insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "city_id", insertable = false, updatable = false)
 	private City city;
 	private Integer district_id;
-//	要加上@OneToOne, @JoinColumn
-//	@JoinColumn(name = "district_id", insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "district_id", insertable = false, updatable = false)
 	private District district;
 	private String address;
 	private Integer unitPrice;
@@ -44,11 +51,11 @@ public class Activities extends Core{
 	private Integer maxParticipants;
 	private String description;
 	private String category;
-//	要加上@OneToMany, @JoinColumn
-//	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
+	@OneToMany
+	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
 	private List<ActivityImage> activityImages;
-//	要加上@OneToMany, @JoinColumn
-//	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
+	@OneToMany
+	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
 	private List<Comment> comments;
 	private Timestamp startDateTime;
 	private Timestamp endDateTime;

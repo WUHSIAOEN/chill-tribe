@@ -53,10 +53,8 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
-	public String addImages(Activities activity) {
-		int resultCount = dao.insertActivityImages(activity);
-		
-		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+	public List<ActivityImage> addImages(Activities activity) {
+		return dao.insertActivityImages(activity);
 	}
 	
 	// 更新活動
