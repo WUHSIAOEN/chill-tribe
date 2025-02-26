@@ -29,10 +29,15 @@ import web.supplier.vo.Supplier;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Activities extends Core{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "activity_id")
 	private Integer activityId;
+	@Column(name = "activity_prefix")
 	private String activityPrefix;
+	@Column(name = "activity_name")
 	private String activityName;
+	@Column(name = "supplier_id")
 	private Integer supplierId;
 	@OneToOne
 	@JoinColumn(name = "supplier_id", insertable = false, updatable = false)
@@ -46,8 +51,11 @@ public class Activities extends Core{
 	@JoinColumn(name = "district_id", insertable = false, updatable = false)
 	private District district;
 	private String address;
+	@Column(name = "unit_price")
 	private Integer unitPrice;
+	@Column(name = "min_participants")
 	private Integer minParticipants;
+	@Column(name = "max_participants")
 	private Integer maxParticipants;
 	private String description;
 	private String category;
@@ -55,20 +63,27 @@ public class Activities extends Core{
 	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
 	private List<ActivityImage> activityImages;
 	@OneToMany
-	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
+	@JoinColumn(name = "activity_id", insertable = false, updatable = false)
 	private List<Comment> comments;
+	@Column(name = "start_date_time")
 	private Timestamp startDateTime;
+	@Column(name = "end_date_time")
 	private Timestamp endDateTime;
 	private Integer status;
 	private String note;
 	private String precaution;
 	private Integer approved;
+	@Column(name = "inventory_count")
 	private Integer inventoryCount;
+	@Column(name = "inventory_update_time")
 	private Timestamp inventoryUpdateTime;
+	@Column(name = "create_time")
 	private Timestamp createTime;
 	private String latitude;
 	private String longitude;
+	@Column(name = "tickets_activate_time")
 	private Timestamp ticketsActivateTime;
+	@Column(name = "tickets_expired_time")
 	private Timestamp ticketsExpiredTime;
 
 }

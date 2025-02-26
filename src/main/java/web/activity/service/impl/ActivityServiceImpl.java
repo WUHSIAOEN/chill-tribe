@@ -53,8 +53,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
-	public List<ActivityImage> addImages(Activities activity) {
-		return dao.insertActivityImages(activity);
+	public String addImages(List<ActivityImage> list) {
+		for (ActivityImage activity : list) {
+			
+		}
+		return null;
 	}
 	
 	// 更新活動
