@@ -71,6 +71,9 @@ public class ActivityDaoImpl implements ActivityDao {
 			pstmt.setString(14, activity.getPrecaution());
 
 			return pstmt.executeUpdate();
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,14 +83,15 @@ public class ActivityDaoImpl implements ActivityDao {
 	// 新增多張活動圖片
 	@Override
 	public int insertActivityImage(ActivityImage activityImage) {
-		final String SQL = "INSERT INTO activity_images (activity_id, image_name, image_base64) VALUES (?, ?, ?)";
+		final String SQL = "INSERT INTO activity_images (activity_id, image_base64) VALUES (?, ?)";
 		try (
 			Connection conn = ds.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SQL)
 		) {
 			pstmt.setInt(1, activityImage.getActivityId());
-			pstmt.setString(2, activityImage.getImageName());
-			pstmt.setString(3, activityImage.getImageBase64());
+			pstmt.setString(2, activityImage.getImageBase64());
+			
+			return pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

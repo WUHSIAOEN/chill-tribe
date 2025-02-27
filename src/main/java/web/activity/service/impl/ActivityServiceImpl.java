@@ -52,10 +52,17 @@ public class ActivityServiceImpl implements ActivityService {
 
 	}
 	
+	// 插入圖片
 	@Override
-	public String addImages(List<ActivityImage> list) {
-		for (ActivityImage activity : list) {
-			
+	public String addImages(Activities activity, List<ActivityImage> list) {
+		
+		int activityId = dao.insert(activity);
+		
+		for (ActivityImage image : list) {
+			image.setActivityId(activityId);
+            int resultCount = dao.insertActivityImage(image);
+            
+            return resultCount > 0 ? null : "插入圖片發生錯誤，請聯絡客服";
 		}
 		return null;
 	}
