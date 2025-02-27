@@ -6,12 +6,17 @@ import web.order.vo.Orders;
 public class OrderServiceImpl implements OrderService{
 
 	@Override
-	public String placeOrder(Orders order) {
-		
-		
-		
+	public String placeOrderWithPayment(Orders order) {
+		// TO-Do
+		return null;
+	}
+
+	@Override
+	public String placeOrderWithoutPayment(Orders order) {
 		
 		return null;
 	}
+
+
 
 }
