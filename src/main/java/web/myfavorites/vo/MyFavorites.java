@@ -22,6 +22,7 @@ import web.activity.vo.ActivityImage;
 @AllArgsConstructor
 public class MyFavorites extends Core{
 	private Integer activity_id;
+	private Integer my_favorite_id;
 	private Integer member_id;
 	private Timestamp added_time;
 	@OneToOne
