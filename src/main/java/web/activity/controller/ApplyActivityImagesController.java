@@ -45,11 +45,11 @@ private static final long serialVersionUID = 1L;
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
 
-		Activities activity = gson.fromJson(req.getReader(), Activities.class);
+		// List<ActivityImage> list = gson.fromJson(req.getReader(), List<ActivityImage>.class);
 			
-		List<ActivityImage> errMsg = service.addImages(activity);
+		String errMsg = "hello";
 		System.out.println(errMsg);
-		System.out.println(activity);
+		// System.out.println(activity);
 		
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", errMsg == null);

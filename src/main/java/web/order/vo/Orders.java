@@ -20,10 +20,10 @@ public class Orders extends Core{
 	private Integer orderId;
 	private String orderPrefix;
     private Integer memberId;
-    
+//    要加上OneToOne, @JoinColum
     private Member member;
     private Integer activityId;
-    
+//    要加上OneToOne, @JoinColum
     private Activities activity;
     private Integer quantity;
     private String orderStatus;

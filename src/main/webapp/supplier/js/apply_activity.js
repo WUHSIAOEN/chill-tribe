@@ -58,7 +58,6 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
 
   console.log("Sending JSON:", JSON.stringify(requestData, requestImages)); // 輸出 JSON 格式資料
 
-  Promise.all([
     fetch("/chill-tribe/activity/apply", {
       method: "POST",
       headers: {
@@ -78,6 +77,5 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     .catch(error => {
       console.error("Image upload failed:", error);
     })
-  ])
 
 });

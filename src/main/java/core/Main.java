@@ -41,10 +41,14 @@ public class Main {
 		OrderDao Od = new OrderDaoImpl();
 		Orders order = new Orders();
 		order.setActivityId(1);
-		order.setMemberId(2);
-		order.setQuantity(2);
+		order.setMemberId(1);
+		order.setQuantity(4);
 		order.setOrderStatus("no_payment_required");
 		order.setPaymentMethod("none");
+		order.setOrderContact("小名");
+		order.setContactMail("aaabbbcc@gmail.com");
+		order.setContactPhone("456196582");
+		order.setRequirement("無");
 		Od.insert(order);
 		
 		
