@@ -11,9 +11,11 @@ public interface ActivityService {
 	// 因為它代表servlet回傳的東西，具體的訊息，告訴使用者操作是成功還是失敗
 	String apply(Activities activity);
 	// 新增活動圖片
-	String addImages(Activities activity);
+	String addImages(List<ActivityImage> list);
 	// 更新活動
 	String update(Activities activity);
+	// 改變活動的狀態-移除活動
+	String cancelById(Activities activity);
 	// 刪除活動
 	boolean removeById(Integer id);
 	// 複數活動

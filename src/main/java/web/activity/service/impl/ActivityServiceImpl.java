@@ -53,10 +53,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
-	public String addImages(Activities activity) {
-		int resultCount = dao.insertActivityImages(activity);
-		
-		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+	public String addImages(List<ActivityImage> list) {
+		for (ActivityImage activity : list) {
+			
+		}
+		return null;
 	}
 	
 	// 更新活動
@@ -95,6 +96,17 @@ public class ActivityServiceImpl implements ActivityService {
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 		
 	}
+	
+	// 將活動取消
+	@Override
+	public String cancelById(Activities activity) {
+		
+		int resultCount = dao.updateteCancel(activity);
+		
+		activity.setSuccessful(resultCount > 0);
+		
+		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+	}
 
 	// 刪除
 	@Override
@@ -116,5 +128,6 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activities findActivityById(Integer id) {
 		return dao.selectByActivityId(id);
 	}
+
 
 }

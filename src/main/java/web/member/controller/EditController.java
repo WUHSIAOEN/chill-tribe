@@ -37,13 +37,20 @@ public class EditController extends HttpServlet {
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd")
 				.create();
+		// 舊的session資料
+		Member sessionMember = (Member) req.getSession().getAttribute("member");
+		// edit後更新的session資料
+		Member updateMember = gson.fromJson(req.getReader(), Member.class);
 		
-		Member member = gson.fromJson(req.getReader(), Member.class);
+		// to do list 更新了session的資料但是如果沒有異動的會沒資料所以要做判斷是否有異動
 		
-		member = service.edit(member);
 		
-		member.setcPassword(null);
+        sessionMember = service.edit(sessionMember, updateMember);
+		
+		req.getSession().setAttribute("member", sessionMember);
+		
+		sessionMember.setcPassword(null);
 		resp.setContentType("application/json");
-		resp.getWriter().write(gson.toJson(member));
+		resp.getWriter().write(gson.toJson(sessionMember));
 	}
 }

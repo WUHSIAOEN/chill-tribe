@@ -3,6 +3,7 @@
 package web.activity.dao.impl;
 
 import static core.util.JdbcConstants.PASSWORD;
+
 import static core.util.JdbcConstants.URL;
 import static core.util.JdbcConstants.USER;
 
@@ -13,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -21,6 +26,7 @@ import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
 public class ActivityDaoImpl implements ActivityDao {
+	
 //	private DataSource ds;
 	private HikariDataSource ds;
 
@@ -70,31 +76,29 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 		return -1;
 	}
-	
+
 	// 新增多張活動圖片
 	@Override
-	public int insertActivityImages(Activities activity) {
+	public int insertActivityImage(ActivityImage activityImage) {
 		final String SQL = "INSERT INTO activity_images (activity_id, image_name, image_base64) VALUES (?, ?, ?)";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			List<ActivityImage> activityImages = activity.getActivityImages();
-			for (ActivityImage image : activityImages) {
-	            pstmt.setInt(1, image.getActivityId());
-	            pstmt.setString(2, image.getImageName());
-	            pstmt.setString(3, image.getImageBase64());
-	            pstmt.addBatch();
-	        }
-			return pstmt.executeUpdate();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return -1;
-	    }
+		try (
+			Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SQL)
+		) {
+			pstmt.setInt(1, activityImage.getActivityId());
+			pstmt.setString(2, activityImage.getImageName());
+			pstmt.setString(3, activityImage.getImageBase64());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
-	
 
 	// 更新活動
 	@Override
 	public int update(Activities activity) {
-		
+
 		StringBuilder sql = new StringBuilder("UPDATE Activities SET ");
 
 		if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
@@ -168,21 +172,21 @@ public class ActivityDaoImpl implements ActivityDao {
 //		if (activity.getTicketsExpiredTime() != null) {
 //			sql.append("TICKETS_EXPIRED_TIME = ?, ");
 //		}
-		
+
 		String sqlQuery = sql.toString();
-	    if (sqlQuery.endsWith(", ")) {
-	        sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
-	    }
+		if (sqlQuery.endsWith(", ")) {
+			sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
+		}
 
-	    // 確保在更新語句中有要更新的欄位
-	    if (sqlQuery.equals("UPDATE ACTIVITIES SET")) {
-	        return 0;  // 如果沒有任何欄位需要更新，則返回 0
-	    }
+		// 確保在更新語句中有要更新的欄位
+		if (sqlQuery.equals("UPDATE ACTIVITIES SET")) {
+			return 0; // 如果沒有任何欄位需要更新，則返回 0
+		}
 
-	    // 加上 WHERE 條件來指定更新的會員 (假設使用 ACTIVITY_ID 或其他識別欄位)
-	    sqlQuery += " WHERE ACTIVITY_ID = ?";  // 假設 ACTIVITY_ID 是更新條件
-	    
-	    int parameterIndex = 1; // 偏移量
+		// 加上 WHERE 條件來指定更新的會員 (假設使用 ACTIVITY_ID 或其他識別欄位)
+		sqlQuery += " WHERE ACTIVITY_ID = ?"; // 假設 ACTIVITY_ID 是更新條件
+
+		int parameterIndex = 1; // 偏移量
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sqlQuery);) {
 
@@ -278,12 +282,26 @@ public class ActivityDaoImpl implements ActivityDao {
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		return -1;
 	}
 
-//  刪除活動
+	// 將活動取消
+	@Override
+	public int updateteCancel(Activities activity) {
+		String SQL = "UPDATE ACTIVITIES SET STATUS = 0 WHERE ACTIVITY_ID = ?";
+
+	    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+	    	pstmt.setInt(1, activity.getActivityId());
+	        return pstmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return -1; // 代表更新失敗
+	}
+
+	// 刪除活動
 	@Override
 	public int deletActivityById(Integer activityId) {
 		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
@@ -331,7 +349,7 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setLongitude(rs.getString("longitude"));
 				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
 				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
-				System.out.println(list);
+//				System.out.println(list);
 				list.add(activity);
 			}
 			return list;
@@ -340,7 +358,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		}
 		return null;
 	}
-	
+
 	// 只用活動ID搜尋，傳回其他活動內容
 	@Override
 	public Activities selectByActivityId(Integer activityId) {
