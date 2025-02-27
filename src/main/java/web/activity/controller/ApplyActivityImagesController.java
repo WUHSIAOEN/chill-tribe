@@ -1,6 +1,8 @@
 package web.activity.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
@@ -44,15 +47,10 @@ private static final long serialVersionUID = 1L;
 		Gson gson = new GsonBuilder()
 				.setDateFormat("yyyy/MM/dd HH:mm:ss")
 				.create();
-
-		// List<ActivityImage> list = gson.fromJson(req.getReader(), List<ActivityImage>.class);
-			
-		String errMsg = "hello";
-		System.out.println(errMsg);
-		// System.out.println(activity);
 		
-		JsonObject respBody = new JsonObject();
-		respBody.addProperty("successful", errMsg == null);
+		Activities activity = gson.fromJson(req.getReader(), Activities.class);
+		List<ActivityImage> imageList = new ArrayList<>();
+        
 		
 		resp.setContentType("application/json");
 			
