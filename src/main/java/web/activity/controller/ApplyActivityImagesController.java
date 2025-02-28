@@ -1,6 +1,9 @@
 package web.activity.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -12,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
@@ -40,21 +42,39 @@ private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy/MM/dd HH:mm:ss")
-				.create();
-
-		// List<ActivityImage> list = gson.fromJson(req.getReader(), List<ActivityImage>.class);
-			
-		String errMsg = "hello";
-		System.out.println(errMsg);
-		// System.out.println(activity);
+		System.out.println("----------------------------------------------");
+//		Gson gson = new GsonBuilder()
+//				.setDateFormat("yyyy/MM/dd HH:mm:ss")
+//				.create();
+//		
+//		Activities activity = gson.fromJson(req.getReader(), Activities.class);
+//		List<ActivityImage> imageList = new ArrayList<>();
 		
-		JsonObject respBody = new JsonObject();
-		respBody.addProperty("successful", errMsg == null);
+		BufferedReader reader = req.getReader();
+		System.out.println("reader " + reader);
+		Gson gson = new Gson();
+		RequestData requestData = gson.fromJson(reader, RequestData.class);
+		System.out.println("requestData"+ requestData);
+		List<String> images = requestData.getImages();
+		System.out.println(" length : " + images.size());
+		for (String str: images) {
+			System.out.println("image-----------------");
+			System.out.println(str.length());
+			System.out.println("image: " + str);
+		}
+        
 		
 		resp.setContentType("application/json");
 			
+	}
+}
+
+class RequestData {
+	private List<String> images = new ArrayList<>();
+	public List<String> getImages() {
+		return images;
+	}
+	public void setImages(List<String> images) {
+		this.images = images;
 	}
 }

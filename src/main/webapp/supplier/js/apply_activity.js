@@ -67,12 +67,16 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     }).catch(error => {
       console.error("Activity created failed:", error)}),
 
+	console.log('................', Array.isArray(window.base64Images));
+	console.log('----------------------', window.base64Images);
     fetch("/chill-tribe/activity/applyimages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestImages),
+      body: JSON.stringify({
+	    images: window.base64Images
+	  }),
     })
     .catch(error => {
       console.error("Image upload failed:", error);

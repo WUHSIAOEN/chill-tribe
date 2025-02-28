@@ -215,7 +215,7 @@
             <th>名稱</th>
             <th>日期</th>
             <th>內容修改</th>
-            <th>刪除活動</th>
+            <th>取消活動</th>
             <th>狀態</th>
           </tr>
           </thead>
@@ -374,7 +374,7 @@
                 <i class="bi bi-trash"></i>
                 </a>
               </td>
-              <td>${statusText}</td>
+              <td class="${activity.status === 0 ? 'text-muted' : ''}">${statusText}</td>
             </tr>
           `;
           
@@ -389,16 +389,16 @@
 </script>
 <script>
   document.addEventListener("click", function (event) {
-  // 確保點擊的是 trash 圖示或其父級的 <a>
-  if (event.target.classList.contains("bi-trash") || event.target.closest("a#removeBtn")) {
-    event.preventDefault(); // 防止 <a> 跳轉
 
-    const userConfirmed = window.confirm("確定要刪除此活動嗎？");
+  if (event.target.classList.contains("bi-trash") || event.target.closest("a#removeBtn")) {
+    event.preventDefault();
+
+    const userConfirmed = window.confirm("確定要取消此活動嗎？");
 
     if (userConfirmed) {
-      const activity_id = parseInt(event.target.closest("tr").querySelector("td").textContent.trim().replace(/^#0*/, "")); 
-      console.log("要刪除的活動 ID:", activity_id);
-      const requestData = {activity_id: activity_id, status: 0};
+      const activityId = parseInt(event.target.closest("tr").querySelector("td").textContent.trim().replace(/^#0*/, "")); 
+      console.log("要取消的活動 ID:", activityId);
+      const requestData = {activityId: activityId, status: 0};
 
       fetch("/chill-tribe/activity/cancelActivity", {
         method: "PUT",
@@ -409,9 +409,10 @@
       })
         .then((response) => {
           if (response.ok) {
-            alert("活動已刪除！");
+            alert("活動已取消！");
+            fetchAllActivity($('#example2').DataTable());
           } else {
-            alert("刪除活動失敗！");
+            alert("取消活動失敗！");
           }
         })
         .catch((error) => {

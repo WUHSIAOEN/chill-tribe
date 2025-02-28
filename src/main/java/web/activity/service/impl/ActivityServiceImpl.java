@@ -17,7 +17,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public ActivityServiceImpl() throws NamingException {
 		dao = new ActivityDaoImpl();
 	}
-	
+
 	// 申請活動
 	@Override
 	public String apply(Activities activity) {
@@ -51,19 +51,26 @@ public class ActivityServiceImpl implements ActivityService {
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 
 	}
-	
+
+	// 插入圖片
 	@Override
-	public String addImages(List<ActivityImage> list) {
-		for (ActivityImage activity : list) {
-			
+	public String addImages(Activities activity, List<ActivityImage> list) {
+
+		int activityId = dao.insert(activity);
+
+		for (ActivityImage image : list) {
+			image.setActivityId(activityId);
+			int resultCount = dao.insertActivityImage(image);
+
+			return resultCount > 0 ? null : "插入圖片發生錯誤，請聯絡客服";
 		}
 		return null;
 	}
-	
+
 	// 更新活動
 	@Override
 	public String update(Activities activity) {
-		
+
 //		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
 //		activity.setActivityName(oActivity.getActivityName());
 //		activity.setAddress(oActivity.getAddress());
@@ -88,23 +95,23 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setTicketsExpiredTime(oActivity.getTicketsExpiredTime());
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
-		
+
 		int resultCount = dao.update(activity);
-		
+
 		activity.setSuccessful(resultCount > 0);
-		
+
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
-		
+
 	}
-	
+
 	// 將活動取消
 	@Override
 	public String cancelById(Activities activity) {
-		
+
 		int resultCount = dao.updateteCancel(activity);
-		
+
 		activity.setSuccessful(resultCount > 0);
-		
+
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 	}
 
@@ -128,6 +135,5 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activities findActivityById(Integer id) {
 		return dao.selectByActivityId(id);
 	}
-
 
 }
