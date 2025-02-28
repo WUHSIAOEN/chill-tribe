@@ -15,17 +15,18 @@ import lombok.Setter;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
-@Entity
+//@Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyFavorites extends Core{
 	private Integer activity_id;
+	private Integer my_favorite_id;
 	private Integer member_id;
 	private Timestamp added_time;
-	@OneToOne
-	@JoinColumn(name = "activity_id", insertable = false, updatable = false)
+//	@OneToOne
+//	@JoinColumn(name = "activity_id", insertable = false, updatable = false)
 	private Activities activities;
 	
 	private List<ActivityImage> activityImages;

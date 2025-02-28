@@ -32,7 +32,7 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 	}
 
 	@Override
-	public List<MyFavorites> insertToFavorites(MyFavorites myFavorites) {
+	public int insertToFavorites(MyFavorites myFavorites) {
 		// SQL 語句：根據 activities 表格新增資料
 		final String SQL = "INSERT INTO MY_FAVORITES (ACTIVITY_ID, MEMBER_ID) " + "VALUES (?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
@@ -48,16 +48,16 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				System.out.println(list);
 
 			}
-			return list;
+			return -1;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return 1;
 	}
 
 	@Override
-	public List<MyFavorites> selectAllFavorites() {
+	public int selectAllFavorites() {
 		final String SQL = "SELECT mf.my_favorite_id, mf.activity_id, mf.member_id, mf.added_time,"
 	               + " act.activity_prefix, act.activity_name, act.supplier_id, act.city_id, act.district_id, act.address,"
 	               + " act.unit_price, act.min_participants, act.max_participants, act.description, act.precaution, act.category,"
@@ -93,8 +93,8 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
 				activity.setApproved(rs.getInt("approved"));
-				activity.setCity_id(rs.getInt("city_id"));
-				activity.setDistrict_id(rs.getInt("district_id"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
@@ -107,11 +107,11 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				
 				list.add(myFavorites);
 			}
-			return list;
+			return -1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return 1;
 	}
 
 	@Override
@@ -119,5 +119,17 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+//	@Override
+//	public int deleteFavorites(Integer id) {
+//		String SQL = "delete from my_favorites where my_favorite_id = ?";
+//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+//			pstmt.setInt(1, id);
+//			return pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
+//	}
 
 }
