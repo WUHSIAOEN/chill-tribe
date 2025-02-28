@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Transient;
 
 import org.aspectj.org.eclipse.jdt.internal.compiler.ast.FalseLiteral;
 
@@ -30,60 +32,113 @@ import web.supplier.vo.Supplier;
 @AllArgsConstructor
 public class Activities extends Core{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "activity_id")
-	private Integer activityId;
-	@Column(name = "activity_prefix")
-	private String activityPrefix;
-	@Column(name = "activity_name")
-	private String activityName;
-	@Column(name = "supplier_id")
-	private Integer supplierId;
-	@OneToOne
-	@JoinColumn(name = "supplier_id", insertable = false, updatable = false)
-	private Supplier supplier;
-	private Integer city_id;
-	@OneToOne
-	@JoinColumn(name = "city_id", insertable = false, updatable = false)
-	private City city;
-	private Integer district_id;
-	@OneToOne
-	@JoinColumn(name = "district_id", insertable = false, updatable = false)
-	private District district;
-	private String address;
-	@Column(name = "unit_price")
-	private Integer unitPrice;
-	@Column(name = "min_participants")
-	private Integer minParticipants;
-	@Column(name = "max_participants")
-	private Integer maxParticipants;
-	private String description;
-	private String category;
-	@OneToMany
-	@JoinColumn(name = "activity_image_id", insertable = false, updatable = false)
-	private List<ActivityImage> activityImages;
-	@OneToMany
-	@JoinColumn(name = "activity_id", insertable = false, updatable = false)
-	private List<Comment> comments;
-	@Column(name = "start_date_time")
-	private Timestamp startDateTime;
-	@Column(name = "end_date_time")
-	private Timestamp endDateTime;
-	private Integer status;
-	private String note;
-	private String precaution;
-	private Integer approved;
-	@Column(name = "inventory_count")
-	private Integer inventoryCount;
-	@Column(name = "inventory_update_time")
-	private Timestamp inventoryUpdateTime;
-	@Column(name = "create_time")
-	private Timestamp createTime;
-	private String latitude;
-	private String longitude;
-	@Column(name = "tickets_activate_time")
-	private Timestamp ticketsActivateTime;
-	@Column(name = "tickets_expired_time")
-	private Timestamp ticketsExpiredTime;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ACTIVITY_ID")
+    private Integer activityId;
+
+    @Column(name = "ACTIVITY_PREFIX", insertable = false)
+    private String activityPrefix;
+    
+    @Column(name = "ACTIVITY_NAME")
+    private String activityName;
+
+    @Column(name = "SUPPLIER_ID")
+    private Integer supplierId;
+
+//    @OneToOne
+//    @JoinColumn(name = "SUPPLIER_ID", insertable = false, updatable = false)
+    @Transient
+    private Supplier supplier;
+
+    @Column(name = "CITY_ID")
+    private Integer cityId;
+
+//    @OneToOne
+//    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
+    @Transient
+    private City city;
+
+    @Column(name = "DISTRICT_ID")
+    private Integer districtId;
+
+//    @OneToOne
+//    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
+    @Transient
+    private District district;
+
+    private String address;
+
+    @Column(name = "UNIT_PRICE")
+    private Integer unitPrice;
+
+    @Column(name = "MIN_PARTICIPANTS")
+    private Integer minParticipants;
+
+    @Column(name = "MAX_PARTICIPANTS")
+    private Integer maxParticipants;
+
+    private String description;
+
+    private String category;
+
+//    @OneToMany
+//    @JoinColumn(name = "ACTIVITY_IMAGE_ID", insertable = false, updatable = false)
+    @Transient
+    private List<ActivityImage> activityImages;
+
+//    @OneToMany
+//    @JoinColumn(name = "COMMENT_ID", insertable = false, updatable = false)
+    @Transient
+    private List<Comment> comments;
+
+    @Column(name = "START_DATE_TIME")
+    private Timestamp startDateTime;
+
+    @Column(name = "END_DATE_TIME")
+    private Timestamp endDateTime;
+
+    private Integer status;
+    
+
+    private String note;
+
+    private String precaution;
+
+    private Integer approved;
+
+    @Column(name = "INVENTORY_COUNT")
+    private Integer inventoryCount;
+    
+
+    @Column(name = "INVENTORY_UPDATE_TIME")
+    private Timestamp inventoryUpdateTime;
+
+    @Column(name = "CREATE_TIME")
+    private Timestamp createTime;
+
+    private String latitude;
+
+    private String longitude;
+
+    @Column(name = "TICKETS_ACTIVATE_TIME")
+    private Timestamp ticketsActivateTime;
+
+    @Column(name = "TICKETS_EXPIRED_TIME")
+    private Timestamp ticketsExpiredTime;
+    
+    @PrePersist
+    public void prePersistStatus() {
+        if (status == null) {
+            status = 1; 
+        }
+        
+        if (approved == null) {
+        	approved = 1;
+        }
+        
+        if (inventoryCount == null) {
+        	inventoryCount = 0;
+        }
+    }
 
 }
