@@ -31,7 +31,7 @@ public class OrderforpayServiceImpl implements OrderforpayService{
         // 訂單編號一定要英文+數字 不然會出錯~~~
         // 綠界要的資料
         AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
-        aioCheckOutALL.setMerchantTradeNo("Order" + "t07"); // 訂單ID
+        aioCheckOutALL.setMerchantTradeNo("Order" + "t010"); // 訂單ID
         aioCheckOutALL.setMerchantTradeDate(orderDate); // 訂單日期
         aioCheckOutALL.setTotalAmount(String.valueOf(total_price)); // 訂單總金額
         aioCheckOutALL.setTradeDesc("購物網站支付"); // 訂單描述

@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Resido - Residence & Real Estate HTML Template</title>
+<title>一般會員新增地址</title>
 
 <!-- Custom CSS -->
 <link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -100,12 +100,12 @@
 
 										<div class="form-group col-md-6">
 											<label>地址</label> <span class="input-required">*</span> <input
-												type="text" class="form-control">
+												type="text" class="form-control" id="address">
 										</div>
 
 										<div class="form-group col-md-6">
 											<label>標籤</label> <span style="font-size: 10px;">(例如：住家、公司、宿舍)</span>
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="tag">
 										</div>
 
 
@@ -121,7 +121,7 @@
 
 										<div class="form-group col-lg-12 col-md-12"
 											style="display: flex; justify-content: flex-end;">
-											<button class="btn btn-primary rounded px-6" type="button">送出</button>
+											<button class="btn btn-primary rounded px-6" type="button" id="btn_upaddress">送出</button>
 										</div>
 
 									</div>
@@ -156,7 +156,8 @@
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
-
+	<input type="hidden" id="address_member_id" value="">
+	<input type="hidden" id="member_id" value="">
 
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
@@ -208,8 +209,13 @@
 	<!-- ============================地址選單的js============================== -->
 	<script src="../member/js/address_form.js"></script>
 
-	<script src="../_html/assets/js/dropzone.js"></script>
+<!-- 	<script src="../_html/assets/js/dropzone.js"></script> -->
+	<script src="../Full_Resido/_html/assets/js/dropzone.js"></script>
 	<!-- New Js -->
+	
+	<script>
+	
+	</script>
 
 </body>
 

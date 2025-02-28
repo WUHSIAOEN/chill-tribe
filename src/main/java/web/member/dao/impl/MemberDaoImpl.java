@@ -306,18 +306,20 @@ public class MemberDaoImpl implements MemberDao {
 		// 地址查詢
 		@Override
 		public Member selectaddress(Member address) {
-			String sql = "select * from ADDRESSES where MEMBER_ID = ?";
-			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			String sql = "SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?";
+			try (Connection conn = ds.getConnection(); 
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, address.getMember_id());
 				try (ResultSet rs = pstmt.executeQuery()) {
 					if (rs.next()) {
 						Member member = new Member();
 						member.setMember_id(rs.getInt("MEMBER_ID"));
-						member.setMember_name(rs.getString("MEMBER_NAME"));
-						member.setEmail(rs.getString("EMAIL"));
-						member.setCity_id(rs.getString("CITY_ID"));
-						member.setDistrict_id(rs.getString("DISTRICT_ID"));
-						member.setAddress_id(rs.getString("ADDRESS_ID"));
+						member.setZip_code(rs.getInt("ZIP_CODE"));
+						member.setCity_id(rs.getInt("CITY_ID"));
+						member.setCity_name(rs.getString("CITY_NAME"));
+						member.setDistrict_id(rs.getInt("DISTRICT_ID"));
+						member.setDistrict_name(rs.getString("DISTRICT_NAME"));
+						member.setAddress_id(rs.getInt("ADDRESS_ID"));
 						member.setAddress(rs.getString("ADDRESS"));
 						member.setTag(rs.getString("TAG"));
 						member.setAddress_default(rs.getInt("ADDRESS_DEFAULT"));
@@ -328,5 +330,55 @@ public class MemberDaoImpl implements MemberDao {
 				e.printStackTrace();
 			}
 			return null;
+		}
+
+		@Override
+		public List<Member> selectaddressAll(Integer member_id) {
+			String sql = "SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?";
+			try (Connection conn = ds.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					pstmt.setInt(1, member_id);
+					ResultSet rs = pstmt.executeQuery(); {
+				List<Member> list = new ArrayList<>();
+
+				while (rs.next()) {
+					Member member = new Member();
+					member.setMember_id(rs.getInt("MEMBER_ID"));
+					member.setZip_code(rs.getInt("ZIP_CODE"));
+					member.setCity_id(rs.getInt("CITY_ID"));
+					member.setCity_name(rs.getString("CITY_NAME"));
+					member.setDistrict_id(rs.getInt("DISTRICT_ID"));
+					member.setDistrict_name(rs.getString("DISTRICT_NAME"));
+					member.setAddress_id(rs.getInt("ADDRESS_ID"));
+					member.setAddress(rs.getString("ADDRESS"));
+					member.setTag(rs.getString("TAG"));
+					member.setAddress_default(rs.getInt("ADDRESS_DEFAULT"));
+					list.add(member);
+				}
+				System.out.println(list);
+				System.out.println(list.size());
+				return list;
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		public int upaddress(Member member) {
+			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, member.getMember_id());
+				pstmt.setInt(2, member.getCity_id());
+				pstmt.setInt(3, member.getDistrict_id());
+				pstmt.setString(4, member.getAddress());
+				pstmt.setInt(5, member.getAddress_default());
+				pstmt.setString(6, member.getTag());
+				return pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
 		}
 }
