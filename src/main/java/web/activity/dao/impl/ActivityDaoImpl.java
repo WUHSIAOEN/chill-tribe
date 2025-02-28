@@ -27,6 +27,8 @@ import web.activity.vo.ActivityImage;
 
 public class ActivityDaoImpl implements ActivityDao {
 	
+	
+//	================ 確定該DAO 都能從Spring 注入的Sesson 取的資料庫連線則不須以下屬性及建構子 ================
 //	private DataSource ds;
 	private HikariDataSource ds;
 
@@ -45,40 +47,51 @@ public class ActivityDaoImpl implements ActivityDao {
 		ds.addDataSourceProperty("preStmtCacheSize", 250);
 		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
-
-	// 新增活動
+//	================ 確定該DAO 都能從Spring 注入的Sesson 取的資料庫連線則不須以上屬性及建構子 ================
+	
+//	================ Spring 注入DataSource 連線 ================
+	@PersistenceContext 
+	private Session session;	
+	
+//	新增一筆活動資料Hibernate 寫法
 	@Override
 	public int insert(Activities activity) {
-		// SQL 語句：根據 activities 表格新增資料
-		final String SQL = "INSERT INTO ACTIVITIES (SUPPLIER_ID, ACTIVITY_NAME, CITY_ID, DISTRICT_ID, ADDRESS, "
-				+ "START_DATE_TIME, END_DATE_TIME, UNIT_PRICE, MIN_PARTICIPANTS, MAX_PARTICIPANTS, "
-				+ "INVENTORY_COUNT, DESCRIPTION, CATEGORY, PRECAUTION) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setInt(1, activity.getSupplierId());
-			pstmt.setString(2, activity.getActivityName());
-			pstmt.setInt(3, activity.getCity_id());
-			pstmt.setInt(4, activity.getDistrict_id());
-			pstmt.setString(5, activity.getAddress());
-			pstmt.setTimestamp(6, activity.getStartDateTime());
-			pstmt.setTimestamp(7, activity.getEndDateTime());
-			pstmt.setInt(8, activity.getUnitPrice());
-			pstmt.setInt(9, activity.getMinParticipants());
-			pstmt.setInt(10, activity.getMaxParticipants());
-			pstmt.setInt(11, activity.getInventoryCount());
-			pstmt.setString(12, activity.getDescription());
-			pstmt.setString(13, activity.getCategory());
-			pstmt.setString(14, activity.getPrecaution());
-
-			return pstmt.executeUpdate();
-			
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+		session.persist(activity);
+		return 1;
 	}
+
+
+//	新增活動 - 原生寫法，確定不用了則可刪掉
+//	@Override
+//	public int insert(Activities activity) {
+//		// SQL 語句：根據 activities 表格新增資料
+//		final String SQL = "INSERT INTO ACTIVITIES (SUPPLIER_ID, ACTIVITY_NAME, CITY_ID, DISTRICT_ID, ADDRESS, "
+//				+ "START_DATE_TIME, END_DATE_TIME, UNIT_PRICE, MIN_PARTICIPANTS, MAX_PARTICIPANTS, "
+//				+ "INVENTORY_COUNT, DESCRIPTION, CATEGORY, PRECAUTION) "
+//				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+//			pstmt.setInt(1, activity.getSupplierId());
+//			pstmt.setString(2, activity.getActivityName());
+//			pstmt.setInt(3, activity.getCity_id());
+//			pstmt.setInt(4, activity.getDistrict_id());
+//			pstmt.setString(5, activity.getAddress());
+//			pstmt.setTimestamp(6, activity.getStartDateTime());
+//			pstmt.setTimestamp(7, activity.getEndDateTime());
+//			pstmt.setInt(8, activity.getUnitPrice());
+//			pstmt.setInt(9, activity.getMinParticipants());
+//			pstmt.setInt(10, activity.getMaxParticipants());
+//			pstmt.setInt(11, activity.getInventoryCount());
+//			pstmt.setString(12, activity.getDescription());
+//			pstmt.setString(13, activity.getCategory());
+//			pstmt.setString(14, activity.getPrecaution());
+//			return pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
+//	}
+	
+	
 
 	// 新增多張活動圖片
 	@Override
@@ -138,10 +151,10 @@ public class ActivityDaoImpl implements ActivityDao {
 		if (activity.getEndDateTime() != null) {
 			sql.append("END_DATE_TIME = ?, ");
 		}
-		if (activity.getCity_id() != null) {
+		if (activity.getCityId() != null) {
 			sql.append("CITY_ID = ?, ");
 		}
-		if (activity.getDistrict_id() != null) {
+		if (activity.getDistrictId() != null) {
 			sql.append("DISTRICT_ID = ?, ");
 		}
 		if (activity.getInventoryCount() != null) {
@@ -246,8 +259,8 @@ public class ActivityDaoImpl implements ActivityDao {
 				pstmt.setInt(parameterIndex, activity.getApproved());
 				parameterIndex++;
 			}
-			if (activity.getCity_id() != null) {
-				pstmt.setInt(parameterIndex, activity.getCity_id());
+			if (activity.getCityId() != null) {
+				pstmt.setInt(parameterIndex, activity.getCityId());
 				parameterIndex++;
 			}
 			if (activity.getInventoryCount() != null) {
@@ -344,8 +357,8 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
 				activity.setApproved(rs.getInt("approved"));
-				activity.setCity_id(rs.getInt("city_id"));
-				activity.setDistrict_id(rs.getInt("district_id"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
@@ -389,8 +402,8 @@ public class ActivityDaoImpl implements ActivityDao {
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
 				activity.setApproved(rs.getInt("approved"));
-				activity.setCity_id(rs.getInt("city_id"));
-				activity.setDistrict_id(rs.getInt("district_id"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));
@@ -406,5 +419,6 @@ public class ActivityDaoImpl implements ActivityDao {
 
 		return null;
 	}
+
 
 }

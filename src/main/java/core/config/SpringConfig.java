@@ -15,9 +15,11 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan("web.*.*.impl")
+@EnableTransactionManagement
 public class SpringConfig {
 	
 	@Bean
@@ -31,7 +33,7 @@ public class SpringConfig {
 
 	@Bean
 	public SessionFactory sessionFactory() throws IllegalArgumentException, NamingException {
-		return new LocalSessionFactoryBuilder(dataSource()).scanPackages("web.*.entity")
+		return new LocalSessionFactoryBuilder(dataSource()).scanPackages("web.*.vo")
 				.addProperties(getHibernateProperties()).buildSessionFactory();
 	}
 

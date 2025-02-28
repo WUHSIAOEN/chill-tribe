@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import web.activity.dao.ActivityDao;
 import web.activity.dao.impl.ActivityDaoImpl;
 import web.activity.service.ActivityService;
@@ -12,51 +14,32 @@ import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
 public class ActivityServiceImpl implements ActivityService {
-	private ActivityDao dao;
+	
+	
+//	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
+	private ActivityDao actdao;
 
 	public ActivityServiceImpl() throws NamingException {
-		dao = new ActivityDaoImpl();
+		actdao = new ActivityDaoImpl();
 	}
+//	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
+	
+//	========= Spring 注入 DAO =========
+	@Autowired
+	private ActivityDao dao;
 
-	// 申請活動
+	// 申請活動上架
 	@Override
 	public String apply(Activities activity) {
-		String activityPrefix = activity.getActivityPrefix();
-		String activityName = activity.getActivityName();
-		Integer supplierId = activity.getSupplierId();
-		String address = activity.getAddress();
-		Integer unitPrice = activity.getUnitPrice();
-		Integer minParticipants = activity.getMinParticipants();
-		Integer maxParticipants = activity.getMaxParticipants();
-		String description = activity.getDescription();
-		String precaution = activity.getPrecaution();
-		String category = activity.getCategory();
-		Timestamp startDateTime = activity.getStartDateTime();
-		Timestamp endDateTime = activity.getEndDateTime();
-		Integer status = activity.getStatus();
-		String note = activity.getNote();
-		Integer approved = activity.getApproved();
-		Integer cityId = activity.getCity_id();
-		Integer districtId = activity.getDistrict_id();
-		Integer inventoryCount = activity.getInventoryCount();
-		Timestamp inventoryUpdateTime = activity.getInventoryUpdateTime();
-		Timestamp createdTime = activity.getCreateTime();
-		String latitude = activity.getLatitude();
-		String longitude = activity.getLongitude();
-		Timestamp ticketsActivateTime = activity.getTicketsActivateTime();
-		Timestamp ticketsExpiredTime = activity.getTicketsExpiredTime();
-
 		int resultCount = dao.insert(activity);
-
 		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
-
 	}
 
 	// 插入圖片
 	@Override
 	public String addImages(Activities activity, List<ActivityImage> list) {
 
-		int activityId = dao.insert(activity);
+		int activityId = actdao.insert(activity);
 
 		for (ActivityImage image : list) {
 			image.setActivityId(activityId);
@@ -96,7 +79,7 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
 
-		int resultCount = dao.update(activity);
+		int resultCount = actdao.update(activity);
 
 		activity.setSuccessful(resultCount > 0);
 
@@ -108,7 +91,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public String cancelById(Activities activity) {
 
-		int resultCount = dao.updateteCancel(activity);
+		int resultCount = actdao.updateteCancel(activity);
 
 		activity.setSuccessful(resultCount > 0);
 
