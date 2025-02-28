@@ -25,6 +25,7 @@ import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
+@Repository
 public class ActivityDaoImpl implements ActivityDao {
 	
 	

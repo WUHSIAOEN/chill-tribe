@@ -93,8 +93,8 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				activity.setStatus(rs.getInt("status"));
 				activity.setNote(rs.getString("note"));
 				activity.setApproved(rs.getInt("approved"));
-				activity.setCity_id(rs.getInt("city_id"));
-				activity.setDistrict_id(rs.getInt("district_id"));
+				activity.setCityId(rs.getInt("city_id"));
+				activity.setDistrictId(rs.getInt("district_id"));
 				activity.setInventoryCount(rs.getInt("inventory_count"));
 				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
 				activity.setCreateTime(rs.getTimestamp("create_time"));

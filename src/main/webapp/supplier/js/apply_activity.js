@@ -3,8 +3,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
 
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
-  const city_id = parseInt(document.getElementById("city_id")?.value) || 1;
-  const district_id = parseInt(document.getElementById("area")?.value) || 3;
+  const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
+  const districtId = parseInt(document.getElementById("area")?.value) || 3;
   const address = document.getElementById("address")?.value || "";
   const category = document.getElementById("category")?.value || "";
   const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
@@ -37,8 +37,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const requestData = {
     supplierId,
     activityName,
-    city_id,
-    district_id,
+    cityId,
+    districtId,
     address,
     startDateTime,
     endDateTime,
