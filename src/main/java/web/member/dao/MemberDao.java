@@ -28,4 +28,12 @@ public interface MemberDao {
 	Member selectimg(String photo_base64);
 	
 	Member selectaddress(Member member);
+	
+	List<Member> selectaddressAll(Integer member_id);
+	
+	int upaddress(Member member);
+	
+	int updateaddress(Member member);
+	
+	List<Member> selectcityAll();
 }
