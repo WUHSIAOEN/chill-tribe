@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -16,47 +23,50 @@ import com.google.gson.JsonObject;
 import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
+import web.member.vo.MemberOther;
 
 // 一般會員註冊
-@WebServlet("/member/register")
-public class RegisterController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@RestController
+@RequestMapping("member/register")
+//@WebServlet("/member/register")
+public class RegisterController  {
+//	private static final long serialVersionUID = 1L;
+	
+	@Autowired
 	private MemberService service;
 	
-	@Override
-	public void init() throws ServletException {
-		 try {
-			service = new MemberServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void init() throws ServletException {
+//		 try {
+//			service = new MemberServiceImpl();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
        
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 接收view層來的請求參數
-//		String username = req.getParameter("username");
-//		String password = req.getParameter("password");
-//		String cPassword = req.getParameter("cPassword");
-//		String nickname = req.getParameter("nickname");
-//		Member member = new Member();
-//		member.setUsername(username);
-//		member.setPassword(password);
-//		member.setcPassword(cPassword);
-//		member.setNickname(nickname);
+	@PostMapping
+//	@Override
+	public Member register(@RequestBody Member member) {
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Gson gson = new Gson();
-		Member member = gson.fromJson(req.getReader(), Member.class);
+		if (member == null) {
+			member = new MemberOther();
+			member.setMessage("無會員資訊");
+			member.setSuccessful(false);
+			return member;
+		}
+
 		
+		member = service.register(member);
+		return member;
+		
+//		Gson gson = new Gson();
+//		Member member = gson.fromJson(req.getReader(), Member.class);
+//		
 //		String errMsg = service.register(member);
-//		System.out.println(errMsg);
-//		resp.getWriter().write(errMsg);
-	
-		String errMsg = service.register(member);
-		
-		JsonObject respBody = new JsonObject();
-		respBody.addProperty("successful", errMsg == null);
-		respBody.addProperty("errMsg", errMsg);
-		resp.getWriter().write(respBody.toString());
+//		
+//		JsonObject respBody = new JsonObject();
+//		respBody.addProperty("successful", errMsg == null);
+//		respBody.addProperty("errMsg", errMsg);
+//		resp.getWriter().write(respBody.toString());
 	}
 }

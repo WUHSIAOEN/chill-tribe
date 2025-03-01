@@ -6,7 +6,7 @@ import web.member.vo.Member;
 
 public interface MemberService {
 
-	String register(Member member);
+	Member register(Member member);
 	
 	Member edit(Member sessionMember, Member updateMember);
 	
@@ -18,14 +18,14 @@ public interface MemberService {
 	
 	Member updateimg(Member sessionMember, Member updateMember);
 	
-	Member selectaddress(Member member);
+//	Member selectaddress(Member member);
 	
-	List<Member> selectaddressAll(Integer member_id);
+//	List<Member> selectaddressAll(Integer member_id);
 	
-	String upaddress(Member member);
+//	String upaddress(Member member);
 	
-	Member addressedit(Member sessionMember, Member updateMember);
+//	Member addressedit(Member sessionMember, Member updateMember);
 	
-	List<Member> selectcityAll();
+//	List<Member> selectcityAll();
 	
 }
