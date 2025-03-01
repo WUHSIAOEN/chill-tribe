@@ -3,8 +3,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
 
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
-  const city_id = parseInt(document.getElementById("city_id")?.value) || 1;
-  const district_id = parseInt(document.getElementById("area")?.value) || 3;
+  const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
+  const districtId = parseInt(document.getElementById("area")?.value) || 3;
   const address = document.getElementById("address")?.value || "";
   const category = document.getElementById("category")?.value || "";
   const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
@@ -37,8 +37,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const requestData = {
     supplierId,
     activityName,
-    city_id,
-    district_id,
+    cityId,
+    districtId,
     address,
     startDateTime,
     endDateTime,
@@ -58,7 +58,6 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
 
   console.log("Sending JSON:", JSON.stringify(requestData, requestImages)); // 輸出 JSON 格式資料
 
-  Promise.all([
     fetch("/chill-tribe/activity/apply", {
       method: "POST",
       headers: {
@@ -68,16 +67,19 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     }).catch(error => {
       console.error("Activity created failed:", error)}),
 
+	console.log('................', Array.isArray(window.base64Images));
+	console.log('----------------------', window.base64Images);
     fetch("/chill-tribe/activity/applyimages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestImages),
+      body: JSON.stringify({
+	    images: window.base64Images
+	  }),
     })
     .catch(error => {
       console.error("Image upload failed:", error);
     })
-  ])
 
 });

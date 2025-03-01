@@ -1,7 +1,6 @@
 package web.myfavorites.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -11,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import web.myfavorites.service.MyFavoritesService;
 import web.myfavorites.service.impl.MyFavoritesServiceImpl;
 import web.myfavorites.vo.MyFavorites;
-import web.shoppingcart.vo.ShoppingCart;
 
-@WebServlet("/myfavorites/findallmyfavorites")
-public class GetMyFavoritesController extends HttpServlet {
+@WebServlet("/myfavorites/deletefavorites")
+public class DeleteMyFavoritesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MyFavoritesService service;
+	
+	private MyFavoritesServiceImpl service;
 	
 	@Override
 	public void init() throws ServletException {
-		System.out.println("Initializing AddToCartController...");
+		System.out.println("Initializing DeleteMyFavoritesController...");
 		try {
 			service = new MyFavoritesServiceImpl(); // 初始化 service
 			System.out.println("Service initialized successfully: " + service);
@@ -36,14 +33,11 @@ public class GetMyFavoritesController extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-		Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy/MM/dd HH:mm:ss")
-				.create();
+		Gson gson = new Gson();
 		
-		String myFavorites = service.findAllFavorites();
-		resp.getWriter().write(gson.toJson(myFavorites));
+		MyFavorites myFavorites = gson.fromJson(req.getReader(), MyFavorites.class);
+//		service.deleteFavorites(id);
 	}
-	
 }

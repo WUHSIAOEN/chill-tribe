@@ -191,6 +191,7 @@ $(function () {
             }
         })
         .then(activityCards => {
+        	console.log('...................', activityCards);
             $("#coming-soon-activities").empty();
             const [firstActivityCard, ...restActivityCards] = activityCards;
             activityCards.forEach(activityCard => {

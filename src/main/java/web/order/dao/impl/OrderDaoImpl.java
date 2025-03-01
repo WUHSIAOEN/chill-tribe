@@ -36,12 +36,14 @@ public class OrderDaoImpl implements OrderDao{
 		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
 
+	
+	// 不須付款的新增訂單
 	@Override
 	public int insert(Orders order) {
 		StringBuilder sql = new StringBuilder(
 				"INSERT INTO orders"
-				+ "(activity_id, member_id, quantity, order_status, payment_method)"
-				+ "VALUES(?, ?, ?, ?, ?)");
+				+ "(activity_id, member_id, quantity, order_status, payment_method, order_contact, contact_mail, contact_phone, requirement)"
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 				pstmt.setInt(1, order.getActivityId());
@@ -49,6 +51,10 @@ public class OrderDaoImpl implements OrderDao{
 				pstmt.setInt(3, order.getQuantity());
 				pstmt.setString(4, order.getOrderStatus());
 				pstmt.setString(5, order.getPaymentMethod());
+				pstmt.setString(6, order.getOrderContact());
+				pstmt.setString(7, order.getContactMail());
+				pstmt.setString(8, order.getContactPhone());
+				pstmt.setString(9, order.getRequirement());
 				return pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
