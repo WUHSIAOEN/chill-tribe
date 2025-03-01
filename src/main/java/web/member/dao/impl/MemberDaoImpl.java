@@ -367,18 +367,104 @@ public class MemberDaoImpl implements MemberDao {
 
 		@Override
 		public int upaddress(Member member) {
-			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
+//			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
+			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, TAG) values(?, ?, ?, ?, ?)";
 			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setInt(1, member.getMember_id());
 				pstmt.setInt(2, member.getCity_id());
 				pstmt.setInt(3, member.getDistrict_id());
 				pstmt.setString(4, member.getAddress());
-				pstmt.setInt(5, member.getAddress_default());
-				pstmt.setString(6, member.getTag());
+//				pstmt.setInt(5, member.getAddress_default());
+				pstmt.setString(5, member.getTag());
 				return pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return -1;
+		}
+
+		@Override
+		public int updateaddress(Member member) {
+			int offset = 1;  
+		    StringBuilder sql = new StringBuilder("UPDATE ADDRESSES SET ");
+		    Integer city_id = member.getCity_id();
+		    Integer district_id = member.getDistrict_id();
+		    String address = member.getAddress();
+		    String tag = member.getTag();
+		    
+		    boolean hasCity_id = city_id != null;
+		    boolean hasDistrict_id = district_id != null;
+		    boolean hasAddress = address != null && !address.isEmpty();
+		    boolean hasTag = tag != null && !tag.isEmpty();
+
+		    if (hasCity_id) {
+		        sql.append("CITY_ID = ?, ");
+		    }
+		    if (hasDistrict_id) {
+		        sql.append("DISTRICT_ID = ?, ");
+		    }
+		    if (hasAddress) {
+		        sql.append("ADDRESS = ?, ");
+		    }
+		    if (hasTag) {
+		        sql.append("TAG = ?, ");
+		    }
+		    
+		    if (sql.charAt(sql.length() - 2) == ',') {
+		        sql.delete(sql.length() - 2, sql.length());
+		    }
+
+		    // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+		    sql.append("WHERE MEMBER_ID = ?");
+
+		    try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+		        if (hasCity_id) {
+		            pstmt.setInt(offset++, member.getCity_id());
+		        }
+		        if (hasDistrict_id) {
+		        	pstmt.setInt(offset++, member.getDistrict_id());
+		        }
+		        if (hasAddress) {
+		            pstmt.setString(offset++, member.getAddress());
+		        }
+		        if (hasTag) {
+		            pstmt.setString(offset++, member.getTag());
+		        }
+
+		        // to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+		        pstmt.setInt(offset, member.getMember_id());
+		        
+		        return pstmt.executeUpdate();
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return -1;
+		}
+
+		@Override
+		public List<Member> selectcityAll() {
+			String sql = "SELECT * FROM DISTRICTS JOIN CITIES ON DISTRICTS.CITY_ID = CITIES.CITY_ID";
+			try (Connection conn = ds.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					ResultSet rs = pstmt.executeQuery(); {
+				List<Member> list = new ArrayList<>();
+
+				while (rs.next()) {
+					Member member = new Member();
+					member.setZip_code(rs.getInt("ZIP_CODE"));
+					member.setCity_id(rs.getInt("CITY_ID"));
+					member.setCity_name(rs.getString("CITY_NAME"));
+					member.setDistrict_id(rs.getInt("DISTRICT_ID"));
+					member.setDistrict_name(rs.getString("DISTRICT_NAME"));
+					list.add(member);
+				}
+				System.out.println(list);
+				System.out.println(list.size());
+				return list;
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 }

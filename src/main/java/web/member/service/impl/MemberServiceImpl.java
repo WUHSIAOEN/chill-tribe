@@ -245,4 +245,49 @@ public class MemberServiceImpl implements MemberService {
 
 		return resultCount > 0 ? null : "發生錯誤，請聯繫專員";
 	}
+
+	@Override
+	public Member addressedit(Member sessionMember, Member updateMember) {
+		boolean isUpdated = false;
+		// 判斷欄位有沒有被異動到&檢查欄位狀態值
+		if (updateMember.getZip_code() != null
+				&& !updateMember.getZip_code().equals(sessionMember.getZip_code())) {
+			sessionMember.setZip_code(updateMember.getZip_code());
+			isUpdated = true;
+		}
+		if (updateMember.getCity_id() != null && !updateMember.getCity_id().equals(sessionMember.getCity_id())) {
+			sessionMember.setCity_id(updateMember.getCity_id());
+			isUpdated = true;
+		}
+		if (updateMember.getDistrict_id() != null && !updateMember.getDistrict_id().equals(sessionMember.getDistrict_id())) {
+			sessionMember.setDistrict_id(updateMember.getDistrict_id());
+			isUpdated = true;
+		}
+		if (updateMember.getAddress() != null
+				&& !updateMember.getAddress().equals(sessionMember.getAddress())) {
+			sessionMember.setAddress(updateMember.getAddress());
+			isUpdated = true;
+		}
+		if (updateMember.getTag() != null && !updateMember.getTag().equals(sessionMember.getTag())) {
+			sessionMember.setTag(updateMember.getTag());
+			isUpdated = true;
+		}
+		
+		
+		if (isUpdated) {
+			int resultCount = memberDao.updateaddress(sessionMember);
+
+			sessionMember.setSuccessful(resultCount > 0);
+			sessionMember.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+		} else {
+			sessionMember.setSuccessful(true); // 沒有異動的情況視為成功
+			sessionMember.setMessage("資料未改動");
+		}
+		return sessionMember;
+	}
+
+	@Override
+	public List<Member> selectcityAll() {
+		return memberDao.selectcityAll();
+	}
 }

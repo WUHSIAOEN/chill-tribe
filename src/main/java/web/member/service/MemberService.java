@@ -24,4 +24,8 @@ public interface MemberService {
 	
 	String upaddress(Member member);
 	
+	Member addressedit(Member sessionMember, Member updateMember);
+	
+	List<Member> selectcityAll();
+	
 }

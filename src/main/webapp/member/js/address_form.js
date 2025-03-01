@@ -51,7 +51,8 @@ var addrData = [
                 "name": "文山區"
             }
         ],
-        "city": "臺北市"
+        "city": "臺北市",
+		"city_id": "2"
     },
     {
         "districts": [
@@ -84,7 +85,8 @@ var addrData = [
                 "name": "七堵區"
             }
         ],
-        "city": "基隆市"
+        "city": "基隆市",
+		"city_id": "1"
     },
     {
         "districts": [
@@ -205,7 +207,8 @@ var addrData = [
                 "name": "石門區"
             }
         ],
-        "city": "新北市"
+        "city": "新北市",
+		"city_id": "3"
     },
     {
         "districts": [
@@ -226,7 +229,8 @@ var addrData = [
                 "name": "東引鄉"
             }
         ],
-        "city": "連江縣"
+        "city": "連江縣",
+		"city_id": "24"
     },
     {
         "districts": [
@@ -283,7 +287,8 @@ var addrData = [
                 "name": "釣魚臺"
             }
         ],
-        "city": "宜蘭縣"
+        "city": "宜蘭縣",
+		"city_id": "17"
     },
     {
         "districts": [
@@ -300,7 +305,8 @@ var addrData = [
                 "name": "香山區"
             }
         ],
-        "city": "新竹市"
+        "city": "新竹市",
+		"city_id": "5"
     },
     {
         "districts": [
@@ -357,7 +363,8 @@ var addrData = [
                 "name": "峨眉鄉"
             }
         ],
-        "city": "新竹縣"
+        "city": "新竹縣",
+		"city_id": "6"
     },
     {
         "districts": [
@@ -414,7 +421,8 @@ var addrData = [
                 "name": "蘆竹區"
             }
         ],
-        "city": "桃園市"
+        "city": "桃園市",
+		"city_id": "4"
     },
     {
         "districts": [
@@ -491,7 +499,8 @@ var addrData = [
                 "name": "卓蘭鎮"
             }
         ],
-        "city": "苗栗縣"
+        "city": "苗栗縣",
+		"city_id": "7"
     },
     {
         "districts": [
@@ -612,7 +621,8 @@ var addrData = [
                 "name": "大安區"
             }
         ],
-        "city": "臺中市"
+        "city": "臺中市",
+		"city_id": "8"
     },
     {
         "districts": [
@@ -721,7 +731,8 @@ var addrData = [
                 "name": "二水鄉"
             }
         ],
-        "city": "彰化縣"
+        "city": "彰化縣",
+		"city_id": "9"
     },
     {
         "districts": [
@@ -778,7 +789,8 @@ var addrData = [
                 "name": "鹿谷鄉"
             }
         ],
-        "city": "南投縣"
+        "city": "南投縣",
+		"city_id": "10"
     },
     {
         "districts": [
@@ -791,7 +803,8 @@ var addrData = [
                 "name": "東區"
             }
         ],
-        "city": "嘉義市"
+        "city": "嘉義市",
+		"city_id": "12"
     },
     {
         "districts": [
@@ -868,7 +881,8 @@ var addrData = [
                 "name": "布袋鎮"
             }
         ],
-        "city": "嘉義縣"
+        "city": "嘉義縣",
+		"city_id": "13"
     },
     {
         "districts": [
@@ -953,7 +967,8 @@ var addrData = [
                 "name": "元長鄉"
             }
         ],
-        "city": "雲林縣"
+        "city": "雲林縣",
+		"city_id": "11"
     },
     {
         "districts": [
@@ -1106,7 +1121,8 @@ var addrData = [
                 "name": "安定區"
             }
         ],
-        "city": "臺南市"
+        "city": "臺南市",
+		"city_id": "14"
     },
     {
         "districts": [
@@ -1271,7 +1287,8 @@ var addrData = [
                 "name": "茄萣區"
             }
         ],
-        "city": "高雄市"
+        "city": "高雄市",
+		"city_id": "15"
     },
     {
         "districts": [
@@ -1300,7 +1317,8 @@ var addrData = [
                 "name": "湖西鄉"
             }
         ],
-        "city": "澎湖縣"
+        "city": "澎湖縣",
+		"city_id": "20"
     },
     {
         "districts": [
@@ -1329,7 +1347,8 @@ var addrData = [
                 "name": "烏坵鄉"
             }
         ],
-        "city": "金門縣"
+        "city": "金門縣",
+		"city_id": "21"
     },
     {
         "districts": [
@@ -1466,7 +1485,8 @@ var addrData = [
                 "name": "滿州鄉"
             }
         ],
-        "city": "屏東縣"
+        "city": "屏東縣",
+		"city_id": "16"
     },
     {
         "districts": [
@@ -1535,7 +1555,8 @@ var addrData = [
                 "name": "達仁鄉"
             }
         ],
-        "city": "臺東縣"
+        "city": "臺東縣",
+		"city_id": "19"
     },
     {
         "districts": [
@@ -1592,7 +1613,8 @@ var addrData = [
                 "name": "富里鄉"
             }
         ],
-        "city": "花蓮縣"
+        "city": "花蓮縣",
+		"city_id": "18"
     }
 ]
 
@@ -1602,7 +1624,7 @@ var addrData = [
 function addr_init() {
     $.each(addrData, function (i, item) {
         let city_str = `
-                    <option value="${item.city}">${item.city}</option>
+                    <option value="${item.city_id}">${item.city}</option>
                 `;
         // 把選到的縣市，底下對應的區，丟到select 標籤裡面
         $("#city").append(city_str);
@@ -1662,7 +1684,7 @@ $("select#city").on("change", function () {
 
         // $("#city").append(city_str);
         // 把選到的縣市，底下對應的區，丟到select 標籤裡面
-        if (item.city == city) { // 如果city 直接用this... 的話 那前面匿名函式也改成鍵頭函式
+        if (item.city_id == city) { // 如果city 直接用this... 的話 那前面匿名函式也改成鍵頭函式
             area_init(item.districts);
         }
     })
