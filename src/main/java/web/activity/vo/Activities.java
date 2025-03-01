@@ -15,6 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
 import org.aspectj.org.eclipse.jdt.internal.compiler.ast.FalseLiteral;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import core.util.Core;
 import core.vo.City;
@@ -90,10 +91,12 @@ public class Activities extends Core{
 //    @JoinColumn(name = "COMMENT_ID", insertable = false, updatable = false)
     @Transient
     private List<Comment> comments;
-
+    
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "START_DATE_TIME")
     private Timestamp startDateTime;
-
+    
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "END_DATE_TIME")
     private Timestamp endDateTime;
 
@@ -109,20 +112,23 @@ public class Activities extends Core{
     @Column(name = "INVENTORY_COUNT")
     private Integer inventoryCount;
     
-
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "INVENTORY_UPDATE_TIME")
     private Timestamp inventoryUpdateTime;
-
+    
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "CREATE_TIME")
     private Timestamp createTime;
 
     private String latitude;
 
     private String longitude;
-
+    
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "TICKETS_ACTIVATE_TIME")
     private Timestamp ticketsActivateTime;
 
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "TICKETS_EXPIRED_TIME")
     private Timestamp ticketsExpiredTime;
     
