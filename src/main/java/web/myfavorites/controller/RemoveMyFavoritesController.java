@@ -38,7 +38,7 @@ public class RemoveMyFavoritesController extends HttpServlet {
 		Gson gson = new Gson();
 		
 		MyFavorites myFavorites = gson.fromJson(req.getReader(), MyFavorites.class);
-		service.removeFavoritesById(myFavorites.getActivity_id());
-		System.out.println(myFavorites.getActivity_id());
+//		service.removeFavoritesById(myFavorites.getActivity_id());
+//		System.out.println(myFavorites.getActivity_id());
 	}
 }
