@@ -1,6 +1,7 @@
 package web.member.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.sql.Date;
 
 import core.util.Core;
@@ -23,9 +24,13 @@ public class Member extends Core {
 	private String photo_base64;
 	private String creator;
 	// 地址
-	private String address_id;
-	private String city_id;
-	private String district_id;
+	private List<Addresses> addresses;
+	private Integer address_id;
+	private Integer city_id;
+	private String city_name;
+	private Integer district_id;
+	private String district_name;
+	private Integer zip_code;
 	private String address;
 	private Integer address_default;
 	private String tag;
@@ -145,27 +150,27 @@ public class Member extends Core {
 		this.photo_base64 = photo_base64;
 	}
 
-	public String getAddress_id() {
+	public Integer getAddress_id() {
 		return address_id;
 	}
 
-	public void setAddress_id(String address_id) {
+	public void setAddress_id(Integer address_id) {
 		this.address_id = address_id;
 	}
 
-	public String getCity_id() {
+	public Integer getCity_id() {
 		return city_id;
 	}
 
-	public void setCity_id(String city_id) {
+	public void setCity_id(Integer city_id) {
 		this.city_id = city_id;
 	}
 
-	public String getDistrict_id() {
+	public Integer getDistrict_id() {
 		return district_id;
 	}
 
-	public void setDistrict_id(String district_id) {
+	public void setDistrict_id(Integer district_id) {
 		this.district_id = district_id;
 	}
 
@@ -191,6 +196,38 @@ public class Member extends Core {
 
 	public void setTag(String tag) {
 		this.tag = tag;
+	}
+	
+	public String getCity_name() {
+		return city_name;
+	}
+
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
+	}
+
+	public String getDistrict_name() {
+		return district_name;
+	}
+
+	public void setDistrict_name(String district_name) {
+		this.district_name = district_name;
+	}
+
+	public Integer getZip_code() {
+		return zip_code;
+	}
+
+	public void setZip_code(Integer zip_code) {
+		this.zip_code = zip_code;
+	}
+	
+	public List<Addresses> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Addresses> addresses) {
+		this.addresses = addresses;
 	}
 
 }
