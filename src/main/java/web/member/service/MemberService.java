@@ -20,4 +20,12 @@ public interface MemberService {
 	
 	Member selectaddress(Member member);
 	
+	List<Member> selectaddressAll(Integer member_id);
+	
+	String upaddress(Member member);
+	
+	Member addressedit(Member sessionMember, Member updateMember);
+	
+	List<Member> selectcityAll();
+	
 }

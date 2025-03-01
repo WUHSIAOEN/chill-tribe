@@ -193,12 +193,14 @@ const addrData = [
       { "name": "埔鹽鄉", "zipcode": "516" },
       { "name": "田中鎮", "zipcode": "520" },
       { "name": "北斗鎮", "zipcode": "521" },
-      { "name": "二林鎮", "zipcode": "522" },
-      { "name": "大城鄉", "zipcode": "523" },
-      { "name": "芳苑鄉", "zipcode": "524" },
-      { "name": "十四鄉", "zipcode": "525" },
-      { "name": "大埔鄉", "zipcode": "526" },
-      { "name": "南投縣", "zipcode": "540" }
+      { "name": "田尾鄉", "zipcode": "522" },
+      { "name": "埤頭鄉", "zipcode": "523" },
+      { "name": "溪州鄉", "zipcode": "524" },
+      { "name": "竹塘鄉", "zipcode": "525" },
+      { "name": "二林鎮", "zipcode": "526" },
+      { "name": "大城鄉", "zipcode": "527" },
+      { "name": "芳苑鄉", "zipcode": "528" },
+      { "name": "二水鄉", "zipcode": "530" }
     ]
   },
   {
@@ -206,18 +208,18 @@ const addrData = [
     "city": "南投縣",
     "area": [
       { "name": "南投市", "zipcode": "540" },
-      { "name": "埔里鎮", "zipcode": "545" },
+      { "name": "中寮鄉", "zipcode": "541" },
       { "name": "草屯鎮", "zipcode": "542" },
-      { "name": "竹山鎮", "zipcode": "557" },
+      { "name": "國姓鄉", "zipcode": "544" },
+      { "name": "埔里鎮", "zipcode": "545" },
+      { "name": "仁愛鄉", "zipcode": "546" },
+      { "name": "名間鄉", "zipcode": "551" },
       { "name": "集集鎮", "zipcode": "552" },
-      { "name": "名間鄉", "zipcode": "553" },
-      { "name": "鹿谷鄉", "zipcode": "555" },
-      { "name": "中寮鄉", "zipcode": "544" },
-      { "name": "魚池鄉", "zipcode": "546" },
-      { "name": "國姓鄉", "zipcode": "510" },
-      { "name": "水里鄉", "zipcode": "552" },
+      { "name": "水里鄉", "zipcode": "553" },
+      { "name": "魚池鄉", "zipcode": "555" },
       { "name": "信義鄉", "zipcode": "556" },
-      { "name": "仁愛鄉", "zipcode": "546" }
+      { "name": "竹山鎮", "zipcode": "557" },
+      { "name": "鹿谷鄉", "zipcode": "558" }
     ]
   },
   {
@@ -230,8 +232,20 @@ const addrData = [
       { "name": "土庫鎮", "zipcode": "633" },
       { "name": "褒忠鄉", "zipcode": "634" },
       { "name": "東勢鄉", "zipcode": "635" },
-      { "name": "台西鄉", "zipcode": "636" },
-      { "name": "澎湖縣", "zipcode": "800" }
+      { "name": "臺西鄉", "zipcode": "636" },
+      { "name": "崙背鄉", "zipcode": "637" },
+      { "name": "麥寮鄉", "zipcode": "638" },
+      { "name": "斗六市", "zipcode": "640" },
+      { "name": "林內鄉", "zipcode": "643" },
+      { "name": "古坑鄉", "zipcode": "646" },
+      { "name": "莿桐鄉", "zipcode": "647" },
+      { "name": "西螺鎮", "zipcode": "648" },
+      { "name": "二崙鄉", "zipcode": "649" },
+      { "name": "北港鎮", "zipcode": "651" },
+      { "name": "水林鄉", "zipcode": "652" },
+      { "name": "口湖鄉", "zipcode": "653" },
+      { "name": "四湖鄉", "zipcode": "654" },
+      { "name": "元長鄉", "zipcode": "655" }
     ]
   },
   {
@@ -239,7 +253,7 @@ const addrData = [
     "city": "嘉義市",
     "area": [
       { "name": "東區", "zipcode": "600" },
-      { "name": "西區", "zipcode": "602" }
+      { "name": "西區", "zipcode": "600" }
     ]
   },
   {
