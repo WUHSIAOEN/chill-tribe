@@ -159,6 +159,7 @@
 
 	</div>
 
+	<input type="hidden" id="details_member_id" value="">
 	<input type="hidden" id="member_id" value="">
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
@@ -216,27 +217,31 @@
 
 	<script>
 	
-	const username = document.querySelector('#member_name');
+	const membername = document.querySelector('#member_name');
 	const password = document.querySelector('#password');
 	const cPassword = document.querySelector('#cPassword');
 	const phone = document.querySelector('#phone');
 	const email = document.querySelector('#email');
-	const date_of_birth = document.querySelector('#date_of_birth');
+	const dateofbirth = document.querySelector('#date_of_birth');
 	const gender = document.querySelector('#gender');
 	const msg = document.querySelector('#msg');
+	const details_member_id = document.querySelector('#details_member_id');
 	const member_id = document.querySelector('#member_id');
+	const memberid = sessionStorage.getItem('memberid');
 
-	fetch('find')
+// 	debugger;
+	fetch(`find/${memberid}`)
 		.then(resp => resp.json())
 		.then(member => {
 			console.log(member);
-			username.value = member.member_name;
+// 			member_id.value = member.memberid;
+			membername.value = member.membername;
 			email.value = member.email;
 			phone.value = member.phone;
-			date_of_birth.value = member.date_of_birth;
+			dateofbirth.value = member.strdateofbirth;
 			gender.value = member.gender;
-			member_id.value = member.member_id;
-			photo_base64.value = member.photo_base64;
+			details_member_id.value = member.memberid;
+// 			photobase64.value = member.photobase64;
 			
 		});
 
@@ -265,19 +270,21 @@
 // 			return;
 // 		}
 		
+// 		debugger;
 		fetch('memberedit', {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				member_name: username.value,
+				membername: membername.value,
 				phone: phone.value,
-				date_of_birth: date_of_birth.value,
+				dateofbirth: dateofbirth.value,
 				gender: gender.value,
-				member_id: member_id.value
-			})
+				memberid: member_id.value
+			}),
 		})
+		
 		// console.log(resp)
 		 .then(resp => {
 			 return resp.json();

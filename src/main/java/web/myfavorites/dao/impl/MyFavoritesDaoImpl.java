@@ -38,7 +38,7 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
 			pstmt.setInt(1, myFavorites.getActivity_id());
-			pstmt.setInt(2, myFavorites.getMember_id());
+			pstmt.setInt(2, myFavorites.getMemberId());
 
 			int result = pstmt.executeUpdate();
 			List<MyFavorites> list = new ArrayList<>();
@@ -74,8 +74,8 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				Activities activity = new Activities();
 				
 				myFavorites.setActivity_id(rs.getInt("activity_id"));
-				myFavorites.setMember_id(rs.getInt("member_id"));
-				myFavorites.setAdded_time(rs.getTimestamp("added_time"));
+				myFavorites.setMemberId(rs.getInt("member_id"));
+				myFavorites.setAddedTime(rs.getTimestamp("added_time"));
 				
 				activity.setActivityId(rs.getInt("activity_id"));
 				activity.setActivityPrefix(rs.getString("activity_prefix"));
@@ -103,7 +103,7 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
 				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
 				
-				myFavorites.setActivities(activity);
+				myFavorites.setActivity(activity);
 				
 				list.add(myFavorites);
 			}

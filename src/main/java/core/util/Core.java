@@ -4,7 +4,16 @@ public class Core {
 	private boolean successful;
 	private String message;
 	private String cpassword;
+	private String strdateofbirth;
 	
+	public String getStrdateofbirth() {
+		return strdateofbirth;
+	}
+
+	public void setStrdateofbirth(String strdateofbirth) {
+		this.strdateofbirth = strdateofbirth;
+	}
+
 	public String getCpassword() {
 		return cpassword;
 	}
