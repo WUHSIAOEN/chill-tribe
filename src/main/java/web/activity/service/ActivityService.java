@@ -21,10 +21,10 @@ public interface ActivityService {
 	String cancelById(Activities activity);
 
 	// 刪除活動
-	boolean removeById(Integer id);
+	boolean remove(Integer id);
 
 	// 複數活動
-	List<Activities> findAllActivity();
+	List<Activities> findAll();
 
 	// 單一活動
 	Activities findActivityById(Integer id);

@@ -19,10 +19,10 @@ public interface ActivityDao {
 	int updateteCancel(Activities activity);
 
 	// 刪除單一活動
-	int deletActivityById(Integer id);
+	int deleteActivityById(Integer id);
 
 	// 查詢所有活動
-	List<Activities> selectAllActivity();
+	List<Activities> selectAll();
 
 	// 只查詢單一活動ID
 	Activities selectByActivityId(Integer id);

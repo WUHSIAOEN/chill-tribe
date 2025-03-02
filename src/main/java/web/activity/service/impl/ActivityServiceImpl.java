@@ -1,16 +1,12 @@
 package web.activity.service.impl;
 
-import java.sql.Timestamp;
 import java.util.List;
-
-import javax.naming.NamingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import web.activity.dao.ActivityDao;
-import web.activity.dao.impl.ActivityDaoImpl;
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
@@ -18,8 +14,7 @@ import web.activity.vo.ActivityImage;
 @Service
 @Transactional
 public class ActivityServiceImpl implements ActivityService {
-	
-	
+
 //	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
 	private ActivityDao actdao;
 //
@@ -27,7 +22,7 @@ public class ActivityServiceImpl implements ActivityService {
 //		actdao = new ActivityDaoImpl();
 //	}
 //	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
-	
+
 //	========= Spring 注入 DAO =========
 	@Autowired
 	private ActivityDao dao;
@@ -63,7 +58,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public Activities edit(Activities activities) {
 		final Activities oActivities = dao.selectByActivityId(activities.getActivityId());
-		
+
 		activities.setActivityName(oActivities.getActivityName());
 		activities.setCityId(oActivities.getCityId());
 		activities.setDistrictId(oActivities.getDistrictId());
@@ -84,7 +79,7 @@ public class ActivityServiceImpl implements ActivityService {
 		activities.setNote(oActivities.getNote());
 		activities.setTicketsActivateTime(oActivities.getTicketsActivateTime());
 		activities.setTicketsExpiredTime(oActivities.getTicketsExpiredTime());
-		
+
 		final int resultCount = dao.update(activities);
 		activities.setSuccessful(resultCount > 0);
 		activities.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
@@ -136,17 +131,21 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 刪除
 	@Override
-	public boolean removeById(Integer id) {
-		if (id == null) {
+	public boolean remove(Integer id) {
+
+		try {
+			boolean result = dao.deleteActivityById(id) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
-		return dao.deletActivityById(id) > 0;
 	}
 
 	// 查詢所有活動
 	@Override
-	public List<Activities> findAllActivity() {
-		return dao.selectAllActivity();
+	public List<Activities> findAll() {
+		return dao.selectAll();
 	}
 
 	// 查詢單一活動

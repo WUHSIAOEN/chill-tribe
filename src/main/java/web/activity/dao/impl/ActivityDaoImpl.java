@@ -4,9 +4,7 @@ package web.activity.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -26,7 +24,6 @@ import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 import web.activity.vo.Comment;
-import web.supplier.vo.Supplier;
 
 @Repository
 public class ActivityDaoImpl implements ActivityDao {
@@ -530,60 +527,64 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 刪除活動
 	@Override
-	public int deletActivityById(Integer activityId) {
-		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setInt(1, activityId);
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+	public int deleteActivityById(Integer activityId) {
+		Activities activities = session.getReference(Activities.class, activityId);
+		session.remove(activities);
+		return 1;
+//		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
+//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+//			pstmt.setInt(1, activityId);
+//			return pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
 	}
 
 	// 全選活動
 	@Override
-	public List<Activities> selectAllActivity() {
-		final String SQL = "SELECT * FROM ACTIVITIES";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			ResultSet rs = pstmt.executeQuery();
-
-			List<Activities> list = new ArrayList<>();
-			while (rs.next()) {
-				Activities activity = new Activities();
-				activity.setActivityId(rs.getInt("activity_id"));
-				activity.setActivityPrefix(rs.getString("activity_prefix"));
-				activity.setActivityName(rs.getString("activity_name"));
-				activity.setSupplierId(rs.getInt("supplier_id"));
-				activity.setAddress(rs.getString("address"));
-				activity.setUnitPrice(rs.getInt("unit_price"));
-				activity.setMinParticipants(rs.getInt("min_participants"));
-				activity.setMaxParticipants(rs.getInt("max_participants"));
-				activity.setDescription(rs.getString("description"));
-				activity.setCategory(rs.getString("category"));
-				activity.setPrecaution(rs.getString("precaution"));
-				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
-				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
-				activity.setStatus(rs.getInt("status"));
-				activity.setNote(rs.getString("note"));
-				activity.setApproved(rs.getInt("approved"));
-				activity.setCityId(rs.getInt("city_id"));
-				activity.setDistrictId(rs.getInt("district_id"));
-				activity.setInventoryCount(rs.getInt("inventory_count"));
-				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
-				activity.setCreateTime(rs.getTimestamp("create_time"));
-				activity.setLatitude(rs.getString("latitude"));
-				activity.setLongitude(rs.getString("longitude"));
-				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
-				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
-//				System.out.println(list);
-				list.add(activity);
-			}
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public List<Activities> selectAll() {
+		final String hql = "FROM Activities ORDER BY activity_id";
+		return session.createQuery(hql, Activities.class).getResultList();
+//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+//			ResultSet rs = pstmt.executeQuery();
+//
+//			List<Activities> list = new ArrayList<>();
+//			while (rs.next()) {
+//				Activities activity = new Activities();
+//				activity.setActivityId(rs.getInt("activity_id"));
+//				activity.setActivityPrefix(rs.getString("activity_prefix"));
+//				activity.setActivityName(rs.getString("activity_name"));
+//				activity.setSupplierId(rs.getInt("supplier_id"));
+//				activity.setAddress(rs.getString("address"));
+//				activity.setUnitPrice(rs.getInt("unit_price"));
+//				activity.setMinParticipants(rs.getInt("min_participants"));
+//				activity.setMaxParticipants(rs.getInt("max_participants"));
+//				activity.setDescription(rs.getString("description"));
+//				activity.setCategory(rs.getString("category"));
+//				activity.setPrecaution(rs.getString("precaution"));
+//				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+//				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
+//				activity.setStatus(rs.getInt("status"));
+//				activity.setNote(rs.getString("note"));
+//				activity.setApproved(rs.getInt("approved"));
+//				activity.setCityId(rs.getInt("city_id"));
+//				activity.setDistrictId(rs.getInt("district_id"));
+//				activity.setInventoryCount(rs.getInt("inventory_count"));
+//				activity.setInventoryUpdateTime(rs.getTimestamp("inventory_update_time"));
+//				activity.setCreateTime(rs.getTimestamp("create_time"));
+//				activity.setLatitude(rs.getString("latitude"));
+//				activity.setLongitude(rs.getString("longitude"));
+//				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
+//				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
+////				System.out.println(list);
+//				list.add(activity);
+//			}
+//			return list;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
 	}
 
 	// 只用活動ID搜尋，傳回其他活動內容
@@ -592,7 +593,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<Activities> cQuery = cBuilder.createQuery(Activities.class);
 		Root<Activities> root = cQuery.from(Activities.class);
-		cQuery.where(cBuilder.equal(root.get("activity_id"), id));
+		cQuery.where(cBuilder.equal(root.get("activityId"), id));
 		return session.createQuery(cQuery).uniqueResult();
 		
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL);) {
