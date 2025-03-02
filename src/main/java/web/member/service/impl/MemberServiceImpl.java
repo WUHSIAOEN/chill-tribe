@@ -1,5 +1,7 @@
 package web.member.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,47 +74,51 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("註冊成功");
 			member.setMessage("註冊成功");
 			member.setSuccessful(true);
-	        return member;  
-	    } else {
-	    	System.out.println("註冊發生錯誤");
-	    	member.setMessage("註冊發生錯誤");
+			return member;
+		} else {
+			System.out.println("註冊發生錯誤");
+			member.setMessage("註冊發生錯誤");
 			member.setSuccessful(true);
-	        return member;  
-	    }
+			return member;
+		}
 	}
 
 	@Override
-	public Member edit(Member sessionMember, Member updateMember) {
+	public Member edit(Member member) {
+		final int resultCount = memberDao.update(member);
+		member.setSuccessful(resultCount > 0);
+		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		return member;
 
-		boolean isUpdated = false;
-		// 判斷欄位有沒有被異動到&檢查欄位狀態值
-		if (updateMember.getMembername() != null
-				&& !updateMember.getMembername().equals(sessionMember.getMembername())) {
-			sessionMember.setMembername(updateMember.getMembername());
-			isUpdated = true;
-		}
-		if (updateMember.getEmail() != null && !updateMember.getEmail().equals(sessionMember.getEmail())) {
-			sessionMember.setEmail(updateMember.getEmail());
-			isUpdated = true;
-		}
-		if (updateMember.getPhone() != null && !updateMember.getPhone().equals(sessionMember.getPhone())) {
-			sessionMember.setPhone(updateMember.getPhone());
-			isUpdated = true;
-		}
-		if (updateMember.getDateofbirth() != null
-				&& !updateMember.getDateofbirth().equals(sessionMember.getDateofbirth())) {
-			sessionMember.setDateofbirth(updateMember.getDateofbirth());
-			isUpdated = true;
-		}
-		if (updateMember.getGender() != null && !updateMember.getGender().equals(sessionMember.getGender())) {
-			sessionMember.setGender(updateMember.getGender());
-			isUpdated = true;
-		}
-		if (updateMember.getPhotobase64() != null
-				&& !updateMember.getPhotobase64().equals(sessionMember.getPhotobase64())) {
-			sessionMember.setPhotobase64(updateMember.getPhotobase64());
-			isUpdated = true;
-		}
+//		boolean isUpdated = false;
+//		// 判斷欄位有沒有被異動到&檢查欄位狀態值
+//		if (updateMember.getMembername() != null
+//				&& !updateMember.getMembername().equals(sessionMember.getMembername())) {
+//			sessionMember.setMembername(updateMember.getMembername());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getEmail() != null && !updateMember.getEmail().equals(sessionMember.getEmail())) {
+//			sessionMember.setEmail(updateMember.getEmail());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getPhone() != null && !updateMember.getPhone().equals(sessionMember.getPhone())) {
+//			sessionMember.setPhone(updateMember.getPhone());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getDateofbirth() != null
+//				&& !updateMember.getDateofbirth().equals(sessionMember.getDateofbirth())) {
+//			sessionMember.setDateofbirth(updateMember.getDateofbirth());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getGender() != null && !updateMember.getGender().equals(sessionMember.getGender())) {
+//			sessionMember.setGender(updateMember.getGender());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getPhotobase64() != null
+//				&& !updateMember.getPhotobase64().equals(sessionMember.getPhotobase64())) {
+//			sessionMember.setPhotobase64(updateMember.getPhotobase64());
+//			isUpdated = true;
+//		}
 
 //		String password = member.getPassword();
 //		if (password != null && !password.isEmpty()  && (password.length() < 6 || password.length() > 12)) {
@@ -141,17 +147,17 @@ public class MemberServiceImpl implements MemberService {
 //			member.setMessage("匿名長度須介於1 ~ 20");
 //		}
 
-		if (isUpdated) {
-			int resultCount = memberDao.update(sessionMember);
-
-			sessionMember.setSuccessful(resultCount > 0);
-			sessionMember.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
-		} else {
-			sessionMember.setSuccessful(true); // 沒有異動的情況視為成功
-			sessionMember.setMessage("資料未改動");
-		}
-
-		return sessionMember;
+//		if (isUpdated) {
+//			int resultCount = memberDao.update(sessionMember);
+//
+//			sessionMember.setSuccessful(resultCount > 0);
+//			sessionMember.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+//		} else {
+//			sessionMember.setSuccessful(true); // 沒有異動的情況視為成功
+//			sessionMember.setMessage("資料未改動");
+//		}
+//
+//		return sessionMember;
 
 //		int resultCount =  memberDao.update(member);
 //		member.setSuccessful(resultCount > 0);
@@ -197,49 +203,54 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member updateimg(Member sessionMember, Member updateMember) {
+	public Member updateimg(Member member) {
 
-		boolean isUpdated = false;
-
-		if (updateMember.getMembername() != null
-				&& !updateMember.getMembername().equals(sessionMember.getMembername())) {
-			sessionMember.setMembername(updateMember.getMembername());
-			isUpdated = true;
-		}
-		if (updateMember.getEmail() != null && !updateMember.getEmail().equals(sessionMember.getEmail())) {
-			sessionMember.setEmail(updateMember.getEmail());
-			isUpdated = true;
-		}
-		if (updateMember.getPhone() != null && !updateMember.getPhone().equals(sessionMember.getPhone())) {
-			sessionMember.setPhone(updateMember.getPhone());
-			isUpdated = true;
-		}
-		if (updateMember.getDateofbirth() != null
-				&& !updateMember.getDateofbirth().equals(sessionMember.getDateofbirth())) {
-			sessionMember.setDateofbirth(updateMember.getDateofbirth());
-			isUpdated = true;
-		}
-		if (updateMember.getGender() != null && !updateMember.getGender().equals(sessionMember.getGender())) {
-			sessionMember.setGender(updateMember.getGender());
-			isUpdated = true;
-		}
-		if (updateMember.getPhotobase64() != null
-				&& !updateMember.getPhotobase64().equals(sessionMember.getPhotobase64())) {
-			sessionMember.setPhotobase64(updateMember.getPhotobase64());
-			isUpdated = true;
-		}
-
-		if (isUpdated) {
-			int resultCount = memberDao.updateimg(sessionMember);
-
-			sessionMember.setSuccessful(resultCount > 0);
-			sessionMember.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
-		} else {
-			sessionMember.setSuccessful(true); // 沒有異動的情況視為成功
-			sessionMember.setMessage("資料未改動");
-		}
-
-		return sessionMember;
+		final int resultCount = memberDao.updateimg(member);
+		member.setSuccessful(resultCount > 0);
+		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		return member;
+		
+//		boolean isUpdated = false;
+//
+//		if (updateMember.getMembername() != null
+//				&& !updateMember.getMembername().equals(sessionMember.getMembername())) {
+//			sessionMember.setMembername(updateMember.getMembername());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getEmail() != null && !updateMember.getEmail().equals(sessionMember.getEmail())) {
+//			sessionMember.setEmail(updateMember.getEmail());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getPhone() != null && !updateMember.getPhone().equals(sessionMember.getPhone())) {
+//			sessionMember.setPhone(updateMember.getPhone());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getDateofbirth() != null
+//				&& !updateMember.getDateofbirth().equals(sessionMember.getDateofbirth())) {
+//			sessionMember.setDateofbirth(updateMember.getDateofbirth());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getGender() != null && !updateMember.getGender().equals(sessionMember.getGender())) {
+//			sessionMember.setGender(updateMember.getGender());
+//			isUpdated = true;
+//		}
+//		if (updateMember.getPhotobase64() != null
+//				&& !updateMember.getPhotobase64().equals(sessionMember.getPhotobase64())) {
+//			sessionMember.setPhotobase64(updateMember.getPhotobase64());
+//			isUpdated = true;
+//		}
+//
+//		if (isUpdated) {
+//			int resultCount = memberDao.updateimg(sessionMember);
+//
+//			sessionMember.setSuccessful(resultCount > 0);
+//			sessionMember.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+//		} else {
+//			sessionMember.setSuccessful(true); // 沒有異動的情況視為成功
+//			sessionMember.setMessage("資料未改動");
+//		}
+//
+//		return sessionMember;
 
 //		
 //		int resultCount =  memberDao.updateimg(member);
@@ -248,6 +259,19 @@ public class MemberServiceImpl implements MemberService {
 //		member.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
 //		return member;
 
+	}
+
+	@Override
+	public Member selectByMemberID(Integer memberid) {
+		Member memberdate = memberDao.selectByMemberID(memberid);
+		if (memberid != null) {
+			Date dateOfBirth = memberdate.getDateofbirth();
+			if (dateOfBirth != null) {
+				String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(dateOfBirth);
+				memberdate.setStrdateofbirth(formattedDate);
+			}
+		}
+		return memberdate;
 	}
 
 //	@Override

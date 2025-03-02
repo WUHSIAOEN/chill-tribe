@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 @ComponentScan({ "core.exception", "web.*.controller" })
 public class SpringMvcConfig implements WebMvcConfigurer {
+	
+//	因預設首頁須配合ViewResolver使用，ViewResolver 需要刪掉
 //	@Override
 //	public void configureViewResolvers(ViewResolverRegistry registry) {
 //		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -26,12 +28,13 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 //		registry.viewResolver(viewResolver);
 //	}
 
-	// 託管靜態資源
+//	託管靜態資源 - 重新映射靜態資源
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("/WEB-INF/");
 	}
 
+//	託管CommonsMultipartResolver元件 - 檔案上下傳
 	@Bean
 	public CommonsMultipartResolver commonsMultipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -40,7 +43,8 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 		resolver.setMaxUploadSize(4L * 1024 * 1024 * 1024);
 		return resolver;
 	}
-
+	
+//	託管/註冊MappingJackson2HttpMessageConverter
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
@@ -48,7 +52,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 		converters.add(messageConverter);
 	}
 	
-//	預設首頁
+//	預設首頁 - 取代web.xml 的welcome file
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry

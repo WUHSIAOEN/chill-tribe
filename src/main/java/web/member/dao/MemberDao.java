@@ -8,10 +8,11 @@ public interface MemberDao {
 
 	int insert(Member member);
 	
-	// SQL:select * from MEMBER where USERNAME = ?
 	Member selectByUsername(String username);
 	
 	Member selectByEmail(String email);
+	
+	Member selectByMemberID(Integer memberid);
 	
 	Member selectByPhone(String phone);
 	
