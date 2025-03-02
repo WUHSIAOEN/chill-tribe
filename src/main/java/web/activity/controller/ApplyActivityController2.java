@@ -23,15 +23,11 @@ public class ApplyActivityController2 extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		ActivityService service;
-		try {
-			service = new ActivityServiceImpl();
-			Gson gson = new Gson();
+		service = new ActivityServiceImpl();
+		Gson gson = new Gson();
 //			System.out.println(req.getReader());
-			Activity activity = gson.fromJson(req.getReader(), Activity.class);
-			System.out.println(activity.getActivityName());
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		Activity activity = gson.fromJson(req.getReader(), Activity.class);
+		System.out.println(activity.getActivityName());
 
 	}
 
