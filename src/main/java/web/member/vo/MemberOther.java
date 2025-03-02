@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberOther extends Member{
+public class MemberOther {
 	// 會員五寶
 	private String cpassword;
 	// 會員基本資料

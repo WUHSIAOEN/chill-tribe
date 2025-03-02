@@ -12,14 +12,14 @@
 		<div class="d-user-avater">
 
 			<img id="photo_base64" src="https://placehold.co/500x500"
-				class="img-fluid avater" alt=""> <label
-				for="upload-avatar" class="btn btn-primary mt-2">上傳圖片</label> <input
-				type="file" id="upload-avatar" class="d-none" accept="image/*"
+				class="img-fluid avater" alt=""> <label for="upload-avatar"
+				class="btn btn-primary mt-2">上傳圖片</label> <input type="file"
+				id="upload-avatar" class="d-none" accept="image/*"
 				onchange="previewImage(event)">
 			<!-- Image preview -->
-<!-- 			<div id="image-preview" class="mt-3"> -->
-<!-- 				<img id="preview" src="" alt="預覽圖片" class="img-fluid d-none"> -->
-<!-- 			</div> -->
+			<!-- 			<div id="image-preview" class="mt-3"> -->
+			<!-- 				<img id="preview" src="" alt="預覽圖片" class="img-fluid d-none"> -->
+			<!-- 			</div> -->
 
 
 			<!--             <h4>Adam Harshvardhan</h4> -->
@@ -154,24 +154,28 @@
 </div>
 
 <input type="hidden" id="img_member_id" value="">
+<input type="hidden" id="member_id" value="">
 
 <script>
 
 	const photo_base64 = document.getElementById('photo_base64');
 // 	console.log(member_img);
+	const memberid = sessionStorage.getItem('memberid');
 
 	
-	fetch('find')
+// 	fetch('find')
+fetch(`find/${memberid}`)
+// fetch(`find/${img_member_id.value}`)
 		.then(resp => resp.json())
 		.then(member => {
 			console.log(member);
-			member_id.value = member.member_id;
-			img_member_id.value = member.member_id;
-			if (member.photo_base64 == null) {
+			member_id.value = member.memberid;
+			img_member_id.value = member.memberid;
+			if (member.photobase64 == null) {
 				photo_base64.src = 'https://placehold.co/500x500';
 				console.log("照片是空的");
 				} else {
-			photo_base64.src = 'data:image/png;base64,' + member.photo_base64;	
+			photo_base64.src = 'data:image/png;base64,' + member.photobase64;	
 			console.log("77777有照片囉");				
 					}
 			
@@ -215,8 +219,8 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-            	member_id: img_member_id.value,
-                photo_base64: base64Image
+            	memberid: img_member_id.value,
+                photobase64: base64Image
             })
         })
         

@@ -49,7 +49,7 @@ public class RegisterController  {
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		if (member == null) {
-			member = new MemberOther();
+			member = new Member();
 			member.setMessage("無會員資訊");
 			member.setSuccessful(false);
 			return member;
