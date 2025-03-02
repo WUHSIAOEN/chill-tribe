@@ -177,6 +177,11 @@
 	            console.log("返回值:", data);
 	            if (data.successful) {
 	                console.log("登入成功");
+	                if (data.memberid) {
+	                    sessionStorage.setItem('memberid', data.memberid);
+	                    console.log('memberid 已儲存到 sessionStorage:', data.memberid);
+	                }
+	                
 	                window.location.href = '/chill-tribe/chilltribe.html';  
 	            } else {
 	                console.log("登入失敗");

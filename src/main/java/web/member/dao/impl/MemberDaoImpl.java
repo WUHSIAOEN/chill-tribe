@@ -55,7 +55,7 @@ public class MemberDaoImpl implements MemberDao {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		
+
 	}
 
 	// 使用member_name查詢相關資料
@@ -65,9 +65,7 @@ public class MemberDaoImpl implements MemberDao {
 		CriteriaQuery<Member> cQuery = cBuilder.createQuery(Member.class);
 		Root<Member> root = cQuery.from(Member.class);
 		cQuery.where(cBuilder.equal(root.get("membername"), membername));
-		return session
-				.createQuery(cQuery)
-				.uniqueResult();
+		return session.createQuery(cQuery).uniqueResult();
 //		String sql = "select * from MEMBERS where MEMBER_NAME = ?";
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 //			pstmt.setString(1, member_name);
@@ -91,63 +89,80 @@ public class MemberDaoImpl implements MemberDao {
 	// 更新資料
 	@Override
 	public int update(Member member) {
-		final StringBuilder sql = new StringBuilder()
-		        .append("UPDATE MEMBERS SET ");
+		final StringBuilder hql = new StringBuilder()
+				.append("UPDATE Member SET ");
 		
+		hql.append("membername = :membername,")
+		.append("phone = :phone,")
+		.append("gender = :gender,")
+		.append("dateofbirth = :dateofbirth ")
+		.append("WHERE memberid = :memberid");
+		
+		Query<?> query = session.createQuery(hql.toString());
+		return query
+			.setParameter("membername", member.getMembername())
+			.setParameter("phone", member.getPhone())
+			.setParameter("gender", member.getGender())
+			.setParameter("dateofbirth", member.getDateofbirth())
+			.setParameter("memberid", member.getMemberid())
+			.executeUpdate();
+		
+//		final StringBuilder sql = new StringBuilder().append("UPDATE MEMBERS SET ");
+
 //		int offset = 1;
 //		StringBuilder sql = new StringBuilder("UPDATE MEMBERS SET ");
-		String gender = member.getGender();
-		Date date_of_birth = member.getDateofbirth();
-		String phone = member.getPhone();
-		String member_name = member.getMembername();
-
-		boolean hasMembername = member_name != null && !member_name.isEmpty();
-		boolean hasGender = gender != null && !gender.isEmpty();
-		boolean hasDateOfBirth = date_of_birth != null;
-		boolean hasPhone = phone != null && !phone.isEmpty();
-
-		if (hasGender) {
-			sql.append("GENDER = :gender, ");
-		}
-		if (hasDateOfBirth) {
-			sql.append("DATE_OF_BIRTH = :date_of_birth, ");
-		}
-		if (hasPhone) {
-			sql.append("PHONE = :phone, ");
-		}
-		if (hasMembername) {
-			sql.append("MEMBER_NAME = :member_name, ");
-		}
-
-		if (sql.charAt(sql.length() - 2) == ',') {
-			sql.delete(sql.length() - 2, sql.length());
-		}
-
+//		String gender = member.getGender();
+//		Date date_of_birth = member.getDateofbirth();
+//		String phone = member.getPhone();
+//		String member_name = member.getMembername();
+//
+//		boolean hasMembername = member_name != null && !member_name.isEmpty();
+//		boolean hasGender = gender != null && !gender.isEmpty();
+//		boolean hasDateOfBirth = date_of_birth != null;
+//		boolean hasPhone = phone != null && !phone.isEmpty();
+//
+//		if (hasGender) {
+//			sql.append("GENDER = :gender, ");
+//		}
+//		if (hasDateOfBirth) {
+//			sql.append("DATE_OF_BIRTH = :date_of_birth, ");
+//		}
+//		if (hasPhone) {
+//			sql.append("PHONE = :phone, ");
+//		}
+//		if (hasMembername) {
+//			sql.append("MEMBER_NAME = :member_name, ");
+//		}
+//
+//		if (sql.charAt(sql.length() - 2) == ',') {
+//			sql.delete(sql.length() - 2, sql.length());
+//		}
+//
+//		// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+//		sql.append("WHERE MEMBER_ID = :member_id");
+//
+//		Query<?> query = session.createQuery(sql.toString());
+////		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+//		if (hasGender) {
+//			query.setParameter("gender", member.getGender());
+////				pstmt.setString(offset++, member.getGender());
+//		}
+//		if (hasDateOfBirth) {
+//			query.setParameter("dateOfBirth", member.getDateofbirth());
+////				pstmt.setDate(offset++, member.getDate_of_birth());
+//		}
+//		if (hasPhone) {
+//			query.setParameter("phone", member.getPhone());
+////				pstmt.setString(offset++, member.getPhone());
+//		}
+//		if (hasMembername) {
+//			query.setParameter("memberName", member.getMembername());
+////				pstmt.setString(offset++, member.getMember_name());
+//		}
+//
+//		query.setParameter("memberId", member.getMemberid());
+//		return query.executeUpdate();
 		// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
-		sql.append("WHERE MEMBER_ID = :member_id");
-
-		Query<?> query = session.createQuery(sql.toString());
-//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-			if (hasGender) {
-				query.setParameter("gender", member.getGender());
-//				pstmt.setString(offset++, member.getGender());
-			}
-			if (hasDateOfBirth) {
-				query.setParameter("dateOfBirth", member.getDateofbirth());
-//				pstmt.setDate(offset++, member.getDate_of_birth());
-			}
-			if (hasPhone) {
-				 query.setParameter("phone", member.getPhone());
-//				pstmt.setString(offset++, member.getPhone());
-			}
-			if (hasMembername) {
-				query.setParameter("memberName", member.getMembername());
-//				pstmt.setString(offset++, member.getMember_name());
-			}
-
-			query.setParameter("memberId", member.getMemberid());
-			return query.executeUpdate();
-			// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
 //			pstmt.setInt(offset, member.getMember_id());
 
 //			return pstmt.executeUpdate();
@@ -161,11 +176,8 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member selectByUsernameAndPassword(String email, String password) {
 		String sql = "select * from MEMBERS where EMAIL = :email and PASSWORD = :password";
-		return session
-				.createNativeQuery(sql, Member.class)
-				.setParameter("email", email)
-				.setParameter("password", password)
-				.uniqueResult();
+		return session.createNativeQuery(sql, Member.class).setParameter("email", email)
+				.setParameter("password", password).uniqueResult();
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 //			pstmt.setString(1, member.getEmail());
 //			pstmt.setString(2, member.getPassword());
@@ -192,10 +204,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public List<Member> selectAll() {
-		final String hql = "FROM MEMBERS ORDER BY MEMBER_ID";
-		return session
-				.createQuery(hql, Member.class)
-				.getResultList();
+		final String sql = "FROM Member ORDER BY memberid";
+		return session.createQuery(sql, Member.class).getResultList();
 //		String sql = "select * from MEMBERS";
 //		try (Connection conn = ds.getConnection();
 //				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -248,9 +258,7 @@ public class MemberDaoImpl implements MemberDao {
 		CriteriaQuery<Member> cQuery = cBuilder.createQuery(Member.class);
 		Root<Member> root = cQuery.from(Member.class);
 		cQuery.where(cBuilder.equal(root.get("email"), email));
-		return session
-				.createQuery(cQuery)
-				.uniqueResult();
+		return session.createQuery(cQuery).uniqueResult();
 //		String sql = "select * from MEMBERS where EMAIL = ?";
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 //			pstmt.setString(1, email);
@@ -279,9 +287,7 @@ public class MemberDaoImpl implements MemberDao {
 		CriteriaQuery<Member> cQuery = cBuilder.createQuery(Member.class);
 		Root<Member> root = cQuery.from(Member.class);
 		cQuery.where(cBuilder.equal(root.get("phone"), phone));
-		return session
-				.createQuery(cQuery)
-				.uniqueResult();
+		return session.createQuery(cQuery).uniqueResult();
 //		String sql = "select * from MEMBERS where PHONE = ?";
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 //			pstmt.setString(1, phone);
@@ -305,45 +311,60 @@ public class MemberDaoImpl implements MemberDao {
 	// 大頭照
 	@Override
 	public int updateimg(Member member) {
-		final StringBuilder sql = new StringBuilder()
-	            .append("UPDATE MEMBERS SET ");
 		
+		final StringBuilder hql = new StringBuilder()
+				.append("UPDATE Member SET ");
+		
+		String photo_base64 = member.getPhotobase64();
+		
+		hql.append("photobase64 = :photobase64 ")
+		.append("WHERE memberid = :memberid");
+		
+		Query<?> query = session.createQuery(hql.toString());
+		return query
+			.setParameter("photobase64", member.getPhotobase64())
+			.setParameter("memberid", member.getMemberid())
+			.executeUpdate();
+		
+		
+//		final StringBuilder sql = new StringBuilder().append("UPDATE MEMBERS SET ");
+
 //		int offset = 1;
 //		StringBuilder sql = new StringBuilder("UPDATE MEMBERS SET ");
-		String photo_base64 = member.getPhotobase64();
+//		String photo_base64 = member.getPhotobase64();
 
-		boolean hasPhoto_base64 = photo_base64 != null && !photo_base64.isEmpty();
+//		boolean hasPhoto_base64 = photo_base64 != null && !photo_base64.isEmpty();
 
-		if (hasPhoto_base64) {
-			sql.append("PHOTOBASE64 = :photoBase64, ");
-		}
+//		if (hasPhoto_base64) {
+//			sql.append("PHOTOBASE64 = :photoBase64, ");
+//		}
 
 		// 如果沒有任何欄位需要更新
-		if (sql.toString().equals("UPDATE MEMBERS SET ")) {
-			System.out.println("沒有任何值" + photo_base64);
-			return 0;
-		}
+//		if (sql.toString().equals("UPDATE MEMBERS SET ")) {
+//			System.out.println("沒有任何值" + photo_base64);
+//			return 0;
+//		}
 
 		// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
-		sql.append("WHERE MEMBER_ID = :memberId");
+//		sql.append("WHERE MEMBER_ID = :memberId");
 
-		 Query<?> query = session.createQuery(sql.toString());
+//		Query<?> query = session.createQuery(sql.toString());
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-			if (hasPhoto_base64) {
-//				pstmt.setString(offset++, member.getPhoto_base64());
-				query.setParameter("photoBase64", member.getPhotobase64());
-				System.out.println("要回傳" + photo_base64);
-			}
-
-			query.setParameter("memberId", member.getMemberid());
-			// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
-//			pstmt.setInt(offset, member.getMember_id());
-
-//			return pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
+//		if (hasPhoto_base64) {
+////				pstmt.setString(offset++, member.getPhoto_base64());
+//			query.setParameter("photoBase64", member.getPhotobase64());
+//			System.out.println("要回傳" + photo_base64);
 //		}
-		return query.executeUpdate();
+//
+//		query.setParameter("memberId", member.getMemberid());
+//		// to do list 修改成member_id 因為使用member_name會導致你如果修改的是member_name會抓不到
+////			pstmt.setInt(offset, member.getMember_id());
+//
+////			return pstmt.executeUpdate();
+////		} catch (Exception e) {
+////			e.printStackTrace();
+////		}
+//		return query.executeUpdate();
 	}
 
 	// 查詢大頭照
@@ -366,6 +387,15 @@ public class MemberDaoImpl implements MemberDao {
 //			e.printStackTrace();
 //		}
 		return session.get(Member.class, photo_base64);
+	}
+
+	@Override
+	public Member selectByMemberID(Integer memberid) {
+		final String hql = "FROM Member WHERE memberid = :memberId"; 
+		return session
+				.createQuery(hql, Member.class)
+				.setParameter("memberId", memberid) 
+				.uniqueResult(); 
 	}
 
 	// 地址查詢
