@@ -22,10 +22,10 @@ public class ActivityServiceImpl implements ActivityService {
 	
 //	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
 	private ActivityDao actdao;
-
-	public ActivityServiceImpl() throws NamingException {
-		actdao = new ActivityDaoImpl();
-	}
+//
+//	public ActivityServiceImpl() throws NamingException {
+//		actdao = new ActivityDaoImpl();
+//	}
 //	========= 原生寫法 - 若確定此類別內的所有Service 方法已可透過Spring 注入取得DAO 即可砍掉以下程式 =========
 	
 //	========= Spring 注入 DAO =========
@@ -34,9 +34,14 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 申請活動上架
 	@Override
-	public String apply(Activities activity) {
-		int resultCount = dao.insert(activity);
-		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+	public Activities apply(Activities activities) {
+		int resultCount = dao.insert(activities);
+		if (resultCount < 0) {
+			activities.setMessage("申請活動成功");
+			activities.setSuccessful(true);
+			return activities;
+		}
+		return activities;
 	}
 
 	// 插入圖片
@@ -56,7 +61,34 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 更新活動
 	@Override
-	public String update(Activities activity) {
+	public Activities edit(Activities activities) {
+		final Activities oActivities = dao.selectByActivityId(activities.getActivityId());
+		
+		activities.setActivityName(oActivities.getActivityName());
+		activities.setCityId(oActivities.getCityId());
+		activities.setDistrictId(oActivities.getDistrictId());
+		activities.setAddress(oActivities.getAddress());
+		activities.setUnitPrice(oActivities.getUnitPrice());
+		activities.setMinParticipants(oActivities.getMinParticipants());
+		activities.setMaxParticipants(oActivities.getMaxParticipants());
+		activities.setDescription(oActivities.getDescription());
+		activities.setCategory(oActivities.getCategory());
+		activities.setStartDateTime(oActivities.getStartDateTime());
+		activities.setEndDateTime(oActivities.getEndDateTime());
+		activities.setNote(oActivities.getNote());
+		activities.setPrecaution(oActivities.getPrecaution());
+		activities.setApproved(oActivities.getApproved());
+		activities.setCreateTime(oActivities.getCreateTime());
+		activities.setLatitude(oActivities.getLatitude());
+		activities.setLongitude(oActivities.getLongitude());
+		activities.setNote(oActivities.getNote());
+		activities.setTicketsActivateTime(oActivities.getTicketsActivateTime());
+		activities.setTicketsExpiredTime(oActivities.getTicketsExpiredTime());
+		
+		final int resultCount = dao.update(activities);
+		activities.setSuccessful(resultCount > 0);
+		activities.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		return null;
 
 //		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
 //		activity.setActivityName(oActivity.getActivityName());
@@ -83,11 +115,11 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
 
-		int resultCount = actdao.update(activity);
-
-		activity.setSuccessful(resultCount > 0);
-
-		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+//		int resultCount = actdao.update(activity);
+//
+//		activity.setSuccessful(resultCount > 0);
+//
+//		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 
 	}
 

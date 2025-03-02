@@ -25,13 +25,8 @@ public class FindActivityByIdController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		System.out.println("Initializing ApplyActivityController...");
-	    try {
-	        service = new ActivityServiceImpl(); // 初始化 service
-	        System.out.println("Service initialized successfully: " + service);
-	    } catch (NamingException e) {
-	        e.printStackTrace();
-	        throw new ServletException("Service initialization failed", e);
-	    }
+	    service = new ActivityServiceImpl(); // 初始化 service
+		System.out.println("Service initialized successfully: " + service);
 	}
 	
 	@Override

@@ -1,36 +1,28 @@
 //從後端拿到資料
-function getActivityIdFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("id");
-}
+// function getActivityIdFromURL() {
+//   const params = new URLSearchParams(window.location.search);
+//   return params.get("id");
+// }
 
-function fetchActivityById(id) {
-  fetch(`/chill-tribe/activity/findActivityById?id=${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("從 Servlet 獲取的數據:", data);
-      document.getElementById("activityName").value = data.activityName;
-      document.getElementById("address").value = data.address;
-      document.getElementById("category").value = data.category;
-      document.getElementById("unitPrice").value = data.unitPrice;
-      document.getElementById("minParticipants").value = data.minParticipants;
-      document.getElementById("maxParticipants").value = data.maxParticipants;
-      document.getElementById("description").value = data.description;
-      document.getElementById("precaution").value = data.precaution;
-    });
-}
-
-const activityId = getActivityIdFromURL();
-if (activityId) {
-  fetchActivityById(activityId);
-} else {
-  console.log("你要的活動找不到喔!");
-}
-
+// function fetchActivityById(id) {
+//   fetch('/chill-tribe/activity/edit')
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log("從 後端獲取的數據:", data);
+//       document.getElementById("activityName").value = data.activityName;
+//       document.getElementById("address").value = data.address;
+//       document.getElementById("category").value = data.category;
+//       document.getElementById("unitPrice").value = data.unitPrice;
+//       document.getElementById("minParticipants").value = data.minParticipants;
+//       document.getElementById("maxParticipants").value = data.maxParticipants;
+//       document.getElementById("description").value = data.description;
+//       document.getElementById("precaution").value = data.precaution;
+//     });
+// }
 
 // 更新
 function newActivityData() {
-  const activityId = getActivityIdFromURL();
+  activity_id = 1;
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("cityId")?.value) || 1;
@@ -69,7 +61,7 @@ function newActivityData() {
   const endDateTime = formatDateTime(endRaw);
 
   return {
-    activityId,
+    activity_id,
     // supplierId,
     activityName,
     // cityId,
@@ -94,8 +86,8 @@ document
   event.preventDefault();
   const requestData = newActivityData();
 
-  fetch('/chill-tribe/activity/updateActivity', {
-    method: "POST",
+  fetch('/chill-tribe/activity/edit', {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },

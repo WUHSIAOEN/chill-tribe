@@ -7,19 +7,25 @@ import web.activity.vo.ActivityImage;
 
 public interface ActivityService {
 	
-	// 這裡可以是字串，或其他型態，
-	// 因為它代表servlet回傳的東西，具體的訊息，告訴使用者操作是成功還是失敗
-	String apply(Activities activity);
+	// 新增活動
+	Activities apply(Activities activities);
+	// String apply(Activities activity);
 	// 新增活動圖片
 	String addImages(Activities activity, List<ActivityImage> list);
+
 	// 更新活動
-	String update(Activities activity);
+	Activities edit(Activities activities);
+	// String update(Activities activity);
+
 	// 改變活動的狀態-移除活動
 	String cancelById(Activities activity);
+
 	// 刪除活動
 	boolean removeById(Integer id);
+
 	// 複數活動
 	List<Activities> findAllActivity();
+
 	// 單一活動
 	Activities findActivityById(Integer id);
 }
