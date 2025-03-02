@@ -3,7 +3,6 @@ package web.activity.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -14,12 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
-import web.activity.vo.Activities;
-import web.activity.vo.ActivityImage;
 
 @WebServlet("/activity/applyimages")
 public class ApplyActivityImagesController extends HttpServlet{
@@ -31,13 +27,8 @@ private static final long serialVersionUID = 1L;
 	@Override
 	public void init() throws ServletException {
 	    System.out.println("Initializing ApplyActivityImagesController...");
-	    try {
-	        service = new ActivityServiceImpl(); // 初始化 service
-	        System.out.println("Service initialized successfully: " + service);
-	    } catch (NamingException e) {
-	        e.printStackTrace();
-	        throw new ServletException("Service initialization failed", e);
-	    }
+	    service = new ActivityServiceImpl(); // 初始化 service
+		System.out.println("Service initialized successfully: " + service);
 	}
 	
 	@Override
