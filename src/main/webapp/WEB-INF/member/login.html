@@ -89,8 +89,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 		
-		const loginemail = document.querySelector('#loginemail');
-		const loginpassword = document.querySelector('#loginpassword');
+		const email = document.querySelector('#loginemail');
+		const password = document.querySelector('#loginpassword');
 // 		const msg = document.querySelector('#msg');
 
 
@@ -120,7 +120,7 @@
 
 		$('button#btn_login').on('click', () => {
 			console.log("登入按鈕觸發");
-			if (!loginemail.value) {
+			if (!email.value) {
 // 				alert('Email必須輸入');
 				Swal.fire({
 				  icon: "error",
@@ -131,7 +131,7 @@
 				return;
 			}
 			
-			if (!loginpassword.value) {
+			if (!password.value) {
 // 				alert('密碼必須輸入');
 				Swal.fire({
 					  icon: "error",
@@ -145,22 +145,23 @@
 			
 			
 			console.log("發送的資料：", {
-			    email: loginemail.value,
-			    password: loginpassword.value,
+			    email: email.value,
+			    password: password.value,
 			});
 			console.log("發送登入請求");
 			
 			// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-			fetch('login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					email: loginemail.value,
-					password: loginpassword.value,
-				})
-			})
+			fetch(`login/${email.value}/${password.value}`)
+// 			, {
+// 				method: 'POST',
+// 				headers: {
+// 					'Content-Type': 'application/json'
+// 				},
+// 				body: JSON.stringify({
+// 					email: loginemail.value,
+// 					password: loginpassword.value,
+// 				})
+// 			})
 			// console.log(resp)
 // 			 .then(resp => {
 // 				 return resp.json();

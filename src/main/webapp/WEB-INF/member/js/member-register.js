@@ -1,7 +1,7 @@
 
 const username = document.querySelector('#member_name');
 const password = document.querySelector('#password');
-const cPassword = document.querySelector('#cPassword');
+const cpassword = document.querySelector('#cPassword');
 const phone = document.querySelector('#phone');
 const email = document.querySelector('#email');
 
@@ -28,7 +28,7 @@ document.querySelector('button#build').addEventListener('click', () => {
 		return;
 	}
 
-	if (password.value !== cPassword.value) {
+	if (password.value !== cpassword.value) {
 //		alert('密碼與確認密碼不同');
 		Swal.fire({
 							icon: "error",
@@ -44,9 +44,9 @@ document.querySelector('button#build').addEventListener('click', () => {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			member_name: username.value,
+			membername: username.value,
 			password: password.value,
-			cPassword: cPassword.value,
+			cpassword: cpassword.value,
 			phone: phone.value,
 			email: email.value,
 		})
@@ -56,6 +56,7 @@ document.querySelector('button#build').addEventListener('click', () => {
 			return resp.json();
 		})
 		.then(body => {
+			debugger;
 			const { successful, errMsg } = body;
 			if (successful) {
 			        Swal.fire({
