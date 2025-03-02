@@ -8,7 +8,7 @@ public interface MemberService {
 
 	Member register(Member member);
 	
-	Member edit(Member sessionMember, Member updateMember);
+	Member edit(Member member);
 	
 	Member login(Member member);
 	
@@ -16,7 +16,9 @@ public interface MemberService {
 	
 	boolean removeById(Integer id);
 	
-	Member updateimg(Member sessionMember, Member updateMember);
+	Member selectByMemberID(Integer memberid);
+	
+	Member updateimg(Member member);
 	
 //	Member selectaddress(Member member);
 	

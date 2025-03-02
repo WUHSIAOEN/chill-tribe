@@ -30,7 +30,7 @@ public class Member extends Core {
 	// 會員五寶
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "MEMBER_ID")
+	@Column(name = "MEMBER_ID")
 	private Integer memberid;
 	@Column(name = "MEMBER_NAME")
 	private String membername;

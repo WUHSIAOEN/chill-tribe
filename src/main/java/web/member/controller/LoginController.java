@@ -25,7 +25,7 @@ import web.member.vo.Member;
 
 // 一般會員登入
 @RestController
-@RequestMapping("member/login")
+@RequestMapping({"member/login", "/login"})
 //@WebServlet({"/member/login", "/login"})
 public class LoginController  {
 //	private static final long serialVersionUID = 1L;
