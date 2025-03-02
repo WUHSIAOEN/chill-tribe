@@ -14,7 +14,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<!-- Java-based config -->
 	<context-param>
 		<param-name>contextClass</param-name>
@@ -24,7 +24,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>core.config.SpringConfig</param-value>
 	</context-param>
-	
+
 	<!-- hibernate filter -->
 	<filter>
 		<filter-name>HibernateFilter</filter-name>
@@ -34,5 +34,27 @@
 		<filter-name>HibernateFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<!-- Spring MVC config start -->
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>core.config.SpringMvcConfig</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<multipart-config />
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 
 </web-app>

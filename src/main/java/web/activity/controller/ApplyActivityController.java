@@ -20,7 +20,7 @@ import web.activity.service.ActivityService;
 import web.activity.service.impl.ActivityServiceImpl;
 import web.activity.vo.Activities;
 
-@WebServlet("/activity/apply")
+//@WebServlet("/activity/apply")
 public class ApplyActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

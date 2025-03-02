@@ -9,37 +9,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
 import web.member.vo.Member;
+import web.member.vo.MemberOther;
 
 // 一般會員大頭照
 @WebServlet("/member/memberimg")
 public class FileImgController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Autowired
 	private MemberService service;
-
-	@Override
-	public void init() throws ServletException {
-		try {
-			service = new MemberServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
+//	@Override
+//	public void init() throws ServletException {
+//		try {
+//			service = new MemberServiceImpl();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		Gson gson = new Gson();
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
 
 		// 舊的session資料
 		Member sessionMember = (Member) req.getSession().getAttribute("member");
 		// edit後更新的session資料
 		Member updateMember = gson.fromJson(req.getReader(), Member.class);
+		
+//		MemberOther memberOther = sessionMember.get;
 
 		// to do list 更新了session的資料但是如果沒有異動的會沒資料所以要做判斷是否有異動
 
@@ -47,7 +55,7 @@ public class FileImgController extends HttpServlet {
 
 		req.getSession().setAttribute("member", sessionMember);
 
-		sessionMember.setcPassword(null);
+//		sessionMember.setcPassword(null);
 		resp.setContentType("application/json");
 		resp.getWriter().write(gson.toJson(sessionMember));
 	}
