@@ -1,6 +1,7 @@
 package web.activity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,19 @@ import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
 
 @RestController
-@RequestMapping("activity/edit")
+@RequestMapping("supplier/activities/edit")
 public class EditActivityController {
 	
 	@Autowired
 	private ActivityService service;
+	
+	@PutMapping("{id}")
+	public Activities edit(@PathVariable Integer id, @RequestBody Activities activities) {
+		System.out.println("test" + activities);
+		activities.setActivityId(id);
+		return service.edit(activities);
+		
+	}
 	
 //	@GetMapping
 //	public Activities getInfo(@SessionAttribute Activities activities) {
@@ -28,10 +37,6 @@ public class EditActivityController {
 //		return activities;
 //	}
 	
-	@PutMapping
-	public Activities edit(@RequestBody Activities reqActivities) {
-		return service.edit(reqActivities);
-	}
 	
 //@WebServlet("/activity/updateActivity")
 //public class EditActivityController extends HttpServlet {

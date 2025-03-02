@@ -110,298 +110,100 @@ public class ActivityDaoImpl implements ActivityDao {
 	// 更新活動
 	@Override
 	public int update(Activities activities) {
+		
+		Activities existingActivity = session.get(Activities.class, activities.getActivityId());
+	    if (existingActivity != null) {
+	        // 只更新傳入的欄位，其他欄位保持原有值
+	    	if (activities.getActivityName() != null) {
+	            existingActivity.setActivityName(activities.getActivityName());
+	        }
+	        if (activities.getActivityPrefix() != null) {
+	            existingActivity.setActivityPrefix(activities.getActivityPrefix());
+	        }
+	        if (activities.getSupplierId() != null) {
+	            existingActivity.setSupplierId(activities.getSupplierId());
+	        }
+	        if (activities.getSupplier() != null) {
+	            existingActivity.setSupplier(activities.getSupplier());
+	        }
+	        if (activities.getCityId() != null) {
+	            existingActivity.setCityId(activities.getCityId());
+	        }
+	        if (activities.getCity() != null) {
+	            existingActivity.setCity(activities.getCity());
+	        }
+	        if (activities.getDistrictId() != null) {
+	            existingActivity.setDistrictId(activities.getDistrictId());
+	        }
+	        if (activities.getDistrict() != null) {
+	            existingActivity.setDistrict(activities.getDistrict());
+	        }
+	        if (activities.getAddress() != null) {
+	            existingActivity.setAddress(activities.getAddress());
+	        }
+	        if (activities.getUnitPrice() != null) {
+	            existingActivity.setUnitPrice(activities.getUnitPrice());
+	        }
+	        if (activities.getMinParticipants() != null) {
+	            existingActivity.setMinParticipants(activities.getMinParticipants());
+	        }
+	        if (activities.getMaxParticipants() != null) {
+	            existingActivity.setMaxParticipants(activities.getMaxParticipants());
+	        }
+	        if (activities.getDescription() != null) {
+	            existingActivity.setDescription(activities.getDescription());
+	        }
+	        if (activities.getCategory() != null) {
+	            existingActivity.setCategory(activities.getCategory());
+	        }
+	        if (activities.getComments() != null) {
+	            existingActivity.setComments(activities.getComments());
+	        }
+	        if (activities.getStartDateTime() != null) {
+	            existingActivity.setStartDateTime(activities.getStartDateTime());
+	        }
+	        if (activities.getEndDateTime() != null) {
+	            existingActivity.setEndDateTime(activities.getEndDateTime());
+	        }
+	        if (activities.getStatus() != null) {
+	            existingActivity.setStatus(activities.getStatus());
+	        }
+	        if (activities.getNote() != null) {
+	            existingActivity.setNote(activities.getNote());
+	        }
+	        if (activities.getPrecaution() != null) {
+	            existingActivity.setPrecaution(activities.getPrecaution());
+	        }
+	        if (activities.getApproved() != null) {
+	            existingActivity.setApproved(activities.getApproved());
+	        }
+	        if (activities.getInventoryCount() != null) {
+	            existingActivity.setInventoryCount(activities.getInventoryCount());
+	        }
+	        if (activities.getInventoryUpdateTime() != null) {
+	            existingActivity.setInventoryUpdateTime(activities.getInventoryUpdateTime());
+	        }
+	        if (activities.getCreateTime() != null) {
+	            existingActivity.setCreateTime(activities.getCreateTime());
+	        }
+	        if (activities.getLatitude() != null) {
+	            existingActivity.setLatitude(activities.getLatitude());
+	        }
+	        if (activities.getLongitude() != null) {
+	            existingActivity.setLongitude(activities.getLongitude());
+	        }
+	        if (activities.getTicketsActivateTime() != null) {
+	            existingActivity.setTicketsActivateTime(activities.getTicketsActivateTime());
+	        }
+	        if (activities.getTicketsExpiredTime() != null) {
+	            existingActivity.setTicketsExpiredTime(activities.getTicketsExpiredTime());
+	        }
+	        session.update(existingActivity);
+	        return 1;
+	    }
+	    return -1;
 
-		final StringBuilder sql = new StringBuilder()
-				.append("UPDATE Activities SET ");
-		
-		String activityName = activities.getActivityName();
-		Integer cityId = activities.getCityId();
-		City city = activities.getCity();
-		Integer districtId = activities.getDistrictId();
-		District district = activities.getDistrict();
-		String address = activities.getAddress();
-		Integer unitPrice = activities.getUnitPrice();
-		Integer minParticipants = activities.getMinParticipants();
-		Integer maxParticipants = activities.getMaxParticipants();
-		String description = activities.getDescription();
-		String category = activities.getCategory();
-		List<ActivityImage> activityImages = activities.getActivityImages();
-		List<Comment> comments = activities.getComments();
-		Timestamp startDateTime = activities.getStartDateTime();
-		Timestamp endDateTime = activities.getEndDateTime();
-		Integer status = activities.getStatus();
-		String note = activities.getNote();
-		String precaution = activities.getPrecaution();
-		Integer approved = activities.getApproved();
-		Integer inventoryCount = activities.getInventoryCount();
-		Timestamp inventoryUpdateTime = activities.getInventoryUpdateTime();
-		Timestamp createTime = activities.getCreateTime();
-		String latitude = activities.getLatitude();
-		String longitude = activities.getLongitude();
-		Timestamp ticketsActivateTime = activities.getTicketsActivateTime();
-		Timestamp ticketsExpiredTime = activities.getTicketsExpiredTime();
-//		Integer supplierId = activities.getSupplierId();
-//		Supplier supplier = activities.getSupplier();
-		
-		if (activityName != null && !activityName.isEmpty()) {
-			sql.append("activity_name = :activity_name, ");
-		}
-		if (cityId != null) {
-			sql.append("city_id = :city_id, ");
-		}
-		if (city != null) {
-			sql.append("city = :city, ");
-		}
-		if (districtId != null) {
-			sql.append("district_id = :district_id, ");
-		}
-		if (district != null) {
-			sql.append("district = :district, ");
-		}
-		if (address != null && !address.isEmpty()) {
-			sql.append("address = :address, ");
-		}
-		if (unitPrice != null) {
-			sql.append("unit_price = :unit_price, ");
-		}
-		if (minParticipants != null) {
-			sql.append("min_participants = :min_participants, ");
-		}
-		if (maxParticipants != null) {
-			sql.append("max_participants = :max_participants, ");
-		}
-		if (description != null && !description.isEmpty()) {
-			sql.append("description = :description, ");
-		}
-		if (category != null && !category.isEmpty()) {
-			sql.append("category = :category, ");
-		}
-		if (activityImages != null && !activityImages.isEmpty()) {
-			sql.append("activity_images = :activity_images, ");
-		}
-		if (comments != null && !comments.isEmpty()) {
-			sql.append("comments = :comments, ");
-		}
-		if (startDateTime != null) {
-			sql.append("start_date_time = :start_date_time, ");
-		}
-		if (endDateTime != null) {
-			sql.append("end_date_time = :end_date_time, ");
-		}
-		if (status != null) {
-			sql.append("status = :status, ");
-		}
-		if (note != null && !note.isEmpty()) {
-			sql.append("note = :note, ");
-		}
-		if (precaution != null && !precaution.isEmpty()) {
-			sql.append("precaution = :precaution, ");
-		}
-		if (approved != null) {
-			sql.append("approved = :approved, ");
-		}
-		if (inventoryCount != null) {
-			sql.append("inventory_count = :inventory_count, ");
-		}
-		if (inventoryUpdateTime != null) {
-			sql.append("inventory_update_time = :inventory_update_time, ");
-		}
-		if (createTime != null) {
-			sql.append("create_time = :create_time, ");
-		}
-		if (latitude != null && !latitude.isEmpty()) {
-			sql.append("latitude = :latitude, ");
-		}
-		if (longitude != null && !longitude.isEmpty()) {
-			sql.append("longitude = :longitude, ");
-		}
-		if (ticketsActivateTime != null) {
-			sql.append("tickets_activate_time = :tickets_activate_time, ");
-		}
-		if (ticketsExpiredTime != null) {
-			sql.append("tickets_expired_time = :tickets_expired_time, ");
-		}
-		
-		if (sql.charAt(sql.length() - 2) == ',') {
-			sql.delete(sql.length() - 2, sql.length());
-		}
-//		if (supplierId != null) {
-//			sql.append("supplier_id = :supplier_id, ");
-//		}
-//		if (supplier != null) {
-//			sql.append("supplier = :supplier, ");
-//		}
-		
-		sql.append("WHERE activity_id = :activity_id");
-		
-		Query<?> query = session.createQuery(sql.toString());
-		
-		if (activityName != null && !activityName.isEmpty()) {
-			query.setParameter("activityName", activities.getActivityName());
-		}
-		if (cityId != null) {
-			query.setParameter("activityName", activities.getCityId());
-		}
-		if (city != null) {
-			query.setParameter("activityName", activities.getCity());
-		}
-		if (districtId != null) {
-			query.setParameter("activityName", activities.getDistrictId());
-		}
-		if (district != null) {
-			query.setParameter("activityName", activities.getDistrict());
-		}
-		if (address != null && !address.isEmpty()) {
-			query.setParameter("activityName", activities.getAddress());
-		}
-		if (unitPrice != null) {
-			query.setParameter("activityName", activities.getUnitPrice());
-		}
-		if (minParticipants != null) {
-			query.setParameter("activityName", activities.getMinParticipants());
-		}
-		if (maxParticipants != null) {
-			query.setParameter("activityName", activities.getMaxParticipants());
-		}
-		if (description != null && !description.isEmpty()) {
-			query.setParameter("activityName", activities.getDescription());
-		}
-		if (category != null && !category.isEmpty()) {
-			query.setParameter("activityName", activities.getCategory());
-		}
-		if (activityImages != null && !activityImages.isEmpty()) {
-			query.setParameter("activityName", activities.getActivityImages());
-		}
-		if (comments != null && !comments.isEmpty()) {
-			query.setParameter("activityName", activities.getComments());
-		}
-		if (startDateTime != null) {
-			query.setParameter("activityName", activities.getStartDateTime());
-		}
-		if (endDateTime != null) {
-			query.setParameter("activityName", activities.getEndDateTime());
-		}
-		if (status != null) {
-			query.setParameter("activityName", activities.getStatus());
-		}
-		if (note != null && !note.isEmpty()) {
-			query.setParameter("activityName", activities.getNote());
-		}
-		if (precaution != null && !precaution.isEmpty()) {
-			query.setParameter("activityName", activities.getPrecaution());
-		}
-		if (approved != null) {
-			query.setParameter("activityName", activities.getApproved());
-		}
-		if (inventoryCount != null) {
-			query.setParameter("activityName", activities.getInventoryCount());
-		}
-		if (inventoryUpdateTime != null) {
-			query.setParameter("activityName", activities.getInventoryUpdateTime());
-		}
-		if (createTime != null) {
-			query.setParameter("activityName", activities.getCreateTime());
-		}
-		if (latitude != null && !latitude.isEmpty()) {
-			query.setParameter("activityName", activities.getLatitude());
-		}
-		if (longitude != null && !longitude.isEmpty()) {
-			query.setParameter("activityName", activities.getLongitude());
-		}
-		if (ticketsActivateTime != null) {
-			query.setParameter("activityName", activities.getTicketsActivateTime());
-		}
-		if (ticketsExpiredTime != null) {
-			query.setParameter("activityName", activities.getTicketsExpiredTime());
-		}
-//		if (supplierId != null) {
-//			query.setParameter("activityName", activities.getSupplierId());
-//		}
-//		if (supplier != null) {
-//			query.setParameter("activityName", activities.getSupplier());
-//		}
-		
-		query.setParameter("activity_id", activities.getActivityId());
-		
-		return query.executeUpdate();
 
-//		if (activity.getActivityName() != null && !activity.getActivityName().isEmpty()) {
-//			sql.append("ACTIVITY_NAME = ?, ");
-//		}
-//		if (activity.getSupplierId() != null) {
-//			sql.append("SUPPLIER_ID = ?, ");
-//		}
-//		if (activity.getAddress() != null && !activity.getAddress().isEmpty()) {
-//			sql.append("ADDRESS = ?, ");
-//		}
-//		if (activity.getUnitPrice() != null) {
-//			sql.append("UNIT_PRICE = ?, ");
-//		}
-//		if (activity.getMinParticipants() != null) {
-//			sql.append("MIN_PARTICIPANTS = ?, ");
-//		}
-//		if (activity.getMaxParticipants() != null) {
-//			sql.append("MAX_PARTICIPANTS = ?, ");
-//		}
-//		if (activity.getDescription() != null && !activity.getDescription().isEmpty()) {
-//			sql.append("DESCRIPTION = ?, ");
-//		}
-//		if (activity.getPrecaution() != null && !activity.getPrecaution().isEmpty()) {
-//			sql.append("PRECAUTION = ?, ");
-//		}
-//		if (activity.getCategory() != null && !activity.getCategory().isEmpty()) {
-//			sql.append("CATEGORY = ?, ");
-//		}
-//		if (activity.getStartDateTime() != null) {
-//			sql.append("START_DATE_TIME = ?, ");
-//		}
-//		if (activity.getEndDateTime() != null) {
-//			sql.append("END_DATE_TIME = ?, ");
-//		}
-//		if (activity.getCityId() != null) {
-//			sql.append("CITY_ID = ?, ");
-//		}
-//		if (activity.getDistrictId() != null) {
-//			sql.append("DISTRICT_ID = ?, ");
-//		}
-//		if (activity.getInventoryCount() != null) {
-//			sql.append("INVENTORY_COUNT = ?, ");
-//		}
-//		if (activity.getNote() != null && !activity.getNote().isEmpty()) {
-//			sql.append("NOTE = ?, ");
-//		}
-//		if (activity.getStatus() != null) {
-//			sql.append("STATUS = ?, ");
-//		}
-
-//		if (activity.getApproved() != null) {
-//			sql.append("APPROVED = ?, ");
-//		}
-
-//		if (activity.getInventoryUpdateTime() != null) {
-//			sql.append("INVENTORY_UPDATE_TIME = ?, ");
-//		}
-//		if (activity.getCreateTime() != null) {
-//			sql.append("CREATE_TIME = ?, ");
-//		}
-//		if (activity.getLatitude() != null && !activity.getLatitude().isEmpty()) {
-//			sql.append("LATITUDE = ?, ");
-//		}
-//		if (activity.getLongitude() != null && !activity.getLongitude().isEmpty()) {
-//			sql.append("LONGITUDE = ?, ");
-//		}
-//		if (activity.getTicketsActivateTime() != null) {
-//			sql.append("TICKETS_ACTIVATE_TIME = ?, ");
-//		}
-//		if (activity.getTicketsExpiredTime() != null) {
-//			sql.append("TICKETS_EXPIRED_TIME = ?, ");
-//		}
-
-//		String sqlQuery = sql.toString();
-//		if (sqlQuery.endsWith(", ")) {
-//			sqlQuery = sqlQuery.substring(0, sqlQuery.length() - 2);
-//		}
-//
 //		// 確保在更新語句中有要更新的欄位
 //		if (sqlQuery.equals("UPDATE ACTIVITIES SET")) {
 //			return 0; // 如果沒有任何欄位需要更新，則返回 0
