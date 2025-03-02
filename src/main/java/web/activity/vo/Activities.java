@@ -46,7 +46,7 @@ public class Activities extends Core{
     @Column(name = "SUPPLIER_ID")
     private Integer supplierId;
 
-//    @OneToOne
+//    @ManyToOne
 //    @JoinColumn(name = "SUPPLIER_ID", insertable = false, updatable = false)
     @Transient
     private Supplier supplier;
@@ -54,7 +54,7 @@ public class Activities extends Core{
     @Column(name = "CITY_ID")
     private Integer cityId;
 
-//    @OneToOne
+//    @ManyToOne
 //    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
     @Transient
     private City city;
@@ -62,7 +62,7 @@ public class Activities extends Core{
     @Column(name = "DISTRICT_ID")
     private Integer districtId;
 
-//    @OneToOne
+//    @ManyToOne
 //    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
     @Transient
     private District district;
@@ -82,9 +82,9 @@ public class Activities extends Core{
 
     private String category;
 
-//    @OneToMany
-//    @JoinColumn(name = "ACTIVITY_IMAGE_ID", insertable = false, updatable = false)
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "ACTIVITY_ID", insertable = false, updatable = false)
+//    @Transient
     private List<ActivityImage> activityImages;
 
 //    @OneToMany
@@ -101,7 +101,6 @@ public class Activities extends Core{
     private Timestamp endDateTime;
 
     private Integer status;
-    
 
     private String note;
 

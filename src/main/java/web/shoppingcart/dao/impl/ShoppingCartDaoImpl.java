@@ -39,10 +39,10 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 				+ "VALUES (?, ?, ?, ?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-			pstmt.setInt(1, shoppingCart.getActivity_id());
+			pstmt.setInt(1, shoppingCart.getActivityId());
 			pstmt.setInt(2, shoppingCart.getQuantity());
-			pstmt.setInt(3, shoppingCart.getTotal_price());
-			pstmt.setInt(4, shoppingCart.getMember_id());
+			pstmt.setInt(3, shoppingCart.getTotalPrice());
+			pstmt.setInt(4, shoppingCart.getMemberId());
 
 			int result = pstmt.executeUpdate();
 			List<ShoppingCart> list = new ArrayList<>();
@@ -78,11 +78,11 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 				ShoppingCart cartItem = new ShoppingCart();
 				Activities activity = new Activities();
 				// Shopiing Cart
-				cartItem.setActivity_id(rs.getInt("activity_id"));
+				cartItem.setActivityId(rs.getInt("activity_id"));
 				cartItem.setQuantity(rs.getInt("quantity"));
-				cartItem.setTotal_price(rs.getInt("total_price"));
-				cartItem.setMember_id(rs.getInt("member_id"));
-				cartItem.setAdded_time(rs.getTimestamp("added_time"));
+				cartItem.setTotalPrice(rs.getInt("total_price"));
+				cartItem.setMemberId(rs.getInt("member_id"));
+				cartItem.setAddedTime(rs.getTimestamp("added_time"));
 				// Activity
 				activity.setActivityId(rs.getInt("activity_id"));
 				activity.setActivityPrefix(rs.getString("activity_prefix"));
@@ -109,7 +109,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 				activity.setLongitude(rs.getString("longitude"));
 				activity.setTicketsActivateTime(rs.getTimestamp("tickets_activate_time"));
 				activity.setTicketsExpiredTime(rs.getTimestamp("tickets_expired_time"));
-				cartItem.setActivities(activity);
+				cartItem.setActivity(activity);
 				
 				list.add(cartItem);
 			}
