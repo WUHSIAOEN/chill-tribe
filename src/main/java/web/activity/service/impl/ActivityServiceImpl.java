@@ -27,16 +27,21 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	private ActivityDao dao;
 
-	// 申請活動上架
+	// 申請活動
 	@Override
 	public Activities apply(Activities activities) {
 		int resultCount = dao.insert(activities);
-		if (resultCount < 0) {
-			activities.setMessage("申請活動成功");
-			activities.setSuccessful(true);
-			return activities;
-		}
-		return activities;
+		if (resultCount > 0) {
+	        // 更新成功的情況
+	        activities.setMessage("申請活動成功");
+	        activities.setSuccessful(true);
+	    } else {
+	        // 更新失敗的情況
+	        activities.setMessage("申請活動失敗");
+	        activities.setSuccessful(false);
+	    }
+	    
+	    return activities;
 	}
 
 	// 插入圖片
@@ -54,36 +59,49 @@ public class ActivityServiceImpl implements ActivityService {
 		return null;
 	}
 
-	// 更新活動
+	// 修改活動
 	@Override
 	public Activities edit(Activities activities) {
-		final Activities oActivities = dao.selectByActivityId(activities.getActivityId());
-
-		activities.setActivityName(oActivities.getActivityName());
-		activities.setCityId(oActivities.getCityId());
-		activities.setDistrictId(oActivities.getDistrictId());
-		activities.setAddress(oActivities.getAddress());
-		activities.setUnitPrice(oActivities.getUnitPrice());
-		activities.setMinParticipants(oActivities.getMinParticipants());
-		activities.setMaxParticipants(oActivities.getMaxParticipants());
-		activities.setDescription(oActivities.getDescription());
-		activities.setCategory(oActivities.getCategory());
-		activities.setStartDateTime(oActivities.getStartDateTime());
-		activities.setEndDateTime(oActivities.getEndDateTime());
-		activities.setNote(oActivities.getNote());
-		activities.setPrecaution(oActivities.getPrecaution());
-		activities.setApproved(oActivities.getApproved());
-		activities.setCreateTime(oActivities.getCreateTime());
-		activities.setLatitude(oActivities.getLatitude());
-		activities.setLongitude(oActivities.getLongitude());
-		activities.setNote(oActivities.getNote());
-		activities.setTicketsActivateTime(oActivities.getTicketsActivateTime());
-		activities.setTicketsExpiredTime(oActivities.getTicketsExpiredTime());
-
-		final int resultCount = dao.update(activities);
-		activities.setSuccessful(resultCount > 0);
-		activities.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
-		return null;
+		
+		int resultCount = dao.update(activities);
+		if (resultCount > 0) {
+	        // 更新成功的情況
+	        activities.setMessage("修改活動成功");
+	        activities.setSuccessful(true);
+	    } else {
+	        // 更新失敗的情況
+	        activities.setMessage("修改活動失敗");
+	        activities.setSuccessful(false);
+	    }
+	    
+	    return activities;
+//		final Activities oActivities = dao.selectByActivityId(activities.getActivityId());
+//
+//		activities.setActivityName(oActivities.getActivityName());
+//		activities.setCityId(oActivities.getCityId());
+//		activities.setDistrictId(oActivities.getDistrictId());
+//		activities.setAddress(oActivities.getAddress());
+//		activities.setUnitPrice(oActivities.getUnitPrice());
+//		activities.setMinParticipants(oActivities.getMinParticipants());
+//		activities.setMaxParticipants(oActivities.getMaxParticipants());
+//		activities.setDescription(oActivities.getDescription());
+//		activities.setCategory(oActivities.getCategory());
+//		activities.setStartDateTime(oActivities.getStartDateTime());
+//		activities.setEndDateTime(oActivities.getEndDateTime());
+//		activities.setNote(oActivities.getNote());
+//		activities.setPrecaution(oActivities.getPrecaution());
+//		activities.setApproved(oActivities.getApproved());
+//		activities.setCreateTime(oActivities.getCreateTime());
+//		activities.setLatitude(oActivities.getLatitude());
+//		activities.setLongitude(oActivities.getLongitude());
+//		activities.setNote(oActivities.getNote());
+//		activities.setTicketsActivateTime(oActivities.getTicketsActivateTime());
+//		activities.setTicketsExpiredTime(oActivities.getTicketsExpiredTime());
+//
+//		final int resultCount = dao.update(activities);
+//		activities.setSuccessful(resultCount > 0);
+//		activities.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+//		return null;
 
 //		final Activity oActivity = dao.selectByActivityId(activity.getActivityId());
 //		activity.setActivityName(oActivity.getActivityName());
@@ -109,12 +127,6 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setTicketsExpiredTime(oActivity.getTicketsExpiredTime());
 //		activity.setApproved(oActivity.getApproved());
 //		activity.setCreateTime(oActivity.getCreateTime());
-
-//		int resultCount = actdao.update(activity);
-//
-//		activity.setSuccessful(resultCount > 0);
-//
-//		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 
 	}
 
