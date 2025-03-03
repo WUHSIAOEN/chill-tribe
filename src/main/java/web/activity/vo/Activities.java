@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -54,16 +55,16 @@ public class Activities extends Core{
     @Column(name = "CITY_ID")
     private Integer cityId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
     @Transient
     private City city;
 
     @Column(name = "DISTRICT_ID")
     private Integer districtId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
     @Transient
     private District district;
 
