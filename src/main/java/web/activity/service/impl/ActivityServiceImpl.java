@@ -32,49 +32,46 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activities apply(Activities activities) {
 		int resultCount = dao.insert(activities);
 		if (resultCount > 0) {
-	        // 更新成功的情況
-	        activities.setMessage("申請活動成功");
-	        activities.setSuccessful(true);
-	    } else {
-	        // 更新失敗的情況
-	        activities.setMessage("申請活動失敗");
-	        activities.setSuccessful(false);
-	    }
-	    
-	    return activities;
+			// 更新成功的情況
+			activities.setMessage("申請活動成功");
+			activities.setSuccessful(true);
+		} else {
+			// 更新失敗的情況
+			activities.setMessage("申請活動失敗");
+			activities.setSuccessful(false);
+		}
+
+		return activities;
 	}
 
 	// 插入圖片
 	@Override
-	public String addImages(Activities activity, List<ActivityImage> list) {
-
-		int activityId = actdao.insert(activity);
-
-		for (ActivityImage image : list) {
-			image.setActivityId(activityId);
-			int resultCount = dao.insertActivityImage(image);
-
-			return resultCount > 0 ? null : "插入圖片發生錯誤，請聯絡客服";
+	public boolean addImages(List<ActivityImage> images, int activityId) {
+		try {
+			boolean result = dao.insertImages(images, activityId) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		return null;
 	}
 
 	// 修改活動
 	@Override
 	public Activities edit(Activities activities) {
-		
+
 		int resultCount = dao.update(activities);
 		if (resultCount > 0) {
-	        // 更新成功的情況
-	        activities.setMessage("修改活動成功");
-	        activities.setSuccessful(true);
-	    } else {
-	        // 更新失敗的情況
-	        activities.setMessage("修改活動失敗");
-	        activities.setSuccessful(false);
-	    }
-	    
-	    return activities;
+			// 更新成功的情況
+			activities.setMessage("修改活動成功");
+			activities.setSuccessful(true);
+		} else {
+			// 更新失敗的情況
+			activities.setMessage("修改活動失敗");
+			activities.setSuccessful(false);
+		}
+
+		return activities;
 //		final Activities oActivities = dao.selectByActivityId(activities.getActivityId());
 //
 //		activities.setActivityName(oActivities.getActivityName());
@@ -132,13 +129,21 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 將活動取消
 	@Override
-	public String cancelById(Activities activity) {
+	public boolean cancel(Integer id) {
 
-		int resultCount = actdao.updateteCancel(activity);
+		try {
+			boolean result = dao.statusCancel(id) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 
-		activity.setSuccessful(resultCount > 0);
-
-		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
+//		int resultCount = actdao.updateteCancel(activity);
+//
+//		activity.setSuccessful(resultCount > 0);
+//
+//		return resultCount > 0 ? null : "發生錯誤，請聯絡客服";
 	}
 
 	// 刪除

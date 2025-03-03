@@ -1,6 +1,10 @@
 package web.activity.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 @RestController
-@RequestMapping("activity/apply")
+@RequestMapping("supplier/applyAct")
 public class ApplyActivityController {
 
 	@Autowired
@@ -26,6 +31,24 @@ public class ApplyActivityController {
 		}
 		activities = service.apply(activities);
 		return activities;
+	}
+	
+	// 根據 ID 找到一個活動
+	@GetMapping("/images/{activityId}")
+	public Activities findById(@PathVariable Integer activityId) {
+		return service.findActivityById(activityId);
+		
+	}
+	
+	// 用 ID 去插入活動
+	@PostMapping("/images/{activityId}")
+	public boolean activityImages(
+			@PathVariable("activityId") Integer activityId, 
+            @RequestBody List<ActivityImage> images) {
+		for (ActivityImage image : images) {
+	        image.setActivityId(activityId);
+	    }
+		return service.addImages(images, activityId);
 	}
 
 //@WebServlet("/activity/apply")

@@ -2,9 +2,6 @@
 
 package web.activity.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
@@ -18,12 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import core.vo.City;
-import core.vo.District;
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.Comment;
 
 @Repository
 public class ActivityDaoImpl implements ActivityDao {
@@ -93,18 +87,12 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 新增多張活動圖片
 	@Override
-	public int insertActivityImage(ActivityImage activityImage) {
-		final String SQL = "INSERT INTO activity_images (activity_id, image_base64) VALUES (?, ?)";
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setInt(1, activityImage.getActivityId());
-			pstmt.setString(2, activityImage.getImageBase64());
-
-			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+	public int insertImages(List<ActivityImage> images, int activityId) {
+		for (ActivityImage image : images) {
+	        image.setActivityId(activityId); // 設置每張圖片的 activityId
+	        session.persist(image); // 插入圖片資料
+	    }
+		return 1;
 	}
 
 	// 更新活動
@@ -315,16 +303,22 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 將活動取消
 	@Override
-	public int updateteCancel(Activities activity) {
-		String SQL = "UPDATE ACTIVITIES SET STATUS = 0 WHERE ACTIVITY_ID = ?";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-			pstmt.setInt(1, activity.getActivityId());
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1; // 代表更新失敗
+	public int statusCancel(Integer id) {
+		final String hql = "UPDATE Activities a SET a.status = 0 WHERE a.activityId = :activityId";
+	    Query<?> query = session.createQuery(hql);
+	    query.setParameter("activityId", id);
+	    return query.executeUpdate();
+	    
+		//return query.executeUpdate();
+//		String SQL = "UPDATE ACTIVITIES SET STATUS = 0 WHERE ACTIVITY_ID = ?";
+//
+//		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+//			pstmt.setInt(1, activity.getActivityId());
+//			return pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1; // 代表更新失敗
 	}
 
 	// 刪除活動
@@ -333,6 +327,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		Activities activities = session.getReference(Activities.class, activityId);
 		session.remove(activities);
 		return 1;
+		
 //		String SQL = "delete from ACTIVITIES where ACTIVITY_ID = ?";
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 //			pstmt.setInt(1, activityId);
@@ -348,6 +343,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	public List<Activities> selectAll() {
 		final String hql = "FROM Activities ORDER BY activity_id";
 		return session.createQuery(hql, Activities.class).getResultList();
+		
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 //			ResultSet rs = pstmt.executeQuery();
 //
