@@ -83,7 +83,7 @@ public class Activities extends Core{
     private String category;
 
     @OneToMany
-    @JoinColumn(name = "ACTIVITY_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "ACTIVITY_ID")
 //    @Transient
     private List<ActivityImage> activityImages;
 
