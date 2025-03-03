@@ -188,92 +188,26 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">活動申請 (第一步)</h3>
+                <h3 class="card-title">活動申請 (第二步)</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
             <form>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="activityName">活動名稱 <span style="color: red;">*</span></label>
-                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
-                </div>
-                <div class="mb-3">
-                  <label for="zipcode" class="form-label">舉辦縣市 <span class="text-danger">*</span></label>
-                  <div class="d-flex">
-                    <input type="text" id="zipcode" class="form-control" readonly style="width: 80px; border-right: 0; border-radius: 8px 0 0 8px;" />
-                    
-                    <select id="city_id" class="form-select" style="border-radius: 0;"></select>
-                    
-                    <select id="area" class="form-select" style="border-radius: 0 8px 8px 0;"></select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="address">詳細地址 <span style="color: red;">*</span></label>
-                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
-                </div>
-                <div class="form-group">
-                  <label for="category">活動分類 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" id="category" name="category" style="width: 100%;">
-                    <option selected="selected" value="art">文藝</option>
-                    <option value="entertainment">娛樂</option>
-                    <option value="technology">科技</option>
-                    <option value="sport">運動</option>
-                  </select>
-                </div>
-                <!-- Date and time range -->
-                <div class="form-group">
-                  <label>日期與時間 <span style="color: red;"></span></label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input mouse-pointer" id="eventImages" accept="image/*" multiple>
+                            <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
+                        </div>
                     </div>
-                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime">
-                  </div>
-                  <!-- /.input group -->
                 </div>
-                <!-- /.form group -->
-                <div class="form-group">
-                  <label for="supplierId">供應商編號 <span style="color: red;">*</span></label>
-                  <input type="number" id="supplierId" name="supplierId" class="form-control"  placeholder="供應商編號" min="1" max="1000000" required>
-                </div>
-                <div class="form-group">
-                  <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
-                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
-                </div>
-                <div class="form-group">
-                  <label for="minParticipants">成團人數 <span style="color: red;">*</span></label>
-                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
-                </div>
-                <div class="form-group">
-                  <label for="maxParticipants">人數上限 <span style="color: red;">*</span></label>
-                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
-                </div>
-                <!-- textarea -->
-                <div class="form-group">
-                  <label for="description">介紹 <span style="color: red;">*</span></label>
-                  <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter ..." required></textarea>
-                </div>
-                <!-- textarea -->
-                <div class="form-group">
-                  <label for="precaution">備註</label>
-                  <textarea class="form-control" rows="3" id="precaution" placeholder="Enter ..."></textarea>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                      <div class="custom-file">
-                          <input type="file" class="custom-file-input mouse-pointer" id="eventImages" accept="image/*" multiple>
-                          <label class="custom-file-label mouse-pointer" for="eventImages">選擇照片</label>
-                      </div>
-                  </div>
-              </div>
-              <!-- 圖片預覽區域 -->
-              <div id="previewContainer" class="d-flex flex-wrap mt-3">
-              </div>
+                <!-- 圖片預覽區域 -->
+                <div id="previewContainer" class="d-flex flex-wrap mt-3"></div>
               </div>
               <!-- /.card-body -->
               <div class="card-footer d-flex justify-content-end">
-                  <button id="submitBtn" type="button" class="btn btn-primary">下一步</button>
+                  <button id="submitBtn" type="button" class="btn btn-primary">發布活動</button>
                   <button type="button" class="btn btn-secondary btn-spacing">取消</button>
               </div>
            </form>
@@ -402,7 +336,7 @@
 <script src="./js/supplierIndex.js"></script>
 
 <!----- 接收後端的資料 ----->
-<script src="js/apply_activity.js"></script>
+<script src="js/apply_activity_images.js"></script>
 
 <!----- 預覽圖片區域 ----->
 <script>
@@ -452,65 +386,5 @@
   });
 </script>
 
-<!----- 載入地址和郵遞區號 ----->
-<script src="./js/address.js"></script>
-<script>
-  // 跑回圈，抓資料
-  function addr_init(){
-    $.each(addrData, function(i, item){
-      // console.log(item);
-      // console.log(item.cityId);
-      // console.log(item.city);
-
-      let city_str = `
-        <option value="${item.city_id}">${item.city}</option>
-      `;
-      $("#city_id").append(city_str);
-
-      if(item.city_id == 2){
-        area_init(item.area);
-      }
-    });
-  }
-  // 執行涵式
-  addr_init();
-
-  function area_init(areas){
-    // console.log(areas);
-    $.each(areas, function(k, area){
-      // console.log(area);
-      let area_str = `
-        <option value="${area.zipcode}">${area.name}</option>
-      `;
-      $("#area").append(area_str);
-      if(k == 0) {
-        $("#zipcode").val(area.zipcode);
-      }
-    });
-  }
-  
-  // 1. 針對"區"的部分，做change事件上的綁定
-  $("#area").on("change", function(){
-    // console.log($("#zipcode").val($(this).val()));
-    $("#zipcode").val($(this).val());     
-  });
-
-  // 2. 放到郵遞區號的欄位上
-  // 3. 對縣市的下拉選單綁定change事件
-  // 4. 跑addrData迴圈，用"縣市資料"抓"區"的資料，
-  //    放到新的下拉選單 (area_init())
-  $("#city_id").on("change", function(){
-    // console.log($(this).val());
-    $("#area").empty();
-    $.each(addrData, (i, item) => {
-      // console.log(item);
-      if(item.city_id == $(this).val()){
-        console.log(item.area)
-        area_init(item.area);
-      }
-    })
-  });
-
-</script>
 </body>
 </html>

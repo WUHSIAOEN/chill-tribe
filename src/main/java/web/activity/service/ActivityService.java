@@ -10,15 +10,16 @@ public interface ActivityService {
 	// 新增活動
 	Activities apply(Activities activities);
 	// String apply(Activities activity);
+	
 	// 新增活動圖片
-	String addImages(Activities activity, List<ActivityImage> list);
+	boolean addImages(List<ActivityImage> images, int activityId);
 
 	// 更新活動
 	Activities edit(Activities activities);
 	// String update(Activities activity);
 
 	// 改變活動的狀態-移除活動
-	String cancelById(Activities activity);
+	boolean cancel(Integer id);
 
 	// 刪除活動
 	boolean remove(Integer id);

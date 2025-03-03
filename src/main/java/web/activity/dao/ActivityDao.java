@@ -10,13 +10,13 @@ public interface ActivityDao {
 	int insert(Activities activities);
 
 	// 新增活動圖片
-	int insertActivityImage(ActivityImage activityImage);
+	int insertImages(List<ActivityImage> images, int activityId);
 
 	// 修改活動
 	int update(Activities activities);
 	
 	// 改變活動的狀態-移除活動
-	int updateteCancel(Activities activity);
+	int statusCancel(Integer id);
 
 	// 刪除單一活動
 	int deleteActivityById(Integer id);
