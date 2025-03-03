@@ -1,13 +1,17 @@
 package web.myfavorites.service;
 
-import web.myfavorites.vo.MyFavorites;
+import java.util.List;
 
+import web.myfavorites.vo.MyFavorites;
 
 public interface MyFavoritesService {
 	// 加入購物車
-	String AddToMyFavorites(MyFavorites myFavorites);
+	MyFavorites add(MyFavorites myFavorites);
+
 	// 找到所有產品
-	String findAllFavorites();
-	
-	String deleteFavorites();
+	List<MyFavorites> findAll();
+
+	MyFavorites findByMfId(Integer id);
+
+	boolean remove(Integer id);
 }
