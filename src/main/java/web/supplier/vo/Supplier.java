@@ -2,17 +2,27 @@ package web.supplier.vo;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import core.util.Core;
 
 // 供應商VO
+@Entity
+@Table(name = "SUPPLIERS")
 public class Supplier extends Core {
 
 	// 供應商五寶
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer supplier_id;
 	private String supplier_name;
 	private String email;
 	private String password;
-	private String cPassword;
 	// 供應商基本資料
 	private String contact_person;
 	private String phone;
@@ -20,11 +30,6 @@ public class Supplier extends Core {
 	private String about;
 	private String image;
 	private String id_number;
-	private String creator;
-	// 年薪1000萬工程師查日期用
-	private Timestamp registration_date;
-	private Timestamp lastUpdatedDate;
-	private String updater;
 
 	public Integer getSupplier_id() {
 		return supplier_id;
@@ -72,46 +77,6 @@ public class Supplier extends Core {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getcPassword() {
-		return cPassword;
-	}
-
-	public void setcPassword(String cPassword) {
-		this.cPassword = cPassword;
-	}
-
-	public String getCreator() {
-		return creator;
-	}
-
-	public void setCreator(String creator) {
-		this.creator = creator;
-	}
-
-	public Timestamp getRegistration_date() {
-		return registration_date;
-	}
-
-	public void setRegistration_date(Timestamp registration_date) {
-		this.registration_date = registration_date;
-	}
-
-	public String getUpdater() {
-		return updater;
-	}
-
-	public void setUpdater(String updater) {
-		this.updater = updater;
-	}
-
-	public Timestamp getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
-
-	public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
 	public String getContact_person() {
