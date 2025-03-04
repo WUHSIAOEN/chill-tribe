@@ -194,19 +194,102 @@
 	<!-- New Js -->
 
 	<script>
-		findAllMyFavorites();
+		function findAllProducts() {
+
+    fetch('/chill-tribe/myfavorites')
+       .then(response => response.json())
+        .then(data => {
+					console.log("從後端獲取的數據:", data);
+
+					let tbody = document.querySelector("table tbody");
+          tbody.innerHTML = "";
+					
+					if (data.length === 0) {
+						let tr = document.createElement("tr");
+						tr.innerHTML = `
+							<td colspan="5" style="text-align: center; color: gray;">
+								趕快去瀏覽商品並加到我的最愛！
+							</td>
+						`;
+						tbody.appendChild(tr);
+					} else {
+						// 找到 tbody
+						let tbody = document.querySelector("table tbody");
+						tbody.innerHTML = "";
+
+						// 迭代數據，插入表格
+						data.forEach(product => {
+							let activity = product.activity;
+							let imageSrc = activity.activityImages.length > 0 ? `${activity.activityImages[0].imageBase64}` : 'placeholder.jpg';
+
+							let tr = document.createElement("tr");
+
+							// 設置 data-id，方便查找對應商品
+							tr.setAttribute("product-id", product.myFavoriteId);
+
+							tr.innerHTML = `
 		
-		function findAllMyFavorites() {
-			fetch('/chill-tribe/myfavorites')
-				.then(response => response.json())
-				.then(data => {
-					console.log("從 後端 獲取的數據:", data);
-					data.forEach((product, i) => {
-						document.getElementById("activity_name").innerHTML = product.activity.activityName || "暫無"
+								<td class="property-container">
+									<img src="${imageSrc}" alt="">
+									<div class="title">
+										<h4 id="activity_name"><a href="#">${activity.activityName}</a></h4>
+										<span>${activity.category}</span>
+										<span class="table-property-price">${activity.unitPrice}</span>
+									</div>
+								</td>
+								<td class="action">
+									<a href="#" class="delete"><i class="fa-solid fa-trash-can"></i> 刪除</a>
+								</td>
+							`;
+
+							tbody.appendChild(tr);
+						});
 					}
-				)
-			});
+        })
+      .catch(error => console.error("獲取數據時出錯:", error));
 		};
+
+		// 操作按鈕
+
+		document.addEventListener("click", function (event) {
+	
+		if (event.target.closest(".fa-trash-can")) {
+			event.preventDefault();
+	
+			const userConfirmed = window.confirm("確定要將此商品移除我的最愛嗎？");
+	
+			if (userConfirmed) {
+				// 找到對應的商品 ID
+				let tr = event.target.closest("tr");
+        let myFavoriteId = tr.getAttribute("product-id");
+
+				console.log("要刪除的商品 ID:", myFavoriteId);
+				const requestData = {myFavoriteId: myFavoriteId};
+	
+				fetch(`/chill-tribe/myfavorites/${myFavoriteId}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(requestData),
+				})
+					.then((response) => {
+						if (response.ok) {
+							alert("商品已刪除！");
+							tr.remove();
+							findAllProducts();
+						} else {
+							alert("商品刪除失敗！");
+						}
+					})
+					.catch((error) => {
+						console.log("取消商品失敗！", error);
+					});
+				};
+			};
+		});
+
+		findAllProducts();
 	</script>
 
 </body>

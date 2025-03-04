@@ -131,17 +131,18 @@
     });
     console.log("發送登入請求");
     
-    
-    fetch('supplierlogin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: loginemail.value,
-        password: loginpassword.value,
-      })
-    })
+// 	debugger;
+    fetch(`supplierlogin/${loginemail.value}/${loginpassword.value}`)
+//     fetch('supplierlogin', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         email: loginemail.value,
+//         password: loginpassword.value,
+//       })
+//     })
     // console.log(resp)
 // 			 .then(resp => {
 // 				 return resp.json();
@@ -157,6 +158,9 @@
             console.log("返回值:", data);
             if (data.successful) {
                 console.log("登入成功");
+                if (data.supplier_id) {
+                    sessionStorage.setItem('supplier_id', data.supplier_id);
+                }
                 window.location.href = '/chill-tribe/supplier/supplierIndex.html';  
             } else {
                 console.log("登入失敗");
