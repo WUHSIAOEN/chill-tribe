@@ -9,16 +9,17 @@ public interface SupplierDao {
 
 	int insert(Supplier supplier);
 	
-	// SQL:select * from MEMBER where USERNAME = ?
 	Supplier selectByUsername(String username);
 	
 	Supplier selectByEmail(String email);
+	
+	Supplier selectBySupplierID(Integer supplier_id);
 	
 	Supplier selectByPhone(String phone);
 	
 	int update(Supplier supplier);
 	
-	Supplier selectByUsernameAndPassword(Supplier supplier);
+	Supplier selectByUsernameAndPassword(String email, String password);
 	
 	List<Supplier> selectAll();
 	

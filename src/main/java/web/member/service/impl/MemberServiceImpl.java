@@ -88,6 +88,7 @@ public class MemberServiceImpl implements MemberService {
 		final int resultCount = memberDao.update(member);
 		member.setSuccessful(resultCount > 0);
 		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		System.out.println(member.getMembername() + "  異動了資料");
 		return member;
 
 //		boolean isUpdated = false;
@@ -185,6 +186,7 @@ public class MemberServiceImpl implements MemberService {
 		if (member != null) {
 			member.setSuccessful(true);
 		}
+		System.out.println(member.getMembername() + "  登入成功了");
 		return member;
 //		return memberDao.selectByUsernameAndPassword(member);			
 	}
@@ -208,6 +210,7 @@ public class MemberServiceImpl implements MemberService {
 		final int resultCount = memberDao.updateimg(member);
 		member.setSuccessful(resultCount > 0);
 		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		System.out.println(member.getMembername() + "  異動了照片");
 		return member;
 		
 //		boolean isUpdated = false;

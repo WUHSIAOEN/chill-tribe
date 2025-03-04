@@ -9,53 +9,63 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import web.member.vo.Member;
 import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
 import web.supplier.vo.Supplier;
 
 // 供應商註冊
-@WebServlet("/supplier/register")
-public class SupplierRegisterController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@RestController
+@RequestMapping("/supplier/register")
+//@WebServlet("/supplier/register")
+public class SupplierRegisterController {
+//	private static final long serialVersionUID = 1L;
+	@Autowired
 	private SupplierService service;
 	
-	@Override
-	public void init() throws ServletException {
-		 try {
-			service = new SupplierServiceImpl();
-		} catch (NamingException e) {
-			e.printStackTrace();
+//	@Override
+//	public void init() throws ServletException {
+//		 try {
+//			service = new SupplierServiceImpl();
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
+    
+	@PostMapping
+//	@Override
+	public Supplier supplierregister(@RequestBody Supplier supplier) {
+		
+		if (supplier == null) {
+			supplier = new Supplier();
+			supplier.setMessage("無會員資訊");
+			supplier.setSuccessful(false);
+			return supplier;
 		}
-	}
-       
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 接收view層來的請求參數
-//		String username = req.getParameter("username");
-//		String password = req.getParameter("password");
-//		String cPassword = req.getParameter("cPassword");
-//		String nickname = req.getParameter("nickname");
-//		Member member = new Member();
-//		member.setUsername(username);
-//		member.setPassword(password);
-//		member.setcPassword(cPassword);
-//		member.setNickname(nickname);
+
 		
-		Gson gson = new Gson();
-		Supplier supplier = gson.fromJson(req.getReader(), Supplier.class);
+		supplier = service.register(supplier);
+		return supplier;
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		String errMsg = service.register(member);
-//		System.out.println(errMsg);
-//		resp.getWriter().write(errMsg);
-	
-		String errMsg = service.register(supplier);
-		
-		JsonObject respBody = new JsonObject();
-		respBody.addProperty("successful", errMsg == null);
-		respBody.addProperty("errMsg", errMsg);
-		resp.getWriter().write(respBody.toString());
+//		Gson gson = new Gson();
+//		Supplier supplier = gson.fromJson(req.getReader(), Supplier.class);
+//		
+//	
+//		String errMsg = service.register(supplier);
+//		
+//		JsonObject respBody = new JsonObject();
+//		respBody.addProperty("successful", errMsg == null);
+//		respBody.addProperty("errMsg", errMsg);
+//		resp.getWriter().write(respBody.toString());
 	}
 }

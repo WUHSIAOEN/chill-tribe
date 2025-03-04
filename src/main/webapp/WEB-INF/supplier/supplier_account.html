@@ -1017,9 +1017,12 @@
   const id_number = document.querySelector('#id_number');
   const address = document.querySelector('#address');
   const about = document.querySelector('#about');
-  const supplier_id = document.querySelector('#supplier_id');
+  const supplierid = document.querySelector('#supplier_id');
+  const supplier_id = sessionStorage.getItem('supplier_id');
 
-  fetch('supplierfind')
+//   debugger;
+  fetch(`supplierfind/${supplier_id}`)
+//   fetch('supplierfind')
     .then(resp => resp.json())
     .then(supplier => {
       console.log(supplier);
@@ -1030,7 +1033,7 @@
       contact_person.value = supplier.contact_person;
       address.value = supplier.address;
       about.value = supplier.about;
-      supplier_id.value = supplier.supplier_id;
+      supplierid.value = supplier.supplier_id;
       img_supplier_id.value = supplier.supplier_id
 
       const imagePlaceholder = document.getElementById('imagePlaceholder');
@@ -1043,7 +1046,7 @@
       }
     })
     .catch(error => {
-      console.error('Fetch error:', error); // 增加錯誤處理，便於除錯
+      console.error('Fetch error:', error); 
     });
 
   function sendImageToServer(image) {
@@ -1051,7 +1054,7 @@
       const img_supplier_id = document.querySelector('#img_supplier_id');
       console.log(img_supplier_id.value);
 
-  
+//   debugger;
   fetch('supplierimg', {
       method: 'POST',
       headers: {
@@ -1083,7 +1086,7 @@
 			console.log("觸發更新按鈕囉！");
 			event.preventDefault();
 		fetch('supplieredit', {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -1095,7 +1098,7 @@
 				phone: phone.value,
 				email: email.value,
 				about: about.value,
-				supplier_id: supplier_id.value
+				supplier_id: supplierid.value
 			})
 		})
 		// console.log(resp)

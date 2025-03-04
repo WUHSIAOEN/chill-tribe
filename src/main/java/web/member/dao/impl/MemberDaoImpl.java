@@ -176,8 +176,10 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member selectByUsernameAndPassword(String email, String password) {
 		String sql = "select * from MEMBERS where EMAIL = :email and PASSWORD = :password";
-		return session.createNativeQuery(sql, Member.class).setParameter("email", email)
-				.setParameter("password", password).uniqueResult();
+		return session.createNativeQuery(sql, Member.class)
+				.setParameter("email", email)
+				.setParameter("password", password)
+				.uniqueResult();
 //		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 //			pstmt.setString(1, member.getEmail());
 //			pstmt.setString(2, member.getPassword());
