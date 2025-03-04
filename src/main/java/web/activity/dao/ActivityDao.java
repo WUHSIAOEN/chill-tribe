@@ -5,20 +5,26 @@ import java.util.List;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
-public interface ActivityDao{
-	// 新增是活動，回傳整數
-	int insert(Activities activity);
+public interface ActivityDao {
+	// 新增活動文字
+	int insert(Activities activities);
+
 	// 新增活動圖片
-	int insertActivityImage(ActivityImage activityImage);
-	// 更新活動
-	int update(Activities activity);
+	int insertImages(List<ActivityImage> images, int activityId);
+
+	// 修改活動
+	int update(Activities activities);
+	
 	// 改變活動的狀態-移除活動
-	int updateteCancel(Activities activity);
+	int statusCancel(Integer id);
+
 	// 刪除單一活動
-	int deletActivityById(Integer id);
+	int deleteActivityById(Integer id);
+
 	// 查詢所有活動
-	List<Activities> selectAllActivity();
+	List<Activities> selectAll();
+
 	// 只查詢單一活動ID
 	Activities selectByActivityId(Integer id);
-	
+
 }

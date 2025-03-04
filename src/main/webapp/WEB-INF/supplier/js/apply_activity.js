@@ -52,34 +52,53 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     // not required
   };
 
-  const requestImages = {
-    images
-  }
+  console.log("Sending JSON text:", JSON.stringify(requestData));
 
-  console.log("Sending JSON:", JSON.stringify(requestData, requestImages)); // 輸出 JSON 格式資料
+  // 申請活動 - Post
+  fetch("/chill-tribe/supplier/applyAct", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.successful) {
+        const activityId = data.activityId;
 
-    fetch("/chill-tribe/activity/apply", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestData),
-    }).catch(error => {
-      console.error("Activity created failed:", error)}),
-
-	console.log('................', Array.isArray(window.base64Images));
-	console.log('----------------------', window.base64Images);
-    fetch("/chill-tribe/activity/applyimages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-	    images: window.base64Images
-	  }),
+        // 創造新物件，每個物件都含有 {id: a, base64: b}
+        const requestImages = images.map(image => ({
+          activityId: activityId,
+          imageBase64: image
+        }));
+  
+        // 首先獲取活動資料 - Get
+        fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
+          .then(response => response.json())
+          .then(activity => {
+            console.log('活動信息:', activity);
+  
+            // 然後發送第二次 POST 請求來提交圖片 - Post
+            fetch(`/chill-tribe/supplier/applyAct/${activityId}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestImages),
+            })
+              .then(response => response.json())
+              .then(uploadedPictures => {
+                console.log('圖片上傳成功:', uploadedPictures);
+              })
+              .catch(error => console.error('圖片上傳失敗:', error));
+          })
+          .catch(error => console.error('獲取活動失敗:', error));
+      } else {
+        console.log('申請活動失敗:', data.message);
+      }
     })
     .catch(error => {
-      console.error("Image upload failed:", error);
-    })
-
+      console.error("活動創建失敗:", error);
+    });
 });

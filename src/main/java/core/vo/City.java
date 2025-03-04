@@ -1,20 +1,32 @@
 package core.vo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class City {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CITY_ID")
 	private Integer cityId;
+	
+	@Column(name = "CITY_NAME")
 	private String cityName;
 	
-	public Integer getCityId() {
-		return cityId;
-	}
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
-	}
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+//	等公版DB 更新後再返註解
+	private String region;
 	
 }

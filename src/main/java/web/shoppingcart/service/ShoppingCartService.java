@@ -6,7 +6,12 @@ import web.shoppingcart.vo.ShoppingCart;
 
 public interface ShoppingCartService {
 	// 加入購物車
-	List<ShoppingCart> AddToCart(ShoppingCart shppingCart);
+	ShoppingCart add(ShoppingCart shoppingCart);
+
 	// 找到所有產品
-	List<ShoppingCart> findAllProducts();
+	List<ShoppingCart> findAll();
+	
+	ShoppingCart findByScId(Integer id);
+
+	boolean remove(Integer id);
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -46,7 +47,7 @@ public class Activities extends Core{
     @Column(name = "SUPPLIER_ID")
     private Integer supplierId;
 
-//    @OneToOne
+//    @ManyToOne
 //    @JoinColumn(name = "SUPPLIER_ID", insertable = false, updatable = false)
     @Transient
     private Supplier supplier;
@@ -54,16 +55,16 @@ public class Activities extends Core{
     @Column(name = "CITY_ID")
     private Integer cityId;
 
-//    @OneToOne
-//    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
     @Transient
     private City city;
 
     @Column(name = "DISTRICT_ID")
     private Integer districtId;
 
-//    @OneToOne
-//    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
     @Transient
     private District district;
 
@@ -82,9 +83,9 @@ public class Activities extends Core{
 
     private String category;
 
-//    @OneToMany
-//    @JoinColumn(name = "ACTIVITY_IMAGE_ID", insertable = false, updatable = false)
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "ACTIVITY_ID")
+//    @Transient
     private List<ActivityImage> activityImages;
 
 //    @OneToMany
@@ -101,7 +102,6 @@ public class Activities extends Core{
     private Timestamp endDateTime;
 
     private Integer status;
-    
 
     private String note;
 

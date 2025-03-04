@@ -1,11 +1,17 @@
 package web.myfavorites.vo;
 
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import core.util.Core;
 import lombok.AllArgsConstructor;
@@ -13,22 +19,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import web.activity.vo.Activities;
-import web.activity.vo.ActivityImage;
 
-//@Entity
+@Entity
+@Table(name = "my_favorites")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyFavorites extends Core{
-	private Integer activity_id;
-	private Integer my_favorite_id;
-	private Integer member_id;
-	private Timestamp added_time;
-//	@OneToOne
-//	@JoinColumn(name = "activity_id", insertable = false, updatable = false)
-	private Activities activities;
 	
-	private List<ActivityImage> activityImages;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "MY_FAVORITE_ID")
+	private Integer myFavoriteId;
 	
+	@Column(name = "ACTIVITY_ID")
+	private Integer activityId;
+	
+	@ManyToOne
+	@JoinColumn(name = "ACTIVITY_ID", insertable = false, updatable = false)
+	private Activities activity;
+	
+	@Column(name = "MEMBER_ID")
+	private Integer memberId;
+	
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "ADDED_TIME")
+	private Timestamp addedTime;
+
 }

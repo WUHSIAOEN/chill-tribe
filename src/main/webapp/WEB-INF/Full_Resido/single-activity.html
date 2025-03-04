@@ -758,14 +758,16 @@
 			// 取得 ID
 			function getActivityIdFromURL() {
 				const params = new URLSearchParams(window.location.search);
-				return params.get("id");
-      }
+  			return params.get("id");
+			};
 
-			function fetchActivityById(id) {
-				fetch(`/chill-tribe/activity/findActivityById?id=${id}`)
+			const activityId = getActivityIdFromURL();
+
+			function fetchActivityById(activityId) {
+				fetch(`/chill-tribe/activities/${activityId}`)
 				.then(response => response.json())
 				.then(data => {
-					console.log("從 Servlet 獲取的數據:", data);
+					console.log("從 後端 獲取的數據:", data);
 					// 更新 HTML 內容
 					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
 					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
@@ -783,47 +785,33 @@
 					document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
 
 					const city = addrData.find(item => item.city_id === data.city_id);
-					const district = city.area.find(area => area.zipcode === data.district_id);
+					const district = city?.area.find(area => area.zipcode === data.district_id);
 					console.log(city)
 					console.log(district)
-					document.getElementById("cityId").innerHTML = city.city;
-					// document.getElementById("districtId").innerHTML = district.name;
-					// 
-					// ----------------------------------------------------------------------------
-					// document.getElementById("supplierId").innerHTML = data.supplierId;
-					// document.getElementById("activityId").innerHTML = data.activityId;
-					// document.getElementById("activityPrefix").innerHTML = data.activityPrefix;
-					// document.getElementById("latitude").innerHTML = data.latitude;
-					// document.getElementById("longitude").innerHTML = data.longitude;
-					// document.getElementById("note").innerText = data.note;
-					// document.getElementById("approved").innerHTML = data.approved;
-					// document.getElementById("status").innerHTML = data.status;
-					// document.getElementById("ticketsActivateTime").innerHTML = data.ticketsActivateTime;
-					// document.getElementById("ticketsExpiredTime").innerHTML = data.ticketsExpiredTime;
-					// document.getElementById("inventoryUpdateTime").innerHTML = data.inventoryUpdateTime;
-					// document.getElementById("createTime").innerHTML = data.createTime;
+					document.getElementById("cityId").innerHTML = city ? city.city : "未知";
 				})
 			}
-			const activity_id = getActivityIdFromURL();
-        if (activity_id) {
-            fetchActivityById(activity_id);
-        } else {
-            console.log("你要的活動找不到喔!")
-      }
+
+			if (activityId) {
+				fetchActivityById(activityId);
+			} else {
+				console.log("你要的活動找不到喔!");
+			};
+		
 			
 			// 新增活動商品到購物車
 			function ShoppingCartItems() {
-				const activity_id = parseInt(getActivityIdFromURL()) || 1;
+				const activityId = parseInt(getActivityIdFromURL()) || 1;
 				const quantity = parseInt(document.getElementById("quantity")?.textContent) || 1;
 				const unitPrice = parseInt(document.getElementById("unitPrice-2").textContent);
-				const total_price = quantity * unitPrice;
-				const member_id = parseInt(document.getElementById("member_id")?.value) || 1;
-				console.log(activity_id, quantity, unitPrice);
+				const totalPrice = quantity * unitPrice;
+				const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
+				console.log(activityId, quantity, unitPrice);
 				return {
-					activity_id,
+					activityId,
 					quantity,
-					total_price,
-					member_id
+					totalPrice,
+					memberId
 				};
 			};
 
@@ -834,7 +822,7 @@
 
 				const requestData = ShoppingCartItems();
 				console.log("送出的資料:", requestData);
-				fetch('/chill-tribe/shoppingCart/addToCart', {
+				fetch(`/chill-tribe/cart/${activityId}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -845,13 +833,13 @@
 
 			// 新增活動商品到我的最愛
 			function MyFavoritesItems() {
-				const activity_id = parseInt(getActivityIdFromURL()) || 1;
-				const member_id = parseInt(document.getElementById("member_id")?.value) || 1;
-				console.log(activity_id, member_id);
+				const activityId = parseInt(getActivityIdFromURL()) || 1;
+				const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
+				console.log(activityId, memberId);
 
 				return {
-					activity_id,
-					member_id
+					activityId,
+					memberId
 				};
 			};
 
@@ -862,7 +850,7 @@
 
 				const requestMyforitesData = MyFavoritesItems();
 				console.log("送出的資料:", requestMyforitesData);
-				fetch('/chill-tribe/myfavorites/addtomyfavorites', {
+				fetch(`/chill-tribe/myfavorites/${activityId}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
