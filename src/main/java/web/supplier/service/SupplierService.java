@@ -7,7 +7,7 @@ import web.supplier.vo.Supplier;
 
 public interface SupplierService {
 
-	String register(Supplier supplier);
+	Supplier register(Supplier supplier);
 	
 	Supplier edit(Supplier supplier);
 	
@@ -18,4 +18,6 @@ public interface SupplierService {
 	boolean removeById(Integer id);
 	
 	Supplier updateimg(Supplier supplier);
+	
+	Supplier selectBySupplierID(Integer supplier_id);
 }
