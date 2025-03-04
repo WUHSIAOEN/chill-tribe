@@ -325,7 +325,7 @@
 
   // 動態抓取資料並加入 DataTable
   function fetchAllActivity(table) {
-    fetch("/chill-tribe/activity/findAll")
+    fetch("/chill-tribe/activities")
     .then(response => response.json())
     .then(data => {
       // console.log("從 Servlet 獲取的數據:", data);
@@ -400,7 +400,7 @@
       console.log("要取消的活動 ID:", activityId);
       const requestData = {activityId: activityId, status: 0};
 
-      fetch("/chill-tribe/activity/cancelActivity", {
+      fetch(`/chill-tribe/activities/${activityId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

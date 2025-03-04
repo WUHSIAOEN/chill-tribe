@@ -238,24 +238,25 @@
 	<!-- ============================地址選單的js============================== -->
 	<script src="../member/js/address_form.js"></script>
 
-	<script src="../_html/assets/js/dropzone.js"></script>
+	<!-- <script src="../_html/assets/js/dropzone.js"></script> -->
 	<!-- New Js -->
 	<script>
 		findAllProducts();
 		
 		function findAllProducts() {
-			fetch('/chill-tribe/shoppingCart/findAllProducts')
+			fetch('/chill-tribe/cart')
 				.then(response => response.json())
 				.then(data => {
-					console.log("從 Servlet 獲取的數據:", data);
-					// document.getElementById("quantity").textContent = data.quantity || 1;
-					// document.getElementById("activity_name").innerHTML = data.activity_name || "暫無";
-					// document.getElementById("unit_price").innerHTML = data.unit_price || 0;
-				});
+					console.log("從 後端 獲取的數據:", data);
+					data.forEach((product, i) => {
+						document.getElementById("activity_name").innerHTML = product.activity.activityName || "暫無"
+					}
+				)
+			});
 		};
 	</script>
 	<!-- 購物車開始 -->
-	<script>
+	<!-- <script>
     let data = {
         activity_name: document.getElementById('activity_name').innerText,
         count_number: parseInt(document.getElementById('count_number').value), 
@@ -293,7 +294,7 @@
    
 	
     
-</script>
+	</script> -->
 	<!-- 購物車結束 -->
 </body>
 

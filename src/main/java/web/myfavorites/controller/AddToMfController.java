@@ -16,7 +16,7 @@ public class AddToMfController {
 	@Autowired
 	private MyFavoritesService service;
 
-	@PostMapping
+	@PostMapping("{id}")
 	public MyFavorites add(@RequestBody MyFavorites myFavorites) {
 		if (myFavorites == null) {
 			myFavorites = new MyFavorites();
