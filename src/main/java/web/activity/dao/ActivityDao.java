@@ -6,7 +6,7 @@ import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
 
 public interface ActivityDao {
-	// 新增是活動，回傳整數
+	// 新增活動文字
 	int insert(Activities activities);
 
 	// 新增活動圖片

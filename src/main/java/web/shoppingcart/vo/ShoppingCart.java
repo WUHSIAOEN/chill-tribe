@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -21,6 +22,7 @@ import web.activity.vo.Activities;
 import web.member.vo.Member;
 
 @Entity
+@Table(name = "shopping_cart_items")
 @Setter
 @Getter
 @NoArgsConstructor

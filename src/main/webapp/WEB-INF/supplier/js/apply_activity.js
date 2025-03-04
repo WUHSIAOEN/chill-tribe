@@ -74,13 +74,13 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`/chill-tribe/supplier/applyAct/images/${activityId}`)
+        fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 POST 請求來提交圖片 - Post
-            fetch(`/chill-tribe/supplier/applyAct/images/${activityId}`, {
+            fetch(`/chill-tribe/supplier/applyAct/${activityId}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
