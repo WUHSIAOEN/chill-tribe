@@ -16,7 +16,7 @@ public class AddToScController {
 	@Autowired
 	private ShoppingCartService service;
 
-	@PostMapping
+	@PostMapping("{id}")
 	public ShoppingCart add(@RequestBody ShoppingCart shoppingCart) {
 		if (shoppingCart == null) {
 			shoppingCart = new ShoppingCart();
