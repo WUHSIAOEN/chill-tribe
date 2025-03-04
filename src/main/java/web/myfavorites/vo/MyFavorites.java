@@ -1,7 +1,6 @@
 package web.myfavorites.vo;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,9 +19,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import web.activity.vo.Activities;
-import web.activity.vo.ActivityImage;
 
 @Entity
+@Table(name = "my_favorites")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -35,7 +34,7 @@ public class MyFavorites extends Core{
 	private Integer myFavoriteId;
 	
 	@Column(name = "ACTIVITY_ID")
-	private Integer activity_id;
+	private Integer activityId;
 	
 	@ManyToOne
 	@JoinColumn(name = "ACTIVITY_ID", insertable = false, updatable = false)

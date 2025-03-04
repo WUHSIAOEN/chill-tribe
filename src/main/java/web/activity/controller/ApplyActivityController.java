@@ -34,14 +34,14 @@ public class ApplyActivityController {
 	}
 	
 	// 根據 ID 找到一個活動
-	@GetMapping("/images/{activityId}")
+	@GetMapping("{activityId}")
 	public Activities findById(@PathVariable Integer activityId) {
 		return service.findActivityById(activityId);
 		
 	}
 	
 	// 用 ID 去插入活動
-	@PostMapping("/images/{activityId}")
+	@PostMapping("{activityId}")
 	public boolean activityImages(
 			@PathVariable("activityId") Integer activityId, 
             @RequestBody List<ActivityImage> images) {

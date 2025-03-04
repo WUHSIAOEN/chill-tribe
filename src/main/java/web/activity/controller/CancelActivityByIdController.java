@@ -10,7 +10,7 @@ import core.util.Core;
 import web.activity.service.ActivityService;
 
 @RestController
-@RequestMapping("supplier/activity")
+@RequestMapping("activities")
 public class CancelActivityByIdController {
 	
 	@Autowired
