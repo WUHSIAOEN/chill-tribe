@@ -1,5 +1,7 @@
 package web.order.dao.impl;
 
+// 曉恩的檔案
+
 import static core.util.JdbcConstants.PASSWORD;
 import static core.util.JdbcConstants.URL;
 import static core.util.JdbcConstants.USER;
@@ -8,12 +10,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import javax.naming.NamingException;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 import web.order.dao.OrderDao;
 import web.order.vo.Orders;
 
+@Repository
 public class OrderDaoImpl implements OrderDao{
 	
 	private HikariDataSource ds;
@@ -35,32 +42,41 @@ public class OrderDaoImpl implements OrderDao{
 		ds.addDataSourceProperty("preStmtCacheSize", 250);
 		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
+	
+	
+	@PersistenceContext
+	private Session session;
 
 	
 	// 不須付款的新增訂單
 	@Override
 	public int insert(Orders order) {
-		StringBuilder sql = new StringBuilder(
-				"INSERT INTO orders"
-				+ "(activity_id, member_id, quantity, order_status, payment_method, order_contact, contact_mail, contact_phone, requirement)"
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			
-			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
-				pstmt.setInt(1, order.getActivityId());
-				pstmt.setInt(2, order.getMemberId());
-				pstmt.setInt(3, order.getQuantity());
-				pstmt.setString(4, order.getOrderStatus());
-				pstmt.setString(5, order.getPaymentMethod());
-				pstmt.setString(6, order.getOrderContact());
-				pstmt.setString(7, order.getContactMail());
-				pstmt.setString(8, order.getContactPhone());
-				pstmt.setString(9, order.getRequirement());
-				return pstmt.executeUpdate();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return -1;
+//		StringBuilder sql = new StringBuilder(
+//				"INSERT INTO orders"
+//				+ "(activity_id, member_id, quantity, order_status, payment_method, order_contact, contact_mail, contact_phone, requirement)"
+//				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+//			
+//			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+//				pstmt.setInt(1, order.getActivityId());
+//				pstmt.setInt(2, order.getMemberId());
+//				pstmt.setInt(3, order.getQuantity());
+//				pstmt.setString(4, order.getOrderStatus());
+//				pstmt.setString(5, order.getPaymentMethod());
+//				pstmt.setString(6, order.getOrderContact());
+//				pstmt.setString(7, order.getContactMail());
+//				pstmt.setString(8, order.getContactPhone());
+//				pstmt.setString(9, order.getRequirement());
+//				return pstmt.executeUpdate();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+		session.persist(order);
+		
+		return 1;
 	}
+	
+	
+	
 	
 
 	

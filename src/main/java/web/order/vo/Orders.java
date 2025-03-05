@@ -11,12 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import core.util.Core;
+import core.vo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +30,8 @@ import web.member.vo.Member;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Orders extends Core{
+	private static final long serialVersionUID = -1924879674331510853L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_ID")
@@ -78,16 +80,32 @@ public class Orders extends Core{
     private String tradeNo;
     
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @Column(name = "ORDER_UPDATE_DATETIME")
+    @Column(name = "ORDER_UPDATE_DATETIME", insertable = false)
     private Timestamp orderUpdateDatetime;
     
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @Column(name = "ORDER_CREATE_DATETIME")
+    @Column(name = "ORDER_CREATE_DATETIME", insertable = false)
     private Timestamp orderCreateDatetime;
     
     @OneToMany
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID", insertable = false, updatable = false)
     @Transient
     private List<Ticket> tickets;
+    
+    @PrePersist
+    public void prePersistStatus() {
+        if (orderPrefix == null) {
+        	orderPrefix = "ORD"; 
+        }
+        
+        if (orderStatus == null) {
+        	orderStatus = "pending_payment";
+        }
+        
+        if (paymentMethod == null) {
+        	paymentMethod = "none";
+        }
+
+    }
 	
 }
