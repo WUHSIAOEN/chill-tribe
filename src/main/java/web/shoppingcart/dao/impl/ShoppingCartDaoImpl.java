@@ -8,8 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import web.activity.vo.Activities;
 import web.shoppingcart.dao.ShoppingCartDao;
 import web.shoppingcart.vo.ShoppingCart;
 
@@ -86,6 +88,31 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 		ShoppingCart shoppingCart = session.getReference(ShoppingCart.class, shoppingCartItemId);
 		session.remove(shoppingCart);
 		return 1;
+	}
+
+	@Override
+	public int update(ShoppingCart shoppingCart) {
+		String hql = "FROM ShoppingCart WHERE memberId = :memberId AND activityId = :activityId";
+	    Query<ShoppingCart> query = session.createQuery(hql, ShoppingCart.class);
+	    query.setParameter("memberId", shoppingCart.getMemberId());
+	    query.setParameter("activityId", shoppingCart.getActivityId());
+	    
+	    ShoppingCart existingCart = query.uniqueResult();
+
+	    if (existingCart != null) {
+	        if (shoppingCart.getQuantity() != null) {
+	            existingCart.setQuantity(existingCart.getQuantity() + shoppingCart.getQuantity());
+	        }
+	        if (shoppingCart.getAddedTime() != null) {
+	            existingCart.setAddedTime(shoppingCart.getAddedTime());
+	        }
+
+	        session.update(existingCart);
+	        return 1;
+	    } else {
+	        session.save(shoppingCart);
+	        return 1;
+	    }
 	}
 
 //	@Override

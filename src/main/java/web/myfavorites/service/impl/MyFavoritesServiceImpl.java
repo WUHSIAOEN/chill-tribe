@@ -22,8 +22,8 @@ public class MyFavoritesServiceImpl implements MyFavoritesService {
 //	}
 
 	@Override
-	public MyFavorites add(MyFavorites myFavorites) {
-		int resultCount = dao.insert(myFavorites);
+	public MyFavorites addOrUpdate(MyFavorites myFavorites) {
+		int resultCount = dao.update(myFavorites);
 		if (resultCount > 0) {
 			// 更新成功的情況
 			myFavorites.setMessage("刪除商品成功");

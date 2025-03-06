@@ -8,11 +8,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import web.activity.vo.Activities;
 import web.myfavorites.dao.MyFavoritesDao;
 import web.myfavorites.vo.MyFavorites;
+import web.shoppingcart.vo.ShoppingCart;
 
 @Repository
 public class MyFavoritesDaoImpl implements MyFavoritesDao {
@@ -27,10 +29,10 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 //		ds.addDataSourceProperty("preStmtCacheSize", 250);
 //		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 //	}
-	
+
 	@PersistenceContext
 	private Session session;
-	
+
 	@Override
 	public int insert(MyFavorites myFavorites) {
 		session.persist(myFavorites);
@@ -140,6 +142,26 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 		Root<MyFavorites> root = cQuery.from(MyFavorites.class);
 		cQuery.where(cBuilder.equal(root.get("myFavoriteId"), id));
 		return session.createQuery(cQuery).uniqueResult();
+	}
+
+	@Override
+	public int update(MyFavorites myFavorites) {
+		String hql = "FROM MyFavorites WHERE memberId = :memberId AND activityId = :activityId";
+		Query<MyFavorites> query = session.createQuery(hql, MyFavorites.class);
+		query.setParameter("memberId", myFavorites.getMemberId());
+		query.setParameter("activityId", myFavorites.getActivityId());
+
+		MyFavorites existingMf = query.uniqueResult();
+
+		if (existingMf != null) {
+			existingMf.setAddedTime(myFavorites.getAddedTime());
+
+			session.update(existingMf);
+			return 1;
+		} else {
+			session.save(existingMf);
+			return 1;
+		}
 	}
 
 //	@Override

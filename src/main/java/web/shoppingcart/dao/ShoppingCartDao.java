@@ -11,6 +11,8 @@ public interface ShoppingCartDao {
 	List<ShoppingCart> selectAll();
 	
 	ShoppingCart selectByScId(Integer id);
+	
+	int update(ShoppingCart shoppingCart);
 
 	int delete(Integer id);
 }
