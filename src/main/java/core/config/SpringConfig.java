@@ -33,7 +33,7 @@ public class SpringConfig {
 
 	@Bean
 	public SessionFactory sessionFactory() throws IllegalArgumentException, NamingException {
-		return new LocalSessionFactoryBuilder(dataSource()).scanPackages("web.*.vo")
+		return new LocalSessionFactoryBuilder(dataSource()).scanPackages("web.*.vo", "core.vo")
 				.addProperties(getHibernateProperties()).buildSessionFactory();
 	}
 
