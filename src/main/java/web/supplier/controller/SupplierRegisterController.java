@@ -58,6 +58,8 @@ public class SupplierRegisterController {
 		
 		supplier = service.register(supplier);
 		
+		// 判斷有才發
+		if (supplier != null) {
 		// 呼叫SendEmail
 		SendEmail sendEmail = new SendEmail();
 		
@@ -74,6 +76,7 @@ public class SupplierRegisterController {
 				"<html>" + "<head></head>" + "<body>" + "<h1>歡迎註冊Chill Tribe!</h1>"
 				+ "<p><a href='http://localhost:8080/chill-tribe/supplier/supplierlogin.html'> 請點擊此連結已進行供應商登入 </a></p>" + "</body>" + "</html>";
 		sendEmail.send(sesv2Client, sender, recipient, subject, bodyHTML);
+		}
 		return supplier;
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
