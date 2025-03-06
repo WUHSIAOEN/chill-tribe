@@ -24,7 +24,7 @@ public class AddToMfController {
 			myFavorites.setSuccessful(false);
 			return myFavorites;
 		}
-		myFavorites = service.add(myFavorites);
+		myFavorites = service.addOrUpdate(myFavorites);
 		return myFavorites;
 	}
 

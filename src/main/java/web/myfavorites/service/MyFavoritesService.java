@@ -6,7 +6,7 @@ import web.myfavorites.vo.MyFavorites;
 
 public interface MyFavoritesService {
 	// 加入購物車
-	MyFavorites add(MyFavorites myFavorites);
+	MyFavorites addOrUpdate(MyFavorites myFavorites);
 
 	// 找到所有產品
 	List<MyFavorites> findAll();

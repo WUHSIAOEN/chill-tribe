@@ -24,7 +24,7 @@ public class AddToScController {
 			shoppingCart.setSuccessful(false);
 			return shoppingCart;
 		}
-		shoppingCart = service.add(shoppingCart);
+		shoppingCart = service.addOrUpdate(shoppingCart);
 		return shoppingCart;
 	}
 
