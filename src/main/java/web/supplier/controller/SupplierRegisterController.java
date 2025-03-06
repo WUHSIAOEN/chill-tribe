@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import core.util.SendEmail;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sesv2.SesV2Client;
 import web.member.vo.Member;
 import web.supplier.service.SupplierService;
 import web.supplier.service.impl.SupplierServiceImpl;
@@ -54,6 +57,23 @@ public class SupplierRegisterController {
 
 		
 		supplier = service.register(supplier);
+		
+		// 呼叫SendEmail
+		SendEmail sendEmail = new SendEmail();
+		
+		Region region = Region.AP_NORTHEAST_1;
+		SesV2Client sesv2Client = SesV2Client.builder().region(region).build();
+		// 發信者
+		String sender = "crystalwu@metaage.com.tw";
+		// 收件者
+		String recipient = supplier.getEmail();
+		// 主旨
+		String subject = "註冊成功通知";
+		// 內容
+		String bodyHTML =
+				"<html>" + "<head></head>" + "<body>" + "<h1>歡迎註冊Chill Tribe!</h1>"
+				+ "<p><a href='http://localhost:8080/chill-tribe/supplier/supplierlogin.html'> 請點擊此連結已進行供應商登入 </a></p>" + "</body>" + "</html>";
+		sendEmail.send(sesv2Client, sender, recipient, subject, bodyHTML);
 		return supplier;
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
