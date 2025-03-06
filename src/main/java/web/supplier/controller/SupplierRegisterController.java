@@ -58,6 +58,7 @@ public class SupplierRegisterController {
 		
 		supplier = service.register(supplier);
 		
+		// 判斷有才發
 		if (supplier != null) {
 		// 呼叫SendEmail
 		SendEmail sendEmail = new SendEmail();
