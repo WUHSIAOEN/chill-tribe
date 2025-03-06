@@ -186,6 +186,19 @@ public class ActivityDaoImpl implements ActivityDao {
 	        if (activities.getTicketsExpiredTime() != null) {
 	            existingActivity.setTicketsExpiredTime(activities.getTicketsExpiredTime());
 	        }
+	        
+//	        // 更新活動圖片（如果有傳入）
+//	        if (images != null && !images.isEmpty()) {
+//	            // 刪除舊的圖片記錄
+//	            for (ActivityImage image : existingActivity.getActivityImages()) {
+//	                session.delete(image);
+//	            }
+//	            // 插入新的圖片記錄
+//	            for (ActivityImage newImage : images) {
+//	                newImage.setActivityId(activities.getActivityId()); // 確保每個圖片的 activityId 連結到正確的活動
+//	                session.save(newImage); // 插入新圖片
+//	            }
+//	        }
 	        session.update(existingActivity);
 	        return 1;
 	    }
