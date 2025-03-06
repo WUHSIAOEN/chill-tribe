@@ -58,6 +58,7 @@ public class SupplierRegisterController {
 		
 		supplier = service.register(supplier);
 		
+		// 呼叫SendEmail
 		SendEmail sendEmail = new SendEmail();
 		
 		Region region = Region.AP_NORTHEAST_1;
@@ -66,7 +67,9 @@ public class SupplierRegisterController {
 		String sender = "crystalwu@metaage.com.tw";
 		// 收件者
 		String recipient = supplier.getEmail();
+		// 主旨
 		String subject = "註冊成功通知";
+		// 內容
 		String bodyHTML =
 				"<html>" + "<head></head>" + "<body>" + "<h1>歡迎註冊Chill Tribe!</h1>"
 				+ "<p><a href='http://localhost:8080/chill-tribe/supplier/supplierlogin.html'> 請點擊此連結已進行供應商登入 </a></p>" + "</body>" + "</html>";
