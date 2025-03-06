@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import core.util.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,8 @@ import web.member.vo.Member;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+@Table(name = "comments")
+public class Comment extends Core{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +43,6 @@ public class Comment {
 	
 	@Column(name = "ACTIVITY_ID")
 	private Integer activityId;
-	
-	@ManyToOne
-	@JoinColumn(name = "ACTIVITY_ID", insertable = false, updatable = false)
-	private Activities activity;
 	
 	private String content;
 	

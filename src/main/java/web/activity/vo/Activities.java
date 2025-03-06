@@ -11,11 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
-import org.aspectj.org.eclipse.jdt.internal.compiler.ast.FalseLiteral;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import core.util.Core;
@@ -88,9 +86,9 @@ public class Activities extends Core{
 //    @Transient
     private List<ActivityImage> activityImages;
 
-//    @OneToMany
-//    @JoinColumn(name = "COMMENT_ID", insertable = false, updatable = false)
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "COMMENT_ID")
+//    @Transient
     private List<Comment> comments;
     
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
