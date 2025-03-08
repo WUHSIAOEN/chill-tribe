@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import core.util.Core;
 import lombok.AllArgsConstructor;
@@ -22,12 +24,12 @@ import web.activity.vo.Activities;
 import web.member.vo.Member;
 
 @Entity
-@Table(name = "shopping_cart_items")
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Table(name = "shopping_cart_items")
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 public class ShoppingCart extends Core{
 	
 	@Id
@@ -52,11 +54,10 @@ public class ShoppingCart extends Core{
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_ID", insertable = false, updatable = false)
+	@JsonIgnore
 	private Member member;
 	
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "ADDED_TIME")
 	private Timestamp addedTime;
-
-
 }

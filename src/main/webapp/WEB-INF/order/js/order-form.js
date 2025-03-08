@@ -78,7 +78,7 @@ $(function () {
             }
         })
         .then(activity => {
-            // console.log(activity);
+            console.log(activity);
             let startDateTime = convertTimeFormat(activity.startDateTime);
             let endDateTime = convertTimeFormat(activity.endDateTime);
             let firstImg = activity.activityImages[0].imageBase64;
@@ -87,6 +87,7 @@ $(function () {
             $("#activity-info-header h4").text(activity.activityName);
             $("#activity-info-header span").text(activity.city.cityName);
             $("#supplier-name").text(activity.supplier.supplier_name);
+            $("#address").text(activity.address);
             $("#start-time").text(startDateTime);
             $("#end-time").text(endDateTime);
         })
