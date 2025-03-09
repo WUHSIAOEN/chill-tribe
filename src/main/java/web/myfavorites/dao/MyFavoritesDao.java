@@ -12,6 +12,8 @@ public interface MyFavoritesDao {
 	List<MyFavorites> selectAll();
 	
 	MyFavorites selectByMfId(Integer id);
+	
+	int update(MyFavorites myFavorites);
 
 	// 刪除
 	int delete(Integer id);
