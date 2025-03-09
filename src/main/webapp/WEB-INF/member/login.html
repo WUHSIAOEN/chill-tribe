@@ -71,8 +71,8 @@
 			</div>
 			<div class="social-login mb-3">
 				<ul>
-					<li><a href="#" class="btn connect-google"><i
-							class="ti-google"></i>Google+</a></li>
+					<li><a href="#" class="btn connect-google" id="btn_googlelogin">
+					<i class="ti-google"></i>Google+</a></li>
 				</ul>
 			</div>
 			<div class="text-center">
@@ -91,6 +91,7 @@
 		
 		const email = document.querySelector('#loginemail');
 		const password = document.querySelector('#loginpassword');
+		var googleshow = true;
 // 		const msg = document.querySelector('#msg');
 
 
@@ -119,6 +120,7 @@
 
 
 		$('button#btn_login').on('click', () => {
+			googleshow = false;
 			console.log("登入按鈕觸發");
 			if (!email.value) {
 // 				alert('Email必須輸入');
@@ -191,5 +193,36 @@
 	            console.error("錯誤訊息:", error);
 	        });
 	    });
+
+
+	    $('#btn_googlelogin').on("click", () => {
+	        console.log("Google登入按鈕觸發");
+	        // 先跳轉到 Google 認證頁面
+	        location.href = "http://localhost:8080/chill-tribe/anotherOauthLogin";
+		    });
+
+
+	    window.onload = function() {
+		    // 發送 GET 請求以獲取 session 資料
+		    fetch('googlelogin/findGoogleEmail')
+		        .then(response => {
+		            return response.json();
+		        })
+		        .then(data => {
+			        if (data.email != null && data.memberid != null) {
+		            	sessionStorage.setItem('GoogleEmail', data.email);
+		                console.log("GoogleEmail", data.email);
+		                sessionStorage.setItem('memberid', data.memberid);
+		                console.log("memberid", data.memberid);
+		//                 sessionStorage.setItem('name', data.name);
+		//             	sessionStorage.setItem('Access Token:', data.access_token);
+		                setmembername(data.memberid);
+			        }
+		        })
+		        .catch(error => {
+		            console.error("錯誤:", error);
+		        });
+		};
+	    
 
 		</script>
