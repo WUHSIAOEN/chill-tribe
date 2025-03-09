@@ -19,6 +19,12 @@ $(function(){
         }
         return null;
     }
+
+    function calculateTotalPrice() {
+        
+    }
+
+
     // ============== 自訂函式↑ =================
 
     // 將會員購物車內容撈回來
@@ -35,7 +41,7 @@ $(function(){
         .then(shoppingCartItems => {
 
             // 清空item DOM
-            $("#shopping-cart-item").remove();
+            $(".shopping-cart-item").remove();
 
             // 將itemDOM字串塞到DOM裡
             for (let i = 0; i < shoppingCartItems.length; i++) {
@@ -73,9 +79,10 @@ $(function(){
             }
             // console.log(shoppingCartItems);
 
-            // 預設button 在第一個item
-            $("#item-button").prop("checked", true);
-
+            // 如果購物車有東西，就將第一個item的radio button打勾
+            if (shoppingCartItems.length > 0) {
+                $("#shopping-cart-list .item-button").first().prop("checked", true);
+            }
             
         })
         .catch(error => {            
@@ -83,8 +90,13 @@ $(function(){
         });
 
 
+
     // 計算總價 - 要抓單選的活動: 單價*數量
-    // 
+    
+
+
+
+
     // 綁定button click 事件
     
     
