@@ -28,4 +28,18 @@ public class MemberShoppingCartDaoImpl implements MemberShoppingCartDao {
 		return query1.getResultList();
 	}
 
+	
+//	刪除某個會員的購物車Item
+	@Override
+	public int deleteScItembyId(Integer id) {
+		ShoppingCart shoppingCart = session.load(ShoppingCart.class, id);
+		
+		session.remove(shoppingCart);
+		return 0;
+	}
+	
+	
+
+	
+
 }
