@@ -63,7 +63,7 @@
 					<div class="col-lg-9 col-md-12 form-submit">
 
 						<!-- 1st Step Checkout -->
-						<div class="checkout-wrap">
+						<form id="order-form" class="checkout-wrap">
 
 							<div class="checkout-head">
 								<ul>
@@ -83,14 +83,14 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>訂單聯絡人<i class="req">*</i></label>
-											<input type="text" class="form-control" value="Shaurya">
+											<input id="default-name" type="text" class="form-control" value="">
 										</div>
 									</div>
 
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>聯絡信箱<i class="req">*</i></label>
-											<input type="email" class="form-control" value="themezhub@gmail.com">
+											<input id="default-email" type="email" class="form-control" value="">
 										</div>
 									</div>
 
@@ -110,7 +110,7 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>聯絡電話<i class="req">*</i></label>
-											<input type="text" class="form-control" value="780 052 2177">
+											<input id="default-phone" type="text" class="form-control" value="">
 										</div>
 									</div>
 
@@ -123,13 +123,13 @@
 
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<div class="form-group text-center">
-											<a href="#" class="btn btn-primary rounded full-width">確認結帳</a>
+											<button type="submit" class="btn btn-primary rounded full-width">確認結帳</button>
 										</div>
 									</div>
 
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 
 					<!-- Sidebar End -->
@@ -137,7 +137,7 @@
 					<div class="col-lg-3 col-md-12">
 						<div class="checkout-side">
 
-							<div class="booking-short">
+							<div id="activity-info-header" class="booking-short">
 								<img src="https://placehold.co/1200x800" class="img-fluid" alt="" />
 								<h4>活動名稱</h4>
 								<span>活動地點</span>
@@ -156,14 +156,14 @@
 											</h2>
 										</div>
 
-										<div id="bookinSer" class="collapse show" aria-labelledby="bookinDet"
+										<div id="activity-info-body" class="collapse show" aria-labelledby="bookinDet"
 											data-parent="#accordionExample">
 											<div class="card-body">
 												<ul class="booking-detail-list">
-													<li>活動供應商</li>
-													<li>票券張數<span>5</span></li>
-													<li>活動開始時間<span>2025/04/04 13:00</span></li>
-													<li>活動結束時間<span>2025/04/04 17:00</span></li>
+													<li>活動供應商<span id="supplier-name"></span></li>
+													<li>活動地點<span id="address"></span></li>
+													<li>開始時間<span id="start-time"></span></li>
+													<li>結束時間<span id="end-time"></span></li>
 												</ul>
 											</div>
 										</div>
@@ -183,9 +183,9 @@
 											data-parent="#accordionExample">
 											<div class="card-body">
 												<ul class="booking-detail-list">
-													<li>單價<span>$200</span></li>
-													<li>數量<span>5</span></li>
-													<li><b>總計</b><span>$1000</span></li>
+													<li>單價<span id="act-unit-price"></span></li>
+													<li>數量<span id="order-quantity"></span></li>
+													<li><b>總計</b><span id="order-total"></span></li>
 												</ul>
 											</div>
 										</div>

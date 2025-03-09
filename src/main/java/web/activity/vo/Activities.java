@@ -45,9 +45,9 @@ public class Activities extends Core{
     @Column(name = "SUPPLIER_ID")
     private Integer supplierId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "SUPPLIER_ID", insertable = false, updatable = false)
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "SUPPLIER_ID", insertable = false, updatable = false)
+//    @Transient
     private Supplier supplier;
 
     @Column(name = "CITY_ID")
@@ -55,7 +55,6 @@ public class Activities extends Core{
 
     @ManyToOne
     @JoinColumn(name = "CITY_ID", insertable = false, updatable = false)
-    @Transient
     private City city;
 
     @Column(name = "DISTRICT_ID")
@@ -63,7 +62,6 @@ public class Activities extends Core{
 
     @ManyToOne
     @JoinColumn(name = "DISTRICT_ID", insertable = false, updatable = false)
-    @Transient
     private District district;
 
     private String address;

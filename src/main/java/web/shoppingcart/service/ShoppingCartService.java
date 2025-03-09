@@ -6,7 +6,7 @@ import web.shoppingcart.vo.ShoppingCart;
 
 public interface ShoppingCartService {
 	// 加入購物車
-	ShoppingCart add(ShoppingCart shoppingCart);
+	ShoppingCart addOrUpdate(ShoppingCart shoppingCart);
 
 	// 找到所有產品
 	List<ShoppingCart> findAll();

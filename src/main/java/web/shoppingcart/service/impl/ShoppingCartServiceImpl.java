@@ -18,20 +18,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	private ShoppingCartDao dao;
 
 	@Override
-	public ShoppingCart add(ShoppingCart shoppingCart) {
-		int resultCount = dao.insert(shoppingCart);
-		if (resultCount > 0) {
-			// 更新成功的情況
-			shoppingCart.setMessage("刪除商品成功");
-			shoppingCart.setSuccessful(true);
-		} else {
-			// 更新失敗的情況
-			shoppingCart.setMessage("刪除商品失敗");
-			shoppingCart.setSuccessful(false);
-		}
+	public ShoppingCart addOrUpdate(ShoppingCart shoppingCart) {
+		int resultCount = dao.update(shoppingCart);
 
-		return shoppingCart;
-	}
+        if (resultCount > 0) {
+            shoppingCart.setMessage("操作成功");
+            shoppingCart.setSuccessful(true);
+        } else {
+            shoppingCart.setMessage("操作失敗");
+            shoppingCart.setSuccessful(false);
+        }
+
+        return shoppingCart;
+    }
 
 	@Override
 	public List<ShoppingCart> findAll() {
@@ -53,6 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			return false;
 		}
 	}
+
 
 //	public ShoppingCartServiceImpl() throws NamingException {
 //		dao = new ShoppingCartDaoImpl();
