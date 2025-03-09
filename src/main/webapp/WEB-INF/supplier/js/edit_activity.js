@@ -6,6 +6,10 @@ function getActivityIdFromURL() {
 const activityId = getActivityIdFromURL();
 
 function fetchActivityById(activityId) {
+  if (!window.base64Images) {
+    window.base64Images = [];
+  }
+
   fetch(`/chill-tribe/supplier/activities/edit/${activityId}`)
     .then((response) => response.json())
     .then((data) => {
@@ -18,6 +22,40 @@ function fetchActivityById(activityId) {
       document.getElementById("maxParticipants").value = data.maxParticipants;
       document.getElementById("description").value = data.description;
       document.getElementById("precaution").value = data.precaution;
+
+      if (data.activityImages && data.activityImages.length > 0) {
+        const previewContainer = document.getElementById("previewContainer");
+
+        data.activityImages.forEach(imageData => {
+          const base64String = imageData.imageBase64;
+
+          const previewDiv = document.createElement("div");
+          previewDiv.classList.add("position-relative", "m-2");
+          previewDiv.style.width = "160px";
+          previewDiv.style.height = "120px";
+
+          const img = document.createElement("img");
+          img.src = base64String;
+          img.classList.add("img-thumbnail", "w-100", "h-100");
+
+          const removeBtn = document.createElement("button");
+          removeBtn.innerHTML = "✖";
+          removeBtn.classList.add("remove-btn", "position-absolute");
+
+          removeBtn.addEventListener("click", () => {
+            previewDiv.remove();
+
+            const index = window.base64Images.indexOf(base64String);
+            if (index !== -1) {
+              window.base64Images.splice(index, 1);
+            }
+          });
+
+          previewDiv.appendChild(img);
+          previewDiv.appendChild(removeBtn);
+          previewContainer.appendChild(previewDiv);
+        });
+      }
     });
 }
 
@@ -67,6 +105,11 @@ function newActivityData() {
   const startDateTime = formatDateTime(startRaw);
   const endDateTime = formatDateTime(endRaw);
 
+  const requestImages = images.map(image => ({
+    activityId: activityId,
+    imageBase64: image
+  }));
+
   return {
     activityId,
     // supplierId,
@@ -102,5 +145,5 @@ document
   })
   .then((data) => {
     console.log("從 前端送出的數據:", data);
-  });
+  })
 });
