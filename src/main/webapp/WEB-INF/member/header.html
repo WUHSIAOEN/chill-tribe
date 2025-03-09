@@ -151,7 +151,8 @@
 // 			debugger;
 // 			fetch(`find/${img_member_header_id.value}`)
 // 			fetch(`/chill-tribe/member/find/${img_member_header_id}`)
-			fetch(`find/${memberid}`)
+			function setmembername(a) {
+			fetch(`find/${a}`)
 			.then(resp => resp.json())
 			.then(member => {
 				membername.innerText = member.membername;	
@@ -173,6 +174,9 @@
 			        logoutMenu.style.display = 'block';
 			      }			
 			});
+		}
+
+			setmembername(memberid);
 
 			// 拼接路徑字串，塞回去標籤內
 			 let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
