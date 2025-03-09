@@ -44,8 +44,8 @@ import java.util.Set;
 
 @WebServlet("/callback2")
 public class CallbackController2 extends AbstractAuthorizationCodeCallbackServlet {
-    private static final String CLIENT_ID = "";
-    private static final String CLIENT_SECRET = "";
+    private static final String CLIENT_ID = "778188269055-9htm2tsvh4b4m1eaeul5jj9qe9eig0j0.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "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";
     private static final java.io.File DATA_STORE_DIR = new java.io.File("credentials");
     private static final DataStoreFactory DATA_STORE_FACTORY;
     
