@@ -13,7 +13,7 @@ public class OauthController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String OAUTH_URL = "https://accounts.google.com/o/oauth2/auth";
-	private static final String CLIENT_ID = "224274855650-058eb8p8d84m05f3sodeggamp88u4u3s.apps.googleusercontent.com";
+	private static final String CLIENT_ID = "";
 	private static final String REDIRECT_URI = "http://localhost:8080/oauthTest/callback";
 
 	@Override

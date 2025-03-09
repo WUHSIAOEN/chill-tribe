@@ -21,8 +21,8 @@ import java.util.Enumeration;
 public class CallbackController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String TOKEN_URI = "https://oauth2.googleapis.com/token";
-    private static final String CLIENT_ID = "224274855650-058eb8p8d84m05f3sodeggamp88u4u3s.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
+    private static final String CLIENT_ID = "";
+    private static final String CLIENT_SECRET = "";
     private static final String REDIRECT_URI = "http://localhost:8080/oauthTest/callback";
 
     @Override
