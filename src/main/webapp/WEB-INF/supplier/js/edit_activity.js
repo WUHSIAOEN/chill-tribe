@@ -6,14 +6,13 @@ function getActivityIdFromURL() {
 const activityId = getActivityIdFromURL();
 
 function fetchActivityById(activityId) {
-  if (!window.base64Images) {
-    window.base64Images = [];
-  }
+  
 
   fetch(`/chill-tribe/supplier/activities/edit/${activityId}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("從 後端獲取的數據:", data);
+
       document.getElementById("activityName").value = data.activityName;
       document.getElementById("address").value = data.address;
       document.getElementById("category").value = data.category;
@@ -23,11 +22,14 @@ function fetchActivityById(activityId) {
       document.getElementById("description").value = data.description;
       document.getElementById("precaution").value = data.precaution;
 
+      window.base64Images = [];
       if (data.activityImages && data.activityImages.length > 0) {
         const previewContainer = document.getElementById("previewContainer");
 
         data.activityImages.forEach(imageData => {
           const base64String = imageData.imageBase64;
+
+          window.base64Images.push(base64String);
 
           const previewDiv = document.createElement("div");
           previewDiv.classList.add("position-relative", "m-2");
@@ -86,6 +88,8 @@ function newActivityData() {
   const note = document.getElementById("note")?.value || "";
 
   const selectedRange = document.getElementById("reservationtime")?.value || "";
+  const selectedRange_1 = document.getElementById("reservationtime_1")?.value || "";
+  const images = window.base64Images;
 
   function formatDateTime(input) {
     if (!input) return "";
@@ -102,8 +106,11 @@ function newActivityData() {
   }
 
   const [startRaw, endRaw] = selectedRange.split(" - ");
+  const [startRaw_1, endRaw_1] = selectedRange_1.split(" - ");
   const startDateTime = formatDateTime(startRaw);
   const endDateTime = formatDateTime(endRaw);
+  const ticketsActivateTime = formatDateTime(startRaw_1);
+  const ticketsExpiredTime = formatDateTime(endRaw_1);
 
   const requestImages = images.map(image => ({
     activityId: activityId,
@@ -119,6 +126,8 @@ function newActivityData() {
     address,
     startDateTime,
     endDateTime,
+    ticketsActivateTime,
+    ticketsExpiredTime,
     unitPrice,
     minParticipants,
     maxParticipants,
@@ -126,6 +135,7 @@ function newActivityData() {
     description,
     category,
     precaution,
+    requestImages
     // not required
   };  
 }

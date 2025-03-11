@@ -4,6 +4,7 @@ import java.util.List;
 
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.Comment;
 
 public interface ActivityDao {
 	// 新增活動文字
@@ -11,6 +12,9 @@ public interface ActivityDao {
 
 	// 新增活動圖片
 	int insertImages(List<ActivityImage> images, int activityId);
+	
+	// 新增活動評論
+	int insertComments(List<Comment> comments, int activityId);
 
 	// 修改活動
 	int update(Activities activities);
