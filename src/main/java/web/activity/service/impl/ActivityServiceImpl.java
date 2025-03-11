@@ -10,6 +10,7 @@ import web.activity.dao.ActivityDao;
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.Comment;
 
 @Service
 @Transactional
@@ -49,6 +50,18 @@ public class ActivityServiceImpl implements ActivityService {
 	public boolean addImages(List<ActivityImage> images, int activityId) {
 		try {
 			boolean result = dao.insertImages(images, activityId) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	// 插入評論
+	@Override
+	public boolean addComments(List<Comment> comments, int activityId) {
+		try {
+			boolean result = dao.insertComments(comments, activityId) > 0;
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -170,5 +183,6 @@ public class ActivityServiceImpl implements ActivityService {
 	public Activities findActivityById(Integer id) {
 		return dao.selectByActivityId(id);
 	}
+
 
 }

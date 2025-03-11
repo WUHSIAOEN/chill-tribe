@@ -2,17 +2,17 @@ $(function () {
 
     // ============== 假資料↓ =================
     // 先塞假訂單資料到localStorage
-    let orderData = {
-        activityId: 34,
-        quantity: 2,
-        unitPrice: 1000,
-        total: 2000
-    }
-    localStorage.setItem('orderData', JSON.stringify(orderData));
+    // let orderData = {
+    //     activityId: 34,
+    //     quantity: 2,
+    //     unitPrice: 1000,
+    //     total: 2000
+    // }
+    // localStorage.setItem('checkoutActivity', JSON.stringify(checkoutActivity));
 
     // 先塞假會員資料到SessionStorage
     let MemberData = {
-        memberId: 1
+        memberId: 2
     }
     sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
     // ============== 假資料↑ =================
@@ -21,9 +21,9 @@ $(function () {
 
     // 函式 - 取得訂單資料
     function getOrderData() {
-        const orderData = localStorage.getItem('orderData');
-        if (orderData) {
-            return JSON.parse(orderData);
+        const checkoutActivity = localStorage.getItem('checkoutActivity');
+        if (checkoutActivity) {
+            return JSON.parse(checkoutActivity);
         }
         return null;
     }
@@ -68,7 +68,9 @@ $(function () {
 
     // 要先抓到活動資訊放到右邊活動資訊卡
     // URI 要改`/chill-tribe/supplier/applyAct/${activityId}`
-    fetch(`/chill-tribe/supplier/applyAct/34`)
+    const activityId = getOrderData().activityId;
+    console.log(activityId);
+    fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -81,7 +83,7 @@ $(function () {
             console.log(activity);
             let startDateTime = convertTimeFormat(activity.startDateTime);
             let endDateTime = convertTimeFormat(activity.endDateTime);
-            let firstImg = activity.activityImages[0].imageBase64;
+            let firstImg = activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg';
             // 顯示活動資訊
             $("#activity-info-header img").attr("src", firstImg);
             $("#activity-info-header h4").text(activity.activityName);
@@ -111,9 +113,9 @@ $(function () {
         // console.log("送出訂單");
 
         // 取得表單資料
-        let orderContact = $("#order-contact").val();
-        let contactMail = $("#contact-mail").val();
-        let contactPhone = $("#contact-phone").val();
+        let orderContact = $("#default-name").val();
+        let contactMail = $("#default-email").val();
+        let contactPhone = $("#default-phone").val();
         let requirement = $("#requirement").val();
 
         // console.log(orderContact, contactMail, contactPhone, requirement);
@@ -145,7 +147,7 @@ $(function () {
             .then(order => {
                 console.log(order);
                 // 導向訂單完成頁
-                // location.href = "/chill-tribe/order/order-complete.html";
+                location.href = "/chill-tribe/order/order-details.html";
             })
     })
 

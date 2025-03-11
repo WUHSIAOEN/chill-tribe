@@ -50,7 +50,7 @@ public class Comment extends Core{
 	@Column(name = "COMMENT_TIME")
 	private Timestamp commentTime;
 	
-	@Column(name = "star_rating")
+	@Column(name = "STAR_RATING")
 	private Integer starRating;
 	
 }

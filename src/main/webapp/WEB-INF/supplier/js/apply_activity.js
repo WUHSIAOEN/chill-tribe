@@ -4,7 +4,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
-  const districtId = parseInt(document.getElementById("area")?.value) || 3;
+  const districtId = parseInt(document.getElementById("area")?.value) || 2;
   const address = document.getElementById("address")?.value || "";
   const category = document.getElementById("category")?.value || "";
   const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
@@ -14,6 +14,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const description = document.getElementById("description")?.value || "";
   const precaution = document.getElementById("precaution")?.value || "";
   const selectedRange = document.getElementById("reservationtime")?.value || "";
+  const selectedRange_1 = document.getElementById("reservationtime_1")?.value || "";
   const images = window.base64Images;
 
   function formatDateTime(input) {
@@ -31,8 +32,11 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   }
 
   const [startRaw, endRaw] = selectedRange.split(" - ");
+  const [startRaw_1, endRaw_1] = selectedRange_1.split(" - ");
   const startDateTime = formatDateTime(startRaw);
   const endDateTime = formatDateTime(endRaw);
+  const ticketsActivateTime = formatDateTime(startRaw_1);
+  const ticketsExpiredTime = formatDateTime(endRaw_1);
 
   const requestData = {
     supplierId,
@@ -42,6 +46,8 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
     address,
     startDateTime,
     endDateTime,
+    ticketsActivateTime,
+    ticketsExpiredTime,
     unitPrice,
     minParticipants,
     maxParticipants,
