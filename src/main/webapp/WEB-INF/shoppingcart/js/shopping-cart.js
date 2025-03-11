@@ -65,7 +65,7 @@ $(function(){
         <!-- Item #1 -->
         <tr id="shopping-cart-item">
             <td class="action text-center">
-                <input type="radio" class="form-check-input item-button" name="shopping-cart-item">
+                <input type="radio" class="form-check-input item-button" name="shopping-cart-item" value="${shoppingCartItems[i]?.activity?.activityId}" />
             </td>
             <td class="property-container">
                 <img src="${shoppingCartItems[i]?.activity?.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg'}" alt="${shoppingCartItems[i]?.activity?.activityImages[0]?.imageName || 'No Image'}" />
@@ -150,6 +150,41 @@ $(function(){
     //         console.error(error);
     //     });
     // }
+
+    // 進入結帳頁面
+    $('#checkout').on('click', function(e) {
+        e.preventDefault();
+
+        // 取得被選取的item的activityId
+        var activityId = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.item-button').val();
+        var memberId = getMemberData();
+        var quantity = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.item-quantity').val();
+        var unitPrice = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.table-property-price').attr('data-price');
+        var orderStatus, paymentMethod;
+        if (unitPrice === 0) {
+            orderStatus = "no_payment_required";
+            paymentMethod = "none";
+        } else {
+            orderStatus = "pending_payment";
+            paymentMethod = "credit_card";
+        }
+        const checkoutActivity = {
+            // memberId: memberId,
+            activityId: activityId,
+            quantity: quantity,
+            unitPrice: unitPrice,
+            orderStatus: orderStatus,
+            paymentMethod: paymentMethod
+        };
+
+        console.log(checkoutActivity);
+
+        // 將activity 存到sessionStorage
+        localStorage.setItem('checkoutActivity', JSON.stringify(checkoutActivity));
+
+        // 導向結帳頁面
+        window.location.href = '/chill-tribe/order/order-form.html';
+    });
     
     
     
