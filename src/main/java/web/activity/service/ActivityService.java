@@ -4,6 +4,7 @@ import java.util.List;
 
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.Comment;
 
 public interface ActivityService {
 	
@@ -13,6 +14,9 @@ public interface ActivityService {
 	
 	// 新增活動圖片
 	boolean addImages(List<ActivityImage> images, int activityId);
+	
+	// 新增留言
+	boolean addComments(List<Comment> comments, int activityId);
 
 	// 更新活動
 	Activities edit(Activities activities);

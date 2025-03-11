@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.Comment;
 
 @RestController
 @RequestMapping("supplier/applyAct")
@@ -32,24 +33,24 @@ public class ApplyActivityController {
 		activities = service.apply(activities);
 		return activities;
 	}
-	
+
 	// 根據 ID 找到一個活動
 	@GetMapping("{activityId}")
 	public Activities findById(@PathVariable Integer activityId) {
 		return service.findActivityById(activityId);
-		
+
 	}
-	
+
 	// 用 ID 去插入活動
 	@PostMapping("{activityId}")
-	public boolean activityImages(
-			@PathVariable("activityId") Integer activityId, 
-            @RequestBody List<ActivityImage> images) {
+	public boolean activityImages(@PathVariable("activityId") Integer activityId,
+			@RequestBody List<ActivityImage> images) {
 		for (ActivityImage image : images) {
-	        image.setActivityId(activityId);
-	    }
+			image.setActivityId(activityId);
+		}
 		return service.addImages(images, activityId);
 	}
+
 
 //@WebServlet("/activity/apply")
 
