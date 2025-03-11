@@ -30,13 +30,14 @@ import web.supplier.vo.Supplier;
 //@WebServlet("/supplier/supplierlogin")
 public class SupplierLoginController {
 //	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private SupplierService service;
-	
-	@GetMapping ("{email}/{password}")
+
+	@GetMapping("{email}/{password}")
 //	@Override
-	protected Supplier supplierlogin(HttpServletRequest request, @PathVariable String email, @PathVariable String password) {
+	protected Supplier supplierlogin(HttpServletRequest request, @PathVariable String email,
+			@PathVariable String password) {
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Supplier supplier = new Supplier();
 		if (email == null || password == null) {
@@ -49,15 +50,20 @@ public class SupplierLoginController {
 		supplier.setPassword(password);
 		supplier = service.login(supplier);
 		if (supplier.isSuccessful()) {
-			if (request.getSession(false) != null) {
-				request.changeSessionId();
+//			if (request.getSession(false) != null) {
+//				request.changeSessionId();
+			HttpSession existingSession = request.getSession(false);
+			if (existingSession != null) {
+				existingSession.invalidate();
 			}
-			final HttpSession session = request.getSession();
+			HttpSession session = request.getSession(true);
+//			}
+//			final HttpSession session = request.getSession();
 			session.setAttribute("loggedin", true);
 			session.setAttribute("supplier", supplier);
 		}
 		return supplier;
-		
+
 //		try {
 //			Gson gson = new Gson();
 //			Supplier supplier = gson.fromJson(req.getReader(), Supplier.class);

@@ -25,16 +25,15 @@ import web.member.vo.Member;
 
 // 一般會員登入
 @RestController
-@RequestMapping({"member/login", "/login"})
+@RequestMapping({ "member/login", "/login" })
 //@WebServlet({"/member/login", "/login"})
-public class LoginController  {
+public class LoginController {
 //	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private MemberService service;
-	
-	
-	@GetMapping ("{email}/{password}")
+
+	@GetMapping("{email}/{password}")
 //	@Override
 	protected Member login(HttpServletRequest request, @PathVariable String email, @PathVariable String password) {
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,12 +48,18 @@ public class LoginController  {
 		member.setPassword(password);
 		member = service.login(member);
 		if (member.isSuccessful()) {
-			if (request.getSession(false) != null) {
-				request.changeSessionId();
+//			if (request.getSession(false) != null) {
+//				request.changeSessionId();
+			HttpSession existingSession = request.getSession(false);
+			if (existingSession != null) {
+				existingSession.invalidate();
 			}
-			final HttpSession session = request.getSession();
+			HttpSession session = request.getSession(true);
+//			}
+//			final HttpSession session = request.getSession();
 			session.setAttribute("loggedin", true);
 			session.setAttribute("member", member);
+			session.setAttribute("memberid", member.getMemberid());
 		}
 		return member;
 //		try {
