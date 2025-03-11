@@ -5,7 +5,45 @@ public class Core {
 	private String message;
 	private String cpassword;
 	private String strdateofbirth;
+	private String googleemail;
+	private String access_token;
+	private String googleid;
+	private String googlename;
 	
+	
+	
+	public String getGoogleemail() {
+		return googleemail;
+	}
+
+	public void setGoogleemail(String googleemail) {
+		this.googleemail = googleemail;
+	}
+
+	public String getAccess_token() {
+		return access_token;
+	}
+
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
+	}
+
+	public String getGoogleid() {
+		return googleid;
+	}
+
+	public void setGoogleid(String googleid) {
+		this.googleid = googleid;
+	}
+
+	public String getGooglename() {
+		return googlename;
+	}
+
+	public void setGooglename(String googlename) {
+		this.googlename = googlename;
+	}
+
 	public String getStrdateofbirth() {
 		return strdateofbirth;
 	}
