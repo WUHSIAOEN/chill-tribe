@@ -277,6 +277,31 @@ public class MemberServiceImpl implements MemberService {
 		return memberdate;
 	}
 
+	@Override
+	public Member forgetpassowrd(Member member) {
+		
+		String email = member.getEmail();
+		if (memberDao.selectByEmail(email) != null) {
+			System.out.println("有這個Email");
+			memberDao.forgetpassword(email);
+			return member;
+		}
+		
+//		String memberemail = member.getEmail();
+//		memberemail = memberDao.selectByEmail(memberemail);
+//		return null;
+		return member;
+	}
+
+	@Override
+	public Member editpassword(Member member) {
+		final int resultCount = memberDao.updatepassword(member);
+		member.setSuccessful(resultCount > 0);
+		member.setMessage(resultCount > 0 ? "修改密碼成功" : "修改密碼失敗");
+		System.out.println(member.getMemberid() + "  修改了密碼");
+		return member;
+	}
+
 //	@Override
 //	public Member selectaddress(Member member) {
 //		member = memberDao.selectaddress(member);

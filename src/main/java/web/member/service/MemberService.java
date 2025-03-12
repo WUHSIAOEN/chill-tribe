@@ -20,6 +20,10 @@ public interface MemberService {
 	
 	Member updateimg(Member member);
 	
+	Member forgetpassowrd(Member member);
+	
+	Member editpassword(Member member);
+	
 //	Member selectaddress(Member member);
 	
 //	List<Member> selectaddressAll(Integer member_id);
