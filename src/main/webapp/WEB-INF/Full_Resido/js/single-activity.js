@@ -61,6 +61,12 @@ function fetchActivityById(activityId) {
       let cBody = document.getElementById('comment-body');
       cBody.innerHTML = "";
       data.comments.forEach(comment => {
+        let memberPhoto;
+        if (memberPhoto != null) {
+          memberPhoto = `${data.comments.member?.photobase64}`;
+        } else {
+          memberPhoto = "https://placehold.co/500x500";
+        }
         let totalComments = data.comments.length;
         let commentName = comment.member.membername
         let commentTime = comment.commentTime;
@@ -75,7 +81,7 @@ function fetchActivityById(activityId) {
           <li class="article_comments_wrap">
             <article>
               <div class="article_comments_thumb">
-                <img src="https://placehold.co/500x500" alt="">
+                <img src="${memberPhoto}" alt="">
               </div>
               <div class="comment-details">
                 <div class="comment-meta">
@@ -127,26 +133,29 @@ function fetchActivityById(activityId) {
     };
     
     // 供應商
-    if (data.supplier.length > 0) {
-      let sBody = document.getElementById('supplier-body');
-      sBody.innerHTML = "";
-      data.supplier.forEach((sup => {
-        let supplierName = sup.supplier_name;
-        let supplierPhone = sup.phone;
-        let supplierElement = document.createElement("div");
-        supplierElement.classList.add("sides-widget-header", "bg-primary");
-        supplierElement.innerHTML = `
-          <div class="agent-photo"><img src="${supplierImage}" alt="Supplier Image"></div>
-            <div class="sides-widget-details">
-              <h4><a href="#">${supplierName}</a></h4>
-              <span><i class="lni-phone-handset"></i>${supplierPhone}</span>
-            </div>
-          <div class="clearfix"></div>
-        `;
+    console.log(data.supplier.supplier_name)
+    let sBody = document.getElementById('supplier-body');
+    sBody.innerHTML = ""; // 清空目前的內容
 
-        sBody.appendChild(supplierElement);
-      }))
-    }
+    let supplierName = data.supplier.supplier_name;
+    let supplierPhone = data.supplier.phone;
+    let supplierImage = data.supplier?.image || "https://placehold.co/500x500";
+
+    let supplierElement = document.createElement("div");
+    supplierElement.classList.add("sides-widget-header", "bg-primary");
+
+    supplierElement.innerHTML = `
+      <div class="agent-photo">
+        <img src="${supplierImage}" alt="Supplier Image">
+      </div>
+      <div class="sides-widget-details">
+        <h4><a href="#">${supplierName}</a></h4>
+        <span><i class="lni-phone-handset"></i>${supplierPhone}</span>
+      </div>
+      <div class="clearfix"></div>
+    `;
+
+    sBody.appendChild(supplierElement);
 
 
     document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
