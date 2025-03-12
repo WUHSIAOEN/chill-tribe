@@ -191,11 +191,10 @@ $(function () {
             }
         })
         .then(activityCards => {
-        	console.log('...................', activityCards);
             $("#coming-soon-activities").empty();
             const [firstActivityCard, ...restActivityCards] = activityCards;
             activityCards.forEach(activityCard => {
-                //    console.log(activityCard.supplier.supplier_name);
+                   console.log(activityCard.supplier.supplier_name);
 
                 let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -204,7 +203,7 @@ $(function () {
 
                             <div class="listing-img-wrapper">
                                 <a href="single-property-2.html">
-                                    <img src="${activityCard.activityImages[0].imageBase64}" class="img-fluid mx-auto rounded" alt="" />
+                                    <img src="${activityCard.activityImages[0]?.imageBase64 || './asset/no-image.jpg'}" class="img-fluid mx-auto rounded" alt="" />
                                 </a>
                             </div>
 

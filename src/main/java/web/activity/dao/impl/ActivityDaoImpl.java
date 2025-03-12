@@ -18,6 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import web.activity.dao.ActivityDao;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
+import web.activity.vo.Comment;
 
 @Repository
 public class ActivityDaoImpl implements ActivityDao {
@@ -92,6 +93,16 @@ public class ActivityDaoImpl implements ActivityDao {
 	        image.setActivityId(activityId); // 設置每張圖片的 activityId
 	        session.persist(image); // 插入圖片資料
 	    }
+		return 1;
+	}
+	
+	// 新增留言
+	@Override
+	public int insertComments(List<Comment> comments, int activityId) {
+		for (Comment comment : comments) {
+			comment.setActivityId(activityId);
+			session.persist(comment);
+		}
 		return 1;
 	}
 
@@ -446,5 +457,6 @@ public class ActivityDaoImpl implements ActivityDao {
 //
 //		return null;
 	}
+
 
 }

@@ -23,6 +23,21 @@
 					height: 382.66px; 
 					object-fit: cover;
 			}
+			.star-rating {
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+			}
+
+			.star {
+					font-size: 1.5em;
+					color: gray;
+					cursor: pointer;
+			}
+
+			.star.selected {
+					color: gold;
+			}
 		</style>
     </head>
 	
@@ -41,7 +56,7 @@
 			<!-- ============================================================== -->
             <!-- Top header  -->
             <!-- ============================================================== -->
-            <!-- Start Navigation -->
+            <!-- Start Navigation  -->
 
 			<div class="header header-light">
 				<div class="container">
@@ -355,7 +370,7 @@
 							</div>
 							
 							<!-- All over Review -->
-							<div class="rating-overview">
+							<!-- <div class="rating-overview">
 								<div class="rating-overview-box">
 									<span class="rating-overview-box-total">4.2</span>
 									<span class="rating-overview-box-percent">out of 5.0</span>
@@ -404,7 +419,7 @@
 											</span>
 										</div>
 								</div>
-							</div>
+							</div> -->
 							<!-- All over Review -->
 							
 							<!-- Single Reviews Block -->
@@ -413,14 +428,14 @@
 								<div class="property_block_wrap_header">
 									<a data-bs-toggle="collapse" data-parent="#rev"  data-bs-target="#clEight" 
 									aria-controls="clEight" href="javascript:void(0);" aria-expanded="true">
-									<h4 class="property_block_title">102 Reviews</h4></a>
+									<h4 id="comment-count" class="property_block_title">102 Reviews</h4></a>
 								</div>
 								
 								<div id="clEight" class="panel-collapse collapse show">
 									<div class="block-body">
 										<div class="author-review">
 											<div class="comment-list">
-												<ul>
+												<ul id="comment-body">
 													<li class="article_comments_wrap">
 														<article>
 															<div class="article_comments_thumb">
@@ -429,11 +444,11 @@
 															<div class="comment-details">
 																<div class="comment-meta">
 																	<div class="comment-left-meta">
-																		<h4 class="author-name">Rosalina Kelian</h4>
-																		<div class="comment-date">19th May 2018</div>
+																		<h4 id="author-name" class="author-name">Rosalina Kelian</h4>
+																		<div id="comment-date" class="comment-date">19th May 2018</div>
 																	</div>
 																</div>
-																<div class="comment-text">
+																<div id="comment-text" class="comment-text">
 																	<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
 																		deserunt mollit anim laborumab.
 																		perspiciatis unde omnis iste natus error.</p>
@@ -478,7 +493,7 @@
 								<div class="property_block_wrap_header">
 									<a data-bs-toggle="collapse" data-parent="#comment" data-bs-target="#clTen" 
 									aria-controls="clTen" href="javascript:void(0);" aria-expanded="true">
-									<h4 class="property_block_title">Write a Review</h4></a>
+									<h4 class="property_block_title">寫下評分</h4></a>
 								</div>
 								
 								<div id="clTen" class="panel-collapse collapse show">
@@ -488,7 +503,7 @@
 												
 												<div class="col-lg-12 col-md-12 col-sm-12">
 													<div class="form-group">
-														<textarea class="form-control ht-80" placeholder="Messages">
+														<textarea id="content" class="form-control ht-80" placeholder="Messages">
 
 														</textarea>
 													</div>
@@ -496,7 +511,7 @@
 												
 												<div class="col-lg-12 col-md-12 col-sm-12">
 													<div class="form-group">
-														<select id="ratting" class="form-control border">
+														<select id="starRating" class="form-control border">
 															<option value="">&nbsp;</option>
 															<option value="1">01 Star</option>
 															<option value="2">02 Star</option>
@@ -509,8 +524,8 @@
 												
 												<div class="col-lg-12 col-md-12 col-sm-12">
 													<div class="form-group">
-														<button class="btn btn-primary fw-medium px-lg-5 rounded" type="submit">
-															Submit Review
+														<button id="commentBtn" class="btn btn-primary fw-medium px-lg-5 rounded" type="submit">
+															送出評分
 														</button>
 													</div>
 												</div>
@@ -566,7 +581,7 @@
 							<div class="details-sidebar">
 							
 								<!-- Agent Detail -->
-								<div class="sides-widget">
+								<div id="supplier-body" class="sides-widget">
 									<div class="sides-widget-header bg-primary">
 										<div class="agent-photo"><img src="https://placehold.co/500x500" alt=""></div>
 										<div class="sides-widget-details">
@@ -574,24 +589,6 @@
 											<span><i class="lni-phone-handset"></i>(91) 123 456 7895</span>
 										</div>
 										<div class="clearfix"></div>
-									</div>
-									
-									<div class="sides-widget-body simple-form">
-										<div class="form-group">
-											<label>Email</label>
-											<input type="text" class="form-control" placeholder="Your Email">
-										</div>
-										<div class="form-group">
-											<label>Phone No.</label>
-											<input type="text" class="form-control" placeholder="Your Phone">
-										</div>
-										<div class="form-group">
-											<label>Description</label>
-											<textarea class="form-control">I'm interested in this property.</textarea>
-										</div>
-										<button class="btn btn-light-primary fw-medium rounded full-width">
-											Send Message
-										</button>
 									</div>
 								</div>	
 								</div>
@@ -740,162 +737,7 @@
 
 		<!----- 載入地址和郵遞區號 ----->
 		<script src="./js/address.js"></script>
-
-		<script>
-			
-			// 從 URL 取得 活動 ID
-			function getActivityIdFromURL() {
-				const params = new URLSearchParams(window.location.search);
-  			return params.get("id");
-			};
-
-			const activityId = getActivityIdFromURL();
-
-			function fetchActivityById(activityId) {
-				fetch(`/chill-tribe/activities/${activityId}`)
-				.then(response => response.json())
-				.then(data => {
-					console.log("從 後端 獲取的數據:", data);
-					// 更新 HTML 內容
-
-					let imageGallery = document.getElementById("imageGallery");
-					let imageGallery2 = document.getElementById("imageGallery2");
-          imageGallery.innerHTML = "";
-					imageGallery2.innerHTML = "";
-					
-					if (data.activityImages.length > 0) {
-						data.activityImages.forEach(image => {
-								let base64Image = `${image.imageBase64}`;
-								let imageElement = `
-										<div class="featured_slick_padd">
-												<a href="${base64Image}" class="mfp-gallery">
-														<img src="${base64Image}" class="img-fluid mx-auto custom-img" alt="活動圖片" />
-												</a>
-										</div>
-								`;
-								imageGallery.innerHTML += imageElement;
-
-								let imageElement2 = `
-										<li>
-											<a href="https://placehold.co/1200x800" class="mfp-gallery">
-												<img src="${base64Image}" class="img-fluid mx-auto" alt="活動圖片" />
-											</a>
-										</li>
-								`;
-								imageGallery2.innerHTML += imageElement2;
-						});
-
-						// **重新初始化 Slick 輪播 **
-						if ($(".featured_slick_gallery-slide").hasClass("slick-initialized")) {
-										$(".featured_slick_gallery-slide").slick("unslick");
-								}
-							$(".featured_slick_gallery-slide").slick({
-									slidesToShow: 2,
-									slidesToScroll: 1,
-									autoplay: false,
-									autoplaySpeed: 3000,
-									dots: false,
-									arrows: true
-							});
-					}
-
-
-					document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
-					document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
-					document.getElementById("address").innerHTML = data.address || "暫無";
-					document.getElementById("unitPrice-1").textContent = data.unitPrice || "暫無";
-					document.getElementById("unitPrice-2").textContent = data.unitPrice || "暫無";
-					document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
-					document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
-					document.getElementById("description").innerHTML = data.description || "暫無";
-					document.getElementById("precaution").innerHTML = data.precaution || "暫無";
-					document.getElementById("category-1").innerHTML = data.category || "暫無";
-					document.getElementById("category-2").innerHTML = data.category || "暫無";
-					document.getElementById("startDateTime").innerHTML = data.startDateTime || "暫無";
-					document.getElementById("endDateTime").innerHTML = data.endDateTime || "暫無";
-					document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
-
-					const city = addrData.find(item => item.city_id === data.city_id);
-					const district = city?.area.find(area => area.zipcode === data.district_id);
-					console.log(city)
-					console.log(district)
-					document.getElementById("cityId").innerHTML = city ? city.city : "未知";
-				})
-				
-			}
-
-			if (activityId) {
-				fetchActivityById(activityId);
-			} else {
-				console.log("你要的活動找不到喔!");
-			};
-		
-			
-			// 新增活動商品到購物車
-			function ShoppingCartItems() {
-				const activityId = parseInt(getActivityIdFromURL()) || 1;
-				const quantity = parseInt(document.getElementById("quantity")?.value) || 1;
-				const unitPrice = parseInt(document.getElementById("unitPrice-2").textContent);
-				const totalPrice = quantity * unitPrice;
-				const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
-				console.log(activityId, quantity, unitPrice);
-				return {
-					activityId,
-					quantity,
-					totalPrice,
-					memberId
-				};
-			};
-
-			document
-			.getElementById("addToCartBtn")
-			.addEventListener("click", function (event) {
-				event.preventDefault();
-				const userConfirmed = window.confirm("確定要加入此商品到購物車嗎？");
-	
-				if (userConfirmed) {
-					const requestData = ShoppingCartItems();
-					console.log("送出的資料:", requestData);
-					fetch(`/chill-tribe/cart/${activityId}`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(requestData),
-					})
-				}	
-			});
-
-			// 新增活動商品到我的最愛
-			function MyFavoritesItems() {
-				const activityId = parseInt(getActivityIdFromURL()) || 1;
-				const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
-				console.log(activityId, memberId);
-
-				return {
-					activityId,
-					memberId
-				};
-			};
-
-			document
-			.getElementById("addToFavoritesBtn")
-			.addEventListener("click", function (event) {
-				event.preventDefault();
-				const userConfirmed = window.confirm("確定要加入此商品到我的最愛嗎？");
-				if (userConfirmed) {
-					const requestMyforitesData = MyFavoritesItems();
-					console.log("送出的資料:", requestMyforitesData);
-					fetch(`/chill-tribe/myfavorites/${activityId}`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(requestMyforitesData),
-					})
-				}
-			});
-		</script>
+		<script src="./js/single-activity.js"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
 		<!-- ============================================================== -->

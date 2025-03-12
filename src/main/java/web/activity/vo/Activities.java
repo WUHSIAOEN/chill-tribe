@@ -85,7 +85,7 @@ public class Activities extends Core{
     private List<ActivityImage> activityImages;
 
     @OneToMany
-    @JoinColumn(name = "COMMENT_ID")
+    @JoinColumn(name = "ACTIVITY_ID")
 //    @Transient
     private List<Comment> comments;
     
