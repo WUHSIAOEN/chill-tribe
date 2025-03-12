@@ -28,6 +28,10 @@ public interface MemberDao {
 	
 	Member selectimg(String photo_base64);
 	
+	int forgetpassword(String email);
+	
+	int updatepassword(Member member);
+	
 //	Member selectaddress(Member member);
 	
 //	List<Member> selectaddressAll(Integer member_id);

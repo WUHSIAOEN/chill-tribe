@@ -85,13 +85,13 @@
 	</div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 		
 		const email = document.querySelector('#loginemail');
 		const password = document.querySelector('#loginpassword');
 		var googleshow = true;
+		var googlebtn = false;
 // 		const msg = document.querySelector('#msg');
 
 
@@ -196,10 +196,32 @@
 
 
 	    $('#btn_googlelogin').on("click", () => {
+	    	localStorage.setItem('btngooglelogin', 'true');
+	    	googlebtn = true;
 	        console.log("Google登入按鈕觸發");
 	        // 先跳轉到 Google 認證頁面
 	        location.href = "http://localhost:8080/chill-tribe/anotherOauthLogin";
 		    });
+
+
+//  	    debugger;
+			if (localStorage.getItem('btngooglelogin') == 'true') {
+				if (sessionStorage.getItem('GoogleEmail') == null) {
+				localStorage.setItem('btngooglelogin', 'false');
+				window.addEventListener('load', function() {
+					Swal.fire({
+						  icon: "error",
+						  title: "Oh...糟糕",
+						  text: "請先註冊Chill Tribe的會員帳號，才能使用Google登入!",
+		 				  footer: '<a href="http://localhost:8080/chill-tribe/member/member-register.html">前往註冊</a>'
+						});
+		            });
+				console.log("googlebtn=true,memberid==null");
+// 				alert('請前往註冊頁面，點擊這裡註冊：\nhttp://localhost:8080/chill-tribe/member/member-register.html');
+// 				location.href = 'http://localhost:8080/chill-tribe/member/member-register.html';
+				}
+				
+				}
 
 
 	    window.onload = function() {
