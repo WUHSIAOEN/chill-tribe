@@ -400,6 +400,32 @@ public class MemberDaoImpl implements MemberDao {
 				.uniqueResult(); 
 	}
 
+	@Override
+	public int forgetpassword(String email) {
+		final String hql = "UPDATE Member SET PASSWORD = :password WHERE email = :email";
+		String newPassword = "chilltribe202";  
+		Query<?> query = session.createQuery(hql.toString());
+		return query
+	    	.setParameter("password", newPassword)
+			.setParameter("email", email)
+			.executeUpdate();
+	}
+
+	@Override
+	public int updatepassword(Member member) {
+		final StringBuilder hql = new StringBuilder()
+				.append("UPDATE Member SET ");
+		
+		hql.append("password = :password ")
+		.append("WHERE memberid = :memberid");
+		
+		Query<?> query = session.createQuery(hql.toString());
+		return query
+			.setParameter("password", member.getPassword())
+			.setParameter("memberid", member.getMemberid())
+			.executeUpdate();
+	}
+
 	// 地址查詢
 //		@Override
 //		public Member selectaddress(Member address) {
