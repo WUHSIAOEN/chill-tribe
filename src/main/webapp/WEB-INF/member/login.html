@@ -204,27 +204,14 @@
 		    });
 
 
-//  	    debugger;
-			if (localStorage.getItem('btngooglelogin') == 'true') {
-				if (sessionStorage.getItem('GoogleEmail') == null) {
-				localStorage.setItem('btngooglelogin', 'false');
-				window.addEventListener('load', function() {
-					Swal.fire({
-						  icon: "error",
-						  title: "Oh...糟糕",
-						  text: "請先註冊Chill Tribe的會員帳號，才能使用Google登入!",
-		 				  footer: '<a href="http://localhost:8080/chill-tribe/member/member-register.html">前往註冊</a>'
-						});
-		            });
-				console.log("googlebtn=true,memberid==null");
-// 				alert('請前往註冊頁面，點擊這裡註冊：\nhttp://localhost:8080/chill-tribe/member/member-register.html');
-// 				location.href = 'http://localhost:8080/chill-tribe/member/member-register.html';
-				}
-				
-				}
+//  	    
+
+
+// 		debugger;
 
 
 	    window.onload = function() {
+// 		    debugger;
 		    // 發送 GET 請求以獲取 session 資料
 		    fetch('googlelogin/findGoogleEmail')
 		        .then(response => {
@@ -239,12 +226,28 @@
 		//                 sessionStorage.setItem('name', data.name);
 		//             	sessionStorage.setItem('Access Token:', data.access_token);
 		                setmembername(data.memberid);
+// 		                debugger;
+		    			if (localStorage.getItem('btngooglelogin') == 'true') {
+		    				if (sessionStorage.getItem('GoogleEmail') == null) {
+		    				localStorage.setItem('btngooglelogin', 'false');
+		    				window.addEventListener('load', function() {
+		    					Swal.fire({
+		    						  icon: "error",
+		    						  title: "Oh...糟糕",
+		    						  text: "請先註冊Chill Tribe的會員帳號，才能使用Google登入!",
+		    		 				  footer: '<a href="http://localhost:8080/chill-tribe/member/member-register.html">前往註冊</a>'
+		    						});
+		    		            });
+		    				console.log("googlebtn=true,memberid==null");
+		    				}
+		    				
+		    				}
 			        }
 		        })
 		        .catch(error => {
-		            console.error("錯誤:", error);
+		             console.error("錯誤:", error);
 		        });
 		};
-	    
+
 
 		</script>
