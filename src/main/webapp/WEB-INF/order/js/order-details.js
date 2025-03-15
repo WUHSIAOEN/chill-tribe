@@ -31,8 +31,40 @@ $(function () {
 
 
     // 抓活動資訊 - 這邊應該要發fetch 去查訂單的活動資訊
-    const activityId = getOrderData().activityId;
-    fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
+    // 從URI取得orderId
+    let urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams.toString());
+    let orderId = urlParams.get('orderId');
+    // var activityId;
+    fetch(`/chill-tribe/orders/order/${orderId}`)
+        .then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                const { status, statusText } = resp;
+                throw Error(`${status}: ${statusText}`);
+            }
+        })
+        .then(orders => {
+            // console.log(orders);
+
+            // 訂單資訊
+            $('#order-serial').text(orders.orderId);
+            $('#contact-person').text(orders.orderContact);
+            $('#contact-email').text(orders.contactMail);
+            $('#contact-phone').text(orders.contactPhone);
+            $('#order-datetime').text(orders.orderCreateDatetime);
+            $('#order-status').text(orders.orderStatus);
+            $('#order-payment').text(orders.paymentMethod);
+            $('#requirement').text(orders.requirement);
+            $("#order-quantity").text(orders.quantity);
+            $("#act-unit-price").text(orders.activity.unitPrice);
+            const totalPrice = orders.quantity * orders.activity.unitPrice;
+            $("#order-total").text(totalPrice);
+            activityId = orders.activityId;
+
+            return fetch(`/chill-tribe/supplier/applyAct/${activityId}`);
+        })
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -42,7 +74,7 @@ $(function () {
             }
         })
         .then(activity => {
-            console.log(activity);
+            // console.log(activity);
             let startDateTime = convertTimeFormat(activity.startDateTime);
             let endDateTime = convertTimeFormat(activity.endDateTime);
             let firstImg = activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg';
@@ -56,12 +88,7 @@ $(function () {
             $("#end-time").text(endDateTime);
         })
 
-
-
-
-
-    // 抓訂單資訊
-
+        // 跳轉瀏覽訂單還沒寫
 
 
 });
