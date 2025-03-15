@@ -192,9 +192,9 @@ $(function () {
         })
         .then(activityCards => {
             $("#coming-soon-activities").empty();
-            const [firstActivityCard, ...restActivityCards] = activityCards;
+            // const [firstActivityCard, ...restActivityCards] = activityCards;
             activityCards.forEach(activityCard => {
-                   console.log(activityCard.supplier.supplier_name);
+                   console.log(activityCard);
 
                 let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -286,7 +286,7 @@ $(function () {
         params.append("category", category);
         params.append("region", region);
         
-        let url = `activity/chill-list-layout.html`;
+        let url = `activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
