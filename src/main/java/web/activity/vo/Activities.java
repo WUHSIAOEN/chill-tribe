@@ -12,12 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import core.util.Core;
 import core.vo.City;
+import core.vo.Core;
 import core.vo.District;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +30,8 @@ import web.supplier.vo.Supplier;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Activities extends Core{
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACTIVITY_ID")

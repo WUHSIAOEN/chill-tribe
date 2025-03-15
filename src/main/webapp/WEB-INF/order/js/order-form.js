@@ -62,10 +62,6 @@ $(function () {
         })
 
 
-    // 從query string 取得活動ID
-    // let activityId = new URLSearchParams(window.location.search);
-    // console.log(urlParams.toString());
-
     // 要先抓到活動資訊放到右邊活動資訊卡
     // URI 要改`/chill-tribe/supplier/applyAct/${activityId}`
     const activityId = getOrderData().activityId;
@@ -145,8 +141,9 @@ $(function () {
             })
             .then(order => {
                 console.log(order);
+                
                 // 導向訂單完成頁
-                location.href = "/chill-tribe/order/order-details.html";
+                location.href = `/chill-tribe/order/order-details.html?orderId=${order.orderId}`;
             })
     })
 

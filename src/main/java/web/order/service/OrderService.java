@@ -8,4 +8,6 @@ public interface OrderService {
 	
 	Orders placeOrderWithoutPayment(Orders order);
 	
+	Orders getOrderInfo(Integer orderId);
+	
 }

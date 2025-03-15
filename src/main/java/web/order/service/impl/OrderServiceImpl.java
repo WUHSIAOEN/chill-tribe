@@ -35,6 +35,13 @@ public class OrderServiceImpl implements OrderService{
 		return order;
 	}
 
+//	查已成立訂單
+	@Override
+	public Orders getOrderInfo(Integer orderId) {
+		Orders order = dao.selectOrderbyId(orderId);
+		return order;
+	}
+
 
 
 }
