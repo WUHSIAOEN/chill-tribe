@@ -14,21 +14,30 @@ import web.order.vo.Orders;
 @RestController
 @RequestMapping("orders/order")
 public class OrderController {
-	
+
 	@Autowired
 	private OrderService service;
-	
-	// 下訂單
-	@PostMapping
-	public Orders order(@RequestBody Orders order) {
+
+	// 下訂單 - 無須付款
+	@PostMapping("/orderWithoutPayment")
+	public Orders orderWithoutPayment(@RequestBody Orders order) {
 		if (order == null) {
 			order = new Orders();
 			order.setMessage("訂單成立失敗");
 			order.setSuccessful(false);
 			return order;
 		}
+		
 		return service.placeOrderWithoutPayment(order);
 	}
+	
+	// 下訂單 - 無須付款
+	@PostMapping("/orderWithPayment")
+	public String orderWithPayment(@RequestBody Orders order) {
+		String result = service.placeOrderWithPayment(order);
+		return result;
+	}
+	
 	
 	// 撈訂單資訊
 	@GetMapping("{orderId}")
@@ -41,6 +50,5 @@ public class OrderController {
 		}
 		return service.getOrderInfo(orderId);
 	}
-	
-	
+
 }

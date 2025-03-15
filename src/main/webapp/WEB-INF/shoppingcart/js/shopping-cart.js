@@ -161,7 +161,7 @@ $(function(){
         var quantity = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.item-quantity').val();
         var unitPrice = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.table-property-price').attr('data-price');
         var orderStatus, paymentMethod;
-        if (unitPrice === 0) {
+        if (unitPrice === "0") {
             orderStatus = "no_payment_required";
             paymentMethod = "none";
         } else {

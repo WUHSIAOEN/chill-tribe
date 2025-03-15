@@ -2,7 +2,6 @@ package web.order.controller;
 
 import java.io.IOException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import web.member.vo.Member;
-import web.order.service.OrderService;
 import web.order.service.OrderforpayService;
-import web.order.service.impl.OrderServiceImpl;
 import web.order.service.impl.OrderforpayServiceImpl;
-import web.order.vo.Order;
 import web.order.vo.Orderforpay;
 
 //一般會員購物
@@ -48,7 +43,7 @@ public class BuyCartController extends HttpServlet {
 	    Integer count_number = order.getCount_number();    
 	    Integer total_price = order.getTotal_price();  
 		
-		String errMsg = service.ecpay(activity_name, count_number, total_price);
+		String errMsg = service.ecpay(activity_name, count_number, total_price, 30);
 		
 		JsonObject respBody = new JsonObject();
 		respBody.addProperty("successful", errMsg == null);
