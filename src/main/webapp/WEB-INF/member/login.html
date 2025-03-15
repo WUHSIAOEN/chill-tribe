@@ -207,7 +207,11 @@
 //  	    
 
 
+// 		debugger;
+
+
 	    window.onload = function() {
+// 		    debugger;
 		    // 發送 GET 請求以獲取 session 資料
 		    fetch('googlelogin/findGoogleEmail')
 		        .then(response => {
@@ -241,9 +245,9 @@
 			        }
 		        })
 		        .catch(error => {
-		            console.error("錯誤:", error);
+		             console.error("錯誤:", error);
 		        });
 		};
-	    
+
 
 		</script>

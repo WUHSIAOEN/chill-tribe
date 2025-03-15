@@ -187,18 +187,17 @@
 			 index_href.setAttribute('href', chilltribeLink);
 			 index_href_cart.setAttribute('href', chilltribemember);
 
-			 $('#btn_logout').on("click", function(){
-// 			 debugger;
-				 console.log("登出按鈕觸發");
-// 				 sessionStorage.setItem("memberid", "");
-// 				 sessionStorage.setItem("GoogleEmail", "");
-// 				 sessionStorage.setItem("member", "");
-				 sessionStorage.clear();
-				 sessionStorage.removeItem("GoogleEmail");
-				 sessionStorage.removeItem("memberid");
-				 sessionStorage.removeItem("google");
-				 sessionStorage.removeItem("member");
 
+			 $('#btn_logout').on("click", function(){
+			 debugger;
+				 console.log("登出按鈕觸發");
+				 sessionStorage.clear();
+// 				 sessionStorage.removeItem("GoogleEmail");
+// 				 sessionStorage.removeItem("memberid");
+// 				 sessionStorage.removeItem("google");
+// 				 sessionStorage.removeItem("member");
+				document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+				
 				 fetch(`member/logout`, {
 						method: 'DELETE'
 					});
