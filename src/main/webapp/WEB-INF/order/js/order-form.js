@@ -12,7 +12,7 @@ $(function () {
 
     // 先塞假會員資料到SessionStorage
     let MemberData = {
-        memberId: 2
+        memberId: 1
     }
     sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
     // ============== 假資料↑ =================
@@ -69,7 +69,6 @@ $(function () {
     // 要先抓到活動資訊放到右邊活動資訊卡
     // URI 要改`/chill-tribe/supplier/applyAct/${activityId}`
     const activityId = getOrderData().activityId;
-    console.log(activityId);
     fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
         .then(resp => {
             if (resp.ok) {
@@ -101,7 +100,8 @@ $(function () {
     // console.log(getOrderData());
     $("#order-quantity").text(getOrderData().quantity);
     $("#act-unit-price").text(getOrderData().unitPrice);
-    $("#order-total").text(getOrderData().total);
+    const totalPrice = getOrderData().quantity * getOrderData().unitPrice;
+    $("#order-total").text(totalPrice);
 
     // ============== 從LocalStorage 取得訂單資訊↑ =================
 
@@ -110,7 +110,6 @@ $(function () {
     // 當按下送出訂單按鈕時
     $("#order-form").submit(function (e) {
         e.preventDefault();
-        // console.log("送出訂單");
 
         // 取得表單資料
         let orderContact = $("#default-name").val();
@@ -118,7 +117,7 @@ $(function () {
         let contactPhone = $("#default-phone").val();
         let requirement = $("#requirement").val();
 
-        // console.log(orderContact, contactMail, contactPhone, requirement);
+        // =====================要判斷需不需要付款=====================
 
         // 送出訂單
         fetch("/chill-tribe/orders/order", {
