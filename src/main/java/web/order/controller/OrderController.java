@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import web.activity.vo.Activities;
 import web.order.service.OrderService;
 import web.order.vo.Orders;
 
@@ -19,23 +18,28 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
+	// 下訂單
 	@PostMapping
 	public Orders order(@RequestBody Orders order) {
-		
 		if (order == null) {
 			order = new Orders();
-			order.setMessage("無訂單資訊");
+			order.setMessage("訂單成立失敗");
 			order.setSuccessful(false);
 			return order;
 		}
 		return service.placeOrderWithoutPayment(order);
 	}
 	
+	// 撈訂單資訊
 	@GetMapping("{orderId}")
 	public Orders showOrderInfo(@PathVariable Integer orderId) {
-		Orders order = service.getOrderInfo(orderId);
-		System.out.println("orderID 是" + order.getOrderId());
-		return order;
+		if (orderId == null) {
+			Orders order = new Orders();
+			order.setMessage("無訂單資訊");
+			order.setSuccessful(false);
+			return order;
+		}
+		return service.getOrderInfo(orderId);
 	}
 	
 	

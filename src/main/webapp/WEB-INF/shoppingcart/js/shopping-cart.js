@@ -80,11 +80,11 @@ $(function(){
             </td>
             <td>
                 <input type="number" class="form-control text-center mx-2 item-quantity"
-                    value="${shoppingCartItems[i].quantity}" min="1" max="${shoppingCartItems[i].activity.maxParticipants}" />
+                    value="${shoppingCartItems[i].quantity}" min="1" max="${shoppingCartItems[i].activity.inventoryCount}" />
             </td>
             <td class="action">
                 <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
-                    Delete</a>
+                    刪除</a>
             </td>
         </tr>
         `;
