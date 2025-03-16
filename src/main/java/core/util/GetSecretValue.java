@@ -24,7 +24,7 @@ public class GetSecretValue {
         }
 
         String secretName = args[0];
-        Region region = Region.US_EAST_1;
+        Region region = Region.AP_NORTHEAST_1;
         SecretsManagerClient secretsClient = SecretsManagerClient.builder()
                 .region(region)
                 .build();
