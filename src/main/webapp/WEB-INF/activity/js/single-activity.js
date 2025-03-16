@@ -13,10 +13,8 @@ function fetchActivityById(activityId) {
     console.log("從 後端 獲取的數據:", data);
     // 更新 HTML 內容
 
-    let imageGallery = document.getElementById("imageGallery");
-    let imageGallery2 = document.getElementById("imageGallery2");
-    imageGallery.innerHTML = "";
-    imageGallery2.innerHTML = "";
+    $('#imageGallery').empty();
+    $('#imageGallery2').empty();
 
     // 背景圖片
     if (data.activityImages.length > 0) {
@@ -29,11 +27,11 @@ function fetchActivityById(activityId) {
                   </a>
               </div>
           `;
-          imageGallery.innerHTML += imageElement;
+          $('#imageGallery').append(imageElement);
 
           let imageElement2 = `
               <li>
-                <a href="https://placehold.co/1200x800" class="mfp-gallery">
+                <a href="${base64Image}" class="mfp-gallery">
                   <img src="${base64Image}" class="img-fluid mx-auto" alt="活動圖片" />
                 </a>
               </li>
@@ -139,7 +137,7 @@ function fetchActivityById(activityId) {
 
     let supplierName = data.supplier.supplier_name;
     let supplierPhone = data.supplier.phone;
-    let supplierImage = data.supplier?.image || "https://placehold.co/500x500";
+    let supplierImage = data.supplier?.image;
 
     let supplierElement = document.createElement("div");
     supplierElement.classList.add("sides-widget-header", "bg-primary");
