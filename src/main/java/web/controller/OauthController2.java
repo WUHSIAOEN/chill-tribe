@@ -10,6 +10,8 @@ import com.google.api.client.util.store.DataStoreFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.gson.JsonObject;
 
+import core.util.GetSecretValue;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,10 @@ import java.util.Set;
 
 @WebServlet("/anotherOauthLogin")
 public class OauthController2 extends AbstractAuthorizationCodeServlet {
-    private static final String CLIENT_ID = "778188269055-9htm2tsvh4b4m1eaeul5jj9qe9eig0j0.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
+	private static final long serialVersionUID = 1L;
+	
+	private static final String CLIENT_ID = GetSecretValue.getOAuthKeyValue("CLIENT_ID");
+    private static final String CLIENT_SECRET = GetSecretValue.getOAuthKeyValue("CLIENT_SECRET");
     private static final java.io.File DATA_STORE_DIR = new java.io.File("credentials");
     private static final DataStoreFactory DATA_STORE_FACTORY;
 
