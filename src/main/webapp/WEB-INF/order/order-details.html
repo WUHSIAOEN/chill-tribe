@@ -88,26 +88,27 @@
 
 									<div class="col-md-6 col-lg-6">
 										<ul class="booking-detail-list">
-											<li><b>訂單編號</b><span>ORD00001</span></li>
-											<li><b>聯絡信箱</b><span>themezhub@gmail.com</span></li>
-											<li><b>活動名稱</b><span>California</span></li>
-											<li><b>訂單總額</b><span>1000</span></li>
-											<li><b>訂單狀態</b><span>已付款</span></li>
+											<li><b>訂單編號</b><span id="order-serial">ORD00001</span></li>
+											<li><b>聯絡信箱</b><span id="contact-mail">themezhub@gmail.com</span></li>
+											<li><b>訂單狀態</b><span id="order-status">已付款</span></li>
+											<li><b>訂單成立時間</b><span id="order-datetime"></span></li>
 											<br>
 										</ul>
 									</div>
 
 									<div class="col-md-6 col-lg-6">
 										<ul class="booking-detail-list">
-											<li><b>訂單聯絡人</b><span>Shaurya</span></li>
-											<li><b>聯絡電話</b><span>91 235 458 7458</span></li>
-											<li><b>票券數量</b><span>5</span></li>
-											<li><b>付款方式</b><span>信用卡</span></li>
+											<li><b>訂單聯絡人</b><span id="contact-person">Shaurya</span></li>
+											<li><b>聯絡電話</b><span id="contact-phone">91 235 458 7458</span></li>
+											<li><b>付款方式</b><span id="payment_method">信用卡</span></li>
 										</ul>
 									</div>
-									<!-- <hr> -->
-									<h6>特殊需求</h6>
-									<p>需要接送</p>
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<div class="form-group">
+											<b>特殊需求</b>
+											<textarea id="requirement" class="form-control" disabled>我是奧客</textarea>
+										</div>
+									</div>
 
 
 									<div class="col-lg-12 col-md-12 col-sm-12">
@@ -129,10 +130,10 @@
 					<div class="col-lg-3 col-md-12">
 						<div class="checkout-side">
 
-							<div class="booking-short">
+							<div id="activity-info-header" class="booking-short">
 								<img src="https://placehold.co/1200x800" class="img-fluid" alt="" />
 								<h4>活動名稱</h4>
-								<span>活動地點</span>
+								<span>活動縣市</span>
 							</div>
 
 							<div class="booking-short-side">
@@ -148,14 +149,14 @@
 											</h2>
 										</div>
 
-										<div id="bookinSer" class="collapse show" aria-labelledby="bookinDet"
+										<div id="activity-info-body" class="collapse show" aria-labelledby="bookinDet"
 											data-parent="#accordionExample">
 											<div class="card-body">
 												<ul class="booking-detail-list">
-													<li>活動供應商</li>
-													<li>票券張數<span>5</span></li>
-													<li>活動開始時間<span>2025/04/04 13:00</span></li>
-													<li>活動結束時間<span>2025/04/04 17:00</span></li>
+													<li>活動供應商<span id="supplier-name"></span></li>
+													<li>活動地點<span id="address"></span></li>
+													<li>開始時間<span id="start-time"></span></li>
+													<li>結束時間<span id="end-time"></span></li>
 												</ul>
 											</div>
 										</div>
@@ -175,9 +176,9 @@
 											data-parent="#accordionExample">
 											<div class="card-body">
 												<ul class="booking-detail-list">
-													<li>單價<span>$200</span></li>
-													<li>數量<span>5</span></li>
-													<li><b>總計</b><span>$1000</span></li>
+													<li>單價<span id="act-unit-price"></span></li>
+													<li>數量<span id="order-quantity"></span></li>
+													<li><b>總計</b><span id="order-total"></span></li>
 												</ul>
 											</div>
 										</div>
@@ -247,6 +248,9 @@
 		// 載入 login.html
 		$('#login').load('../member/login.html');
 	</script>
+
+	<!-- ============================自定義js============================== -->
+	<script src="./js/order-details.js"></script>
 
 
 

@@ -5,38 +5,39 @@ import java.util.Date;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
-import web.order.service.OrderService;
 import web.order.service.OrderforpayService;
-import web.order.vo.Orders;
+
 
 public class OrderforpayServiceImpl implements OrderforpayService{
 
-	@Override
-	public String placeOrder(Orders order) {
-		
-		return null;
-	}
 
-	
-	// 綠界
+	// 綠界付款方法
     @Override
-    public String ecpay(String activity_name, Integer count_number, Integer total_price) {
+    public String ecpay(String activityName, Integer countNumber, Integer totalPrice, Integer orderId) {
         // 設定訂單的日期
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String orderDate = sdf.format(new Date());
         
         // AllInOne 物件
         AllInOne allInOne = new AllInOne("");
+        
+        // 自己新增 - 整理Order 序號
+        String OrderNo = String.format("ORD%06d", orderId);
+        
+        // 自己新增 - 整理ClientBackURL
+        String clientBackURL = "http://localhost:8080/chill-tribe/order/order-details.html?orderId=" + orderId;
+        
 
         // 訂單編號一定要英文+數字 不然會出錯~~~
         // 綠界要的資料
         AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
-        aioCheckOutALL.setMerchantTradeNo("Order" + "t010"); // 訂單ID
+//        aioCheckOutALL.setMerchantTradeNo("Order" + "t010"); // 訂單ID
+        aioCheckOutALL.setMerchantTradeNo(OrderNo + "chill"); // 訂單ID
         aioCheckOutALL.setMerchantTradeDate(orderDate); // 訂單日期
-        aioCheckOutALL.setTotalAmount(String.valueOf(total_price)); // 訂單總金額
+        aioCheckOutALL.setTotalAmount(String.valueOf(totalPrice)); // 訂單總金額
         aioCheckOutALL.setTradeDesc("購物網站支付"); // 訂單描述
-        aioCheckOutALL.setItemName(activity_name); // 商品名稱
-        aioCheckOutALL.setClientBackURL("http://localhost:8080/chill-tribe/chilltribe.html"); // 客戶端返回的 URL
+        aioCheckOutALL.setItemName(activityName); // 商品名稱
+        aioCheckOutALL.setClientBackURL(clientBackURL); // 客戶端返回的 URL
         aioCheckOutALL.setReturnURL("http://localhost:8080/chill-tribe/member/member-register.html"); // 返回的URL
         aioCheckOutALL.setNeedExtraPaidInfo("N"); // 不需要額外支付資訊
 

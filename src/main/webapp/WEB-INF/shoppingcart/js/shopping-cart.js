@@ -80,11 +80,11 @@ $(function(){
             </td>
             <td>
                 <input type="number" class="form-control text-center mx-2 item-quantity"
-                    value="${shoppingCartItems[i].quantity}" min="1" max="${shoppingCartItems[i].activity.maxParticipants}" />
+                    value="${shoppingCartItems[i].quantity}" min="1" max="${shoppingCartItems[i].activity.inventoryCount}" />
             </td>
             <td class="action">
                 <a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
-                    Delete</a>
+                    刪除</a>
             </td>
         </tr>
         `;
@@ -161,7 +161,7 @@ $(function(){
         var quantity = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.item-quantity').val();
         var unitPrice = $('#shopping-cart-list input[type="radio"]:checked').closest('tr').find('.table-property-price').attr('data-price');
         var orderStatus, paymentMethod;
-        if (unitPrice === 0) {
+        if (unitPrice === "0") {
             orderStatus = "no_payment_required";
             paymentMethod = "none";
         } else {
