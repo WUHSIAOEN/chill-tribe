@@ -1,11 +1,7 @@
 package web.order.service;
 
-import web.order.vo.Orders;
-
 public interface OrderforpayService {
 	
-	String placeOrder(Orders order);
-	
-	String ecpay(String activity_name, Integer count_number, Integer total_price);
+	String ecpay(String activityName, Integer countNumber, Integer totalPrice, Integer orderId);
 	
 }

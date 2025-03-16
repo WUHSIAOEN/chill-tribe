@@ -100,11 +100,9 @@
 									src="https://placehold.co/500x500" class="avater-img" alt="">您好！<span
 									id="member_name"> </span>
 							</button>
-							<div class="dropdown-menu pull-right animated flipInX"
-								id="showing">
-								<a href="./member/member-details.html"><i
-									class="fa-solid fa-gauge"></i>個人資料</a> <a href=""><i
-									class="fa-solid fa-power-off" id="btn_logout"></i>登出</a>
+							<div class="dropdown-menu pull-right animated flipInX" id="showing">
+								<a href="./member/member-details.html"><i class="fa-solid fa-gauge"></i>個人資料</a> 
+								<a href=" " id="btn_logout"><i class="fa-solid fa-power-off"></i>登出</a>
 							</div>
 						</div>
 					</li>
@@ -189,8 +187,20 @@
 			 index_href.setAttribute('href', chilltribeLink);
 			 index_href_cart.setAttribute('href', chilltribemember);
 
+
 			 $('#btn_logout').on("click", function(){
+// 			 debugger;
 				 console.log("登出按鈕觸發");
+				 sessionStorage.clear();
+// 				 sessionStorage.removeItem("GoogleEmail");
+// 				 sessionStorage.removeItem("memberid");
+// 				 sessionStorage.removeItem("google");
+// 				 sessionStorage.removeItem("member");
+				document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+				
+				 fetch(`member/logout`, {
+						method: 'DELETE'
+					});
 				 });
 
 			

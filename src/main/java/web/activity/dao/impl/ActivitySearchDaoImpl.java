@@ -12,7 +12,14 @@ import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -24,7 +31,10 @@ import web.activity.vo.Activity2;
 import web.activity.vo.ActivityImage;
 import web.supplier.vo.Supplier;
 
+
+@Repository
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
+	
 //	private DataSource ds;
 	private HikariDataSource ds;
 
@@ -45,6 +55,10 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 		ds.addDataSourceProperty("preStmtCacheSize", 250);
 		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
 	}
+	
+	
+	@PersistenceContext
+	private Session session;
 
 	// 查詢所有的活動回來
 	@Override
@@ -283,5 +297,16 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public Integer updateActInventoryById(Integer activityId, Integer count) {
+		int result = session
+				.createQuery("UPDATE Activities SET inventoryCount = :inventoryCount WHERE activityId = :activityId")
+				.setParameter("inventoryCount", count)
+				.setParameter("activityId", activityId)
+				.executeUpdate();
+		
+		return result;
 	}
 }

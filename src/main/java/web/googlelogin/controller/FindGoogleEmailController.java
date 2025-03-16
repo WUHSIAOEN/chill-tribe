@@ -56,7 +56,8 @@ public class FindGoogleEmailController extends HttpServlet {
             response.getWriter().write(obj.toString());
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            obj.addProperty("message", "使用者沒登入成功");
+            response.setContentType("application/json");
+            obj.addProperty("message", "Oh..糟糕錯誤了哦~");
             response.getWriter().write(obj.toString());
         }
     }
