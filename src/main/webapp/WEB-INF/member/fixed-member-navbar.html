@@ -63,7 +63,7 @@
                 </button>
                 <div class="dropdown-menu pull-right animated flipInX" id="showing">
                     <a href="./member-details.html"><i class="fa-solid fa-gauge"></i>個人資料</a>
-                    <a href=""><i class="fa-solid fa-power-off"></i>登出</a>
+                    <a href="" id="btn_logout"><i class="fa-solid fa-power-off"></i>登出</a>
                 </div>
             </div>
         </li>
@@ -103,4 +103,19 @@ fetch(`find/${memberid}`)
 	 console.log(chilltribeLink);
 	 member_logo_href.setAttribute('href', chilltribeLink);
 	 member_index_href.setAttribute('href', chilltribeLink);
+
+
+
+
+	 $('#btn_logout').on("click", function(){
+//			 debugger;
+			 console.log("登出按鈕觸發");
+			 sessionStorage.clear();
+			document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+			
+			 fetch(`member/logout`, {
+					method: 'DELETE'
+				});
+			 });
+	 
 </script>

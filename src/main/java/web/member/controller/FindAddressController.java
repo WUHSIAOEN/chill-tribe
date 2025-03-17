@@ -1,43 +1,52 @@
-//package web.member.controller;
-//
-//import java.io.IOException;
-//
+package web.member.controller;
+
+import java.io.IOException;
+
+import javax.naming.NamingException;
 //import javax.naming.NamingException;
-////import javax.naming.NamingException;
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
-//
-//import web.member.service.MemberService;
-//import web.member.service.impl.MemberServiceImpl;
-////import web.test.member.dao.MemberDao;
-////import web.test.member.dao.impl.MemberDaoImpl;
-//import web.member.vo.Member;
-//
-//// 一般會員地址查詢
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import web.member.service.MemberService;
+import web.member.service.impl.MemberServiceImpl;
+import web.member.vo.Addresses;
+//import web.test.member.dao.MemberDao;
+//import web.test.member.dao.impl.MemberDaoImpl;
+import web.member.vo.Member;
+
+// 一般會員地址查詢
+@RestController
+@RequestMapping({"member/findaddress", "/findaddress"})
 //@WebServlet("/member/findaddress")
-//public class FindAddressController extends HttpServlet{
-//	private static final long serialVersionUID = 1L;
-//	
-//	private MemberService service;
-//
+public class FindAddressController {
+	
+	@Autowired
+	private MemberService service;
+
+	@GetMapping("{memberid}")
 //	@Override
-//	public void init() throws ServletException {
-//		 try {
-//			service = new MemberServiceImpl();
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
+	public Addresses findaddressAll (@PathVariable Integer memberid) {
+		return service.selectaddress(memberid);
+	}
+//	public Member findaddressAll (@PathVariable Integer memberid) {
+//		return service.selectaddress(memberid);
 //	}
-//	
-//	@Override
+	
+	
+	
 //	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		// 配合登入功能修改
 //		Member member = (Member) req.getSession().getAttribute("member");
 ////		Gson gson = new Gson();
 //		Gson gson = new GsonBuilder()
@@ -45,18 +54,5 @@
 //				.create();
 //		member = service.selectaddress(member);
 //		resp.getWriter().write(gson.toJson(member));
-////		// 暫時寫法
-////		MemberDao dao;
-////		try {
-////			dao = new MemberDaoImpl();
-////			// 資料庫上有的資料
-////			Member member = dao.selectByUsername("ernietest");
-////			// 轉換格式，取得
-////			Gson gson = new Gson();
-////			resp.setContentType("application/json");
-////			resp.getWriter().write(gson.toJson(member));
-////		} catch (NamingException e) {
-////			e.printStackTrace();
-////		}
 //	}
-//}
+}

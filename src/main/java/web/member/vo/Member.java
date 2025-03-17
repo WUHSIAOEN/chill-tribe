@@ -3,11 +3,15 @@ package web.member.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.sql.Date;
@@ -17,6 +21,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import web.member.vo.Addresses;
 
 // 一般會員VO
 @Entity
@@ -46,6 +52,10 @@ public class Member extends Core {
 	private Date dateofbirth;
 	@Column(name = "PHOTO_BASE64")
 	private String photobase64;
+	
+//	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Addresses> addresses;
+
 //	// 地址
 //	private List<Addresses> addresses;
 //	private Integer address_id;
