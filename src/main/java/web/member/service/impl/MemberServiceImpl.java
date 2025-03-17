@@ -319,10 +319,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member upaddress(Member member) {
-		int resultCount = memberDao.upaddress(member);
+	public Addresses upaddress(Addresses addresses) {
+		int resultCount = memberDao.upaddress(addresses);
 
-		return resultCount > 0 ? null : member;
+		
+		if (resultCount > 0) {
+			System.out.println("新增地址成功");
+			addresses.setMessage("新增地址成功");
+			addresses.setSuccessful(true);
+			return addresses;
+		} else {
+			System.out.println("新增地址發生錯誤");
+			addresses.setMessage("新增地址發生錯誤");
+			addresses.setSuccessful(true);
+			return addresses;
+		}
+//		return resultCount > 0 ? null : addresses;
 	}
 
 //	@Override

@@ -21,6 +21,7 @@ import com.google.gson.JsonObject;
 
 import web.member.service.MemberService;
 import web.member.service.impl.MemberServiceImpl;
+import web.member.vo.Addresses;
 import web.member.vo.Member;
 
 // 一般會員地址新增
@@ -35,9 +36,9 @@ public class UpAddressController {
 	
 	@PostMapping
 //	@Override
-	public Member upaddress(@RequestBody Member member) {
-		member = service.upaddress(member);
-		return member;
+	public Addresses upaddress(@RequestBody Addresses addresses) {
+		addresses = service.upaddress(addresses);
+		return addresses;
 	}
        
 //	@Override
