@@ -15,6 +15,8 @@ public interface ActivityService {
 	// 新增活動圖片
 	boolean addImages(List<ActivityImage> images, int activityId);
 	
+	boolean editImages(List<ActivityImage> images, int activityId);
+	
 	// 新增留言
 	boolean addComments(List<Comment> comments, int activityId);
 
