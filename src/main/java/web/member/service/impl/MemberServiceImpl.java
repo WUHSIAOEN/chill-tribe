@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import web.member.dao.MemberDao;
 import web.member.dao.impl.MemberDaoImpl;
 import web.member.service.MemberService;
+import web.member.vo.Addresses;
 import web.member.vo.Member;
 import web.member.vo.MemberOther;
 
@@ -302,26 +303,27 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-//	@Override
-//	public Member selectaddress(Member member) {
+	@Override
+	public Addresses selectaddress(Integer member_id) {
+		return memberDao.selectaddress(member_id);
 //		member = memberDao.selectaddress(member);
-//
-////		member.setSuccessful(resultCount > 0);
-////		member.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
+
+//		member.setSuccessful(resultCount > 0);
+//		member.setMessage(resultCount > 0 ? null : "發生錯誤，請聯繫專員");
 //		return member;
-//	}
+	}
 
-//	@Override
-//	public List<Member> selectaddressAll(Integer member_id) {
-//		return memberDao.selectaddressAll(member_id);
-//	}
+	@Override
+	public Member selectaddressAll(Integer member_id) {
+		return memberDao.selectaddressAll(member_id);
+	}
 
-//	@Override
-//	public String upaddress(Member member) {
-//		int resultCount = memberDao.upaddress(member);
-//
-//		return resultCount > 0 ? null : "發生錯誤，請聯繫專員";
-//	}
+	@Override
+	public Member upaddress(Member member) {
+		int resultCount = memberDao.upaddress(member);
+
+		return resultCount > 0 ? null : member;
+	}
 
 //	@Override
 //	public Member addressedit(Member sessionMember, Member updateMember) {

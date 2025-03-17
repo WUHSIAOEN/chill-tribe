@@ -20,16 +20,19 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import web.activity.vo.Activities;
 import web.member.dao.MemberDao;
+import web.member.vo.Addresses;
 import web.member.vo.Member;
+import web.shoppingcart.vo.ShoppingCart;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
-//	private DataSource ds;
-//
-//	public MemberDaoImpl() throws NamingException {
-//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
-//	}
+	private DataSource ds;
+
+	public MemberDaoImpl() throws NamingException {
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
+	}
 
 	@PersistenceContext
 	private Session session;
@@ -427,16 +430,35 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	// 地址查詢
-//		@Override
-//		public Member selectaddress(Member address) {
+		@Override
+		public Addresses selectaddress(Integer member_id) {
+			CriteriaBuilder cBuilder = session.getCriteriaBuilder();
+			CriteriaQuery<Addresses> cQuery = cBuilder.createQuery(Addresses.class);
+			Root<Addresses> root = cQuery.from(Addresses.class);
+			cQuery.where(cBuilder.equal(root.get("memberid"), member_id));
+			return session.createQuery(cQuery).uniqueResult();
+//			SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?
+//			String hql = "SELECT a FROM Addresses a "
+//		               + "JOIN a.city c "
+//		               + "JOIN a.district d "
+//		               + "WHERE a.memberId = :memberId";
+//
+//			 Query<Member> query = session.createQuery(hql, Member.class);
+//		    query.setParameter("memberId", memberid);
+//
+//		    Member member = query.uniqueResult();
+//		    
+//		    return member;
+			
+//			--------------------------------下面是傳統寫法
 //			String sql = "SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?";
 //			try (Connection conn = ds.getConnection(); 
 //					PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//				pstmt.setInt(1, address.getMember_id());
+//				pstmt.setInt(1, member_id);
 //				try (ResultSet rs = pstmt.executeQuery()) {
 //					if (rs.next()) {
 //						Member member = new Member();
-//						member.setMember_id(rs.getInt("MEMBER_ID"));
+//						member.setMemberid(rs.getInt("MEMBER_ID"));
 //						member.setZip_code(rs.getInt("ZIP_CODE"));
 //						member.setCity_id(rs.getInt("CITY_ID"));
 //						member.setCity_name(rs.getString("CITY_NAME"));
@@ -453,58 +475,60 @@ public class MemberDaoImpl implements MemberDao {
 //				e.printStackTrace();
 //			}
 //			return null;
-//		}
+		}
 
-//		@Override
-//		public List<Member> selectaddressAll(Integer member_id) {
-//			String sql = "SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?";
-//			try (Connection conn = ds.getConnection();
-//					PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//					pstmt.setInt(1, member_id);
-//					ResultSet rs = pstmt.executeQuery(); {
-//				List<Member> list = new ArrayList<>();
-//
-//				while (rs.next()) {
-//					Member member = new Member();
-//					member.setMember_id(rs.getInt("MEMBER_ID"));
-//					member.setZip_code(rs.getInt("ZIP_CODE"));
-//					member.setCity_id(rs.getInt("CITY_ID"));
-//					member.setCity_name(rs.getString("CITY_NAME"));
-//					member.setDistrict_id(rs.getInt("DISTRICT_ID"));
-//					member.setDistrict_name(rs.getString("DISTRICT_NAME"));
-//					member.setAddress_id(rs.getInt("ADDRESS_ID"));
-//					member.setAddress(rs.getString("ADDRESS"));
-//					member.setTag(rs.getString("TAG"));
-//					member.setAddress_default(rs.getInt("ADDRESS_DEFAULT"));
-//					list.add(member);
-//				}
-//				System.out.println(list);
-//				System.out.println(list.size());
-//				return list;
-//					}
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			return null;
-//		}
+		@Override
+		public Member selectaddressAll(Integer member_id) {
+//			SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?
+			
+			String sql = "SELECT * FROM ADDRESSES JOIN CITIES ON ADDRESSES.CITY_ID = CITIES.CITY_ID JOIN DISTRICTS ON ADDRESSES.DISTRICT_ID = DISTRICTS.DISTRICT_ID WHERE MEMBER_ID = ?";
+			try (Connection conn = ds.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+					pstmt.setInt(1, member_id);
+					ResultSet rs = pstmt.executeQuery(); {
+				List<Member> list = new ArrayList<>();
 
-//		@Override
-//		public int upaddress(Member member) {
-////			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
-//			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, TAG) values(?, ?, ?, ?, ?)";
-//			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//				pstmt.setInt(1, member.getMember_id());
-//				pstmt.setInt(2, member.getCity_id());
-//				pstmt.setInt(3, member.getDistrict_id());
-//				pstmt.setString(4, member.getAddress());
-////				pstmt.setInt(5, member.getAddress_default());
-//				pstmt.setString(5, member.getTag());
-//				return pstmt.executeUpdate();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			return -1;
-//		}
+				Member member = new Member();
+				while (rs.next()) {
+					member.setMemberid(rs.getInt("MEMBER_ID"));
+					member.setZip_code(rs.getInt("ZIP_CODE"));
+					member.setCity_id(rs.getInt("CITY_ID"));
+					member.setCity_name(rs.getString("CITY_NAME"));
+					member.setDistrict_id(rs.getInt("DISTRICT_ID"));
+					member.setDistrict_name(rs.getString("DISTRICT_NAME"));
+					member.setAddress_id(rs.getInt("ADDRESS_ID"));
+					member.setAddress(rs.getString("ADDRESS"));
+					member.setTag(rs.getString("TAG"));
+					member.setAddress_default(rs.getInt("ADDRESS_DEFAULT"));
+					list.add(member);
+				}
+				System.out.println(list);
+				System.out.println(list.size());
+				return member;
+					}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		public int upaddress(Member member) {
+//			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
+			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, TAG) values(?, ?, ?, ?, ?)";
+			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, member.getMemberid());
+				pstmt.setInt(2, member.getCity_id());
+				pstmt.setInt(3, member.getDistrict_id());
+				pstmt.setString(4, member.getAddress());
+//				pstmt.setInt(5, member.getAddress_default());
+				pstmt.setString(5, member.getTag());
+				return pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 
 //		@Override
 //		public int updateaddress(Member member) {

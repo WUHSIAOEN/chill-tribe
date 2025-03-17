@@ -2,6 +2,7 @@ package web.member.dao;
 
 import java.util.List;
 
+import web.member.vo.Addresses;
 import web.member.vo.Member;
 
 public interface MemberDao {
@@ -34,9 +35,13 @@ public interface MemberDao {
 	
 //	Member selectaddress(Member member);
 	
+	Addresses selectaddress(Integer member_id);
+	
 //	List<Member> selectaddressAll(Integer member_id);
 	
-//	int upaddress(Member member);
+	Member selectaddressAll(Integer member_id);
+	
+	int upaddress(Member member);
 	
 //	int updateaddress(Member member);
 	
