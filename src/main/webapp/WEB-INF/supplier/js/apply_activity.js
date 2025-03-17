@@ -10,7 +10,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
   const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 4;
   const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 10;
-  const inventoryCount = parseInt(document.getElementById("inventoryCount")?.value) || 10;
+  const inventoryCount = parseInt(document.getElementById("maxParticipants")?.value) || 10;
   const description = document.getElementById("description")?.value || "";
   const precaution = document.getElementById("precaution")?.value || "";
   const selectedRange = document.getElementById("reservationtime")?.value || "";

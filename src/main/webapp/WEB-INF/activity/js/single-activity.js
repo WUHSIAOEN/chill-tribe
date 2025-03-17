@@ -13,10 +13,8 @@ function fetchActivityById(activityId) {
     console.log("從 後端 獲取的數據:", data);
     // 更新 HTML 內容
 
-    let imageGallery = document.getElementById("imageGallery");
-    let imageGallery2 = document.getElementById("imageGallery2");
-    imageGallery.innerHTML = "";
-    imageGallery2.innerHTML = "";
+    $('#imageGallery').empty();
+    $('#imageGallery2').empty();
 
     // 背景圖片
     if (data.activityImages.length > 0) {
@@ -29,11 +27,11 @@ function fetchActivityById(activityId) {
                   </a>
               </div>
           `;
-          imageGallery.innerHTML += imageElement;
+          $('#imageGallery').append(imageElement);
 
           let imageElement2 = `
               <li>
-                <a href="https://placehold.co/1200x800" class="mfp-gallery">
+                <a href="${base64Image}" class="mfp-gallery">
                   <img src="${base64Image}" class="img-fluid mx-auto" alt="活動圖片" />
                 </a>
               </li>
@@ -139,7 +137,7 @@ function fetchActivityById(activityId) {
 
     let supplierName = data.supplier.supplier_name;
     let supplierPhone = data.supplier.phone;
-    let supplierImage = data.supplier?.image || "https://placehold.co/500x500";
+    let supplierImage = data.supplier?.image || "./asset/no-image.jpg";
 
     let supplierElement = document.createElement("div");
     supplierElement.classList.add("sides-widget-header", "bg-primary");
@@ -160,17 +158,21 @@ function fetchActivityById(activityId) {
 
     document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
     document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
-    document.getElementById("address").innerHTML = data.address || "暫無";
-    document.getElementById("unitPrice-1").textContent = data.unitPrice || "暫無";
-    document.getElementById("unitPrice-2").textContent = data.unitPrice || "暫無";
-    document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無";
-    document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無";
+    document.getElementById("address").innerHTML = data.address || "暫無地址";
+    document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無人數";
+    document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無人數";
     document.getElementById("description").innerHTML = data.description || "暫無";
     document.getElementById("precaution").innerHTML = data.precaution || "暫無";
     document.getElementById("category-1").innerHTML = data.category || "暫無";
     document.getElementById("category-2").innerHTML = data.category || "暫無";
     document.getElementById("startDateTime").innerHTML = data.startDateTime || "暫無";
     document.getElementById("endDateTime").innerHTML = data.endDateTime || "暫無";
+    document.getElementById("inventoryCount").innerHTML = data.inventoryCount || "暫無";
+
+    if (data.unitPrice == 0) {
+      document.getElementById("unitPrice-1").textContent = 0;
+      document.getElementById("unitPrice-2").textContent = 0;
+    }
 
     const city = addrData.find(item => item.city_id === data.city_id);
     const district = city?.area.find(area => area.zipcode === data.district_id);

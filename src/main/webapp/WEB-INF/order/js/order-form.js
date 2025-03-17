@@ -62,10 +62,6 @@ $(function () {
         })
 
 
-    // 從query string 取得活動ID
-    // let activityId = new URLSearchParams(window.location.search);
-    // console.log(urlParams.toString());
-
     // 要先抓到活動資訊放到右邊活動資訊卡
     // URI 要改`/chill-tribe/supplier/applyAct/${activityId}`
     const activityId = getOrderData().activityId;
@@ -79,7 +75,7 @@ $(function () {
             }
         })
         .then(activity => {
-            console.log(activity);
+            // console.log(activity);
             let startDateTime = convertTimeFormat(activity.startDateTime);
             let endDateTime = convertTimeFormat(activity.endDateTime);
             let firstImg = activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg';
@@ -94,7 +90,7 @@ $(function () {
         })
 
     // 這邊要新增一個判斷，前處理訂單狀態，是否為需要付款的訂單
-    
+
 
     // ============== 從LocalStorage 取得訂單資訊↓ =================
     // console.log(getOrderData());
@@ -117,69 +113,79 @@ $(function () {
         let contactPhone = $("#default-phone").val();
         let requirement = $("#requirement").val();
 
+        let orderObj = {
+            activityId: getOrderData().activityId,
+            memberId: getMemberData().memberId,
+            quantity: getOrderData().quantity,
+            orderStatus: getOrderData().orderStatus,
+            paymentMethod: getOrderData().paymentMethod,
+            orderContact,
+            contactMail,
+            contactPhone,
+            requirement
+        }
+		
+		console.log(orderObj);
+
+
         // =====================要判斷需不需要付款=====================
 
-        // 送出訂單
-        fetch("/chill-tribe/orders/order", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                activityId: getOrderData().activityId,
-                memberId: getMemberData().memberId,
-                quantity: getOrderData().quantity,
-                orderStatus: "no_payment_required",
-                paymentMethod: "none",
-                orderContact: orderContact,
-                contactMail: contactMail,
-                contactPhone: contactPhone,
-                requirement: requirement
-            }),
-        })
-            .then(resp => {
-                if (resp.ok) {
-                    return resp.json();
-                } else {
-                    const { status, statusText } = resp;
-                    throw Error(`${status}: ${statusText}`);
-                }
+        if (getOrderData().orderStatus === "no_payment_required") {
+            // 送出訂單
+            fetch("/chill-tribe/orders/order/orderWithoutPayment", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderObj),
             })
-            .then(order => {
-                console.log(order);
-                // 導向訂單完成頁
-                location.href = "/chill-tribe/order/order-details.html";
+                .then(resp => {
+                    if (resp.ok) {
+                        return resp.json();
+                    } else {
+                        const { status, statusText } = resp;
+                        throw Error(`${status}: ${statusText}`);
+                    }
+                })
+                .then(order => {
+                    console.log(order);
+
+                    // 導向訂單完成頁
+                    location.href = `/chill-tribe/order/order-details.html?orderId=${order.orderId}`;
+
+                    // 清空localStorage
+                    // localStorage.removeItem('checkoutActivity');
+                })
+        } else {
+            // 送出訂單
+            fetch("/chill-tribe/orders/order/orderWithPayment", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderObj),
             })
+                .then(resp => {
+                    if (resp.ok) {
+                        return resp.json();
+                    } else {
+                        const { status, statusText } = resp;
+                        throw Error(`${status}: ${statusText}`);
+                    }
+                })
+                .then(result => {
+                    console.log(result);
+                    // $("#ecpay").html(result.successful ? "結帳成功" : result.errMsg);
+                    $("#ecpay").html(result);
+
+                    // 清空localStorage
+                    // localStorage.removeItem('checkoutActivity');
+
+                })
+        }
+
     })
 
 
 
 
 
-    // 故意先多一個s
-    // fetch("/chill-tribe/orders/orders", {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         activityId: 34,
-    //         memberId: 1,
-    //         quantity: 2,
-    //         orderStatus: "no_payment_required",
-    //         paymentMethod: "none",
-    //         orderContact: "小名",
-    //         contactMail: "aaabbbcc@gmail.com",
-    //         contactPhone: "456196582",
-    //         requirement: "無"
-    //     }),
-    // })
-    // .then(resp => {
-    //     if (resp.ok) {
-    //         return resp.json();
-    //     } else {
-    //         const { status, statusText } = resp;
-    //         throw Error(`${status}: ${statusText}`);
-    //     }
-    // })
-    // .then(order => {
-    //     console.log(order);
-    // })
+
 
 })
