@@ -2,6 +2,7 @@ package web.member.service;
 
 import java.util.List;
 
+import web.member.vo.Addresses;
 import web.member.vo.Member;
 
 public interface MemberService {
@@ -24,11 +25,15 @@ public interface MemberService {
 	
 	Member editpassword(Member member);
 	
-//	Member selectaddress(Member member);
+	Addresses selectaddress(Integer member_id);
 	
 //	List<Member> selectaddressAll(Integer member_id);
 	
+	Member selectaddressAll(Integer member_id);
+	
 //	String upaddress(Member member);
+	
+	Member upaddress(Member member);
 	
 //	Member addressedit(Member sessionMember, Member updateMember);
 	
