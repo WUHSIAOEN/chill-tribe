@@ -33,6 +33,7 @@ public interface MemberDao {
 	
 	int updatepassword(Member member);
 	
+	
 //	Member selectaddress(Member member);
 	
 	Addresses selectaddress(Integer member_id);
@@ -41,7 +42,9 @@ public interface MemberDao {
 	
 	Member selectaddressAll(Integer member_id);
 	
-	int upaddress(Member member);
+//	int upaddress(Member member);
+	
+	int upaddress(Addresses addresses);
 	
 //	int updateaddress(Member member);
 	

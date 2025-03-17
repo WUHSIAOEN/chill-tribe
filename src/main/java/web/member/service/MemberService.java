@@ -33,7 +33,9 @@ public interface MemberService {
 	
 //	String upaddress(Member member);
 	
-	Member upaddress(Member member);
+//	Member upaddress(Member member);
+	
+	Addresses upaddress(Addresses addresses);
 	
 //	Member addressedit(Member sessionMember, Member updateMember);
 	

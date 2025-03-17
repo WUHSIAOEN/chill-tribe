@@ -513,21 +513,32 @@ public class MemberDaoImpl implements MemberDao {
 		}
 
 		@Override
-		public int upaddress(Member member) {
-//			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)";
-			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, TAG) values(?, ?, ?, ?, ?)";
-			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, member.getMemberid());
-				pstmt.setInt(2, member.getCity_id());
-				pstmt.setInt(3, member.getDistrict_id());
-				pstmt.setString(4, member.getAddress());
-//				pstmt.setInt(5, member.getAddress_default());
-				pstmt.setString(5, member.getTag());
-				return pstmt.executeUpdate();
+		public int upaddress(Addresses addresses) {
+//			insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, ADDRESS_DEFAULT, TAG) values(?, ?, ?, ?, ?, ?)
+			try {
+				session.persist(addresses);
+				System.out.println("MemberDaoImpl：新增一筆會員地址成功");
+				return 1;
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("MemberDaoImpl：新增一筆會員地址失敗");
+				return -1;
 			}
-			return -1;
+			
+			
+//			--------------------------------下面是傳統寫法
+//			String sql = "insert into ADDRESSES(MEMBER_ID, CITY_ID, DISTRICT_ID, ADDRESS, TAG) values(?, ?, ?, ?, ?)";
+//			try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//				pstmt.setInt(1, member.getMemberid());
+//				pstmt.setInt(2, member.getCity_id());
+//				pstmt.setInt(3, member.getDistrict_id());
+//				pstmt.setString(4, member.getAddress());
+////				pstmt.setInt(5, member.getAddress_default());
+//				pstmt.setString(5, member.getTag());
+//				return pstmt.executeUpdate();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return -1;
 		}
 
 //		@Override
