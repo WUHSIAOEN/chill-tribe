@@ -27,7 +27,7 @@ public class FindMfController{
 	
 	// 根據 ID 找到一個活動
 	@GetMapping("{id}")
-	public MyFavorites findById(@PathVariable Integer id) {
+	public List<MyFavorites> findById(@PathVariable Integer id) {
 		return service.findByMfId(id);
 		
 	}

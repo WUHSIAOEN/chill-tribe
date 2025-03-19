@@ -136,12 +136,12 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 	}
 
 	@Override
-	public MyFavorites selectByMfId(Integer id) {
+	public List<MyFavorites> selectByMfId(Integer id) {
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<MyFavorites> cQuery = cBuilder.createQuery(MyFavorites.class);
 		Root<MyFavorites> root = cQuery.from(MyFavorites.class);
 		cQuery.where(cBuilder.equal(root.get("myFavoriteId"), id));
-		return session.createQuery(cQuery).uniqueResult();
+		return session.createQuery(cQuery).getResultList();
 	}
 
 	@Override

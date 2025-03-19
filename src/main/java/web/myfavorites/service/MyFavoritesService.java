@@ -11,7 +11,7 @@ public interface MyFavoritesService {
 	// 找到所有產品
 	List<MyFavorites> findAll();
 
-	MyFavorites findByMfId(Integer id);
+	List<MyFavorites> findByMfId(Integer id);
 
 	boolean remove(Integer id);
 }
