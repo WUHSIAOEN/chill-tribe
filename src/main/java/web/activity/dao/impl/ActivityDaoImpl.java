@@ -324,6 +324,29 @@ public class ActivityDaoImpl implements ActivityDao {
 //		}
 //		return -1;
 	}
+	
+	// 更新圖片
+	@Override
+	public int updateImages(List<ActivityImage> images, int activityId) {
+	    // 查詢現有圖片
+	    String hql = "FROM ActivityImage WHERE activityId = :activityId";
+	    List<ActivityImage> existingImages = session.createQuery(hql, ActivityImage.class)
+	                                                 .setParameter("activityId", activityId)
+	                                                 .getResultList();
+
+	    // 刪除舊圖片
+	    for (ActivityImage image : existingImages) {
+	        session.remove(image);
+	    }
+
+	    // 插入新圖片
+	    for (ActivityImage image : images) {
+	    	image.setActivityId(activityId); // 設定 activityId
+	        session.persist(image);
+	    }
+
+	    return 1;
+	}
 
 	// 將活動取消
 	@Override

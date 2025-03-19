@@ -13,6 +13,8 @@ public interface ActivityDao {
 	// 新增活動圖片
 	int insertImages(List<ActivityImage> images, int activityId);
 	
+	int updateImages(List<ActivityImage> images, int activityId);
+	
 	// 新增活動評論
 	int insertComments(List<Comment> comments, int activityId);
 

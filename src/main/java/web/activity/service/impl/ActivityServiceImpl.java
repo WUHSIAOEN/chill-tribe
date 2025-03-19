@@ -139,6 +139,19 @@ public class ActivityServiceImpl implements ActivityService {
 //		activity.setCreateTime(oActivity.getCreateTime());
 
 	}
+	
+	// 更新圖片
+	@Override
+	public boolean editImages(List<ActivityImage> images, int activityId) {
+		try {
+			boolean result = dao.updateImages(images, activityId) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 
 	// 將活動取消
 	@Override
