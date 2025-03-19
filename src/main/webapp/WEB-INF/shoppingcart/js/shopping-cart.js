@@ -2,10 +2,10 @@ $(function(){
 
     // ============== 假資料↓ =================
     // 先塞假會員資料到SessionStorage
-    let MemberData = {
-        memberId: 1
-    }
-    sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
+    // let memberid = {
+    //     memberid: 1
+    // }
+    // sessionStorage.setItem('memberid', JSON.stringify(memberid));
     // ============== 假資料↑ =================
 
 
@@ -13,7 +13,7 @@ $(function(){
 
     // 函式 - 取得會員資料
     function getMemberData() {
-        const memberData = sessionStorage.getItem('MemberData');
+        const memberData = sessionStorage.getItem('memberid');
         if (memberData) {
             return JSON.parse(memberData);
         }
@@ -43,7 +43,7 @@ $(function(){
 
     // 將會員購物車內容撈回來
     // path 要再改成從session 取得
-    fetch(`/chill-tribe/shoppingcart/list/${getMemberData().memberId}`)
+    fetch(`/chill-tribe/shoppingcart/list/${getMemberData().memberid}`)
     .then(resp => {
         if (resp.ok) {
             return resp.json();
