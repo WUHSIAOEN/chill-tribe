@@ -38,7 +38,8 @@ document.querySelector('button#build').addEventListener('click', () => {
 		return;
 	}
 
-	fetch('register', {
+	fetch(`http://localhost:8080/chill-tribe/member/register`, {
+//	fetch('register', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

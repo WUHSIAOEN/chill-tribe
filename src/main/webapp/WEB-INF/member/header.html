@@ -132,7 +132,8 @@
 	// 			fetch(`find/${img_member_header_id.value}`)
 	// 			fetch(`/chill-tribe/member/find/${img_member_header_id}`)
 	function setmembername(a) {
-		fetch(`find/${a}`)
+		fetch(`http://localhost:8080/chill-tribe/member/find/${a}`)
+// 		fetch(`find/${a}`)
 			.then(resp => resp.json())
 			.then(member => {
 				membername.innerText = member.membername;
@@ -174,13 +175,15 @@
 		// 			 debugger;
 		console.log("登出按鈕觸發");
 		sessionStorage.clear();
+		localStorage.clear();
 		// 				 sessionStorage.removeItem("GoogleEmail");
 		// 				 sessionStorage.removeItem("memberid");
 		// 				 sessionStorage.removeItem("google");
 		// 				 sessionStorage.removeItem("member");
 		document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
-		fetch(`member/logout`, {
+		fetch(`http://localhost:8080/chill-tribe/member/logout`, {
+// 		fetch(`member/logout`, {
 			method: 'DELETE'
 		});
 	});
