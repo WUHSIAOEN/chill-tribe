@@ -41,18 +41,20 @@
 //				req.getServletPath().startsWith("/member/js/loginmodal.js") ||
 //				req.getServletPath().startsWith("/member/js/index-ernie.js") ||
 //				req.getServletPath().equals("/chilltribe") ||
+//				req.getServletPath().equals("/member/member-register.html") ||
+//				req.getServletPath().equals("/member/supplier-register.html") ||
 //				req.getServletPath().equals("/"))
 //			{
 //				chain.doFilter(req, res);
 //			}	else {
 //				HttpSession session = req.getSession();
-//				Member member = (Member) session.getAttribute("member");
+//				Member member = (Member) session.getAttribute("memberid");
 //				if (member != null) {
 //					chain.doFilter(req, res);
 //				} else {
 //					String targetPath = req.getRequestURI().toString();
 //					session.setAttribute("targetPath", targetPath);
-//					req.getRequestDispatcher("member-register.html").forward(req, res);
+//					req.getRequestDispatcher("chilltribe.html").forward(req, res);
 //				}
 //			}
 //		} catch (Exception e) {
