@@ -154,7 +154,8 @@
 
 
 	// 	fetch('find')
-	fetch(`find/${memberid}`)
+	fetch(`http://localhost:8080/chill-tribe/member/find/${memberid}`)
+// 	fetch(`find/${memberid}`)
 		// fetch(`find/${img_member_id.value}`)
 		.then(resp => resp.json())
 		.then(member => {
@@ -203,7 +204,8 @@
 		//         const member_id = document.getElementById('member_id');
 		console.log(img_member_id.value);
 
-		fetch('memberimg', {
+		fetch(`http://localhost:8080/chill-tribe/member/memberimg`, {
+// 		fetch('memberimg', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
