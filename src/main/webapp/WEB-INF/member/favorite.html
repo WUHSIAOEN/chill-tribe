@@ -6,7 +6,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>Resido - Residence & Real Estate HTML Template</title>
+<title>ChillTribe - 收藏</title>
 
 <!-- Custom CSS -->
 <link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -190,13 +190,26 @@
 	<!-- ============================地址選單的js============================== -->
 	<script src="../member/js/address_form.js"></script>
 
-	<script src="../_html/assets/js/dropzone.js"></script>
-	<!-- New Js -->
-
 	<script>
+
+		function fetchMemberId() {
+			let MemberData = { memberid: 2 };
+			sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
+
+			console.log("已存入:", MemberData); // 確認存入
+
+			const memberData = sessionStorage.getItem('MemberData');
+			if (memberData) {
+				return JSON.parse(memberData);
+			}
+			return null;
+		};
+
 		function findAllProducts() {
 
-    fetch('/chill-tribe/myfavorites')
+		const memberData = fetchMemberId();
+
+    fetch(`/chill-tribe/myfavorites/${memberData.memberid}`)
        .then(response => response.json())
         .then(data => {
 					console.log("從後端獲取的數據:", data);
@@ -249,6 +262,8 @@
       .catch(error => console.error("獲取數據時出錯:", error));
 		};
 
+		fetchMemberId();
+
 		// 操作按鈕
 
 		document.addEventListener("click", function (event) {
@@ -282,11 +297,11 @@
 							alert("商品刪除失敗！");
 						}
 					})
-					.catch((error) => {
-						console.log("取消商品失敗！", error);
-					});
+						.catch((error) => {
+							console.log("取消商品失敗！", error);
+						});
+					};
 				};
-			};
 		});
 
 		findAllProducts();

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>活動列表</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <!-- <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <!-- <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">  
+  <!-- iCheck -->
+  <!-- <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <!-- <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css"> -->
+  <link rel="stylesheet" href="../admin//plugins/jqvmap/jqvmap.min.css">
+  <!-- DataTables -->
+  <!-- <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
+  <!-- <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
+  <!-- <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <!-- <link rel="stylesheet" href="../dist/css/adminlte.min.css"> -->
+  <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <!-- <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <!-- <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <!-- <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css"> -->
+  <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.min.css">
+  <!-- 引入bootstrap iocn CDN方式 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <img class="animation__shake" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
+    <img class="animation__shake" src="../admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+       
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+       
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <!-- <img src="../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
+              <img src="../admin/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <!-- <img src="../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
+              <img src="../admin/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <!-- <img src="../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
+              <img src="../admin/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+       
+      </li>
+      <li class="nav-item">
+  
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside id="sidebar">
+  
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+       <!-- Content Header (Page header) -->
+       <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">活動管理</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="nav-item d-none d-sm-inline-block">
+                  <a href="#" class="nav-link">登出</a>
+                </li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+    <!-- /.content-header -->
+
+
+
+ 
+    <!-- Main content -->
+    <section class="content">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">活動列表</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table id="example1" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>活動編號</th>
+            <th>名稱</th>
+            <th>日期</th>
+            <th>內容修改</th>
+            <th>取消活動</th>
+            <th>狀態</th>
+          </tr>
+          </thead>
+          <tbody id="activityTableBody">
+            
+          </tbody>
+          <tfoot>
+          </tfoot>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+         
+  <footer >
+    
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<!-- <script src="../plugins/jquery/jquery.min.js"></script> -->
+<script src="../admin/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<!-- <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<!-- <script src="../plugins/datatables/jquery.dataTables.js"></script> -->
+<script src="../admin/plugins/datatables/jquery.dataTables.js"></script>
+<!-- <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script> -->
+<script src="../admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> -->
+<script src="../admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<!-- <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
+<script src="../admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script> -->
+<script src="../admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<!-- <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
+<script src="../admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<!-- <script src="../plugins/jszip/jszip.min.js"></script> -->
+<script src="../admin/plugins/jszip/jszip.min.js"></script>
+<!-- <script src="../plugins/pdfmake/pdfmake.min.js"></script> -->
+<script src="../admin/plugins/pdfmake/pdfmake.min.js"></script>
+<!-- <script src="../plugins/pdfmake/vfs_fonts.js"></script> -->
+<script src="../admin/plugins/pdfmake/vfs_fonts.js"></script>
+<!-- <script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
+<script src="../admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<!-- <script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
+<script src="../admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<!-- <script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
+<script src="../admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- AdminLTE App -->
+<!-- <script src="../dist/js/adminlte.min.js"></script> -->
+<script src="../admin/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="../dist/js/demo.js"></script> -->
+<!-- <script src="../dist/js/demo-ernie.js"></script> -->
+<script src="./js/demo-ernie.js"></script>
+<!-- Page specific script -->
+</script>
+<script src="./js/supplierIndex.js"></script>
+
+<script>
+  $(function () {
+    var table = $("#example1").DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+
+    fetchAllActivity(table); // 傳遞 DataTable 實例
+  });
+
+  // 動態抓取資料並加入 DataTable
+
+  function fetchSupplierId() {
+    let SupplierData = { supplierId: 1 };
+    sessionStorage.setItem('SupplierData', JSON.stringify(SupplierData));
+
+    console.log("已存入:", SupplierData); // 確認存入
+
+    const supplierData = sessionStorage.getItem('SupplierData');
+    if (supplierData) {
+      return JSON.parse(supplierData);
+    }
+    return null;
+  };
+
+  function fetchAllActivity(table) {
+    const supplierData = fetchSupplierId();
+
+    fetch(`/chill-tribe/activities/supplier/${supplierData.supplierId}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("從 後端 獲取的數據:", data);
+
+      table.clear();
+
+      // 若沒有活動
+      if (data.length === 0) {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td colspan="5" style="text-align: center; color: gray;">
+            目前還沒有活動，趕快創建一個吧！
+          </td>
+        `;
+        table.row.add($(tr));
+      } else {
+        data.forEach(activity => {
+          let statusText = "";
+
+          switch(activity.status) {
+            case 0:
+              statusText = "已取消";
+              break;
+            case 1:
+              statusText = "已成團";
+              break;
+            case 2:
+              statusText = "待成團";
+              break;
+            default:
+              statusText = "錯誤狀態";
+          }
+
+          let tr = `
+            <tr>
+              <td>#${String(activity.activityId).padStart(4, '0')}</td>
+              <td>${activity.activityName}</td>
+              <td>${activity.startDateTime}</td>
+              <td>
+                <a href="#"> 
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+              </td>
+              <td>
+                <a href="#" id="removeBtn"> 
+                <i class="bi bi-trash"></i>
+                </a>
+              </td>
+              <td class="${activity.status === 0 ? 'text-muted' : ''}">${statusText}</td>
+            </tr>
+          `;
+          
+          table.row.add($(tr));
+        });
+      }
+
+      table.draw();
+    })
+    .catch(error => console.log("發生錯誤:", error));
+  }
+</script>
+<script>
+  document.addEventListener("click", function (event) {
+
+  if (event.target.classList.contains("bi-trash") || event.target.closest("a#removeBtn")) {
+    event.preventDefault();
+
+    const userConfirmed = window.confirm("確定要取消此活動嗎？");
+
+    if (userConfirmed) {
+      const activityId = parseInt(event.target.closest("tr").querySelector("td").textContent.trim().replace(/^#0*/, "")); 
+      console.log("要取消的活動 ID:", activityId);
+      const requestData = {activityId: activityId, status: 0};
+
+      fetch(`/chill-tribe/activities/${activityId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("活動已取消！");
+            fetchAllActivity($('#example1').DataTable());
+          } else {
+            alert("取消活動失敗！");
+          }
+        })
+        .catch((error) => {
+          console.log("取消活動失敗！", error);
+        });
+      }
+    }
+  });
+</script>
+</body>
+</html>

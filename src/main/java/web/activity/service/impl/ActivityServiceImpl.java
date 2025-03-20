@@ -56,7 +56,7 @@ public class ActivityServiceImpl implements ActivityService {
 			return false;
 		}
 	}
-	
+
 	// 插入評論
 	@Override
 	public boolean addComments(List<Comment> comments, int activityId) {
@@ -140,6 +140,18 @@ public class ActivityServiceImpl implements ActivityService {
 
 	}
 
+	// 更新圖片
+	@Override
+	public boolean editImages(List<ActivityImage> images, int activityId) {
+		try {
+			boolean result = dao.updateImages(images, activityId) > 0;
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	// 將活動取消
 	@Override
 	public boolean cancel(Integer id) {
@@ -184,5 +196,10 @@ public class ActivityServiceImpl implements ActivityService {
 		return dao.selectByActivityId(id);
 	}
 
+	// 用供應商 ID 找活動
+	@Override
+	public List<Activities> findActivityBySupplierId(Integer supplierId) {
+		return dao.selectBySupplierId(supplierId);
+	}
 
 }

@@ -112,11 +112,6 @@ function newActivityData() {
   const ticketsActivateTime = formatDateTime(startRaw_1);
   const ticketsExpiredTime = formatDateTime(endRaw_1);
 
-  const requestImages = images.map(image => ({
-    activityId: activityId,
-    imageBase64: image
-  }));
-
   return {
     activityId,
     // supplierId,
@@ -134,8 +129,7 @@ function newActivityData() {
     // inventoryCount,
     description,
     category,
-    precaution,
-    requestImages
+    precaution
     // not required
   };  
 }
@@ -144,6 +138,7 @@ document
 .getElementById("updateBtn")
 .addEventListener("click", function (event) {
   event.preventDefault();
+  const images = window.base64Images;
   const requestData = newActivityData();
 
   fetch(`/chill-tribe/supplier/activities/edit/${activityId}`, {
@@ -153,7 +148,44 @@ document
     },
     body: JSON.stringify(requestData),
   })
-  .then((data) => {
-    console.log("從 前端送出的數據:", data);
-  })
+  .then(response => response.json())
+    .then(data => {
+      if (data.successful) {
+        const activityId = data.activityId;
+
+        // 創造新物件，每個物件都含有 {id: a, base64: b}
+        const requestImages = images.map(image => ({
+          activityId: activityId,
+          imageBase64: image
+        }));
+  
+        // 首先獲取活動資料 - Get
+        fetch(`/chill-tribe/supplier/activities/edit/${activityId}`)
+          .then(response => response.json())
+          .then(activity => {
+            console.log('活動信息:', activity);
+  
+            // 然後發送第二次 PUT 請求來修改圖片
+            fetch(`/chill-tribe/supplier/activities/edit/${activityId}/images`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestImages),
+            })
+              .then(response => response.json())
+              .then(uploadedPictures => {
+                console.log('圖片上傳成功:', uploadedPictures);
+              })
+              .catch(error => console.error('圖片上傳失敗:', error));
+          })
+          .catch(error => console.error('獲取活動失敗:', error));
+      } else {
+        console.log('圖片更新失敗:', data.message);
+      }
+    })
+    .catch(error => {
+      console.error("活動更新失敗:", error);
+    })
+  .catch(error => console.error('獲取活動失敗:', error));
 });

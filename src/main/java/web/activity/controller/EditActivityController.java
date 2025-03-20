@@ -1,5 +1,7 @@
 package web.activity.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 @RestController
 @RequestMapping("supplier/activities/edit")
@@ -19,18 +22,28 @@ public class EditActivityController {
 	private ActivityService service;
 
 	// 根據 ID 找到一個活動
-	@GetMapping("{id}")
-	public Activities findById(@PathVariable Integer id) {
-		return service.findActivityById(id);
+	@GetMapping("{activityId}")
+	public Activities findById(@PathVariable Integer activityId) {
+		return service.findActivityById(activityId);
 
 	}
 
-	@PutMapping("{id}")
-	public Activities edit(@PathVariable Integer id, @RequestBody Activities activities) {
+	@PutMapping("{activityId}")
+	public Activities edit(@PathVariable Integer activityId, @RequestBody Activities activities) {
 		System.out.println("test" + activities);
-		activities.setActivityId(id);
+		activities.setActivityId(activityId);
 		return service.edit(activities);
 
+	}
+	
+	@PutMapping("{activityId}/images")
+	public boolean editPictures(@PathVariable("activityId") Integer activityId,
+			@RequestBody List<ActivityImage> images) {
+		for (ActivityImage image : images) {
+			image.setActivityId(activityId);
+		}
+		return service.editImages(images, activityId);
+		
 	}
 
 //	@GetMapping

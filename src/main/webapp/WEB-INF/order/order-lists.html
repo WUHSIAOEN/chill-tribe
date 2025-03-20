@@ -5,9 +5,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<title>ChillTribe - 購物車列表</title>
+	<title>ChillTribe - 訂單列表</title>
 	<link rel="icon" href="/chill-tribe/tribe-temp.jpg" type="image/jepg">
-    <link rel="shortcut icon" href="/chill-tribe/tribe-temp.jpg" type="image/jepg">
+	<link rel="shortcut icon" href="/chill-tribe/tribe-temp.jpg" type="image/jepg">
 
 	<!-- Custom CSS -->
 	<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -18,6 +18,8 @@
 	<!-- Custom Color Option -->
 	<link href="../Full_Resido/_html/assets/css/colors.css" rel="stylesheet">
 
+	
+
 </head>
 
 <body class="blue-skin">
@@ -26,9 +28,7 @@
 	<!-- Preloader - style you can find in spinners.css -->
 	<!-- ============================================================== -->
 	<div id="preloader">
-		<div class="preloader">
-			<span></span><span></span>
-		</div>
+		<div class="preloader"><span></span><span></span></div>
 	</div>
 
 	<!-- ============================================================== -->
@@ -40,6 +40,7 @@
 		<!-- Top header  -->
 		<!-- ============================================================== -->
 		<!-- Start Navigation -->
+
 		<div class="header header-light head-shadow">
 			<div class="container">
 				<nav id="navigation" class="navigation navigation-landscape"></nav>
@@ -65,94 +66,53 @@
 				<div class="row">
 					<!-- ========================= 最大頁面的sidebar ========================= -->
 					<div class="col-lg-3 col-md-12">
-
 						<div class="simple-sidebar sm-sidebar" id="filter_search"></div>
 					</div>
 
+
 					<!-- ============================ Main Content ================================== -->
 					<div class="col-lg-9 col-md-12">
-						<!-- ======================== 頁面內容放這裡 ======================== -->
 						<div class="dashboard-wraper">
 
 							<!-- Single Block Wrap -->
 							<div class="form-submit"
 								style="display: flex; justify-content: space-between; align-items: center;">
-								<h4 class="block-title">購物車</h4>
-								<button class="btn btn-primary rounded px-3" type="button">
-									<i class="fa-solid fa-trash-can me-4"></i> 清空購物車
-								</button>
+								<h4 class="block-title">訂單資訊</h4>
 							</div>
 
-							<div class="block-body">
-								<div class="p-3">
-									<div class="table-responsive">
-										<table class="property-table-wrap responsive-table bkmark">
-											<thead>
-												<tr>
-													<th class="py-3" style="width: 1%;"></th>
-													<th class="py-3 text-center fs-5 fw-bold">活動</th>
-													<th class="py-3 text-center fs-5 fw-bold">單價</th>
-													<th class="py-3 text-center fs-5 fw-bold">數量</th>
-													<th class="py-3 text-center fs-5 fw-bold">操作</th>
-												</tr>
-											</thead>
-											<tbody id="shopping-cart-list">
-												<!-- Item #1 -->
-												<tr class="shopping-cart-item">
-													<td class="action text-center">
-														<input type="radio" class="form-check-input item-button" name="shopping-cart-item" value="1" />
-													</td>
-													<td class="property-container">
-														<img src="https://placehold.co/1200x800" alt="">
-														<div class="title">
-															<h4><a href="#">Serene Uptown</a></h4>
-															<span>6 Bishop Ave. Perkasie, PA </span>
-														</div>
-													</td>
-													<td>
-														<span class="table-property-price" data-price="900">$900 /
-															人</span>
-													</td>
-													<td>
-														<input type="number" class="form-control text-center mx-2 item-quantity" value="1" min="1" max="10" />
-													</td>
-													<td class="action">
-														<a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
-															Delete</a>
-													</td>
-												</tr>
-											</tbody>
-											<tfoot class="table-primary text-end">
-													<tr>
-														<td colspan="5">
-															<div>
-																<h4 class="text-primary total-price"><span></span></h4>
-															</div>
-														</td>
-													</tr>
-											</tfoot>
-										</table>
-									</div>
+							<table class="property-table-wrap responsive-table bkmark">
+								<tbody id="order-list">
+									<!-- Item #1 -->
+									<tr class="order-item">
+										<td class="property-container">
+											<img src="https://placehold.co/1200x800" alt="">
+											<div class="title">
+												<h4><a href="#">活動標題</a></h4>
+												<span>訂單編號</span>
+												<span>訂購日期</span>
+												<span>出發日期</span>
+											</div>
+										</td>
+										<td>
+											<span class="ticket-amount" data-price="900">共計 </span><span>2</span><span> 張</span>
+										</td>
+										<td>
+											<span class="table-property-price" data-price="900">總額</span><span> TWD$</span><span>1000</span>
+										</td>
+										<td class="status">
+											<span class="order-status">未使用</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
-									<!-- <div class="bg-light text-end py-3 px-4">
-										<h4 class="text-success" id="total_price">總計: NT$ 3000</h4>
-									</div> -->
-								</div>
-								<div class="d-flex justify-content-between p-3">
-									<button class="btn btn-primary rounded px-4" type="button">
-										<i class="fa fa-arrow-circle-left pr-2" aria-hidden="true">
-											繼續選購</i></button>
-									<button id="checkout" class="btn btn-primary rounded px-4" type="button">
-										<i class="fa fa-arrow-circle-right pr-2" aria-hidden="true">
-											前往結帳</i></button>
-								</div>
-							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</section>
-		<!-- ============================ Main Content End ================================== -->
+		<!-- ============================ User Dashboard End ================================== -->
 
 		<!-- ============================ Call To Action ================================== -->
 		<section id="cta" class="bg-primary call-to-act-wrap"></section>
@@ -169,6 +129,7 @@
 
 		<!-- ============================ 目前還找不到這個按鍵 ============================ -->
 		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
 
 	</div>
 	<!-- ============================================================== -->
@@ -216,7 +177,7 @@
 	</script>
 
 	<!-- ============================自定義js============================== -->
-	<script src="./js/shopping-cart.js"></script>
+	<script src="./js/order-lists.js"></script>
 
 </body>
 

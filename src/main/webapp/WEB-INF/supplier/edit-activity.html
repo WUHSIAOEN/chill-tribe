@@ -434,7 +434,54 @@
   
 </script>
 
+<script>
+  window.base64Images = [];
+
+  document.getElementById("eventImages").addEventListener("change", function (event) {
+    const previewContainer = document.getElementById("previewContainer");
+    // files 是用戶選擇的所有圖片檔案
+    const files = event.target.files;
+    // 遍歷用戶選擇的所有檔案，轉成陣列
+    Array.from(files).forEach((file, index) => {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const base64String = e.target.result; // 獲取Base64字串
+        window.base64Images.push(base64String);
+
+        // 創建一個 div 來顯示圖片預覽
+        const previewDiv = document.createElement("div");
+        previewDiv.classList.add("position-relative", "m-2");
+        previewDiv.style.width = "160px";
+        previewDiv.style.height = "120px";
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.classList.add("img-thumbnail", "w-100", "h-100");
+
+        const removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "✖";
+        removeBtn.classList.add("remove-btn", "position-absolute");
+
+        removeBtn.addEventListener("click", () => {
+          let removeImages = window.base64Images.indexOf(base64String);
+          if (removeImages !== -1) {
+              window.base64Images.splice(removeImages, 1); // 刪除對應的 Base64 資料
+          }
+          previewDiv.remove();
+        });
+
+        // 將 img 和 removeBtn 加入 previewDiv
+        previewDiv.appendChild(img);
+        previewDiv.appendChild(removeBtn);
+        previewContainer.appendChild(previewDiv);
+      };
+        reader.readAsDataURL(file);
+    });
+  });
+</script>
+
 <!----- 接收後端的資料 ----->
-<script src="js/edit_activity.js"></script>
+<script src="js/edit-activity.js"></script>
 </body>
 </html>

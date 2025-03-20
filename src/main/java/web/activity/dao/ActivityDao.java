@@ -13,6 +13,8 @@ public interface ActivityDao {
 	// 新增活動圖片
 	int insertImages(List<ActivityImage> images, int activityId);
 	
+	int updateImages(List<ActivityImage> images, int activityId);
+	
 	// 新增活動評論
 	int insertComments(List<Comment> comments, int activityId);
 
@@ -30,5 +32,8 @@ public interface ActivityDao {
 
 	// 只查詢單一活動ID
 	Activities selectByActivityId(Integer id);
+	
+	// 用供應商 ID 去找活動
+	List<Activities> selectBySupplierId(Integer supplierId);
 
 }

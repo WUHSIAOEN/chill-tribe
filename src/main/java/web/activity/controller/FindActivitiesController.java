@@ -36,6 +36,13 @@ public class FindActivitiesController {
 
 	}
 
+	// 根據 Sup ID 找到一個活動
+	@GetMapping("supplier/{supplierId}")
+	public List<Activities> findBySupId(@PathVariable Integer supplierId) {
+		return service.findActivityBySupplierId(supplierId);
+
+	}
+
 	// 用 ID 去插入評論
 	@PostMapping("{activityId}")
 	public boolean activityComments(@PathVariable("activityId") Integer activityId,
