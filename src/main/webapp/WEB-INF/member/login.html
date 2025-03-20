@@ -172,7 +172,8 @@
 				if (data.successful) {
 					console.log("登入成功");
 					if (data.memberid) {
-						sessionStorage.setItem('memberid', data.memberid);
+// 						sessionStorage.setItem('memberid', data.memberid);
+						localStorage.setItem('memberid', data.memberid);
 						console.log('memberid 已儲存到 sessionStorage:', data.memberid);
 					}
 
@@ -215,6 +216,7 @@
 					console.log("GoogleEmail", data.email);
 					sessionStorage.setItem('memberid', data.memberid);
 					console.log("memberid", data.memberid);
+					localStorage.setItem('memberid', data.memberid);
 					//                 sessionStorage.setItem('name', data.name);
 					//             	sessionStorage.setItem('Access Token:', data.access_token);
 					setmembername(data.memberid);

@@ -223,7 +223,8 @@
 		const msg = document.querySelector('#msg');
 		const details_member_id = document.querySelector('#details_member_id');
 		const member_id = document.querySelector('#member_id');
-		const memberid = sessionStorage.getItem('memberid');
+// 		const memberid = sessionStorage.getItem('memberid');
+		const memberid = localStorage.getItem('memberid');
 
 		// 	debugger;
 		fetch(`find/${memberid}`)

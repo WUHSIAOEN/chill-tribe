@@ -94,11 +94,15 @@
 <input type="hidden" id="member_id" value="">
 
 <script>
-	const member_navbar_photo_base64 = document.getElementById('member_navbar_photo_base64');
+	const member_navbar_photo_base64 = document.getElementById('member_header_photo_base64');
 	const username = document.querySelector('#member_name');
+	const loginRegisterMenu = document.querySelector('#login-register-menu');
+	const logoutMenu = document.querySelector('#logout-menu');
 	const member_logo_href = document.querySelector('#member_logo_href');
 	const member_index_href = document.querySelector('#member_index_href');
-	const memberid = sessionStorage.getItem('memberid');
+	const img_member_header_id = document.querySelector('#img_member_navbar_id');
+// 	const memberid = sessionStorage.getItem('memberid');
+	const memberid = localStorage.getItem('memberid');
 
 	// 	fetch('find')
 	fetch(`find/${memberid}`)
@@ -114,6 +118,14 @@
 				member_navbar_photo_base64.src = 'data:image/png;base64,' + member.photobase64;
 				console.log("77777有照片囉");
 			}
+
+			if (member.membername != null) {
+				// 顯示登出&隱藏登錄或註冊
+				membername.innerText = member.membername;
+				loginRegisterMenu.style.display = 'none';
+				logoutMenu.style.display = 'block';
+			}
+			
 		});
 
 
@@ -132,6 +144,7 @@
 		//			 debugger;
 		console.log("登出按鈕觸發");
 		sessionStorage.clear();
+		localStorage.clear();
 		document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
 		fetch(`member/logout`, {
