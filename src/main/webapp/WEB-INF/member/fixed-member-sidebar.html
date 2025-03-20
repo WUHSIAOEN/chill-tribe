@@ -1,7 +1,6 @@
 <div class="search-sidebar_header">
 	<h4 class="ssh_heading">關閉側邊攔</h4>
-	<button onclick="closeFilterSearch()"
-		class="w3-bar-item w3-button w3-large">
+	<button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large">
 		<i class="fa-regular fa-circle-xmark fs-5 text-muted-2"></i>
 	</button>
 </div>
@@ -11,11 +10,9 @@
 
 		<div class="d-user-avater">
 
-			<img id="photo_base64" src="https://placehold.co/500x500"
-				class="img-fluid avater" alt=""> <label for="upload-avatar"
-				class="btn btn-primary mt-2">上傳圖片</label> <input type="file"
-				id="upload-avatar" class="d-none" accept="image/*"
-				onchange="previewImage(event)">
+			<img id="photo_base64" src="https://placehold.co/500x500" class="img-fluid avater" alt=""> <label
+				for="upload-avatar" class="btn btn-primary mt-2">上傳圖片</label> <input type="file" id="upload-avatar"
+				class="d-none" accept="image/*" onchange="previewImage(event)">
 			<!-- Image preview -->
 			<!-- 			<div id="image-preview" class="mt-3"> -->
 			<!-- 				<img id="preview" src="" alt="預覽圖片" class="img-fluid d-none"> -->
@@ -33,14 +30,12 @@
 				<div class="widget-boxed-header">
 
 					<h4>
-						<a href="#myprofile" data-bs-toggle="collapse"
-							aria-expanded="false" role="button" class="collapsed"><i
-							class="fa-solid fa-house"></i>我的帳戶</a>
+						<a href="#myprofile" data-bs-toggle="collapse" aria-expanded="false" role="button"
+							class="collapsed"><i class="fa-solid fa-house"></i>我的帳戶</a>
 					</h4>
 
 				</div>
-				<div class="widget-boxed-body collapse" id="myprofile"
-					data-parent="#myprofile">
+				<div class="widget-boxed-body collapse" id="myprofile" data-parent="#myprofile">
 					<div class="side-list no-border">
 
 						<!-- Single Navigation Card -->
@@ -65,14 +60,12 @@
 				<div class="widget-boxed-header">
 
 					<h4>
-						<a href="#historyorder" data-bs-toggle="collapse"
-							aria-expanded="false" role="button" class="collapsed"><i
-							class="fa-solid fa-building-circle-check"></i>歷史訂單</a>
+						<a href="#historyorder" data-bs-toggle="collapse" aria-expanded="false" role="button"
+							class="collapsed"><i class="fa-solid fa-building-circle-check"></i>歷史訂單</a>
 					</h4>
 
 				</div>
-				<div class="widget-boxed-body collapse" id="historyorder"
-					data-parent="#historyorder">
+				<div class="widget-boxed-body collapse" id="historyorder" data-parent="#historyorder">
 					<div class="side-list no-border">
 
 						<!-- Single Navigation Card -->
@@ -95,14 +88,12 @@
 				<div class="widget-boxed-header">
 
 					<h4>
-						<a href="#collection" data-bs-toggle="collapse"
-							aria-expanded="false" role="button" class="collapsed"><i
-							class="fa-solid fa-bookmark"></i>收藏</a>
+						<a href="#collection" data-bs-toggle="collapse" aria-expanded="false" role="button"
+							class="collapsed"><i class="fa-solid fa-bookmark"></i>收藏</a>
 					</h4>
 
 				</div>
-				<div class="widget-boxed-body collapse" id="collection"
-					data-parent="#collection">
+				<div class="widget-boxed-body collapse" id="collection" data-parent="#collection">
 					<div class="side-list no-border">
 
 						<!-- Single Navigation Card -->
@@ -125,14 +116,12 @@
 				<div class="widget-boxed-header">
 
 					<h4>
-						<a href="#notification" data-bs-toggle="collapse"
-							aria-expanded="false" role="button" class="collapsed"><i
-							class="fa-solid fa-gauge"></i>通知中心</a>
+						<a href="#notification" data-bs-toggle="collapse" aria-expanded="false" role="button"
+							class="collapsed"><i class="fa-solid fa-gauge"></i>通知中心</a>
 					</h4>
 
 				</div>
-				<div class="widget-boxed-body collapse" id="notification"
-					data-parent="#notification">
+				<div class="widget-boxed-body collapse" id="notification" data-parent="#notification">
 					<div class="side-list no-border">
 
 						<!-- Single Navigation Card -->
@@ -159,13 +148,13 @@
 <script>
 
 	const photo_base64 = document.getElementById('photo_base64');
-// 	console.log(member_img);
+	// 	console.log(member_img);
 	const memberid = sessionStorage.getItem('memberid');
 
-	
-// 	fetch('find')
-fetch(`find/${memberid}`)
-// fetch(`find/${img_member_id.value}`)
+
+	// 	fetch('find')
+	fetch(`find/${memberid}`)
+		// fetch(`find/${img_member_id.value}`)
 		.then(resp => resp.json())
 		.then(member => {
 			console.log(member);
@@ -174,79 +163,78 @@ fetch(`find/${memberid}`)
 			if (member.photobase64 == null) {
 				photo_base64.src = 'https://placehold.co/500x500';
 				console.log("照片是空的");
-				} else {
-			photo_base64.src = 'data:image/png;base64,' + member.photobase64;	
-			console.log("77777有照片囉");				
-					}
-			
+			} else {
+				photo_base64.src = 'data:image/png;base64,' + member.photobase64;
+				console.log("77777有照片囉");
+			}
+
 		});
 
-	
 
-			//更換上傳後圖片
-// 			member_img.src = 'data:image/png;base64,' + 'base64Image';
-//             photo_base64.src = `data:image/png;base64, ${photo_base64.value} `;
-	
-    // 預覽圖片&轉成Base64的值
-    function previewImage(event) {
-        const file = event.target.files[0];
-        
 
-        const reader = new FileReader();
-        
-        reader.onloadend = function () {
-            // Base64圖片去掉Base64前綴字
-            const base64Image = reader.result.split(',')[1]; 
-                        
-            // 將Base64圖片傳後端
-            sendImageToServer(base64Image);
-        };
-        
-        // 將圖片轉成Base64
-        reader.readAsDataURL(file);
-    }
+	//更換上傳後圖片
+	// 			member_img.src = 'data:image/png;base64,' + 'base64Image';
+	//             photo_base64.src = `data:image/png;base64, ${photo_base64.value} `;
 
-    // Base64值傳到後端
-    function sendImageToServer(base64Image) {
+	// 預覽圖片&轉成Base64的值
+	function previewImage(event) {
+		const file = event.target.files[0];
 
-        const img_member_id = document.querySelector('#img_member_id');
-//         const member_id = document.getElementById('member_id');
-        console.log(img_member_id.value);
-        
-        fetch('memberimg', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            	memberid: img_member_id.value,
-                photobase64: base64Image
-            })
-        })
-        
-        .then(resp => {
-			 return resp.json();
-		 })
-		 .then(body => {
-			 const { successful, errMsg } = body;
-// 		 	 alert(successful ? '圖片上傳成功囉' : errMsg);
-		 	 // to do list 按下上傳照片後要可以馬上更換新的照片
-			// 	console.log(base64Image);
-			if (successful) {
-			        Swal.fire({
-			            icon: "success",
-			            title: "上傳成功",
-			            text: "成功換照片囉！",
-			        });
-			    } else {
-			        Swal.fire({
-			            icon: "error",
-			            title: "Oh...糟糕",
-			            text: errMsg || "照片上傳失敗了...QQ",
-			        });
-			    }
-		 	photo_base64.src = 'data:image/png;base64,' + base64Image;
-		 })
-    }
+
+		const reader = new FileReader();
+
+		reader.onloadend = function () {
+			// Base64圖片去掉Base64前綴字
+			const base64Image = reader.result.split(',')[1];
+
+			// 將Base64圖片傳後端
+			sendImageToServer(base64Image);
+		};
+
+		// 將圖片轉成Base64
+		reader.readAsDataURL(file);
+	}
+
+	// Base64值傳到後端
+	function sendImageToServer(base64Image) {
+
+		const img_member_id = document.querySelector('#img_member_id');
+		//         const member_id = document.getElementById('member_id');
+		console.log(img_member_id.value);
+
+		fetch('memberimg', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				memberid: img_member_id.value,
+				photobase64: base64Image
+			})
+		})
+
+			.then(resp => {
+				return resp.json();
+			})
+			.then(body => {
+				const { successful, errMsg } = body;
+				// 		 	 alert(successful ? '圖片上傳成功囉' : errMsg);
+				// to do list 按下上傳照片後要可以馬上更換新的照片
+				// 	console.log(base64Image);
+				if (successful) {
+					Swal.fire({
+						icon: "success",
+						title: "上傳成功",
+						text: "成功換照片囉！",
+					});
+				} else {
+					Swal.fire({
+						icon: "error",
+						title: "Oh...糟糕",
+						text: errMsg || "照片上傳失敗了...QQ",
+					});
+				}
+				photo_base64.src = 'data:image/png;base64,' + base64Image;
+			})
+	}
 </script>
-

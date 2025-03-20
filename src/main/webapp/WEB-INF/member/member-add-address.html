@@ -2,23 +2,22 @@
 <html lang="zxx">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>一般會員新增地址</title>
+	<title>ChillTribe - 一般會員新增地址</title>
 
-<!-- Custom CSS -->
-<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
 
-<!-- chill-header css -->
-<link href="../Full_Resido/_html/assets/css/chill-header.css" rel="stylesheet">
+	<!-- chill-header css -->
+	<link href="../Full_Resido/_html/assets/css/chill-header.css" rel="stylesheet">
 
-<!-- Custom Color Option -->
-<link href="../Full_Resido/_html/assets/css/colors.css" rel="stylesheet">
+	<!-- Custom Color Option -->
+	<link href="../Full_Resido/_html/assets/css/colors.css" rel="stylesheet">
 
-<!-- Custom CSS - 不是模板提供的 -->
-<link href="css/front-desk.css" rel="stylesheet">
+	<!-- Custom CSS - 不是模板提供的 -->
+	<link href="css/front-desk.css" rel="stylesheet">
 
 </head>
 
@@ -88,8 +87,8 @@
 										</div>
 
 										<div class="form-group col-md-6">
-											<label>縣市</label> <span class="input-required">*</span> <select
-												id="city" class="form-control"></select>
+											<label>縣市</label> <span class="input-required">*</span> <select id="city"
+												class="form-control"></select>
 										</div>
 
 										<div class="form-group col-md-6">
@@ -99,8 +98,8 @@
 										</div>
 
 										<div class="form-group col-md-6">
-											<label>地址</label> <span class="input-required">*</span> <input
-												type="text" class="form-control" id="address">
+											<label>地址</label> <span class="input-required">*</span> <input type="text"
+												class="form-control" id="address">
 										</div>
 
 										<div class="form-group col-md-6">
@@ -121,7 +120,8 @@
 
 										<div class="form-group col-lg-12 col-md-12"
 											style="display: flex; justify-content: flex-end;">
-											<button class="btn btn-primary rounded px-6" type="button" id="btn_upaddress">送出</button>
+											<button class="btn btn-primary rounded px-6" type="button"
+												id="btn_upaddress">送出</button>
 										</div>
 
 									</div>
@@ -144,13 +144,12 @@
 		<!-- ============================ Footer End ================================== -->
 
 		<!-- Log In Modal -->
-		<div class="modal fade" id="login" tabindex="-1" role="dialog"
-			aria-labelledby="registermodal" aria-hidden="true"></div>
+		<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal"
+			aria-hidden="true"></div>
 		<!-- End Modal -->
 
 		<!-- ============================ 目前還找不到這個按鍵 ============================ -->
-		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i
-			class="ti-arrow-up"></i></a>
+		<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
 
 	</div>
 	<!-- ============================================================== -->
@@ -199,8 +198,8 @@
 	</script>
 
 	<script>
-		$(document).ready(function() {
-			$("#showbutton").click(function() {
+		$(document).ready(function () {
+			$("#showbutton").click(function () {
 				$("#showing").slideToggle("slow");
 			});
 		});
@@ -209,7 +208,7 @@
 	<!-- ============================地址選單的js============================== -->
 	<script src="../member/js/address_form.js"></script>
 
-<!-- 	<script src="../_html/assets/js/dropzone.js"></script> -->
+	<!-- 	<script src="../_html/assets/js/dropzone.js"></script> -->
 	<script src="../Full_Resido/_html/assets/js/dropzone.js"></script>
 	<!-- New Js -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -223,14 +222,14 @@
 		document.querySelector('button#btn_upaddress').addEventListener('click', () => {
 			console.log("送出按鈕觸發");
 			event.preventDefault();
-// 			if (address.value.length <= 0 ) {
-// 				Swal.fire({
-// 					icon: "error",
-// 					title: "Oh...糟糕",
-// 					text: "地址必須輸入唷~",
-// 				});
-// 				return;
-// 			}
+			// 			if (address.value.length <= 0 ) {
+			// 				Swal.fire({
+			// 					icon: "error",
+			// 					title: "Oh...糟糕",
+			// 					text: "地址必須輸入唷~",
+			// 				});
+			// 				return;
+			// 			}
 
 
 
@@ -241,11 +240,11 @@
 				},
 				body: JSON.stringify({
 					memberid: member_id.value,
-// 					zipcode: zip_code.value,
+					// 					zipcode: zip_code.value,
 					zip_code: zipcode.value,
-// 					city: city_id.value,
+					// 					city: city_id.value,
 					city_id: city.value,
-// 					districts: district_id.value,
+					// 					districts: district_id.value,
 					district_id: districts.value,
 					address: address.value,
 					tag: tag.value,
@@ -258,18 +257,18 @@
 				.then(body => {
 					const { successful, errMsg } = body;
 					if (successful) {
-					        Swal.fire({
-					            icon: "success",
-					            title: "成功",
-					            text: "恭喜您，新增地址成功囉！",
-					        });
-					    } else {
-					        Swal.fire({
-					            icon: "error",
-					            title: "Oh...糟糕",
-					            text: errMsg || "發生錯誤，請稍後再試。",
-					        });
-					    }
+						Swal.fire({
+							icon: "success",
+							title: "成功",
+							text: "恭喜您，新增地址成功囉！",
+						});
+					} else {
+						Swal.fire({
+							icon: "error",
+							title: "Oh...糟糕",
+							text: errMsg || "發生錯誤，請稍後再試。",
+						});
+					}
 				});
 		});
 	</script>
