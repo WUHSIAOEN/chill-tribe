@@ -103,9 +103,11 @@
 	const img_member_header_id = document.querySelector('#img_member_navbar_id');
 // 	const memberid = sessionStorage.getItem('memberid');
 	const memberid = localStorage.getItem('memberid');
+	const membername = document.querySelector('#member_name');
 
 	// 	fetch('find')
-	fetch(`find/${memberid}`)
+	fetch(`http://localhost:8080/chill-tribe/member/find/${memberid}`)
+// 	fetch(`find/${memberid}`)
 		// fetch(`find/${img_member_navbar_id.value}`)
 		.then(resp => resp.json())
 		.then(member => {
