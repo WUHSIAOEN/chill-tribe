@@ -160,6 +160,7 @@
                 console.log("登入成功");
                 if (data.supplier_id) {
                     sessionStorage.setItem('supplier_id', data.supplier_id);
+                    localStorage.setItem('supplier_id', data.supplier_id);
                 }
                 window.location.href = '/chill-tribe/supplier/supplierIndex.html';  
             } else {
