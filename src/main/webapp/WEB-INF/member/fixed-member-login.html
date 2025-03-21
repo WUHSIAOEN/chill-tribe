@@ -145,7 +145,8 @@
 		console.log("發送登入請求");
 
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`login/${email.value}/${password.value}`)
+		fetch(`http://localhost:8080/chill-tribe/member/login/${email.value}/${password.value}`)
+// 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
 			// 				headers: {
