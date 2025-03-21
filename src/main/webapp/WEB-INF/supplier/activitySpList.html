@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>活動列表</title>
+  <title>ChillTribe - 總活動列表</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -211,11 +211,12 @@
         <table id="example1" class="table table-bordered table-hover">
           <thead>
           <tr>
-            <th>活動編號</th>
+            <th>編號</th>
             <th>名稱</th>
-            <th>日期</th>
-            <th>內容修改</th>
-            <th>取消活動</th>
+            <th>開始時間</th>
+            <th>預覽</th>
+            <th>修改</th>
+            <th>取消</th>
             <th>狀態</th>
           </tr>
           </thead>
@@ -291,6 +292,9 @@
 </script>
 <script src="./js/supplierIndex.js"></script>
 
+<!----- 載入第三方的提醒視窗 ----->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
   $(function () {
     var table = $("#example1").DataTable({
@@ -324,7 +328,7 @@
   function fetchAllActivity(table) {
     const supplierData = fetchSupplierId();
 
-    fetch(`/chill-tribe/activities/supplier/${supplierData.supplierId}`)
+    fetch(`http://localhost:8080/chill-tribe/activities/supplier/${supplierData.supplierId}`)
     .then(response => response.json())
     .then(data => {
       console.log("從 後端 獲取的數據:", data);
@@ -344,18 +348,27 @@
         data.forEach(activity => {
           let statusText = "";
 
-          switch(activity.status) {
-            case 0:
-              statusText = "已取消";
-              break;
-            case 1:
-              statusText = "已成團";
-              break;
-            case 2:
-              statusText = "待成團";
-              break;
-            default:
-              statusText = "錯誤狀態";
+          // 判斷時間
+          const startDateTime = new Date(activity.startDateTime);
+          const now = new Date();
+          const isFutureTime = startDateTime < now;
+
+          if (isFutureTime) {
+            statusText = "已截止";
+          } else {
+            switch (activity.status) {
+              case 0:
+                statusText = "已取消";
+                break;
+              case 1:
+                statusText = "已成團";
+                break;
+              case 2:
+                statusText = "待成團";
+                break;
+              default:
+                statusText = "錯誤狀態";
+            }
           }
 
           let tr = `
@@ -364,7 +377,12 @@
               <td>${activity.activityName}</td>
               <td>${activity.startDateTime}</td>
               <td>
-                <a href="#"> 
+                <a href="./preview-activity.html?id=${activity.activityId}"> 
+                  <i class="bi bi-eye"></i>
+                </a>
+              </td>
+              <td>
+                <a href="./edit-activity.html?id=${activity.activityId}"> 
                   <i class="bi bi-pencil-square"></i>
                 </a>
               </td>
@@ -392,14 +410,20 @@
   if (event.target.classList.contains("bi-trash") || event.target.closest("a#removeBtn")) {
     event.preventDefault();
 
-    const userConfirmed = window.confirm("確定要取消此活動嗎？");
+    const userConfirmed = 
+    Swal.fire({
+      icon: "success",
+      title: "太棒了!",
+      text: "取消活動成功!",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
 
     if (userConfirmed) {
       const activityId = parseInt(event.target.closest("tr").querySelector("td").textContent.trim().replace(/^#0*/, "")); 
       console.log("要取消的活動 ID:", activityId);
       const requestData = {activityId: activityId, status: 0};
 
-      fetch(`/chill-tribe/activities/${activityId}`, {
+      fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
