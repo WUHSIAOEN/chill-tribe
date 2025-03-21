@@ -57,7 +57,7 @@ document.querySelector('button#build').addEventListener('click', () => {
 			return resp.json();
 		})
 		.then(body => {
-			debugger;
+//			debugger;
 			const { successful, errMsg } = body;
 			if (successful) {
 			        Swal.fire({

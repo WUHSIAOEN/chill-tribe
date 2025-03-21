@@ -223,11 +223,11 @@
 		const msg = document.querySelector('#msg');
 		const details_member_id = document.querySelector('#details_member_id');
 		const member_id = document.querySelector('#member_id');
-// 		const memberid = sessionStorage.getItem('memberid');
+		const sememberid = sessionStorage.getItem('memberid');
 		const memberid = localStorage.getItem('memberid');
 
 		// 	debugger;
-		fetch(`find/${memberid}`)
+		fetch(`http://localhost:8080/chill-tribe/member/find/${memberid}`)
 			.then(resp => resp.json())
 			.then(member => {
 				console.log(member);
@@ -268,7 +268,7 @@
 			// 		}
 
 			// 		debugger;
-			fetch('memberedit', {
+			fetch(`http://localhost:8080/chill-tribe/member/memberedit`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
