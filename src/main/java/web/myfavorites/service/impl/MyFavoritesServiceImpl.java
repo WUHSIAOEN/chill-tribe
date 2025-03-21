@@ -57,8 +57,8 @@ public class MyFavoritesServiceImpl implements MyFavoritesService {
 	}
 
 	@Override
-	public List<MyFavorites> findByMfId(Integer id) {
-		return dao.selectByMfId(id);
+	public List<MyFavorites> findMfByMemberId(Integer memberId) {
+		return dao.selectFvByMemberId(memberId);
 	}
 
 //	@Override

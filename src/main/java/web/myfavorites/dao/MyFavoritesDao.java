@@ -11,7 +11,7 @@ public interface MyFavoritesDao {
 	// 選擇多個商品
 	List<MyFavorites> selectAll();
 	
-	List<MyFavorites> selectByMfId(Integer id);
+	List<MyFavorites> selectFvByMemberId(Integer memberId);
 	
 	int update(MyFavorites myFavorites);
 
