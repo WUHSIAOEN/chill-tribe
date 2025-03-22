@@ -1,5 +1,8 @@
 package web.order.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,35 +38,20 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 		Activities activity = actDao.selectByActivityId(order.getActivityId());
 		int totalPrice = activity.getUnitPrice() * nOrder.getQuantity();
 		
-		Ticket ticket = new Ticket(); 
-		ticket.setOrderId(nOrder.getOrderId());
-		ticket.setActivityId(nOrder.getActivityId());
-		ticketDao.insert(ticket);
+		createTickets(nOrder);
 		
 		// 呼叫綠界付款API
 		String result = ecpay(activity.getActivityName(), nOrder.getQuantity(), totalPrice, nOrder.getOrderId());
+		// 付款成功要變更訂單狀態，待優畫
+		ticketDao.updateOrderStatus(nOrder.getOrderId(), "paid");
 		return result;
 	}
 
 //	免付款下訂單
 	@Override
-	public Ticket placeOrderWithoutPayment(Orders order) {
-		Orders nOrder = updateInventory(order);
-		Ticket ticket = new Ticket(); 
-		ticket.setOrderId(nOrder.getOrderId());
-		ticket.setActivityId(nOrder.getActivityId());
-		
-		int ticketInsertResultCount = ticketDao.insert(ticket);
-		
-		if (ticketInsertResultCount > 0 ) {
-			ticket.setMessage("票券新增成功");
-			ticket.setSuccessful(true);
-		} else {
-			ticket.setMessage("票券新增失敗");
-			ticket.setSuccessful(false);
-		}
-		return ticket;
-		
+	public void placeOrderWithoutPayment(Orders order) {
+		Orders nOrder = updateInventory(order);		
+		createTickets(nOrder);	
 	}
 
 //	查已成立訂單
@@ -110,7 +98,7 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 	}
 
 	@Override
-	public Ticket createTickets(Ticket ticket) {
+	public Ticket createTicket(Ticket ticket) {
 		int TicketInsertResultCount = ticketDao.insert(ticket);
 		if (TicketInsertResultCount > 0 ) {
 			ticket.setMessage("訂單/票券新增成功");
@@ -120,6 +108,28 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 			ticket.setSuccessful(false);
 		}
 		return ticket;
+	}
+
+	@Override
+	public List<Ticket> createTickets(Orders nOrder) {
+		List<Ticket> tickets = new ArrayList<>();
+		for (int i = 0; i < nOrder.getQuantity(); i++) {
+			Ticket ticket = new Ticket(); 
+			ticket.setOrderId(nOrder.getOrderId());
+			ticket.setActivityId(nOrder.getActivityId());
+			int ticketInsertResultCount = ticketDao.insert(ticket);
+			
+			if (ticketInsertResultCount > 0 ) {
+				ticket.setMessage("票券新增成功");
+				ticket.setSuccessful(true);
+			} else {
+				ticket.setMessage("票券新增失敗");
+				ticket.setSuccessful(false);
+			}
+			tickets.add(ticket);
+		}
+		
+		return tickets;
 	}
 	
 	

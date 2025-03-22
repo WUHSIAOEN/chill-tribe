@@ -33,7 +33,7 @@ $(function () {
 
 
 
-    let queryString = "orderId=65";
+    let queryString = "orderId=67";
     let urlParams = new URLSearchParams(queryString);
     let orderId = urlParams.get('orderId');
 
@@ -90,15 +90,23 @@ $(function () {
             $('#endDateTime').text(endDateTime);
 
             // 整理票券變數
-            let ticketSerialNumber = formatSerialNumber(tickets[0]?.ticketId, "TKT");
+            
             let ticketStartTime = convertTimeFormat(tickets[0]?.activity.ticketsActivateTime);
             let ticketEndTime = convertTimeFormat(tickets[0]?.activity.ticketsExpiredTime);
 
+            // 右邊供應商資訊
+            $('#supplier-img').attr('src', tickets[0]?.activity.supplier.image?.imageBase64 || '../activity/asset/no-image.jpg');
+            $('#supplier-name').text(tickets[0]?.activity.supplier.supplier_name);
+            $('#supplier-phone').text(tickets[0]?.activity.supplier.phone);
+            $('#msg-contact-email').val(tickets[0]?.order.contactMail);
+            $('#msg-contact-phone').val(tickets[0]?.order.contactPhone);
 
 
             $('#ticket-card').empty();
 
             for (let i = 0; i < tickets.length; i++) {
+                
+                let ticketSerialNumber = formatSerialNumber(tickets[i]?.ticketId, "TKT");
                 // 個別票券
                 let ticketEl = `
                     <!-- 票券QRCode 下拉 -->

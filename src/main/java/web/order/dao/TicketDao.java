@@ -8,9 +8,11 @@ public interface TicketDao {
 	
 	int insert(Ticket ticket);
 	
-	Ticket selctByTicketId(int ticketId);
+	Ticket selctByTicketId(Integer ticketId);
 	
-	List<Ticket> selctByOrderId(int orderId);
+	List<Ticket> selctByOrderId(Integer orderId);
+	
+	int updateOrderStatus(Integer orderId, String status);
 	
 	
 }

@@ -27,20 +27,16 @@ public class OrderController {
 
 	// 下訂單 - 無須付款
 	@PostMapping("/orderWithoutPayment")
-	public Ticket orderWithoutPayment(@RequestBody Orders order) {
+	public Orders orderWithoutPayment(@RequestBody Orders order) {
 		if (order == null) {
-			Ticket ticket = new Ticket();
 			order = new Orders();
 			order.setMessage("訂單成立失敗");
 			order.setSuccessful(false);
-			
-			ticket.setMessage("票券成立失敗");
-			ticket.setSuccessful(false);
-			ticket.setOrder(order);
-			return ticket;
+
+			return order;
 		}
-		
-		return orderService.placeOrderWithoutPayment(order);
+		orderService.placeOrderWithoutPayment(order);
+		return order;
 	}
 	
 	// 下訂單 - 無須付款

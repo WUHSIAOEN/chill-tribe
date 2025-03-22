@@ -122,7 +122,7 @@
 						<div class="block-wrap">
 
 							<div class="block-header ags">
-								<h4 class="block-title">訂單資訊</h4>
+								<h2 class="block-title">訂單資訊</h2>
 								<div class="btn"></div>
 							</div>
 
@@ -206,10 +206,10 @@
 							<!-- Agent Detail -->
 							<div class="sides-widget">
 								<div class="sides-widget-header">
-									<div class="agent-photo"><img src="https://placehold.co/500x500" alt=""></div>
+									<div class="agent-photo"><img src="https://placehold.co/500x500" alt="" id="supplier-img" style="min-width: 60px; min-height: 60px;"></div>
 									<div class="sides-widget-details">
-										<h4><a href="#">供應商名稱</a></h4>
-										<span><i class="lni-phone-handset"></i>供應商電話</span>
+										<h4><a href="#" id="supplier-name">供應商名稱</a></h4>
+										<span><i class="lni-phone-handset" id="supplier-phone"></i></span>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -217,15 +217,15 @@
 								<div class="sides-widget-body simple-form">
 									<div class="form-group">
 										<label>聯絡信箱</label>
-										<input type="text" class="form-control" placeholder="Your Email">
+										<input type="text" class="form-control" placeholder="Your Email" id="msg-contact-email" value="">
 									</div>
 									<div class="form-group">
 										<label>連絡電話</label>
-										<input type="text" class="form-control" placeholder="Your Phone">
+										<input type="text" class="form-control" placeholder="Your Phone" id="msg-contact-phone" value="">
 									</div>
 									<div class="form-group">
 										<label>內容</label>
-										<textarea class="form-control">請問天氣不佳如何處理呢</textarea>
+										<textarea class="form-control" placeholder="填入問題"></textarea>
 									</div>
 									<button class="btn btn-dark btn-md rounded full-width">傳送訊息</button>
 								</div>
