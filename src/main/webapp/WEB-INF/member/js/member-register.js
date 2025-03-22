@@ -1,4 +1,3 @@
-
 const username = document.querySelector('#member_name');
 const password = document.querySelector('#password');
 const cpassword = document.querySelector('#cPassword');
@@ -9,7 +8,6 @@ document.querySelector('button#build').addEventListener('click', () => {
 	console.log("觸發");
 	event.preventDefault();
 	if (username.value.length < 2 || username.value.length > 50) {
-		//			alert('使用者名稱長度須介於2 ~ 50');
 		Swal.fire({
 			icon: "error",
 			title: "Oh...糟糕",
@@ -19,7 +17,6 @@ document.querySelector('button#build').addEventListener('click', () => {
 	}
 
 	if (password.value.length < 4 || password.value.length > 12) {
-//		alert('密碼長度須介於6 ~ 12');
 		Swal.fire({
 					icon: "error",
 					title: "Oh...糟糕",
@@ -29,7 +26,6 @@ document.querySelector('button#build').addEventListener('click', () => {
 	}
 
 	if (password.value !== cpassword.value) {
-//		alert('密碼與確認密碼不同');
 		Swal.fire({
 							icon: "error",
 							title: "Oh...糟糕",
@@ -57,13 +53,13 @@ document.querySelector('button#build').addEventListener('click', () => {
 			return resp.json();
 		})
 		.then(body => {
-//			debugger;
 			const { successful, errMsg } = body;
 			if (successful) {
 			        Swal.fire({
 			            icon: "success",
 			            title: "註冊成功",
 			            text: "恭喜您，註冊成功囉！",
+						footer: '<a href="http://localhost:8080/chill-tribe/chilltribe.html">前往首頁</a>'
 			        });
 			    } else {
 			        Swal.fire({
