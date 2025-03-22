@@ -11,10 +11,10 @@ $(function () {
     // localStorage.setItem('checkoutActivity', JSON.stringify(checkoutActivity));
 
     // 先塞假會員資料到SessionStorage
-    // let memberid = {
-    //     memberid: 1
-    // }
-    // sessionStorage.setItem('memberid', JSON.stringify(memberid));
+    let memberid = {
+        memberid: 1
+    }
+    sessionStorage.setItem('memberid', JSON.stringify(memberid));
     // ============== 假資料↑ =================
 
     // ============== 自訂函式↓ =================

@@ -2,10 +2,10 @@ $(function(){
 
     // ============== 假資料↓ =================
     // 先塞假會員資料到SessionStorage
-    // let memberid = {
-    //     memberid: 1
-    // }
-    // sessionStorage.setItem('memberid', JSON.stringify(memberid));
+    let memberid = {
+        memberid: 1
+    }
+    sessionStorage.setItem('memberid', JSON.stringify(memberid));
     // ============== 假資料↑ =================
 
 

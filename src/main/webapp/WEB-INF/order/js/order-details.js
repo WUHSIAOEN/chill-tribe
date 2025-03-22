@@ -2,22 +2,17 @@ $(function () {
 
     // ============== 自訂函式↓ =================
 
-    // 函式 - 取得訂單資料
-    function getOrderData() {
-        const checkoutActivity = localStorage.getItem('checkoutActivity');
-        if (checkoutActivity) {
-            return JSON.parse(checkoutActivity);
-        }
-        return null;
-    }
+    // 函式 - 格式化票券編號
+    function formatSerialNumber(number, suffix) {
+        const numStr = String(number);
+        const padding = 6 - numStr.length;
 
-    // 函式 - 取得會員資料
-    function getMemberData() {
-        const memberData = sessionStorage.getItem('MemberData');
-        if (memberData) {
-            return JSON.parse(memberData);
+        let SerialNumber = suffix;
+        for (let i = 0; i < padding; i++) {
+            SerialNumber += "0";
         }
-        return null;
+        SerialNumber += numStr;
+        return SerialNumber;
     }
 
     // 函式 - 將日期時間格式轉換成只有日期的格式
@@ -46,16 +41,30 @@ $(function () {
             }
         })
         .then(orders => {
-            // console.log(orders);
+            console.log(orders);
+            // 後面的判斷等改好狀態，要再調整
+            let orderStatus;
+            if (orders.orderStatus === "no_payment_required" || orders.orderStatus === "paid"){
+                orderStatus = "訂單已成立"
+            }
+            // 如果後續有多種付款方式的話建議換成js 的swith-case 比較合適
+            let paymentMethod;
+            if (orders.paymentMethod === "credit_card"){
+                paymentMethod = "信用卡"
+            } else {
+                paymentMethod = "無需付款"
+            }
+
+            let orderSerial = formatSerialNumber(orders.orderId, "ORD");
 
             // 訂單資訊
-            $('#order-serial').text(orders.orderId);
+            $('#order-serial').text(orderSerial);
             $('#contact-person').text(orders.orderContact);
-            $('#contact-email').text(orders.contactMail);
+            $('#contact-mail').text(orders.contactMail);
             $('#contact-phone').text(orders.contactPhone);
             $('#order-datetime').text(orders.orderCreateDatetime);
-            $('#order-status').text(orders.orderStatus);
-            $('#order-payment').text(orders.paymentMethod);
+            $('#order-status').text(orderStatus);
+            $('#payment_method').text(paymentMethod);
             $('#requirement').text(orders.requirement);
             $("#order-quantity").text(orders.quantity);
             $("#act-unit-price").text(orders.activity.unitPrice);
