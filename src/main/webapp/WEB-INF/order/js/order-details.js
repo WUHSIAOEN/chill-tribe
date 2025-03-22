@@ -15,7 +15,7 @@ $(function () {
         return SerialNumber;
     }
 
-    // 函式 - 將日期時間格式轉換成只有日期的格式
+    // 函式 - 將日期時間格式轉換成沒有秒數
     function convertTimeFormat(dateTime) {
         return dateTime.slice(0, 16);
     }

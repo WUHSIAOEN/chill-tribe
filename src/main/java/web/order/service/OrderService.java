@@ -19,4 +19,6 @@ public interface OrderService {
 	
 	List<Ticket> createTickets(Orders nOrder);
 	
+	List<Orders> getMemberOrders(Integer memberId);
+	
 }
