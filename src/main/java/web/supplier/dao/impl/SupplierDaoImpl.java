@@ -435,4 +435,15 @@ public class SupplierDaoImpl implements SupplierDao {
 					.setParameter("supplier_id", supplier_id) 
 					.uniqueResult(); 
 		}
+
+		@Override
+		public int forgetpassword(String email) {
+			final String hql = "UPDATE Supplier SET PASSWORD = :password WHERE email = :email";
+			String newPassword = "chilltribe202";  
+			Query<?> query = session.createQuery(hql.toString());
+			return query
+		    	.setParameter("password", newPassword)
+				.setParameter("email", email)
+				.executeUpdate();
+		}
 }

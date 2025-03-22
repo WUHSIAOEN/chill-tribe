@@ -28,4 +28,6 @@ public interface SupplierDao {
 	int updateimg(Supplier supplier);
 	
 	Supplier selectimg(String image);
+	
+	int forgetpassword(String email);
 }
