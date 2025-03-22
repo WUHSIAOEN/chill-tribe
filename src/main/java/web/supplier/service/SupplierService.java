@@ -20,4 +20,6 @@ public interface SupplierService {
 	Supplier updateimg(Supplier supplier);
 	
 	Supplier selectBySupplierID(Integer supplier_id);
+	
+	Supplier forgetpassowrd(Supplier supplier);
 }
