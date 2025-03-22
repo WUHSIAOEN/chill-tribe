@@ -480,6 +480,14 @@ public class ActivityDaoImpl implements ActivityDao {
 //
 //		return null;
 	}
+	
+	@Override
+	public List<Activities> selectBySupplierId(Integer supplierId) {
+		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<Activities> cQuery = cBuilder.createQuery(Activities.class);
+		Root<Activities> root = cQuery.from(Activities.class);
+		cQuery.where(cBuilder.equal(root.get("supplierId"), supplierId));
+		return session.createQuery(cQuery).getResultList();
 
-
+	}	
 }

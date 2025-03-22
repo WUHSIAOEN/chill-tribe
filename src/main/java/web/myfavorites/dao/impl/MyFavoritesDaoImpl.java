@@ -136,12 +136,12 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 	}
 
 	@Override
-	public MyFavorites selectByMfId(Integer id) {
+	public List<MyFavorites> selectFvByMemberId(Integer memberId) {
 		CriteriaBuilder cBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<MyFavorites> cQuery = cBuilder.createQuery(MyFavorites.class);
 		Root<MyFavorites> root = cQuery.from(MyFavorites.class);
-		cQuery.where(cBuilder.equal(root.get("myFavoriteId"), id));
-		return session.createQuery(cQuery).uniqueResult();
+		cQuery.where(cBuilder.equal(root.get("memberId"), memberId));
+		return session.createQuery(cQuery).getResultList();
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class MyFavoritesDaoImpl implements MyFavoritesDao {
 			session.update(existingMf);
 			return 1;
 		} else {
-			session.save(existingMf);
+			session.save(myFavorites);
 			return 1;
 		}
 	}

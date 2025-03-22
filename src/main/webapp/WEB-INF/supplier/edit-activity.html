@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>ChillTribe - 編輯活動</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -199,11 +199,11 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="activityName">名稱 <span style="color: red;">*</span></label>
-                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
+                  <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required disabled>
                 </div>
                 <div class="form-group">
                   <label for="cityId">舉辦的縣市 <span style="color: red;">*</span></label>
-                  <select class="form-control select2" id="cityId" name="cityId" style="width: 100%;">
+                  <select class="form-control select2" id="cityId" name="cityId" style="width: 100%;" disabled>
                     <option value="taipei" selected="selected">台北市</option>
                     <option value="new-taipei">新北市</option>
                     <option value="taoyuan">桃園市</option>
@@ -230,7 +230,7 @@
                 </div>
                 <div class="form-group">
                   <label for="address">詳細地址 <span style="color: red;">*</span></label>
-                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號">
+                  <input type="text" id="address" name="address" class="form-control" placeholder="例子: 忠孝東路一段400號" disabled>
                 </div>
                 <div class="form-group">
                   <label for="category">分類 <span style="color: red;">*</span></label>
@@ -248,7 +248,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime">
+                    <input type="text" id="reservationtime" class="form-control float-right" name="reservationtime" required disabled >
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -259,22 +259,22 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <input type="text" id="reservationtime_1" class="form-control float-right" name="reservationtime_1">
+                    <input type="text" id="reservationtime_1" class="form-control float-right" name="reservationtime_1" required disabled>
                   </div>
                   <!-- /.input group -->
                 </div>
                 <!-- /.form group -->
                 <div class="form-group">
                   <label for="unitPrice">參加費用 <span style="color: red;">*</span></label>
-                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required>
+                  <input type="number" id="unitPrice" name="unitPrice" class="form-control"  placeholder="參加費用" min="0" max="1000000" required disabled>
                 </div>
                 <div class="form-group">
                   <label for="minParticipants">成團人數 <span style="color: red;">*</span></label>
-                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required>
+                  <input type="number" id="minParticipants" name="minParticipants" class="form-control" placeholder="例子: 2人以上" min="1" max="1000000" required disabled>
                 </div>
                 <div class="form-group">
                   <label for="maxParticipants">人數上限 <span style="color: red;">*</span></label>
-                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required>
+                  <input type="number" id="maxParticipants" name="maxParticipants" class="form-control" placeholder="例子: 上限100人" min="1" max="1000000" required disabled>
                 </div>
                 <!-- textarea -->
                 <div class="form-group">

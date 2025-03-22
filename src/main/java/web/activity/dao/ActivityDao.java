@@ -32,5 +32,8 @@ public interface ActivityDao {
 
 	// 只查詢單一活動ID
 	Activities selectByActivityId(Integer id);
+	
+	// 用供應商 ID 去找活動
+	List<Activities> selectBySupplierId(Integer supplierId);
 
 }

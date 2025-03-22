@@ -190,13 +190,29 @@
 	<!-- ============================地址選單的js============================== -->
 	<script src="../member/js/address_form.js"></script>
 
-	<script src="../_html/assets/js/dropzone.js"></script>
-	<!-- New Js -->
+	<!----- 載入第三方的提醒視窗 ----->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<script>
+
+		function fetchMemberId() {
+			let MemberData = { memberid: 1 };
+			sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
+
+			console.log("已存入:", MemberData); // 確認存入
+
+			const memberData = sessionStorage.getItem('MemberData');
+			if (memberData) {
+				return JSON.parse(memberData);
+			}
+			return null;
+		};
+
 		function findAllProducts() {
 
-    fetch('/chill-tribe/myfavorites')
+		const memberData = fetchMemberId();
+
+    fetch(`http://localhost:8080/chill-tribe/myfavorites/member/${memberData.memberid}`)
        .then(response => response.json())
         .then(data => {
 					console.log("從後端獲取的數據:", data);
@@ -249,6 +265,8 @@
       .catch(error => console.error("獲取數據時出錯:", error));
 		};
 
+		fetchMemberId();
+
 		// 操作按鈕
 
 		document.addEventListener("click", function (event) {
@@ -256,7 +274,13 @@
 		if (event.target.closest(".fa-trash-can")) {
 			event.preventDefault();
 	
-			const userConfirmed = window.confirm("確定要將此商品移除我的最愛嗎？");
+			const userConfirmed = 
+			Swal.fire({
+				icon: "success",
+				title: "太棒了!",
+				text: "成功將商品移出我的最愛!",
+				// footer: '<a href="#">Why do I have this issue?</a>'
+			});
 	
 			if (userConfirmed) {
 				// 找到對應的商品 ID
@@ -266,7 +290,7 @@
 				console.log("要刪除的商品 ID:", myFavoriteId);
 				const requestData = {myFavoriteId: myFavoriteId};
 	
-				fetch(`/chill-tribe/myfavorites/${myFavoriteId}`, {
+				fetch(`http://localhost:8080/chill-tribe/myfavorites/${myFavoriteId}`, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -275,18 +299,17 @@
 				})
 					.then((response) => {
 						if (response.ok) {
-							alert("商品已刪除！");
 							tr.remove();
 							findAllProducts();
 						} else {
-							alert("商品刪除失敗！");
+							return;
 						}
 					})
-					.catch((error) => {
-						console.log("取消商品失敗！", error);
-					});
+						.catch((error) => {
+							console.log("取消商品失敗！", error);
+						});
+					};
 				};
-			};
 		});
 
 		findAllProducts();

@@ -7,7 +7,7 @@ function getActivityIdFromURL() {
 const activityId = getActivityIdFromURL();
 
 function fetchActivityById(activityId) {
-  fetch(`/chill-tribe/activities/${activityId}`)
+  fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`)
   .then(response => response.json())
   .then(data => {
     console.log("從 後端 獲取的數據:", data);
@@ -210,12 +210,17 @@ document
 .getElementById("addToCartBtn")
 .addEventListener("click", function (event) {
   event.preventDefault();
-  const userConfirmed = window.confirm("確定要加入此商品到購物車嗎？");
-
+  const userConfirmed = 
+  Swal.fire({
+    icon: "success",
+    title: "太棒了!",
+    text: "成功加入購物車",
+    // footer: '<a href="#">Why do I have this issue?</a>'
+  });
   if (userConfirmed) {
     const requestData = ShoppingCartItems();
     console.log("送出的資料:", requestData);
-    fetch(`/chill-tribe/cart/${activityId}`, {
+    fetch(`http://localhost:8080/chill-tribe/cart/${activityId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -241,11 +246,17 @@ document
 .getElementById("addToFavoritesBtn")
 .addEventListener("click", function (event) {
   event.preventDefault();
-  const userConfirmed = window.confirm("確定要加入此商品到我的最愛嗎？");
+  const userConfirmed = 
+  Swal.fire({
+    icon: "success",
+    title: "太棒了!",
+    text: "成功加入我的最愛",
+    // footer: '<a href="#">Why do I have this issue?</a>'
+  });
   if (userConfirmed) {
     const requestMyforitesData = MyFavoritesItems();
     console.log("送出的資料:", requestMyforitesData);
-    fetch(`/chill-tribe/myfavorites/${activityId}`, {
+    fetch(`http://localhost:8080/chill-tribe/myfavorites/${activityId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -289,13 +300,24 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
   console.log(reviewData);
 
   if (!content || !starRating) {
-    alert("請留下評論和星星");
+    Swal.fire({
+      icon: "error",
+      title: "Oh....",
+      text: "評論和星星不可為空喔",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
     return;
   } else {
-    const userConfirmed = window.confirm("確定要送出活動評論嗎？");
+    const userConfirmed = 
+    Swal.fire({
+      icon: "success",
+      title: "太棒了!",
+      text: "成功送出評論",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
       if (userConfirmed) {
         console.log("送出的資料:", reviewData);
-        fetch(`/chill-tribe/activities/${activityId}`, {
+        fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
