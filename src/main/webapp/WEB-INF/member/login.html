@@ -112,15 +112,44 @@
 	// 記住帳密結束
 
 
+	debugger;
 	// 一般登入開始
 	$('button#btn_login').on('click', () => {
 		googleshow = false;
 		console.log("登入按鈕觸發");
 		if (!email.value) {
 			Swal.fire({
-				icon: "error",
-				title: "Oh...糟糕",
-				text: "Email必須輸入!",
+				  icon: "error",
+				  title: "Oh...糟糕",
+				  text: "Email必須輸入!",
+				  backdrop: false,
+
+				  didOpen: () => {
+				    const modal = document.querySelector('.modal.fade.show');
+				    if (modal) {
+				      modal.style.display = 'none'; 
+				    }
+
+				    const swalPopup = document.querySelector('.swal2-popup');
+				    if (swalPopup) {
+				      swalPopup.style.position = 'fixed';
+				      swalPopup.style.top = '50%';
+				      swalPopup.style.left = '50%';
+				      swalPopup.style.transform = 'translate(-50%, -50%)';
+				      swalPopup.style.zIndex = '9999999'; 
+				      swalPopup.style.pointerEvents = 'auto';
+				    }
+				  },
+
+				  willClose: () => {
+				    const modal = document.querySelector('.modal.fade.show');
+				    if (modal) {
+				      modal.style.display = 'block'; 
+				    }
+				  },
+
+				  container: 'body'
+				
 			});
 			return;
 		}
@@ -130,6 +159,33 @@
 				icon: "error",
 				title: "Oh...糟糕",
 				text: "密碼必須輸入!",
+
+				didOpen: () => {
+				    const modal = document.querySelector('.modal.fade.show');
+				    if (modal) {
+				      modal.style.display = 'none'; 
+				    }
+
+				    const swalPopup = document.querySelector('.swal2-popup');
+				    if (swalPopup) {
+				      swalPopup.style.position = 'fixed';
+				      swalPopup.style.top = '50%';
+				      swalPopup.style.left = '50%';
+				      swalPopup.style.transform = 'translate(-50%, -50%)';
+				      swalPopup.style.zIndex = '9999999'; 
+				      swalPopup.style.pointerEvents = 'auto';
+				    }
+				  },
+
+				  willClose: () => {
+				    const modal = document.querySelector('.modal.fade.show');
+				    if (modal) {
+				      modal.style.display = 'block'; 
+				    }
+				  },
+
+				  container: 'body'
+				
 			});
 			return;
 		}
@@ -181,6 +237,38 @@
 			})
 			.catch(error => {
 				console.error("錯誤訊息:", error);
+				Swal.fire({
+					icon: "error",
+					title: "Oh...糟糕",
+					text: "登入失敗!",
+
+					didOpen: () => {
+					    const modal = document.querySelector('.modal.fade.show');
+					    if (modal) {
+					      modal.style.display = 'none'; 
+					    }
+
+					    const swalPopup = document.querySelector('.swal2-popup');
+					    if (swalPopup) {
+					      swalPopup.style.position = 'fixed';
+					      swalPopup.style.top = '50%';
+					      swalPopup.style.left = '50%';
+					      swalPopup.style.transform = 'translate(-50%, -50%)';
+					      swalPopup.style.zIndex = '9999999'; 
+					      swalPopup.style.pointerEvents = 'auto';
+					    }
+					  },
+
+					  willClose: () => {
+					    const modal = document.querySelector('.modal.fade.show');
+					    if (modal) {
+					      modal.style.display = 'block'; 
+					    }
+					  },
+
+					  container: 'body'
+					
+				});
 			});
 	});
 	// 一般登入結束
@@ -198,7 +286,7 @@
 	// Google查詢開始
 	window.onload = function () {
 		// 		    debugger;
-		fetch('googlelogin/findGoogleEmail')
+		fetch(`http://localhost:8080/chill-tribe/googlelogin/findGoogleEmail`)
 			.then(response => {
 				return response.json();
 			})
