@@ -98,6 +98,7 @@
 	//   }
 
 
+	// 記住帳密開始
 	$('#save-pass').on('change', () => {
 		consle.log(save - pass);
 		if (save - pass.checked) {
@@ -108,35 +109,30 @@
 			localStorage.removeItem("password");
 		}
 	});
+	// 記住帳密結束
 
 
-
+	// 一般登入開始
 	$('button#btn_login').on('click', () => {
 		googleshow = false;
 		console.log("登入按鈕觸發");
 		if (!email.value) {
-			// 				alert('Email必須輸入');
 			Swal.fire({
 				icon: "error",
 				title: "Oh...糟糕",
 				text: "Email必須輸入!",
-				// 				  footer: '<a href="#">Why do I have this issue?</a>'
 			});
 			return;
 		}
 
 		if (!password.value) {
-			// 				alert('密碼必須輸入');
 			Swal.fire({
 				icon: "error",
 				title: "Oh...糟糕",
 				text: "密碼必須輸入!",
-				//	 				  footer: '<a href="#">Why do I have this issue?</a>'
 			});
 			return;
 		}
-
-
 
 		console.log("發送的資料：", {
 			email: email.value,
@@ -144,6 +140,7 @@
 		});
 		console.log("發送登入請求");
 
+		// 一般登入發後端請求開始
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
 		fetch(`http://localhost:8080/chill-tribe/member/login/${email.value}/${password.value}`)
 // 		fetch(`login/${email.value}/${password.value}`)
@@ -161,7 +158,6 @@
 			// 			 .then(resp => {
 			// 				 return resp.json();
 			// 			 })
-
 			.then(resp => {
 				if (!resp.ok) {
 					throw new Error(`HTTP error! status: ${resp.status}`);
@@ -187,8 +183,9 @@
 				console.error("錯誤訊息:", error);
 			});
 	});
+	// 一般登入結束
 
-
+	// Google登入開始
 	$('#btn_googlelogin').on("click", () => {
 		localStorage.setItem('btngooglelogin', 'true');
 		googlebtn = true;
@@ -196,17 +193,11 @@
 		// 先跳轉到 Google 認證頁面
 		location.href = "http://localhost:8080/chill-tribe/anotherOauthLogin";
 	});
+	// Google登入結束
 
-
-	//  	    
-
-
-	// 		debugger;
-
-
+	// Google查詢開始
 	window.onload = function () {
 		// 		    debugger;
-		// 發送 GET 請求以獲取 session 資料
 		fetch('googlelogin/findGoogleEmail')
 			.then(response => {
 				return response.json();
@@ -243,6 +234,7 @@
 				console.error("錯誤:", error);
 			});
 	};
+	// Google查詢結束
 
 
 </script>

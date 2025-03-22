@@ -44,13 +44,13 @@
 					<li class="active"><a id="index_href" href="../chilltribe.html">首頁<span
 								class="submenu-indicator"></span></a></li>
 
-					<li><a href="JavaScript:Void(0);">活動列表<span class="submenu-indicator"></span></a></li>
+					<li><a id="index_href_search-activities" href="../activity/search-activities.html">活動列表<span class="submenu-indicator"></span></a></li>
 
-					<li><a href="JavaScript:Void(0);">客服中心<span class="submenu-indicator"></span></a></li>
+					<li><a id="index_href_contact" href="../general-info/contact.html">客服中心<span class="submenu-indicator"></span></a></li>
 
-					<li><a href="JavaScript:Void(0);">常見問題<span class="submenu-indicator"></span></a></li>
+					<li><a id="index_href_faq" href="../general-info/faq.html">常見問題<span class="submenu-indicator"></span></a></li>
 
-					<li><a href="JavaScript:Void(0);">關於我們<span class="submenu-indicator"></span></a></li>
+					<li><a id="index_href_about" href="../general-info/about-us.html">關於我們<span class="submenu-indicator"></span></a></li>
 
 					<li><a id="index_href_cart" href="./member/cart.html">購物車<span class="submenu-indicator"></span></a>
 					</li>
@@ -120,6 +120,11 @@
 	const logoutMenu = document.querySelector('#logout-menu');
 	const logo_href = document.querySelector('#logo_href');
 	const index_href = document.querySelector('#index_href');
+	const index_href_search_activities = document.querySelector('#index_href_search-activities');
+	const index_href_contact = document.querySelector('#index_href_contact');
+	const index_href_faq = document.querySelector('#index_href_faq');
+	const index_href_about = document.querySelector('#index_href_about');
+	const index_href_cart = document.querySelector('#index_href_cart');
 	const img_member_header_id = document.querySelector('#img_member_header_id');
 	// 			const memberid = document.querySelector('#memberid');
 // 	const memberid = sessionStorage.getItem('memberid');
@@ -139,7 +144,6 @@
 				membername.innerText = member.membername;
 				img_member_header_id.value = member.memberid;
 				// 				memberid = member.memberid;
-
 				if (member.photobase64 == null) {
 					member_header_photo_base64.src = 'https://placehold.co/500x500';
 					console.log("照片是空的");
@@ -162,17 +166,26 @@
 	// 拼接路徑字串，塞回去標籤內
 	let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
 	console.log(baseUrl);
-	let chilltribeLink = baseUrl + '/chilltribe.html';
-	let chilltribemember = baseUrl + '/member/cart.html';
+	let chilltribeindex = baseUrl + '/chilltribe.html';
+	let chilltribecart = baseUrl + '/member/cart.html';
+	let chilltribesearch_activities = baseUrl + '/activity/search-activities.html';
+	let chilltribecontact = baseUrl + '/general-info/contact.html';
+	let chilltribefaq = baseUrl + '/general-info/faq.html';
+	let chilltribeabout = baseUrl + '/general-info/about-us.html';
+	let chilltribecar = baseUrl + '/shoppingcart/shopping-cart.html';
 	let indexhref = baseUrl + '/chilltribe.html';
-	console.log(chilltribeLink);
-	logo_href.setAttribute('href', chilltribeLink);
-	index_href.setAttribute('href', chilltribeLink);
-	index_href_cart.setAttribute('href', chilltribemember);
+	logo_href.setAttribute('href', chilltribeindex);
+	index_href.setAttribute('href', chilltribeindex);
+	index_href_cart.setAttribute('href', chilltribecart);
+	index_href_search_activities.setAttribute('href', chilltribesearch_activities);
+	index_href_contact.setAttribute('href', chilltribecontact);
+	index_href_faq.setAttribute('href', chilltribefaq);
+	index_href_about.setAttribute('href', chilltribeabout);
+	index_href_cart.setAttribute('href', chilltribecar);
+	// 拼接路徑字串結束
 
-
+	// 登出開始
 	$('#btn_logout').on("click", function () {
-		// 			 debugger;
 		console.log("登出按鈕觸發");
 		sessionStorage.clear();
 		localStorage.clear();
@@ -182,10 +195,12 @@
 		// 				 sessionStorage.removeItem("member");
 		document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
+		// 登出發後端
 		fetch(`http://localhost:8080/chill-tribe/member/logout`, {
 // 		fetch(`member/logout`, {
 			method: 'DELETE'
 		});
+		// 登出結束
 	});
 
 
