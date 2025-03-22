@@ -131,6 +131,11 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 		
 		return tickets;
 	}
+
+	@Override
+	public List<Orders> getMemberOrders(Integer memberId) {
+		return ordDao.selectOrdersByMemberId(memberId);
+	}
 	
 	
 	

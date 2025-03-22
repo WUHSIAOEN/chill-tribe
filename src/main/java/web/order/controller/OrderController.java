@@ -14,6 +14,7 @@ import web.order.service.OrderService;
 import web.order.service.TicketService;
 import web.order.vo.Orders;
 import web.order.vo.Ticket;
+import web.shoppingcart.vo.ShoppingCart;
 
 @RestController
 @RequestMapping("orders/order")
@@ -60,9 +61,20 @@ public class OrderController {
 	}
 	
 	// 查詢訂單票券
-		@GetMapping("/ticket/{orderId}")
-		public List<Ticket> createTickets(@PathVariable Integer orderId) {
-			return ticketService.getOrderTickets(orderId);
+	@GetMapping("/ticket/{orderId}")
+	public List<Ticket> createTickets(@PathVariable Integer orderId) {
+		return ticketService.getOrderTickets(orderId);
+	}
+	
+	// 查會員的所有訂單
+	@GetMapping("/list/{memberId}")
+	public List<Orders> getMemcerAllOrders(@PathVariable Integer memberId){
+		List<Orders> orders = orderService.getMemberOrders(memberId);
+//		如果是空值的判斷要再調整
+		if (orders == null) {
+			System.out.println("沒訂單");
 		}
+		return orders;
+	}
 
 }
