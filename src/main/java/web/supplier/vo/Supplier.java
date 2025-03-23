@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.SerializedName;
+
 import core.util.Core;
 
 // 供應商VO
@@ -26,6 +28,7 @@ public class Supplier extends Core {
 	// 供應商基本資料
 	private String contact_person;
 	private String phone;
+	@SerializedName("supplier_address")
 	private String address;
 	private String about;
 	private String image;
