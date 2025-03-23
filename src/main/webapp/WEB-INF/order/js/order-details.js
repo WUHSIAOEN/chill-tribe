@@ -30,7 +30,7 @@ $(function () {
     let urlParams = new URLSearchParams(window.location.search);
     console.log(urlParams.toString());
     let orderId = urlParams.get('orderId');
-    // var activityId;
+
     fetch(`/chill-tribe/orders/order/${orderId}`)
         .then(resp => {
             if (resp.ok) {
@@ -42,7 +42,7 @@ $(function () {
         })
         .then(orders => {
             console.log(orders);
-            // 後面的判斷等改好狀態，要再調整
+
             let orderStatus;
             if (orders.orderStatus === "no_payment_required" || orders.orderStatus === "paid"){
                 orderStatus = "訂單已成立"
