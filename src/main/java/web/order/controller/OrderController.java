@@ -61,7 +61,7 @@ public class OrderController {
 	}
 	
 	// 查詢訂單票券
-	@GetMapping("/ticket/{orderId}")
+	@GetMapping("/tickets/{orderId}")
 	public List<Ticket> createTickets(@PathVariable Integer orderId) {
 		return ticketService.getOrderTickets(orderId);
 	}
