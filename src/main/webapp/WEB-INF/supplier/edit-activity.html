@@ -483,5 +483,42 @@
 
 <!----- 接收後端的資料 ----->
 <script src="js/edit-activity.js"></script>
+
+<!----- 日期的不早於現在 ----->
+<script>
+  $(function () {
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePicker24Hour: true,
+      startDate: moment().add(1, 'days'),
+      minDate: moment(), // 限制最小日期為今天
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    }).on('apply.daterangepicker', function(ev, picker) {
+      let selectedDate = picker.startDate.clone().subtract(1, 'minutes'); // 讓第二個時間必須早於第一個時間
+      $('#reservationtime_1').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        startDate: moment(), // 預設為現在
+        minDate: moment(),
+        maxDate: selectedDate,
+        locale: {
+          format: 'YYYY-MM-DD HH:mm'
+        }
+      });
+    });
+
+    $('#reservationtime_1').daterangepicker({
+      timePicker: true,
+      timePicker24Hour: true,
+      startDate: moment(),
+      minDate: moment(),
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    });
+  });
+</script>
 </body>
 </html>

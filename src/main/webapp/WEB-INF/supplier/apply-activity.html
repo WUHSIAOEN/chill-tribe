@@ -199,13 +199,13 @@
                   <input type="text" class="form-control" name="activityName" id="activityName" placeholder="例子: 歡樂象山健走" required>
                 </div>
                 <div class="mb-3">
-                  <label for="zipcode" class="form-label">舉辦縣市 <span class="text-danger">*</span></label>
+                  <label for="zipcode" class="form-label" id="zipcode">舉辦縣市 <span class="text-danger">*</span></label>
                   <div class="d-flex">
                     <input type="text" id="zipcode" class="form-control" readonly style="width: 80px; border-right: 0; border-radius: 8px 0 0 8px;" />
                     
-                    <select id="city_id" class="form-select" style="border-radius: 0;"></select>
+                    <select id="city" class="form-select" style="border-radius: 0;"></select>
                     
-                    <select id="area" class="form-select" style="border-radius: 0 8px 8px 0;"></select>
+                    <select id="districts" class="form-select" style="border-radius: 0 8px 8px 0;"></select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -472,64 +472,43 @@
 </script>
 
 <!----- 載入地址和郵遞區號 ----->
-<script src="./js/address.js"></script>
+<script src="./js/address.form.js"></script>
+
+<!----- 日期的不早於現在 ----->
 <script>
-  // 跑回圈，抓資料
-  function addr_init(){
-    $.each(addrData, function(i, item){
-      // console.log(item);
-      // console.log(item.cityId);
-      // console.log(item.city);
+  $(function () {
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePicker24Hour: true,
+      startDate: moment().add(1, 'days'),
+      minDate: moment(), // 限制最小日期為今天
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    }).on('apply.daterangepicker', function(ev, picker) {
+      let selectedDate = picker.startDate.clone().subtract(1, 'minutes'); // 讓第二個時間必須早於第一個時間
+      $('#reservationtime_1').daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        startDate: moment(), // 預設為現在
+        minDate: moment(),
+        maxDate: selectedDate,
+        locale: {
+          format: 'YYYY-MM-DD HH:mm'
+        }
+      });
+    });
 
-      let city_str = `
-        <option value="${item.city_id}">${item.city}</option>
-      `;
-      $("#city_id").append(city_str);
-
-      if(item.city_id == 2){
-        area_init(item.area);
+    $('#reservationtime_1').daterangepicker({
+      timePicker: true,
+      timePicker24Hour: true,
+      startDate: moment(),
+      minDate: moment(),
+      locale: {
+        format: 'YYYY-MM-DD HH:mm'
       }
     });
-  }
-  // 執行涵式
-  addr_init();
-
-  function area_init(areas){
-    // console.log(areas);
-    $.each(areas, function(k, area){
-      // console.log(area);
-      let area_str = `
-        <option value="${area.zipcode}">${area.name}</option>
-      `;
-      $("#area").append(area_str);
-      if(k == 0) {
-        $("#zipcode").val(area.zipcode);
-      }
-    });
-  }
-  
-  // 1. 針對"區"的部分，做change事件上的綁定
-  $("#area").on("change", function(){
-    // console.log($("#zipcode").val($(this).val()));
-    $("#zipcode").val($(this).val());     
   });
-
-  // 2. 放到郵遞區號的欄位上
-  // 3. 對縣市的下拉選單綁定change事件
-  // 4. 跑addrData迴圈，用"縣市資料"抓"區"的資料，
-  //    放到新的下拉選單 (area_init())
-  $("#city_id").on("change", function(){
-    // console.log($(this).val());
-    $("#area").empty();
-    $.each(addrData, (i, item) => {
-      // console.log(item);
-      if(item.city_id == $(this).val()){
-        console.log(item.area)
-        area_init(item.area);
-      }
-    })
-  });
-
 </script>
 </body>
 </html>
