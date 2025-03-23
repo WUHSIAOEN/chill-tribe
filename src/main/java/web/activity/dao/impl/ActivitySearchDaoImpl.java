@@ -32,7 +32,7 @@ import web.activity.vo.ActivityImage;
 import web.supplier.vo.Supplier;
 
 
-@Repository
+//@Repository
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	
 //	private DataSource ds;
@@ -57,8 +57,8 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	}
 	
 	
-	@PersistenceContext
-	private Session session;
+//	@PersistenceContext
+//	private Session session;
 
 	// 查詢所有的活動回來
 	@Override
@@ -299,14 +299,4 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 		return null;
 	}
 
-	@Override
-	public Integer updateActInventoryById(Integer activityId, Integer count) {
-		int result = session
-				.createQuery("UPDATE Activities SET inventoryCount = :inventoryCount WHERE activityId = :activityId")
-				.setParameter("inventoryCount", count)
-				.setParameter("activityId", activityId)
-				.executeUpdate();
-		
-		return result;
-	}
 }
