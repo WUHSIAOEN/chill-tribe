@@ -61,7 +61,7 @@ $(function () {
 
                             <div class="listing-img-wrapper">
                                 <a href="single-property-2.html">
-                                    <img src="${activityCard.activityImages[0]?.imageBase64 || './asset/no-image.jpg'}" class="img-fluid mx-auto rounded" alt="" />
+                                    <img src="${activityCard.activityImages[0]?.imageBase64 || './activity/asset/no-image.jpg'}" class="img-fluid mx-auto rounded" alt="" />
                                 </a>
                             </div>
 
