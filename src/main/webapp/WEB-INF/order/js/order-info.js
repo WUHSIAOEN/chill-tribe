@@ -4,10 +4,13 @@ $(function () {
     // ============== 自訂函式↓ =================
     // 函式 - 將日期時間格式轉換成只有日期的格式
     function convertTimeFormat(dateTime) {
-        if (dateTime instanceof Date) {
-            dateTime = dateTime.toISOString();
+        // if (dateTime instanceof Date) {
+        //     dateTime = dateTime.toISOString();
+        // }
+        if (dateTime == null) {
+            dateTime = "2025/02/15 17:04:19";
         }
-        // console.log(dateTime);
+        console.log(dateTime);
 
         return dateTime.slice(0, 16);
     }
@@ -56,7 +59,7 @@ $(function () {
             $('#activity-desc').text(tickets[0]?.activity?.description);
             $('#activity-date').text(tickets[0]?.activity?.startDateTime);
             // 後端把活動狀態修好之後，再把第二個判斷條件值換掉
-            if (tickets[0]?.order?.orderStatus === "no_payment_required" || tickets[0]?.order?.orderStatus === "pending_payment") {
+            if (tickets[0]?.order?.orderStatus === "no_payment_required" || tickets[0]?.order?.orderStatus === "paid") {
                 let orderStatus = "訂單已成立"
                 $('#order-status').text(orderStatus);
             } else {
@@ -90,7 +93,7 @@ $(function () {
             $('#endDateTime').text(endDateTime);
 
             // 整理票券變數
-            
+
             let ticketStartTime = convertTimeFormat(tickets[0]?.activity.ticketsActivateTime);
             let ticketEndTime = convertTimeFormat(tickets[0]?.activity.ticketsExpiredTime);
 
@@ -105,7 +108,7 @@ $(function () {
             $('#ticket-card').empty();
 
             for (let i = 0; i < tickets.length; i++) {
-                
+
                 let ticketSerialNumber = formatSerialNumber(tickets[i]?.ticketId, "TKT");
                 // 個別票券
                 let ticketEl = `
