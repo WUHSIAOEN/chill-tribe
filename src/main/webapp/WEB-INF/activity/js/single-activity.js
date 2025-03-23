@@ -327,7 +327,14 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
   content = content.replace(/\s+/g, ' ');
   const starRating = parseInt(document.getElementById('starRating').value);
   const commentTime = getFormattedTime(); // 獲取當前時間
-  const memberId = 1;
+
+  const memberData = fetchMemberId();
+  if (memberData.memberid) {
+    console.log("使用者已登入");
+  } else {
+    console.warn("使用者未登入，請先登入！");
+  }
+  const memberId = memberData.memberid;
 
   const reviewData = [{
     content: content,
