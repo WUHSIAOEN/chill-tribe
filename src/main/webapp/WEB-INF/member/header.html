@@ -133,7 +133,6 @@
 
 	// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
 	// 			fetch('/chill-tribe/member/find/') 
-	// 			debugger;
 	// 			fetch(`find/${img_member_header_id.value}`)
 	// 			fetch(`/chill-tribe/member/find/${img_member_header_id}`)
 	function setmembername(a) {
@@ -145,7 +144,9 @@
 				img_member_header_id.value = member.memberid;
 				// 				memberid = member.memberid;
 				if (member.photobase64 == null) {
-					member_header_photo_base64.src = 'https://placehold.co/500x500';
+// 					member_header_photo_base64.src = 'https://placehold.co/500x500';
+// 					member_header_photo_base64.src = 'https://imgur.com/a/jDrbFs9';
+					member_header_photo_base64.src = 'http://localhost:8080/chill-tribe/activity/asset/no-image.jpg';
 					console.log("照片是空的");
 				} else {
 					member_header_photo_base64.src = 'data:image/png;base64,' + member.photobase64;
@@ -161,11 +162,13 @@
 			});
 	}
 
+	if(localStorage.getItem('memberid') !== null && localStorage.getItem('memberid') !== 'null') {
 	setmembername(memberid);
+	}
 
 	// 拼接路徑字串，塞回去標籤內
 	let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
-	console.log(baseUrl);
+// 	console.log(baseUrl);
 	let chilltribeindex = baseUrl + '/chilltribe.html';
 	let chilltribecart = baseUrl + '/member/cart.html';
 	let chilltribesearch_activities = baseUrl + '/activity/search-activities.html';

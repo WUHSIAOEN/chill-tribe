@@ -281,6 +281,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="../admin/dist/js/demo.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- Page specific script -->
 <script>
   $(document).ready(function() {
@@ -383,7 +385,13 @@
 	 })
 	 .then(body => {
 		 const { successful, errMsg } = body;
-	 	 alert(successful ? '圖片上傳成功囉' : errMsg);
+// 	 	 alert(successful ? '圖片上傳成功囉' : errMsg);
+	 	Swal.fire({
+            icon: "success",
+            title: "恭喜",
+            text: "圖片上傳成功囉！",
+        });
+	 	 
 	 	 // to do list 按下上傳照片後要可以馬上更換新的照片
 			console.log(image);
 // 	 	photo_base64.src = 'data:image/png;base64,' + image;
@@ -421,10 +429,18 @@
 			 const { successful, errMsg } = body;
 			 if (body.successful) {
 				console.log("恭喜，個資修改成功囉！！！");
-				alert('個資修改成功囉！');
+				Swal.fire({
+					icon: "success",
+					title: "恭喜",
+					text: "個資修改成功囉！",
+				});
 			 }else {
 				 console.log("OH~NO...您個資修改失敗了！！！");
-				 alert('OH~不，個資修改失敗...');
+				 Swal.fire({
+						icon: "error",
+						title: "Oh...糟糕",
+						text: "個資修改失敗...",
+				 });
 			 }
 		 });
 	});
