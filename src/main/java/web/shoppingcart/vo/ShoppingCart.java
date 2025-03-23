@@ -58,6 +58,6 @@ public class ShoppingCart extends Core{
 	private Member member;
 	
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	@Column(name = "ADDED_TIME")
+	@Column(name = "ADDED_TIME", insertable = false)
 	private Timestamp addedTime;
 }

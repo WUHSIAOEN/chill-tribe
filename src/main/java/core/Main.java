@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -14,6 +15,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.dao.impl.ActivitySearchDaoImpl;
+import web.activity.service.ActivityService2;
 import web.activity.service.impl.ActivityServiceImpl2;
 import web.activity.vo.Activities;
 import web.activity.vo.Activity;
@@ -27,8 +29,18 @@ public class Main {
 
 	public static void main(String[] args) throws NamingException {
 
-		String clientId = GetSecretValue.getOAuthKeyValue("CLIENT_ID");
-		System.out.println(clientId);
+//		String clientId = GetSecretValue.getOAuthKeyValue("CLIENT_ID");
+//		System.out.println(clientId);
+		
+		ActivityService2 activitySearch = new ActivityServiceImpl2();
+		List<Activities> lists = new ArrayList<>();
+		lists = activitySearch.searchActivityByStart();
+		for (Activities act : lists) {
+			System.out.println(act.getActivityName());
+		}
+//		System.out.println(lists);
+
+		
 
 	}
 }

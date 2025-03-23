@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Context>  
- 
+<Context>
+
     <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
  	driverClassName="com.mysql.cj.jdbc.Driver"
  	jdbcUrl="jdbc:mysql://localhost:3306/chilltribe_prod_restore"

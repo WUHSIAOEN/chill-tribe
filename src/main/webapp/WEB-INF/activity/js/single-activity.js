@@ -135,6 +135,7 @@ function fetchActivityById(activityId) {
     let sBody = document.getElementById('supplier-body');
     sBody.innerHTML = ""; // 清空目前的內容
 
+    let supplierIntroPage = data.supplier.supplier_id;
     let supplierName = data.supplier.supplier_name;
     let supplierPhone = data.supplier.phone;
     let supplierImage = data.supplier?.image || "./asset/no-image.jpg";
@@ -147,7 +148,7 @@ function fetchActivityById(activityId) {
         <img src="${supplierImage}" alt="Supplier Image">
       </div>
       <div class="sides-widget-details">
-        <h4><a href="#">${supplierName}</a></h4>
+        <h4><a href="../supplier/suppliers-intro.html?id=${supplierIntroPage}">${supplierName}</a></h4>
         <span><i class="lni-phone-handset"></i>${supplierPhone}</span>
       </div>
       <div class="clearfix"></div>
@@ -158,6 +159,8 @@ function fetchActivityById(activityId) {
 
     document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
     document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
+    document.getElementById("city-1").innerHTML = data.city.cityName || "暫無地址";
+    document.getElementById("city-2").innerHTML = data.city.cityName || "暫無地址";
     document.getElementById("address").innerHTML = data.address || "暫無地址";
     document.getElementById("minParticipants").innerHTML = data.minParticipants || "暫無人數";
     document.getElementById("maxParticipants").innerHTML = data.maxParticipants || "暫無人數";
@@ -205,10 +208,31 @@ function ShoppingCartItems() {
   };
 };
 
+// 檢查使用者有沒有登錄
+function fetchMemberId() {
+  let MemberData = { memberid: 1 };
+  sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
+
+  console.log("已存入:", MemberData); // 確認存入
+
+  const memberData = sessionStorage.getItem('MemberData');
+  if (memberData) {
+    return JSON.parse(memberData);
+  }
+  return null;
+};
+
 document
 .getElementById("addToCartBtn")
 .addEventListener("click", function (event) {
   event.preventDefault();
+  
+  const memberData = fetchMemberId();
+  if (memberData.memberid) {
+    console.log("使用者已登入");
+  } else {
+    console.warn("使用者未登入，請先登入！");
+  }
   const userConfirmed = 
   Swal.fire({
     icon: "success",
@@ -225,6 +249,10 @@ document
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestData),
+    })
+    .then(shoppingCart => {
+      console.log(shoppingCart);
+      // location.href = `/chill-tribe/shoppingcart/shopping-cart.html`;
     })
   }	
 });
@@ -245,6 +273,14 @@ document
 .getElementById("addToFavoritesBtn")
 .addEventListener("click", function (event) {
   event.preventDefault();
+
+  const memberData = fetchMemberId();
+  if (memberData.memberid) {
+    console.log("使用者已登入");
+  } else {
+    console.warn("使用者未登入，請先登入！");
+  }
+
   const userConfirmed = 
   Swal.fire({
     icon: "success",
@@ -261,6 +297,10 @@ document
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestMyforitesData),
+    })
+    .then(myFavorites => {
+      console.log(myFavorites);
+      // location.href = `/chill-tribe/member/favorite.html`;
     })
   }
 });
@@ -287,7 +327,14 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
   content = content.replace(/\s+/g, ' ');
   const starRating = parseInt(document.getElementById('starRating').value);
   const commentTime = getFormattedTime(); // 獲取當前時間
-  const memberId = 1;
+
+  const memberData = fetchMemberId();
+  if (memberData.memberid) {
+    console.log("使用者已登入");
+  } else {
+    console.warn("使用者未登入，請先登入！");
+  }
+  const memberId = memberData.memberid;
 
   const reviewData = [{
     content: content,
