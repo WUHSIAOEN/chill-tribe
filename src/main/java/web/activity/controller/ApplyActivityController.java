@@ -1,56 +1,48 @@
 package web.activity.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import web.activity.service.ActivityService;
 import web.activity.vo.Activities;
 import web.activity.vo.ActivityImage;
-import web.activity.vo.Comment;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("supplier/applyAct")
 public class ApplyActivityController {
 
-	@Autowired
-	private ActivityService service;
+    @Autowired
+    private ActivityService service;
 
-	@PostMapping
-	public Activities apply(@RequestBody Activities activities) {
-		if (activities == null) {
-			activities = new Activities();
-			activities.setMessage("無活動資訊");
-			activities.setSuccessful(false);
-			return activities;
-		}
-		activities = service.apply(activities);
-		return activities;
-	}
+    @PostMapping
+    public Activities apply(@RequestBody Activities activities) {
+        if (activities == null) {
+            activities = new Activities();
+            activities.setMessage("無活動資訊");
+            activities.setSuccessful(false);
+            return activities;
+        }
+        activities = service.apply(activities);
+        return activities;
+    }
 
-	// 根據 ID 找到一個活動
-	@GetMapping("{activityId}")
-	public Activities findById(@PathVariable Integer activityId) {
-		return service.findActivityById(activityId);
+    // 根據 ID 找到一個活動
+    @GetMapping("{activityId}")
+    public Activities findById(@PathVariable Integer activityId) {
+        return service.findActivityById(activityId);
 
-	}
+    }
 
-	// 用 ID 去插入活動
-	@PostMapping("{activityId}")
-	public boolean activityImages(@PathVariable("activityId") Integer activityId,
-			@RequestBody List<ActivityImage> images) {
-		for (ActivityImage image : images) {
-			image.setActivityId(activityId);
-		}
-		return service.addImages(images, activityId);
-	}
-
+    // 用 ID 去插入活動
+    @PostMapping("{activityId}")
+    public boolean activityImages(@PathVariable("activityId") Integer activityId,
+                                  @RequestBody List<ActivityImage> images) {
+        for (ActivityImage image : images) {
+            image.setActivityId(activityId);
+        }
+        return service.addImages(images, activityId);
+    }
 
 //@WebServlet("/activity/apply")
 
