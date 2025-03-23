@@ -6,6 +6,6 @@ import web.order.vo.Ticket;
 
 public interface TicketService {
 	
-	List<Ticket> getOrderTickets(int orderId);
+	List<Ticket> getOrderTickets(Integer orderId);
 
 }

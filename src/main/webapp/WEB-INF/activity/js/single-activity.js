@@ -250,6 +250,10 @@ document
       },
       body: JSON.stringify(requestData),
     })
+    .then(shoppingCart => {
+      console.log(shoppingCart);
+      // location.href = `/chill-tribe/shoppingcart/shopping-cart.html`;
+    })
   }	
 });
 
@@ -293,6 +297,10 @@ document
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestMyforitesData),
+    })
+    .then(myFavorites => {
+      console.log(myFavorites);
+      // location.href = `/chill-tribe/member/favorite.html`;
     })
   }
 });

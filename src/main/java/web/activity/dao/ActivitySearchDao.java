@@ -21,7 +21,6 @@ public interface ActivitySearchDao {
 	// 活動首頁三種條件查詢
 	List<Activities> selectByNameCatgoryRegion(String actname, String catgory, String region);
 	
-	// 依活動ID 及活動票券庫存數量來更新庫存值
-	Integer updateActInventoryById(Integer activityId, Integer count);
+	
 	
 }

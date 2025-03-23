@@ -17,15 +17,11 @@ import web.activity.vo.Activity2;
 import web.activity.vo.ActivityImage;
 
 
-@Service
-@Transactional
 public class ActivityServiceImpl2 implements ActivityService2 {
 	
 	// 以前的轉完Spring 就可以拿掉了
 	private ActivitySearchDao activitySearchDao;
 	
-	@Autowired
-	private ActivityDao actDao;
 
 	public ActivityServiceImpl2() throws NamingException {
 		activitySearchDao = new ActivitySearchDaoImpl();
