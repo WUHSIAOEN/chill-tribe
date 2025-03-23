@@ -114,7 +114,8 @@
 			username.innerText = member.membername;
 			img_member_navbar_id.value = member.memberid;
 			if (member.photobase64 == null) {
-				member_navbar_photo_base64.src = 'https://placehold.co/500x500';
+// 				member_navbar_photo_base64.src = 'https://placehold.co/500x500';
+				member_navbar_photo_base64.src = '../activity/asset/no-image.jpg';
 				console.log("照片是空的");
 			} else {
 				member_navbar_photo_base64.src = 'data:image/png;base64,' + member.photobase64;

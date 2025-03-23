@@ -87,27 +87,31 @@
 	// 		const msg = document.querySelector('#msg');
 
 
-
-	// to do list 完成被勾選要記住帳號密碼&沒被勾選要清空cookie session內的key
-	// 	 window.onload = function () {
-	//     if (localStorage.getItem("email") && localStorage.getItem("password")) {
-	//       loginemail.value = localStorage.getItem("email");
-	//       loginpassword.value = localStorage.getItem("password");
-	//       save-pass.checked = true;
-	//     }
-	//   }
-
-
+	var checksave = false;
+	 email.value = localStorage.getItem(email);
+     password.value = localStorage.getItem(password);
+	
+	// 記住帳密開始
 	$('#save-pass').on('change', () => {
-		consle.log(save - pass);
-		if (save - pass.checked) {
-			console.log('Checkbox 被勾選了');
-		} else {
-			console.log('Checkbox 被取消勾選了');
-			localStorage.removeItem("email");
-			localStorage.removeItem("password");
+    if ($('#save-pass').prop('checked')) {
+        console.log('Checkbox 被勾選了');
+        localStorage.setItem('email', email.value);
+        localStorage.setItem('password', password.value);
+        checksave = true;
+        localStorage.setItem('checksave', true);
+    } else {
+        console.log('Checkbox 被取消勾選了');
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        checksave = false;
+        localStorage.removeItem('checksave');
+        email.value="";
+        password.value="";
+        console.log(email.value);
+        console.log(password.value);
 		}
 	});
+	// 記住帳密結束
 
 
 
@@ -192,21 +196,15 @@
 	$('#btn_googlelogin').on("click", () => {
 		localStorage.setItem('btngooglelogin', 'true');
 		googlebtn = true;
+		localStorage.setItem("btn_google", true);
 		console.log("Google登入按鈕觸發");
 		// 先跳轉到 Google 認證頁面
 		location.href = "http://localhost:8080/chill-tribe/anotherOauthLogin";
 	});
 
 
-	//  	    
-
-
-	// 		debugger;
-
-
-	window.onload = function () {
-		// 		    debugger;
-		// 發送 GET 請求以獲取 session 資料
+	if (localStorage.getItem("btn_google") == "true") {
+		localStorage.setItem("btn_google", false);
 		fetch('googlelogin/findGoogleEmail')
 			.then(response => {
 				return response.json();

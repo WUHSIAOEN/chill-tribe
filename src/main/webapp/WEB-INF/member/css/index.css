@@ -1,4 +1,6 @@
-.social-login ul {
+/* 針對Google登入按鈕做CSS 位置改動 */
+/*.social-login ul { */ 
+#div_google ul {
 	margin: 0;
     width: 100%;
 	padding:0;
@@ -9,6 +11,6 @@
     justify-content:center;
 }
 
-.col-lg-6  {
+/*.col-lg-6  {
    width: 100%;
-}
+}*/
