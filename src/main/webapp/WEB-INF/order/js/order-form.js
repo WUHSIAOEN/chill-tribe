@@ -11,10 +11,10 @@ $(function () {
     // localStorage.setItem('checkoutActivity', JSON.stringify(checkoutActivity));
 
     // 先塞假會員資料到SessionStorage
-    let memberid = {
-        memberid: 1
-    }
-    sessionStorage.setItem('memberid', JSON.stringify(memberid));
+    // let memberid = {
+    //     memberid: 1
+    // }
+    // sessionStorage.setItem('memberid', JSON.stringify(memberid));
     // ============== 假資料↑ =================
 
     // ============== 自訂函式↓ =================
@@ -30,11 +30,11 @@ $(function () {
 
     // 函式 - 取得會員資料
     function getMemberData() {
-        const memberid = sessionStorage.getItem('memberid');
-        if (memberid) {
-            return JSON.parse(memberid);
-        }
-        return null;
+        const memberData = localStorage.getItem('memberid');
+        // if (memberData) {
+        //     return JSON.parse(memberData);
+        // }
+        return memberData;
     }
 
     // 函式 - 將日期時間格式轉換成只有日期的格式
@@ -48,7 +48,7 @@ $(function () {
     // console.log(getMemberData().memberid);
 
     // 取得會員基本資料
-    fetch(`/chill-tribe/member/find/${getMemberData().memberid}`)
+    fetch(`/chill-tribe/member/find/${getMemberData()}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -118,7 +118,7 @@ $(function () {
 
         let orderObj = {
             activityId: getOrderData().activityId,
-            memberId: getMemberData().memberid,
+            memberId: getMemberData(),
             quantity: getOrderData().quantity,
             orderStatus: getOrderData().orderStatus,
             paymentMethod: getOrderData().paymentMethod,
