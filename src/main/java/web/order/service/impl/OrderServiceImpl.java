@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import web.activity.dao.ActivitiesDao;
 import web.activity.dao.ActivityDao;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.vo.Activities;
@@ -27,7 +28,7 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 	private ActivityDao actDao;
 
 	@Autowired
-	private ActivitySearchDao actSearchDao;
+	private ActivitiesDao actsDao;
 	
 	@Autowired
 	private TicketDao ticketDao;
@@ -72,7 +73,7 @@ public class OrderServiceImpl extends OrderforpayServiceImpl implements OrderSer
 
 		if (order.getQuantity() <= oActInventory) {
 			int nActInventory = oActInventory - order.getQuantity();
-			int updateResultCount = actSearchDao.updateActInventoryById(order.getActivityId(), nActInventory);
+			int updateResultCount = actsDao.updateActInventoryById(order.getActivityId(), nActInventory);
 
 			if (updateResultCount <= 0) {
 				order.setMessage("訂單新增失敗");
