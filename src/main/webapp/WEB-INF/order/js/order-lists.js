@@ -3,7 +3,7 @@ $(function () {
     // ============== 假資料↓ =================
     // 先塞假會員資料到SessionStorage
     let memberid = {
-        memberid: 2
+        memberid: 1
     }
     sessionStorage.setItem('memberid', JSON.stringify(memberid));
     // ============== 假資料↑ =================
@@ -86,7 +86,7 @@ $(function () {
                                 <img src="${orderItems[i].activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg'}" alt="">
                                 <ul class="title" style="padding-left: 0; width: 1rem;">
                                     <li>
-                                        <h4><a href="#" class="order-act-name">${orderItems[i].activity.activityName}</a></h4>
+                                        <h4><a href="http://localhost:8080/chill-tribe/order/order-info.html?orderId=${orderItems[i].orderId}" class="order-act-name">${orderItems[i].activity.activityName}</a></h4>
                                     </li>
                                     <li><span>訂單編號</span></li>
                                     <li><span>訂購日期</span></li>
