@@ -170,5 +170,16 @@ public class SupplierServiceImpl implements SupplierService{
 		Supplier supplierdate = supplierDao.selectBySupplierID(supplier_id);
 		return supplierdate;
 	}
+
+	@Override
+	public Supplier forgetpassowrd(Supplier supplier) {
+		String email = supplier.getEmail();
+		if (supplierDao.selectByEmail(email) != null) {
+			System.out.println("有這個Email");
+			supplierDao.forgetpassword(email);
+			return supplier;
+		}
+		return supplier;
+	}
 	}
 

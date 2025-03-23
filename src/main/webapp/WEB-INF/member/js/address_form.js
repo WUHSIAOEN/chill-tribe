@@ -230,7 +230,7 @@ var addrData = [
             }
         ],
         "city": "連江縣",
-		"city_id": "24"
+		"city_id": "22"
     },
     {
         "districts": [

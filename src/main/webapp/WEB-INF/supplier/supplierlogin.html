@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>供應商登入頁面</title>
+  <title>ChillTribe - 供應商登入頁面</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -64,7 +64,7 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="../member/forgot-password.html">忘記密碼!?</a>
+        <a href="../supplier/supplierforgetpassword.html">忘記密碼!?</a>
       </p>
       <p class="mb-0">
         <a href="../member/supplier-register.html" class="text-center">註冊供應商</a>
@@ -123,8 +123,6 @@
       return;
     }
     
-    
-    
     console.log("發送的資料：", {
         email: loginemail.value,
         password: loginpassword.value,
@@ -132,7 +130,7 @@
     console.log("發送登入請求");
     
 // 	debugger;
-    fetch(`supplierlogin/${loginemail.value}/${loginpassword.value}`)
+    fetch(`http://localhost:8080/chill-tribe/supplier/supplierlogin/${loginemail.value}/${loginpassword.value}`)
 //     fetch('supplierlogin', {
 //       method: 'POST',
 //       headers: {

@@ -76,22 +76,22 @@
 						<div class="agency agency-list overlio-40">
 
 							<div class="agency-avatar">
-								<img src="https://placehold.co/500x470" alt="">
+								<img id="activity-img" src="https://placehold.co/500x470" alt="">
 							</div>
 
 							<div class="agency-content">
 								<div class="agency-name">
-									<h4><a href="agency-page.html">活動名稱</a></h4>
-									<span><i class="lni-map-marker"></i>訂單編號：</span><span>ORD00001
+									<h4><a href="agency-page.html" id="activity-name">活動名稱</a></h4>
+									<span><i class="lni-map-marker"></i>訂單編號：</span><span id="order-serial">ORD00001
 									</span>
 								</div>
 
-								<div class="agency-desc">
+								<div id="activity-desc">
 									<p>活動說明活動說明活動說明活動說明活動說明活動說明活動說明活動說明</p>
 								</div>
 
 								<div class="prt-detios">
-									<span class="label text-light bg-success">未使用</span>
+									<span class="label text-light bg-success" id="order-status">未使用</span>
 								</div>
 
 								<!-- <ul class="social-icons">
@@ -122,33 +122,33 @@
 						<div class="block-wrap">
 
 							<div class="block-header ags">
-								<h4 class="block-title">訂單資訊</h4>
+								<h2 class="block-title">訂單資訊</h2>
 								<div class="btn"></div>
 							</div>
 
 							<div class="block-body">
 								<ul class="dw-proprty-info">
-									<li><strong>訂單聯絡人</strong>Shaurya</li>
-									<li><strong>聯絡信箱</strong>themezhub@gmail.com</li>
-									<li><strong>聯絡電話</strong>0912345678</li>
-									<li><strong>總額</strong>300</li>
-									<li><strong>報名人數</strong>3</li>
-									<li><strong>縣市區域</strong>臺北市大安區</li>
-									<li><strong>地址</strong>忠孝東路一段</li>
-									<li><strong>成團</strong>是</li>
-									<li><strong>開始時間</strong>2025-02-15 10:00</li>
-									<li><strong>結束時間</strong>2025-02-15 12:00</li>
+									<li><strong>訂單聯絡人</strong><span id="order-contact">Shaurya</span></li>
+									<li><strong>聯絡信箱</strong><span id="contact-email">themezhub@gmail.com</span></li>
+									<li><strong>聯絡電話</strong><span id="contact-phone">0912345678</span></li>
+									<li><strong>總額</strong><span id="order-total-fee">300</span></li>
+									<li><strong>報名人數</strong><span id="registration-count">3</span></li>
+									<li><strong>縣市區域</strong><span id="city-district">臺北市大安區</span></li>
+									<li><strong>地址</strong><span id="act-location">忠孝東路一段</span></li>
+									<li><strong>成團</strong><span id="group-status">是</span></li>
+									<li><strong>開始時間</strong><span id="actStartDateTime">2025-02-15 10:00</span></li>
+									<li><strong>結束時間</strong><span id="actStartDateTime">2025-02-15 12:00</span></li>
 								</ul>
 							</div>
 
 						</div>
 
 
-						<!-- general Query -->
+						<!-- Ticket Related -->
 						<div class="tab-pane fade show active" id="general" role="tabpanel"
 							aria-labelledby="general-tab">
 
-							<div class="accordion border-0" id="generalac">
+							<div class="accordion border-0" id="ticket-card">
 
 								<!-- 票券QRCode 下拉 -->
 								<div class="card mb-2">
@@ -157,7 +157,7 @@
 											<button class="btn btn-link collapsed" type="button"
 												data-bs-toggle="collapse" data-bs-target="#collapseOne"
 												aria-expanded="false" aria-controls="collapseOne">
-												單人票 #1
+												單人票 # <b class="ticket-index">1</b>
 											</button>
 										</h2>
 									</div>
@@ -180,49 +180,10 @@
 																</h5>
 																<span
 																	class="agent-property text-muted-2">票券有效期限：</span>
-																	<p>2025-02-15
-																		10:00 - 2025-02-15 10:00</p>
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- 票券QRCode 下拉 -->
-								<div class="card mb-2">
-									<div class="card-header" id="headingTwo">
-										<h2 class="mb-0">
-											<button class="btn btn-link collapsed" type="button"
-												data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-												aria-expanded="false" aria-controls="collapseTwo">
-												單人票 #1
-											</button>
-										</h2>
-									</div>
-									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-										data-bs-parent="#generalac">
-										<div class="card-body">
-											<!-- Single Agent -->
-											<div class="col-lg-6 col-md-6 col-sm-12">
-												<div class="agents-grid card rounded-3 border">
-
-													<div class="agents-grid-wrap">
-														<div class="fr-grid-thumb mx-auto text-center mt-5 mb-3">
-															<a href="#" class="d-inline-flex p-1 border">
-																<div class="qrcode"></div>
-															</a>
-														</div>
-														<div class="fr-grid-deatil text-center">
-															<div class="fr-grid-deatil-flex">
-																<h5 class="fr-can-name mb-0"><a href="#">票券編號：</a><span>TKT000002</span>
-																</h5>
-																<span
-																	class="agent-property text-muted-2">票券有效期限：</span>
-																	<p>2025-02-15
-																	10:00 - 2025-02-15 10:00</p>
+																	<p><span class="ticket-start-time">2025-02-15 10:00</span>
+																		<span> - </span>
+																		<span class="ticket-end-time">2025-02-15 10:00</span></p>
+																	
 															</div>
 														</div>
 													</div>
@@ -245,10 +206,10 @@
 							<!-- Agent Detail -->
 							<div class="sides-widget">
 								<div class="sides-widget-header">
-									<div class="agent-photo"><img src="https://placehold.co/500x500" alt=""></div>
+									<div class="agent-photo"><img src="https://placehold.co/500x500" alt="" id="supplier-img" style="min-width: 60px; min-height: 60px;"></div>
 									<div class="sides-widget-details">
-										<h4><a href="#">供應商名稱</a></h4>
-										<span><i class="lni-phone-handset"></i>供應商電話</span>
+										<h4><a href="#" id="supplier-name">供應商名稱</a></h4>
+										<span><i class="lni-phone-handset" id="supplier-phone"></i></span>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -256,15 +217,15 @@
 								<div class="sides-widget-body simple-form">
 									<div class="form-group">
 										<label>聯絡信箱</label>
-										<input type="text" class="form-control" placeholder="Your Email">
+										<input type="text" class="form-control" placeholder="Your Email" id="msg-contact-email" value="">
 									</div>
 									<div class="form-group">
 										<label>連絡電話</label>
-										<input type="text" class="form-control" placeholder="Your Phone">
+										<input type="text" class="form-control" placeholder="Your Phone" id="msg-contact-phone" value="">
 									</div>
 									<div class="form-group">
 										<label>內容</label>
-										<textarea class="form-control">請問天氣不佳如何處理呢</textarea>
+										<textarea class="form-control" placeholder="填入問題"></textarea>
 									</div>
 									<button class="btn btn-dark btn-md rounded full-width">傳送訊息</button>
 								</div>
@@ -335,27 +296,8 @@
 
 
 	<script src="https://cdn.jsdelivr.net/npm/qrcanvas@3"></script>
-	<script>
-		const image = new Image();
-		image.src = "https://i.pinimg.com/736x/8e/c7/eb/8ec7eb0304fab49ff8f7dacd113d1628.jpg";
 
-		image.addEventListener("load", () => {
-			
-			const qrcodes = document.querySelectorAll(".qrcode");
-
-			qrcodes.forEach(element => {
-				const canvas = qrcanvas.qrcanvas({
-					cellSize: 8,
-					correctLevel: "H",
-					data: "https://www.google.com",
-					logo: {
-						image
-					}
-				});
-				element.appendChild(canvas);
-			});
-		});
-	</script>
+	<script src="./js/order-info.js"></script>
 
 
 </body>

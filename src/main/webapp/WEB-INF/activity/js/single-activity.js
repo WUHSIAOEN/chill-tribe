@@ -195,13 +195,12 @@ function ShoppingCartItems() {
   const activityId = parseInt(getActivityIdFromURL()) || 1;
   const quantity = parseInt(document.getElementById("quantity")?.value) || 1;
   const unitPrice = parseInt(document.getElementById("unitPrice-2").textContent);
-  const totalPrice = quantity * unitPrice;
+  // const totalPrice = quantity * unitPrice;
   const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
   console.log(activityId, quantity, unitPrice);
   return {
     activityId,
     quantity,
-    totalPrice,
     memberId
   };
 };

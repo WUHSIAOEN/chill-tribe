@@ -46,8 +46,8 @@ public class ShoppingCart extends Core{
 	
 	private Integer quantity;
 	
-	@Column(name = "TOTAL_PRICE")
-	private Integer totalPrice;
+//	@Column(name = "TOTAL_PRICE")
+//	private Integer totalPrice;
 	
 	@Column(name = "MEMBER_ID")
 	private Integer memberId;
