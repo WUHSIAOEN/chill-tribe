@@ -33,8 +33,8 @@ $(function () {
 
 
 
-    let queryString = "orderId=67";
-    let urlParams = new URLSearchParams(queryString);
+    // let queryString = "orderId=67";
+    let urlParams = new URLSearchParams(window.location.search);
     let orderId = urlParams.get('orderId');
 
     fetch(`/chill-tribe/orders/order/tickets/${orderId}`)
