@@ -19,7 +19,7 @@ public class TicketServiceImpl implements TicketService {
 
 	// 新增票券
 	@Override
-	public List<Ticket> getOrderTickets(int orderId) {
+	public List<Ticket> getOrderTickets(Integer orderId) {
 		List<Ticket> tickets = ticketDao.selctByOrderId(orderId);
 		return tickets;
 	}

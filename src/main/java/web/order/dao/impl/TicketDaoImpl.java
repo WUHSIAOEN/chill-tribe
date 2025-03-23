@@ -37,6 +37,7 @@ public class TicketDaoImpl implements TicketDao {
 		String hql1 = "FROM Ticket WHERE orderId = ?1";		
 		return session
 				.createQuery(hql1, Ticket.class)
+				.setParameter(1, orderId)
 				.getResultList();
 	}
 

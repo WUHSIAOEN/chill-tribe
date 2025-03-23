@@ -37,7 +37,7 @@ $(function () {
     let urlParams = new URLSearchParams(queryString);
     let orderId = urlParams.get('orderId');
 
-    fetch(`/chill-tribe/orders/order/ticket/${orderId}`)
+    fetch(`/chill-tribe/orders/order/tickets/${orderId}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
