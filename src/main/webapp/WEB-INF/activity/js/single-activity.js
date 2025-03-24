@@ -159,8 +159,8 @@ function fetchActivityById(activityId) {
 
     document.getElementById("activityName-1").innerHTML = data.activityName || "暫無";
     document.getElementById("activityName-2").innerHTML = data.activityName || "暫無";
-    document.getElementById("unitPrice-1").innerHTML = data.unitPrice || "暫無";
-    document.getElementById("unitPrice-2").innerHTML = data.unitPrice || "暫無";
+    document.getElementById("unitPrice-1").innerHTML = data.unitPrice || 0;
+    document.getElementById("unitPrice-2").innerHTML = data.unitPrice || 0;
     document.getElementById("city-1").innerHTML = data.city.cityName || "暫無地址";
     document.getElementById("city-2").innerHTML = data.city.cityName || "暫無地址";
     document.getElementById("address").innerHTML = data.address || "暫無地址";
