@@ -63,7 +63,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   console.log("Sending JSON text:", JSON.stringify(requestData));
 
   // 申請活動 - Post
-  fetch("/chill-tribe/supplier/applyAct", {
+  fetch("http://localhost:8080/chill-tribe/supplier/applyAct", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,13 +82,13 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
+        fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 POST 請求來提交圖片 - Post
-            fetch(`/chill-tribe/supplier/applyAct/${activityId}`, {
+            fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -98,6 +98,9 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
               .then(response => response.json())
               .then(uploadedPictures => {
                 console.log('圖片上傳成功:', uploadedPictures);
+                
+                // 上傳成功後跳轉到活動總攬頁面
+                window.location.href = "http://localhost:8080/chill-tribe/supplier/activitySpList.html";
               })
               .catch(error => console.error('圖片上傳失敗:', error));
           })

@@ -482,13 +482,11 @@
         format: 'YYYY-MM-DD HH:mm'
       }
     }).on('apply.daterangepicker', function(ev, picker) {
-      let selectedDate = picker.startDate.clone().subtract(1, 'minutes'); // 讓第二個時間必須早於第一個時間
       $('#reservationtime_1').daterangepicker({
         timePicker: true,
         timePicker24Hour: true,
         startDate: moment(), // 預設為現在
         minDate: moment(),
-        maxDate: selectedDate,
         locale: {
           format: 'YYYY-MM-DD HH:mm'
         }

@@ -8,7 +8,7 @@ const activityId = getActivityIdFromURL();
 function fetchActivityById(activityId) {
   
 
-  fetch(`/chill-tribe/supplier/activities/edit/${activityId}`)
+  fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("從 後端獲取的數據:", data);
@@ -145,7 +145,7 @@ document
   const images = window.base64Images;
   const requestData = newActivityData();
 
-  fetch(`/chill-tribe/supplier/activities/edit/${activityId}`, {
+  fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -164,13 +164,13 @@ document
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`/chill-tribe/supplier/activities/edit/${activityId}`)
+        fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 PUT 請求來修改圖片
-            fetch(`/chill-tribe/supplier/activities/edit/${activityId}/images`, {
+            fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}/images`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -180,6 +180,10 @@ document
               .then(response => response.json())
               .then(uploadedPictures => {
                 console.log('圖片上傳成功:', uploadedPictures);
+
+                setTimeout(function() {
+                  window.location.href = "http://localhost:8080/chill-tribe/supplier/activitySpList.html";
+                }, 1000);
               })
               .catch(error => console.error('圖片上傳失敗:', error));
           })
