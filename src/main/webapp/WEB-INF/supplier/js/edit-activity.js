@@ -44,6 +44,10 @@ function fetchActivityById(activityId) {
           removeBtn.innerHTML = "✖";
           removeBtn.classList.add("remove-btn", "position-absolute");
 
+          removeBtn.style.fontSize = "12px";
+          removeBtn.style.width = "20px";
+          removeBtn.style.height = "20px";
+
           removeBtn.addEventListener("click", () => {
             previewDiv.remove();
 

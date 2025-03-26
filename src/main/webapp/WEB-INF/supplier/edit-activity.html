@@ -34,6 +34,15 @@
   <!-- Apply_activity style -->
   <link rel="stylesheet" href="./css/apply_activity.css">
 </head>
+<style>
+  .remove-btn {
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border-radius: 50%;
+  }
+</style>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Preloader -->
@@ -462,6 +471,11 @@
         const removeBtn = document.createElement("button");
         removeBtn.innerHTML = "✖";
         removeBtn.classList.add("remove-btn", "position-absolute");
+
+        // removeBtn.style.fontSize = "12px";
+        // removeBtn.style.width = "20px";
+        // removeBtn.style.height = "20px";
+        // removeBtn.style.padding = "2px";
 
         removeBtn.addEventListener("click", () => {
           let removeImages = window.base64Images.indexOf(base64String);
