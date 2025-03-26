@@ -70,7 +70,7 @@ if (activityId) {
 // 更新
 function newActivityData() {
   const activityId = getActivityIdFromURL();
-  const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
+  const supplierId = localStorage.getItem('supplier_id');
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("cityId")?.value) || 1;
   const districtId = parseInt(document.getElementById("districtId")?.value) || 3;
@@ -114,7 +114,7 @@ function newActivityData() {
 
   return {
     activityId,
-    // supplierId,
+    supplierId,
     activityName,
     // cityId,
     // districtId,
