@@ -312,23 +312,15 @@
 
   // 動態抓取資料並加入 DataTable
 
-  function fetchSupplierId() {
-    let SupplierData = { supplierId: 1 };
-    localStorage.setItem('SupplierData', JSON.stringify(SupplierData));
-
-    console.log("已存入:", SupplierData); // 確認存入
-
-    const supplierData = localStorage.getItem('SupplierData');
-    if (supplierData) {
-      return JSON.parse(supplierData);
-    }
-    return null;
+  function getSupplierId() {
+    const supplier_id = localStorage.getItem('supplier_id');
+    return supplier_id;
   };
 
   function fetchAllActivity(table) {
-    const supplierData = fetchSupplierId();
+    const supplierId = getSupplierId();
 
-    fetch(`http://localhost:8080/chill-tribe/activities/supplier/${supplierData.supplierId}`)
+    fetch(`http://localhost:8080/chill-tribe/activities/supplier/${supplierId}`)
     .then(response => response.json())
     .then(data => {
       console.log("從 後端 獲取的數據:", data);

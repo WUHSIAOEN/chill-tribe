@@ -1,7 +1,9 @@
 document.getElementById("submitBtn").addEventListener("click", function (event) {
   event.preventDefault(); // 防止表單默認提交行為
 
-  const supplierId = parseInt(document.getElementById("supplierId")?.value) || 1;
+  // 從 localstorage 拿後端傳來的會員資料
+  const supplierId = localStorage.getItem('supplier_id');
+  
   const activityName = document.getElementById("activityName")?.value || "";
   const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
   const districtId = parseInt(document.getElementById("area")?.value) || 2;

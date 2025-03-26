@@ -195,24 +195,16 @@
 
 	<script>
 
-		function fetchMemberId() {
-			let MemberData = { memberid: 1 };
-			sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
-
-			console.log("已存入:", MemberData); // 確認存入
-
-			const memberData = sessionStorage.getItem('MemberData');
-			if (memberData) {
-				return JSON.parse(memberData);
-			}
-			return null;
+		function getMemberId() {
+			const memberId = localStorage.getItem('memberid');
+			return memberId;
 		};
 
 		function findAllProducts() {
 
-		const memberData = fetchMemberId();
+		const memberData = getMemberId();
 
-    fetch(`http://localhost:8080/chill-tribe/myfavorites/member/${memberData.memberid}`)
+    fetch(`http://localhost:8080/chill-tribe/myfavorites/member/${memberData}`)
        .then(response => response.json())
         .then(data => {
 					console.log("從後端獲取的數據:", data);
@@ -265,7 +257,7 @@
       .catch(error => console.error("獲取數據時出錯:", error));
 		};
 
-		fetchMemberId();
+		// fetchMemberId();
 
 		// 操作按鈕
 
