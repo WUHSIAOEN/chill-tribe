@@ -35,30 +35,19 @@ import web.supplier.vo.Supplier;
 //@Repository
 public class ActivitySearchDaoImpl implements ActivitySearchDao {
 	
-//	private DataSource ds;
-	private HikariDataSource ds;
+	private DataSource ds;
 
 	public ActivitySearchDaoImpl() throws NamingException {
-		// JNDI Tomcat 會報錯先註解
-//		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
-//		if (ds != null) {
-//			System.out.println("DataSource found!");
-//		} else {
-//			System.out.println("DataSource not found.");
-//		}
 
-		ds = new HikariDataSource();
-		ds.setJdbcUrl(URL);
-		ds.setUsername(USER);
-		ds.setPassword(PASSWORD);
-		ds.addDataSourceProperty("cachePrepStmts", true);
-		ds.addDataSourceProperty("preStmtCacheSize", 250);
-		ds.addDataSourceProperty("preStmtCacheSqlLimit", 2048);
+		ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/chilltribe");
+		if (ds != null) {
+			System.out.println("DataSource found!");
+		} else {
+			System.out.println("DataSource not found.");
+		}
+
 	}
-	
-	
-//	@PersistenceContext
-//	private Session session;
+
 
 	// 查詢所有的活動回來
 	@Override

@@ -4,14 +4,6 @@ $(function () {
     // ============== 自訂函式↓ =================
     // 函式 - 將日期時間格式轉換成只有日期的格式
     function convertTimeFormat(dateTime) {
-        // if (dateTime instanceof Date) {
-        //     dateTime = dateTime.toISOString();
-        // }
-        if (dateTime == null) {
-            dateTime = "2025/02/15 17:04:19";
-        }
-        console.log(dateTime);
-
         return dateTime.slice(0, 16);
     }
 
@@ -52,6 +44,7 @@ $(function () {
         .then(tickets => {
             console.log(tickets);
 
+            $('#activity-name').attr('href', `http://localhost:8080/chill-tribe/activity/single-activity.html?id=${tickets[0]?.activityId}`);
             $('#activity-img').attr('src', tickets[0]?.activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg');
             $('#activity-name').text(tickets[0]?.activity?.activityName);
             let orderSerial = formatSerialNumber(tickets[0]?.order?.orderId, "ORD");
@@ -66,9 +59,9 @@ $(function () {
                 let orderStatus = "訂單已過期"
                 $('#order-status').text(orderStatus);
             }
-            $('#order-contact').text(tickets[0]?.order?.orderContact);
-            $('#contact-email').text(tickets[0]?.order?.contactMail);
-            $('#contact-phone').text(tickets[0]?.order?.contactPhone);
+            $('#order-contact').text(tickets[0]?.order?.orderContact || "無");
+            $('#contact-email').text(tickets[0]?.order?.contactMail || "無");
+            $('#contact-phone').text(tickets[0]?.order?.contactPhone  || "無");
             let totalPrice = tickets[0]?.order?.quantity * tickets[0]?.activity?.unitPrice;
             $('#order-total-fee').text(totalPrice);
             $('#registration-count').text(tickets[0]?.order?.quantity);
@@ -86,16 +79,18 @@ $(function () {
                 $('#group-status').text(groupStatus);
             }
 
-            let startDateTime = convertTimeFormat(tickets[0]?.activity.startDateTime);
-            let endDateTime = convertTimeFormat(tickets[0]?.activity.endDateTime);
+            let actStartDateTime = convertTimeFormat(tickets[0]?.activity.startDateTime);
+            let actEndDateTime = convertTimeFormat(tickets[0]?.activity.endDateTime);
+            let orderCreatedTime = convertTimeFormat(tickets[0]?.order.orderCreateDatetime)
 
-            $('#startDateTime').text(startDateTime);
-            $('#endDateTime').text(endDateTime);
+            $('#actStartDateTime').text(actStartDateTime);
+            $('#actEndDateTime').text(actEndDateTime);
+            $('#orderCreatedTime').text(orderCreatedTime);
 
             // 整理票券變數
 
-            let ticketStartTime = convertTimeFormat(tickets[0]?.activity.ticketsActivateTime);
-            let ticketEndTime = convertTimeFormat(tickets[0]?.activity.ticketsExpiredTime);
+            let ticketStartTime = convertTimeFormat(tickets[0]?.activity.ticketsActivateTime || tickets[0]?.activity.startDateTime);
+            let ticketEndTime = convertTimeFormat(tickets[0]?.activity.ticketsExpiredTime || tickets[0]?.activity.endDateTime);
 
             // 右邊供應商資訊
             $('#supplier-img').attr('src', tickets[0]?.activity.supplier.image?.imageBase64 || '../activity/asset/no-image.jpg');
