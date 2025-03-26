@@ -172,19 +172,19 @@ $(function () {
 
                 const ratingContainer = document.querySelector(`.fr-can-rating[data-rating-id="${index}"]`);
                 console.log(ratingContainer);
-                const stars = ratingContainer.querySelectorAll('i[data-star-index]');
-                stars.forEach((star, index) => {
+                // const stars = ratingContainer.querySelectorAll('i[data-star-index]');
+                // stars.forEach((star, index) => {
                     
-                    if (index <= Math.floor(commentAverageStar)) {
-                        star.classList.add('filled');
-                        // star.classList.remove('empty');
-                        console.log("有近來判斷哦");
-                        console.log(index);
-                    } else {
-                        // star.classList.remove('filled');
-                        // star.classList.add('empty');
-                    }
-                });
+                //     if (index <= Math.floor(commentAverageStar)) {
+                //         star.classList.add('filled');
+                //         // star.classList.remove('empty');
+                //         console.log("有近來判斷哦");
+                //         console.log(index);
+                //     } else {
+                //         // star.classList.remove('filled');
+                //         // star.classList.add('empty');
+                //     }
+                // });
 
             });
         })
