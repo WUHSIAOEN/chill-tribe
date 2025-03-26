@@ -203,17 +203,9 @@ function ShoppingCartItems() {
 };
 
 // 檢查使用者有沒有登錄
-function fetchMemberId() {
-  let MemberData = { memberid: 1 };
-  sessionStorage.setItem('MemberData', JSON.stringify(MemberData));
-
-  console.log("已存入:", MemberData); // 確認存入
-
-  const memberData = sessionStorage.getItem('MemberData');
-  if (memberData) {
-    return JSON.parse(memberData);
-  }
-  return null;
+function getMemberId() {
+  let memberId = localStorage.getItem('memberid');
+  return memberId;
 };
 
 document
@@ -221,20 +213,20 @@ document
 .addEventListener("click", function (event) {
   event.preventDefault();
   
-  const memberData = fetchMemberId();
-  if (memberData.memberid) {
+  const memberData = getMemberId();
+  if (memberData) {
     console.log("使用者已登入");
   } else {
     console.warn("使用者未登入，請先登入！");
-  }
-  const userConfirmed = 
-  Swal.fire({
-    icon: "success",
-    title: "太棒了!",
-    text: "成功加入購物車",
-    // footer: '<a href="#">Why do I have this issue?</a>'
-  });
-  if (userConfirmed) {
+  };
+
+  if (memberData) {
+    Swal.fire({
+      icon: "success",
+      title: "太棒了!",
+      text: "成功加入購物車",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
     const requestData = ShoppingCartItems();
     console.log("送出的資料:", requestData);
     fetch(`http://localhost:8080/chill-tribe/cart/${activityId}`, {
@@ -248,6 +240,13 @@ document
       console.log(shoppingCart);
       // location.href = `/chill-tribe/shoppingcart/shopping-cart.html`;
     })
+  } else {
+    Swal.fire({
+      icon: "failed",
+      title: "OOPS...",
+      text: "請先登入",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
   }	
 });
 
@@ -268,22 +267,16 @@ document
 .addEventListener("click", function (event) {
   event.preventDefault();
 
-  const memberData = fetchMemberId();
-  if (memberData.memberid) {
-    console.log("使用者已登入");
-  } else {
-    console.warn("使用者未登入，請先登入！");
-  }
-
-  const userConfirmed = 
-  Swal.fire({
-    icon: "success",
-    title: "太棒了!",
-    text: "成功加入我的最愛",
-    // footer: '<a href="#">Why do I have this issue?</a>'
-  });
-  if (userConfirmed) {
+  const memberData = getMemberId();
+  
+  if (memberData) {
     const requestMyforitesData = MyFavoritesItems();
+    Swal.fire({
+      icon: "success",
+      title: "太棒了!",
+      text: "成功加入我的最愛",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
     console.log("送出的資料:", requestMyforitesData);
     fetch(`http://localhost:8080/chill-tribe/myfavorites/${activityId}`, {
       method: "POST",
@@ -296,6 +289,13 @@ document
       console.log(myFavorites);
       // location.href = `/chill-tribe/member/favorite.html`;
     })
+  } else {
+    Swal.fire({
+      icon: "failed",
+      title: "OOPS...",
+      text: "請先登入",
+      // footer: '<a href="#">Why do I have this issue?</a>'
+    });
   }
 });
 
