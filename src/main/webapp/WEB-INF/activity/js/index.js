@@ -34,6 +34,27 @@ $(function () {
     // });
 
 
+    function fillStars(rating) {
+
+        const stars = document.querySelectorAll('.fr-can-rating i');
+        
+        stars.forEach((star, index) => {
+            // star.classList.remove("filled");
+            if (index < Math.floor(rating)) {
+                // 完全填充的星星
+                star.classList.add('filled');
+                // star.classList.remove('empty');
+                console.log("有近來判斷哦");
+                console.log(index);
+            } else {
+                // 空的星星
+                star.classList.remove('filled');
+                // star.classList.add('empty');
+            }
+        });
+    }
+
+
 
 
 
@@ -51,8 +72,9 @@ $(function () {
         .then(activityCards => {
             $("#coming-soon-activities").empty();
 
-            activityCards.forEach(activityCard => {
+            activityCards.forEach((activityCard, index) => {
                 console.log(activityCard);
+                // let index = 0;
 
                 // 留言運算
                 let commentCount = activityCard.comments?.length ?? 0;
@@ -93,11 +115,11 @@ $(function () {
                                         <div class="listing-short-detail">
                                             <span class="label bg-light-danger text-danger d-inline-flex mb-1">${activityCard.category}</span>
                                             <h4 class="listing-name mb-0"><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
-                                            <div class="fr-can-rating">
-                                                <i class="fas fa-star fs-xs filled"></i>
-                                                <i class="fas fa-star fs-xs filled"></i>
-                                                <i class="fas fa-star fs-xs filled"></i>
-                                                <i class="fas fa-star fs-xs filled"></i>
+                                            <div class="fr-can-rating data-rating-id="${index}">
+                                                <i class="fas fa-star fs-xs"></i>
+                                                <i class="fas fa-star fs-xs"></i>
+                                                <i class="fas fa-star fs-xs"></i>
+                                                <i class="fas fa-star fs-xs"></i>
                                                 <i class="fas fa-star fs-xs"></i>
                                                 <span class="reviews_text fs-sm text-muted ms-2">(${commentCount} 則評論)</span>
                                             </div>
@@ -145,13 +167,31 @@ $(function () {
 
                 $("#coming-soon-activities").append(activity_card_html);
 
+                console.log(document.querySelector("#coming-soon-activities"));
 
 
-
+                const ratingContainer = document.querySelector(`.fr-can-rating[data-rating-id="${index}"]`);
+                console.log(ratingContainer);
+                const stars = ratingContainer.querySelectorAll('i[data-star-index]');
+                stars.forEach((star, index) => {
+                    
+                    if (index <= Math.floor(commentAverageStar)) {
+                        star.classList.add('filled');
+                        // star.classList.remove('empty');
+                        console.log("有近來判斷哦");
+                        console.log(index);
+                    } else {
+                        // star.classList.remove('filled');
+                        // star.classList.add('empty');
+                    }
+                });
 
             });
         })
         .catch(({ message }) => console.log(message));
+
+
+        
 
     // ============== 使用者在搜尋欄選取類別 ================
 
