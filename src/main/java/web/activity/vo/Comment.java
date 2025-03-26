@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import core.util.Core;
+import core.vo.Core;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +29,8 @@ import web.member.vo.Member;
 @Table(name = "comments")
 public class Comment extends Core{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "COMMENT_ID")
