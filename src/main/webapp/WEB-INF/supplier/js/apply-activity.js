@@ -4,20 +4,57 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   // 從 localstorage 拿後端傳來的會員資料
   const supplierId = localStorage.getItem('supplier_id');
   
-  const activityName = document.getElementById("activityName")?.value || "";
+  const activityName = document.getElementById("activityName")?.value;
   const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
   const districtId = parseInt(document.getElementById("area")?.value) || 2;
-  const address = document.getElementById("address")?.value || "";
+  const address = document.getElementById("address")?.value;
   const category = document.getElementById("category")?.value || "";
-  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
-  const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 4;
-  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 10;
-  const inventoryCount = parseInt(document.getElementById("maxParticipants")?.value) || 10;
-  const description = document.getElementById("description")?.value || "";
+  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value);
+  const minParticipants = parseInt(document.getElementById("minParticipants")?.value);
+  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value)
+  const inventoryCount = parseInt(document.getElementById("maxParticipants")?.value);
+  const description = document.getElementById("description")?.value;
   const precaution = document.getElementById("precaution")?.value || "";
-  const selectedRange = document.getElementById("reservationtime")?.value || "";
-  const selectedRange_1 = document.getElementById("reservationtime_1")?.value || "";
+  const selectedRange = document.getElementById("reservationtime")?.value;
+  const selectedRange_1 = document.getElementById("reservationtime_1")?.value;
   const images = window.base64Images;
+
+  // 檢查欄位是否為空
+  if (!activityName) {
+    alert("活動名稱不能為空！");
+    activityName.focus();
+    return;
+  };
+
+  if (!address) {
+    alert("詳細地址不能為空！");
+    address.focus();
+    return;
+  };
+
+  if (!unitPrice) {
+    alert("參加費用不能為空！");
+    unitPrice.focus();
+    return;
+  };
+
+  if (!minParticipants) {
+    alert("成團人數不能為空！");
+    minParticipants.focus();
+    return;
+  };
+
+  if (!maxParticipants) {
+    alert("人數上限不能為空！");
+    maxParticipants.focus();
+    return;
+  };
+
+  if (!description) {
+    alert("介紹不能為空！");
+    description.focus();
+    return;
+  };
 
   function formatDateTime(input) {
     if (!input) return "";
