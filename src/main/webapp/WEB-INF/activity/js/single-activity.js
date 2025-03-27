@@ -351,7 +351,7 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
     Swal.fire({
       icon: "success",
       title: "太棒了!",
-      text: "成功送出評論",
+      text: "成功送出評論，頁面將刷新",
       // footer: '<a href="#">Why do I have this issue?</a>'
       
     });
@@ -369,7 +369,10 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
       })
       .then(data => {
         console.log("伺服器回應:", data);
-        location.reload();
+
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
       })
       .catch(error => {
           console.error("發生錯誤:", error);
