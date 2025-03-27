@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,17 +43,19 @@ public class Addresses extends Core {
 	private String tag;
 	
 	
+	
+	
 //	@ManyToOne
 //    @JoinColumn(name = "member_id", insertable = false, updatable = false)
 //    private Member member;
 //	
-//	@ManyToOne
-//    @JoinColumn(name = "city_id", insertable = false, updatable = false)
-//    private City city;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "district_id", insertable = false, updatable = false)
-//    private District district;
+	@ManyToOne
+    @JoinColumn(name = "city_id", insertable = false, updatable = false)
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "district_id", insertable = false, updatable = false)
+    private District district;
 //    
     @Column(name = "member_id")
     private Integer memberid;
