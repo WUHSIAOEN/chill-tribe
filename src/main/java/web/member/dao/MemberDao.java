@@ -48,5 +48,7 @@ public interface MemberDao {
 	
 //	int updateaddress(Member member);
 	
+	int updateaddress(Member member);
+	
 //	List<Member> selectcityAll();
 }
