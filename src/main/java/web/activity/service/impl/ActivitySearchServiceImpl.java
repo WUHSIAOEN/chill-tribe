@@ -22,4 +22,9 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		return actDao.selectAllActivitiesOrderByStartTime();
 	}
 
+	@Override
+	public List<Activities> FilterByActivityCity(String city) {
+		return actDao.selectActivitiesByCategory(city);
+	}
+
 }

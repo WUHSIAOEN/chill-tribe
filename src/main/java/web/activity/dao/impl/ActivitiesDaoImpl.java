@@ -36,6 +36,15 @@ public class ActivitiesDaoImpl implements ActivitiesDao{
 				.setMaxResults(6)
 				.getResultList();
 	}
+
+	@Override
+	public List<Activities> selectActivitiesByCategory(String city) {
+		
+		return session
+				.createQuery("FROM Activities WHERE city = :city", Activities.class)
+				.setParameter("category", city)
+				.getResultList();
+	}
 	
 	
 	
