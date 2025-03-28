@@ -321,14 +321,13 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
   content = content.replace(/\s+/g, ' ');
   const starRating = parseInt(document.getElementById('starRating').value);
   const commentTime = getFormattedTime(); // 獲取當前時間
-
-  const memberData = fetchMemberId();
-  if (memberData.memberid) {
+  const memberData = getMemberId();
+  if (memberData) {
     console.log("使用者已登入");
   } else {
     console.warn("使用者未登入，請先登入！");
   }
-  const memberId = memberData.memberid;
+  const memberId = memberData;
 
   const reviewData = [{
     content: content,
@@ -352,8 +351,9 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
     Swal.fire({
       icon: "success",
       title: "太棒了!",
-      text: "成功送出評論",
+      text: "成功送出評論，頁面將刷新",
       // footer: '<a href="#">Why do I have this issue?</a>'
+      
     });
       if (userConfirmed) {
         console.log("送出的資料:", reviewData);
@@ -364,6 +364,19 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
         },
         body: JSON.stringify(reviewData),
       })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log("伺服器回應:", data);
+
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      })
+      .catch(error => {
+          console.error("發生錯誤:", error);
+      });
     }
   };
 });

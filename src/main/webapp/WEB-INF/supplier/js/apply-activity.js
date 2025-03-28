@@ -4,20 +4,57 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   // 從 localstorage 拿後端傳來的會員資料
   const supplierId = localStorage.getItem('supplier_id');
   
-  const activityName = document.getElementById("activityName")?.value || "";
+  const activityName = document.getElementById("activityName")?.value;
   const cityId = parseInt(document.getElementById("city_id")?.value) || 1;
   const districtId = parseInt(document.getElementById("area")?.value) || 2;
-  const address = document.getElementById("address")?.value || "";
+  const address = document.getElementById("address")?.value;
   const category = document.getElementById("category")?.value || "";
-  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value) || 0;
-  const minParticipants = parseInt(document.getElementById("minParticipants")?.value) || 4;
-  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value) || 10;
-  const inventoryCount = parseInt(document.getElementById("maxParticipants")?.value) || 10;
-  const description = document.getElementById("description")?.value || "";
+  const unitPrice = parseFloat(document.getElementById("unitPrice")?.value);
+  const minParticipants = parseInt(document.getElementById("minParticipants")?.value);
+  const maxParticipants = parseInt(document.getElementById("maxParticipants")?.value)
+  const inventoryCount = parseInt(document.getElementById("maxParticipants")?.value);
+  const description = document.getElementById("description")?.value;
   const precaution = document.getElementById("precaution")?.value || "";
-  const selectedRange = document.getElementById("reservationtime")?.value || "";
-  const selectedRange_1 = document.getElementById("reservationtime_1")?.value || "";
+  const selectedRange = document.getElementById("reservationtime")?.value;
+  const selectedRange_1 = document.getElementById("reservationtime_1")?.value;
   const images = window.base64Images;
+
+  // 檢查欄位是否為空
+  if (!activityName) {
+    alert("活動名稱不能為空！");
+    activityName.focus();
+    return;
+  };
+
+  if (!address) {
+    alert("詳細地址不能為空！");
+    address.focus();
+    return;
+  };
+
+  if (!unitPrice) {
+    alert("參加費用不能為空！");
+    unitPrice.focus();
+    return;
+  };
+
+  if (!minParticipants) {
+    alert("成團人數不能為空！");
+    minParticipants.focus();
+    return;
+  };
+
+  if (!maxParticipants) {
+    alert("人數上限不能為空！");
+    maxParticipants.focus();
+    return;
+  };
+
+  if (!description) {
+    alert("介紹不能為空！");
+    description.focus();
+    return;
+  };
 
   function formatDateTime(input) {
     if (!input) return "";
@@ -63,7 +100,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   console.log("Sending JSON text:", JSON.stringify(requestData));
 
   // 申請活動 - Post
-  fetch("/chill-tribe/supplier/applyAct", {
+  fetch("http://localhost:8080/chill-tribe/supplier/applyAct", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,13 +119,13 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
+        fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 POST 請求來提交圖片 - Post
-            fetch(`/chill-tribe/supplier/applyAct/${activityId}`, {
+            fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -98,6 +135,9 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
               .then(response => response.json())
               .then(uploadedPictures => {
                 console.log('圖片上傳成功:', uploadedPictures);
+                
+                // 上傳成功後跳轉到活動總攬頁面
+                window.location.href = "http://localhost:8080/chill-tribe/supplier/activitySpList.html";
               })
               .catch(error => console.error('圖片上傳失敗:', error));
           })

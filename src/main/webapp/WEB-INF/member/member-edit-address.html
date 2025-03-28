@@ -183,6 +183,13 @@
 		$("#login").load("fixed-member-login.html");
 	</script>
 
+
+	<!-- ============================地址選單的js============================== -->
+	<script src="../member/js/address_form.js"></script>
+
+	<!-- 	<script src="../_html/assets/js/dropzone.js"></script> -->
+	<script src="../Full_Resido/_html/assets/js/dropzone.js"></script>
+	
 	<script src="../Full_Resido/_html/assets/js/custom.js"></script>
 	<!-- ============================================================== -->
 	<!-- This page plugins -->
@@ -204,49 +211,62 @@
 			});
 		});
 	</script>
+	
 
-	<!-- ============================地址選單的js============================== -->
-	<script src="../member/js/address_form.js"></script>
-
-	<!-- 	<script src="../_html/assets/js/dropzone.js"></script> -->
-	<script src="../Full_Resido/_html/assets/js/dropzone.js"></script>
+	
 	<!-- New Js -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		const zipcode = document.getElementById("zipcode");
 		const city = document.getElementById("city");
-		const districts = document.getElementById("districts");
+// 		const districts = document.getElementById("districts");
 		const address = document.getElementById("address");
 		const tag = document.getElementById("tag");
+		const memberid = localStorage.getItem('memberid');
 
 
-		fetch('findaddressall')
-			.then(resp => resp.json())
-			.then(member => {
+		
+		fetch(`findaddress/${memberid}`)
+		.then(resp => resp.json())
+		.then(member => {
+			console.log(member);
+			city.value = member.city_id;
+			$("#city").trigger('change');
+			districts.value = member.zip_code;
+			zipcode.value = member.zip_code;
+			address.value = member.address;
+			tag.value = member.tag;
 
-				debugger;
-				for (i = 0; i < member.length; i++) {
-					if (i == 0) {
-						console.log(member);
-						member_id.value = member[i].member_id;
-						address_member_id.value = member[i].member_id;
-						city.value = member[i].city_id;
-						// 					console.log('zip_code_1：' + zip_code_1.textContent);
-						districts.value = member[i].district_id;
-						// 					console.log('district_id_1：'+ district_id_1.textContent);
-						zipcode.value = member[i].zip_code;
-						// 					console.log('city_id_1：' + city_id_1.textContent);
-						address.textContent = member[i].address;
-						// 					console.log('address_1：' + address_1.textContent);
-						tag.textContent = member[i].tag;
-						// 					console.log('tag_1：' + tag_1.textContent);
-						// 					city_district_1.textContent = `${member[i].city_name}${member[i].district_name}`;
-						// 					console.log('city_district_1：' + city_district_1.textContent);
-						// 					console.log('address_default_1：'+ address_default_1.textContent);
-					}
+		});
+		
 
-				}
-			});
+// 		fetch('findaddressall')
+// 			.then(resp => resp.json())
+// 			.then(member => {
+
+// 				debugger;
+// 				for (i = 0; i < member.length; i++) {
+// 					if (i == 0) {
+// 						console.log(member);
+// 						member_id.value = member[i].member_id;
+// 						address_member_id.value = member[i].member_id;
+// 						city.value = member[i].city_id;
+// 						// 					console.log('zip_code_1：' + zip_code_1.textContent);
+// 						districts.value = member[i].district_id;
+// 						// 					console.log('district_id_1：'+ district_id_1.textContent);
+// 						zipcode.value = member[i].zip_code;
+// 						// 					console.log('city_id_1：' + city_id_1.textContent);
+// 						address.textContent = member[i].address;
+// 						// 					console.log('address_1：' + address_1.textContent);
+// 						tag.textContent = member[i].tag;
+// 						// 					console.log('tag_1：' + tag_1.textContent);
+// 						// 					city_district_1.textContent = `${member[i].city_name}${member[i].district_name}`;
+// 						// 					console.log('city_district_1：' + city_district_1.textContent);
+// 						// 					console.log('address_default_1：'+ address_default_1.textContent);
+// 					}
+
+// 				}
+// 			});
 
 
 		document.querySelector('button#btn_upaddress').addEventListener('click', () => {
@@ -263,8 +283,8 @@
 
 
 
-			fetch('memberaddressedit', {
-				method: 'POST',
+			fetch(`memberaddressedit`, {
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -299,6 +319,7 @@
 				});
 		});
 	</script>
+	
 
 </body>
 
