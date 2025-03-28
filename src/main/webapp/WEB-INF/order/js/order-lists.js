@@ -71,7 +71,7 @@ $(function () {
                 let orderStatus;
 
                 // 訂單狀態之後再細改
-                if (orderItems[i].orderStatus === "paid" && orderItems[i].orderStatus === "no_payment_required") {
+                if (orderItems[i].orderStatus === "paid" || orderItems[i].orderStatus === "no_payment_required") {
                     orderStatus = "訂單已成效";
                 } else {
                     orderStatus = "訂單已無效";
