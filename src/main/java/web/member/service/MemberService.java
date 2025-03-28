@@ -39,6 +39,8 @@ public interface MemberService {
 	
 //	Member addressedit(Member sessionMember, Member updateMember);
 	
+	Member addressedit(Member member);
+	
 //	List<Member> selectcityAll();
 	
 }

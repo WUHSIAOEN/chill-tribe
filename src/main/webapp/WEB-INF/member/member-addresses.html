@@ -317,14 +317,14 @@
 
 
 
-
+// 		debugger;
 		fetch(`findaddress/${memberid}`)
 			.then(resp => resp.json())
 			.then(member => {
 				console.log(member);
 				member_id.value = member.member_id;
 				address_member_id.value = member.member_id;
-				zip_code_1.textContent = member.zip_code;
+				zip_code_1.textContent = member.district_id;
 				console.log('zip_code_1：' + zip_code_1.textContent);
 				district_id_1.textContent = member.district_id;
 				console.log('district_id_1：' + district_id_1.textContent);
@@ -334,37 +334,39 @@
 				console.log('address_1：' + address_1.textContent);
 				tag_1.textContent = member.tag;
 				console.log('tag_1：' + tag_1.textContent);
-				city_district_1.textContent = `${member.city_name}${member.district_name}`;
+				console.log(member.city_name);
+				console.log(member.district_name);
+				city_district_1.textContent = `${member.city_name}  ${member.district_name}`;
 				console.log('city_district_1：' + city_district_1.textContent);
 				console.log('address_default_1：' + address_default_1.textContent);
 
 			});
 
 		// debugger;
-		fetch(`findaddressall/${memberid}`)
-			.then(resp => resp.json())
-			.then(member => {
+// 		fetch(`findaddressall/${memberid}`)
+// 			.then(resp => resp.json())
+// 			.then(member => {
 
-				for (i = 0; i < member.length; i++) {
-					// 			debugger;
-					if (i == 0) {
-						console.log(member);
-						member_id.value = member[i].member_id;
-						address_member_id.value = member[i].member_id;
-						zip_code_1.textContent = member[i].zip_code;
-						console.log('zip_code_1：' + zip_code_1.textContent);
-						district_id_1.textContent = member[i].district_id;
-						console.log('district_id_1：' + district_id_1.textContent);
-						city_id_1.textContent = member[i].city_id;
-						console.log('city_id_1：' + city_id_1.textContent);
-						address_1.textContent = member[i].address;
-						console.log('address_1：' + address_1.textContent);
-						tag_1.textContent = member[i].tag;
-						console.log('tag_1：' + tag_1.textContent);
-						city_district_1.textContent = `${member[i].city_name}${member[i].district_name}`;
-						console.log('city_district_1：' + city_district_1.textContent);
-						console.log('address_default_1：' + address_default_1.textContent);
-					}
+// 				for (i = 0; i < member.length; i++) {
+// 					// 			debugger;
+// 					if (i == 0) {
+// 						console.log(member);
+// 						member_id.value = member[i].member_id;
+// 						address_member_id.value = member[i].member_id;
+// 						zip_code_1.textContent = member[i].zip_code;
+// 						console.log('zip_code_1：' + zip_code_1.textContent);
+// 						district_id_1.textContent = member[i].district_id;
+// 						console.log('district_id_1：' + district_id_1.textContent);
+// 						city_id_1.textContent = member[i].city_id;
+// 						console.log('city_id_1：' + city_id_1.textContent);
+// 						address_1.textContent = member[i].address;
+// 						console.log('address_1：' + address_1.textContent);
+// 						tag_1.textContent = member[i].tag;
+// 						console.log('tag_1：' + tag_1.textContent);
+// 						city_district_1.textContent = `${member[i].city_name}${member[i].district_name}`;
+// 						console.log('city_district_1：' + city_district_1.textContent);
+// 						console.log('address_default_1：' + address_default_1.textContent);
+// 					}
 					// 			debugger;
 					// 			if (i == 1) {
 					// 				console.log(member);
@@ -405,8 +407,8 @@
 					// 				console.log('address_default_3：'+ address_default_3.textContent);
 					// 				} 
 
-				}
-			});
+// 				}
+// 			});
 
 
 

@@ -196,6 +196,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public Member addressedit(Member member) {
+		final int resultCount = memberDao.updateaddress(member);
+		member.setSuccessful(resultCount > 0);
+		member.setMessage(resultCount > 0 ? "修改成功" : "修改失敗");
+		System.out.println(member.getMemberid() + "  異動了資料");
+		return member;
+	}
+
 //	@Override
 //	public Member addressedit(Member sessionMember, Member updateMember) {
 //		boolean isUpdated = false;

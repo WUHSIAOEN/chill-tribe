@@ -37,7 +37,7 @@ $(function () {
     function fillStars(rating) {
 
         const stars = document.querySelectorAll('.fr-can-rating i');
-        
+
         stars.forEach((star, index) => {
             // star.classList.remove("filled");
             if (index < Math.floor(rating)) {
@@ -94,7 +94,7 @@ $(function () {
 
                 console.log(activityCard.activityName + "平均: " + commentAverageStar);
                 // console.log("Comment Count: " + commentCount);
-                
+
 
                 let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -174,7 +174,7 @@ $(function () {
                 console.log(ratingContainer);
                 // const stars = ratingContainer.querySelectorAll('i[data-star-index]');
                 // stars.forEach((star, index) => {
-                    
+
                 //     if (index <= Math.floor(commentAverageStar)) {
                 //         star.classList.add('filled');
                 //         // star.classList.remove('empty');
@@ -191,7 +191,7 @@ $(function () {
         .catch(({ message }) => console.log(message));
 
 
-        
+
 
     // ============== 使用者在搜尋欄選取類別 ================
 
@@ -209,9 +209,32 @@ $(function () {
         params.append("category", category);
         params.append("region", region);
 
-        let url = `activity/search-activities.html`;
+        let url = `http://localhost:8080/chilltribe/activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
+
+    // ============== 使用者點擊類別分類框 ================
+    $(".container_categories_box").on("click", ".act_category", function (e) {
+        e.preventDefault();
+
+        // 取得當前點擊的a 標籤的h4 純文字        
+        let category = $(this).find("h4").text();
+        if(category === "全部"){
+            category = ""
+        }
+        // console.log(category);
+
+
+        let params = new URLSearchParams();
+        params.append("search-activity-name", "");
+        params.append("category", category);
+        params.append("region", "");
+
+        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+
+        window.location.href = `${url}?${params.toString()}`;
+    })
+
 
 });
