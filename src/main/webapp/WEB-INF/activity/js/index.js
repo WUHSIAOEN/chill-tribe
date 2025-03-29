@@ -209,7 +209,7 @@ $(function () {
         params.append("category", category);
         params.append("region", region);
 
-        let url = `http://localhost:8080/chilltribe/activity/search-activities.html`;
+        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
