@@ -58,6 +58,18 @@ public class ActivityServiceImpl2 implements ActivityService2 {
 		}
 		return activityCards;
 	}
+
+//	活動列表頁面的搜尋
+	@Override
+	public List<Activities> FilterAllActivity(String actname, String category, String cityName) {
+		List<Activities> activityCards = activitySearchDao.selectByNameCatgoryCity(actname, category, cityName);
+		for (Activities activityCard : activityCards) {
+			List<ActivityImage> activityImages = activitySearchDao
+					.selectActivityImageById(activityCard.getActivityId());
+			activityCard.setActivityImages(activityImages);
+		}
+		return activityCards;
+	}
 	
 	
 	
