@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import web.activity.service.ActivityService2;
 import web.activity.service.impl.ActivityServiceImpl2;
 import web.activity.vo.Activities;
+import web.activity.vo.ActivityImage;
 
 @WebServlet("/activity/SearchActivities")
 public class SearchActivitiesController extends HttpServlet{
@@ -43,7 +45,9 @@ public class SearchActivitiesController extends HttpServlet{
 			region = "";
 		}
 		List<Activities> indexActivityCard = service.searchActivityByFilter(actname, category, region);
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd HH:mm:ss")
+		        .create();
 		resp.getWriter().write(gson.toJson(indexActivityCard));
 	}
 

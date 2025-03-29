@@ -10,6 +10,6 @@ public interface ActivitySearchService {
 	List<Activities> GetLatestActivities();
 	
 //	依照活動類別搜尋
-	List<Activities> FilterByActivityCity(String city);
+	List<Activities> FilterByActivityCity(Integer cityId);
 
 }

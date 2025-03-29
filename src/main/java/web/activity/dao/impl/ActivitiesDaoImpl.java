@@ -38,11 +38,11 @@ public class ActivitiesDaoImpl implements ActivitiesDao{
 	}
 
 	@Override
-	public List<Activities> selectActivitiesByCategory(String city) {
+	public List<Activities> selectActivitiesByCity(Integer cityId) {
 		
 		return session
-				.createQuery("FROM Activities WHERE city = :city", Activities.class)
-				.setParameter("category", city)
+				.createQuery("FROM Activities WHERE cityId = :cityId", Activities.class)
+				.setParameter("cityId", cityId)
 				.getResultList();
 	}
 	

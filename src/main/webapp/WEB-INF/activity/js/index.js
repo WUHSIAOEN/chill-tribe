@@ -1,5 +1,7 @@
 $(function () {
 
+    // let projectURL = "http://localhost:8080/chill-tribe/";
+
     // Claude 產的 要解決動態綁定的問題 - 待詢問
     // $(document).on('load orientationchange resize scroll', '.slick-initialized', function (e) {
     //      console.log('Event triggered:', e.type);
@@ -33,6 +35,10 @@ $(function () {
     //     // 針對 load 事件的處理邏輯
     // });
 
+    function convertTimeFormat(dateTime) {
+        return dateTime.slice(0, 10);
+    }
+
 
     function fillStars(rating) {
 
@@ -60,7 +66,7 @@ $(function () {
 
     // ============== 查詢活動卡片資料到即將開始活動 ==============
 
-    fetch('activity/search/latest')
+    fetch(`${APP_CONFIG.BASE_URL}activity/search/latest`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -102,7 +108,7 @@ $(function () {
                         <div class="property-listing property-1 bg-white p-2 rounded">
 
                             <div class="listing-img-wrapper">
-                                <a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}">
+                                <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}">
                                     <img src="${activityCard.activityImages[0]?.imageBase64 || './activity/asset/no-image.jpg'}" class="img-fluid mx-auto rounded" alt="" />
                                 </a>
                             </div>
@@ -114,7 +120,7 @@ $(function () {
                                         class="listing-detail-wrapper d-flex align-items-center justify-content-between">
                                         <div class="listing-short-detail">
                                             <span class="label bg-light-danger text-danger d-inline-flex mb-1">${activityCard.category}</span>
-                                            <h4 class="listing-name mb-0"><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
+                                            <h4 class="listing-name mb-0"><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
                                             <div class="fr-can-rating data-rating-id="${index}">
                                                 <i class="fas fa-star fs-xs"></i>
                                                 <i class="fas fa-star fs-xs"></i>
@@ -142,6 +148,11 @@ $(function () {
                                         <div class="listing-card d-flex align-items-center">
                                             <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
                                                     class="fa-solid fa-clone fs-xs"></i></div><span
+                                                class="text-muted-2 fs-sm">${convertTimeFormat(activityCard.startDateTime)}</span>
+                                        </div>
+                                        <div class="listing-card d-flex align-items-center">
+                                            <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
+                                                    class="fa-solid fa-clone fs-xs"></i></div><span
                                                 class="text-muted-2 fs-sm">${activityCard.supplier.supplier_name}</span>
                                         </div>
                                     </div>
@@ -154,7 +165,7 @@ $(function () {
                                                 class="fa-solid fa-location-pin me-1"></i>${activityCard.address}</span>
                                     </div>
                                     <div class="listing-detail-btn">
-                                        <a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"
+                                        <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"
                                             class="btn btn-sm px-4 fw-medium btn-primary">查看活動</a>
                                     </div>
                                 </div>
@@ -171,7 +182,7 @@ $(function () {
 
 
                 const ratingContainer = document.querySelector(`.fr-can-rating[data-rating-id="${index}"]`);
-                console.log(ratingContainer);
+                // console.log(ratingContainer);
                 // const stars = ratingContainer.querySelectorAll('i[data-star-index]');
                 // stars.forEach((star, index) => {
 
@@ -209,7 +220,7 @@ $(function () {
         params.append("category", category);
         params.append("region", region);
 
-        let url = `http://localhost:8080/chilltribe/activity/search-activities.html`;
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
@@ -220,7 +231,7 @@ $(function () {
 
         // 取得當前點擊的a 標籤的h4 純文字        
         let category = $(this).find("h4").text();
-        if(category === "全部"){
+        if (category === "全部") {
             category = ""
         }
         // console.log(category);
@@ -231,10 +242,27 @@ $(function () {
         params.append("category", category);
         params.append("region", "");
 
-        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
 
+    // ============== 使用者點擊類別分類框 ================
+
+    $(".listing-item-grid").on("click", ".city-filter", function (e) {
+        e.preventDefault();
+
+        // 取得當前點擊的a 標籤的h4 純文字        
+        let city = $(this).data("value");
+        console.log(city);
+
+
+        let params = new URLSearchParams();
+        params.append("city", city);
+
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
+
+        window.location.href = `${url}?${params.toString()}`;
+    })
 
 });

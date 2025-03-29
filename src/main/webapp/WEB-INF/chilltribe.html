@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <title>ChillTribe</title>
+    <link rel="icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
+	<link rel="shortcut icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
 
     <!-- Custom CSS -->
     <link href="Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -1286,7 +1288,7 @@
                 <!-- Pagination -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 text-center mt-4">
-                        <a href="listings-list-with-sidebar.html" class="btn btn-primary px-lg-5 rounded">更多活動</a>
+                        <a href='http://localhost:8080/chill-tribe/activity/search-activities.html?search-activity-name=&category=all&region=all' class="btn btn-primary px-lg-5 rounded">更多活動</a>
                     </div>
                 </div>
 
@@ -1318,7 +1320,7 @@
                                 <span>16 </span> Locations
                             </div> -->
                             <div class="listing-item-grid_title">
-                                <h3><a href="listing.html">台北</a></h3>
+                                <h3><a href="#" class="city-filter" data-value="臺北市">台北</a></h3>
                                 <p>
                                     多元活力交匯，找到志同道合的夥伴
                                 </p>
@@ -1335,7 +1337,7 @@
                                 <span>22 </span> Locations
                             </div> -->
                             <div class="listing-item-grid_title">
-                                <h3><a href="listing.html">台中</a></h3>
+                                <h3><a href="#" class="city-filter" data-value="臺中市">台中</a></h3>
                                 <p>
                                     創意與熱情匯聚，參與精彩活動一起成長
                                 </p>
@@ -1352,7 +1354,7 @@
                                 <span>9 </span> Locations
                             </div> -->
                             <div class="listing-item-grid_title">
-                                <h3><a href="listing.html">台南</a></h3>
+                                <h3><a href="#" class="city-filter" data-value="臺南市">台南</a></h3>
                                 <p>
                                     歷史與創新並存，體驗豐富多元的交流
                                 </p>
@@ -1369,7 +1371,7 @@
                                 <span>12 </span> Locations
                             </div> -->
                             <div class="listing-item-grid_title">
-                                <h3><a href="listing.html">高雄</a></h3>
+                                <h3><a href="#" class="city-filter" data-value="高雄市">高雄</a></h3>
                                 <p>
                                     南台灣的熱情舞台，和夥伴一起開創新體驗
                                 </p>
@@ -1386,7 +1388,7 @@
                                 <span>33 </span> Locations
                             </div> -->
                             <div class="listing-item-grid_title">
-                                <h3><a href="listing.html">花蓮</a></h3>
+                                <h3><a href="#" class="city-filter" data-value="花蓮縣">花蓮</a></h3>
                                 <p>
                                     山海間的獨特聚會，探索屬於你的精彩時刻
                                 </p>
@@ -1424,6 +1426,7 @@
     <script src="vendors/jquery/jquery-3.7.1.min.js"></script>
 
     <!-- 自己刻 -->
+     <script src="core/constant.js"></script>
     <script src="activity/js/index.js"></script>
     <!-- 自己刻↑ -->
 

@@ -13,6 +13,6 @@ public interface ActivitiesDao {
 	List<Activities> selectAllActivitiesOrderByStartTime();
 
 	// 查詢即將開始的活動
-	List<Activities> selectActivitiesByCategory(String city);
+	List<Activities> selectActivitiesByCity(Integer cityId);
 
 }
