@@ -20,6 +20,18 @@ $(function () {
         return dateTime.slice(0, 16);
     }
 
+    $('input[name="where"]').on("change", function () {
+        let selectedLabel = $(this).next("label").text(); 
+        $(".city-selected").text(selectedLabel);
+    });
+
+    $('input[name="ptype"]').on("change", function () {
+        // console.log("click");
+        let selectedLabel = $(this).next("label").text(); 
+        // console.log(selectedLabel);
+        $(".category-selected").text(selectedLabel);
+    });
+
 
     let urlParams = new URLSearchParams(window.location.search);
     let firstKey = [...urlParams.keys()][0];
@@ -354,6 +366,9 @@ $(function () {
             })
             .catch(({ message }) => console.log(message));
     }
+
+
+
 
 
 
