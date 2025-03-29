@@ -20,9 +20,10 @@ public class FilterActivitiesController {
 	private ActivitySearchService service;
 
 	// 返回最近開始活動
-	@GetMapping("/category/${category}")
-	public List<Activities> showOrderInfo(@PathVariable String category) {
-		return service.GetLatestActivities();
+	@GetMapping("/city/{cityId}")
+	public List<Activities> showOrderInfo(@PathVariable Integer cityId) {
+		System.out.println(cityId);
+		return service.FilterByActivityCity(cityId);
 	}
 
 }
