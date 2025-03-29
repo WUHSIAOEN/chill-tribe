@@ -93,6 +93,21 @@ $(function () {
 
                 activityCards.forEach(activityCard => {
 
+                    // 留言運算
+                    let commentCount = activityCard.comments?.length ?? 0;
+                    let commentTotalStar = 0;
+                    for (i = 0; i < activityCard.comments?.length; i++) {
+                        commentTotalStar += activityCard.comments[i].starRating;
+                    }
+                    // console.log(commentTotalStar);
+                    let commentAverageStar;
+                    if (commentCount) {
+                        commentAverageStar = commentTotalStar / commentCount;
+                        // console.log("有近到非0 判斷");
+                    } else {
+                        commentAverageStar = 0;
+                    }
+
                     let activity_card_html = `
                         <!-- Single Property 以一個活動為單位-->
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -194,16 +209,7 @@ $(function () {
                                     <div
                                         class="listing-detail-footer d-flex align-items-center justify-content-between">
                                         <div class="footer-first">
-                                            <div class="foot-rates">
-                                                <span class="elio_rate perfect">4.7</span>
-                                                <div class="_rate_stio">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="footer-flex">
                                             <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"
@@ -232,8 +238,7 @@ $(function () {
                 }
             })
             .then(activityCards => {
-                console.log(activityCards);
-
+                // console.log(activityCards);
                 let resultCount = activityCards.length;
                 let resultCountText = `共顯示 ${resultCount} 筆活動`;
 
@@ -242,6 +247,21 @@ $(function () {
                 $("#search-activities").empty();
 
                 activityCards.forEach(activityCard => {
+
+                    // 留言運算
+                    let commentCount = activityCard.comments?.length ?? 0;
+                    let commentTotalStar = 0;
+                    for (i = 0; i < activityCard.comments?.length; i++) {
+                        commentTotalStar += activityCard.comments[i].starRating;
+                    }
+                    // console.log(commentTotalStar);
+                    let commentAverageStar;
+                    if (commentCount) {
+                        commentAverageStar = commentTotalStar / commentCount;
+                        // console.log("有近到非0 判斷");
+                    } else {
+                        commentAverageStar = 0;
+                    }
 
                     let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -344,16 +364,7 @@ $(function () {
                                     <div
                                         class="listing-detail-footer d-flex align-items-center justify-content-between">
                                         <div class="footer-first">
-                                            <div class="foot-rates">
-                                                <span class="elio_rate perfect">4.7</span>
-                                                <div class="_rate_stio">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="footer-flex">
                                             <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"
@@ -391,6 +402,7 @@ $(function () {
             })
             .then(activityCards => {
 
+
                 let resultCount = activityCards.length;
                 let resultCountText = `共顯示 ${resultCount} 筆活動`;
 
@@ -399,6 +411,24 @@ $(function () {
                 $("#search-activities").empty();
 
                 activityCards.forEach(activityCard => {
+
+                    // console.log(activityCard);
+
+                    // 留言運算
+                    let commentCount = activityCard.comments?.length ?? 0;
+                    let commentTotalStar = 0;
+                    for (i = 0; i < activityCard.comments?.length; i++) {
+                        commentTotalStar += activityCard.comments[i].starRating;
+                    }
+                    // console.log(commentTotalStar);
+                    let commentAverageStar;
+                    if (commentCount) {
+                        commentAverageStar = commentTotalStar / commentCount;
+                        // console.log("有近到非0 判斷");
+                    } else {
+                        commentAverageStar = 0;
+                    }
+
 
                     let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
@@ -501,16 +531,7 @@ $(function () {
                                     <div
                                         class="listing-detail-footer d-flex align-items-center justify-content-between">
                                         <div class="footer-first">
-                                            <div class="foot-rates">
-                                                <span class="elio_rate perfect">4.7</span>
-                                                <div class="_rate_stio">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="footer-flex">
                                             <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"

@@ -47,7 +47,12 @@
 		<!-- Top header  -->
 		<!-- ============================================================== -->
 		<!-- Start Navigation -->
-		<header id="header"></header>
+		<!-- <header id="header"></header> -->
+		<div class="header header-light head-shadow">
+			<div class="container">
+				<nav id="navigation" class="navigation navigation-landscape"></nav>
+			</div>
+		</div>
 		<!-- End Navigation -->
 		<!-- ============================================================== -->
 		<!-- Top header  -->
@@ -775,7 +780,7 @@
 	<!-- ============================================================== -->
 
 	<script>
-		$('#header').load('../member/header.html');
+		$('#navigation').load('../member/fixed-member-navbar.html');
 
 		// 載入 footer.html
 		$('#footer').load('../member/footer.html');
