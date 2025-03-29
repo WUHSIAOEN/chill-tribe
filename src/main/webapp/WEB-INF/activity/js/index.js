@@ -33,6 +33,10 @@ $(function () {
     //     // 針對 load 事件的處理邏輯
     // });
 
+    function convertTimeFormat(dateTime) {
+        return dateTime.slice(0, 10);
+    }
+
 
     function fillStars(rating) {
 
@@ -142,6 +146,11 @@ $(function () {
                                         <div class="listing-card d-flex align-items-center">
                                             <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
                                                     class="fa-solid fa-clone fs-xs"></i></div><span
+                                                class="text-muted-2 fs-sm">${convertTimeFormat(activityCard.startDateTime)}</span>
+                                        </div>
+                                        <div class="listing-card d-flex align-items-center">
+                                            <div class="square--25 text-muted-2 fs-sm circle gray-simple me-1"><i
+                                                    class="fa-solid fa-clone fs-xs"></i></div><span
                                                 class="text-muted-2 fs-sm">${activityCard.supplier.supplier_name}</span>
                                         </div>
                                     </div>
@@ -171,7 +180,7 @@ $(function () {
 
 
                 const ratingContainer = document.querySelector(`.fr-can-rating[data-rating-id="${index}"]`);
-                console.log(ratingContainer);
+                // console.log(ratingContainer);
                 // const stars = ratingContainer.querySelectorAll('i[data-star-index]');
                 // stars.forEach((star, index) => {
 
@@ -220,7 +229,7 @@ $(function () {
 
         // 取得當前點擊的a 標籤的h4 純文字        
         let category = $(this).find("h4").text();
-        if(category === "全部"){
+        if (category === "全部") {
             category = ""
         }
         // console.log(category);
@@ -236,5 +245,22 @@ $(function () {
         window.location.href = `${url}?${params.toString()}`;
     })
 
+    // ============== 使用者點擊類別分類框 ================
+
+    $(".listing-item-grid").on("click", ".city-filter", function (e) {
+        e.preventDefault();
+
+        // 取得當前點擊的a 標籤的h4 純文字        
+        let city = $(this).data("value");
+        console.log(city);
+
+
+        let params = new URLSearchParams();
+        params.append("city", city);
+
+        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+
+        window.location.href = `${url}?${params.toString()}`;
+    })
 
 });

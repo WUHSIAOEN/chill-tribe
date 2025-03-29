@@ -23,8 +23,8 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 	}
 
 	@Override
-	public List<Activities> FilterByActivityCity(String city) {
-		return actDao.selectActivitiesByCategory(city);
+	public List<Activities> FilterByActivityCity(Integer cityId) {
+		return actDao.selectActivitiesByCity(cityId);
 	}
 
 }
