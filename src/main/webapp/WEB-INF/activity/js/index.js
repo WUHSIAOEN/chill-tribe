@@ -64,7 +64,7 @@ $(function () {
 
     // ============== 查詢活動卡片資料到即將開始活動 ==============
 
-    fetch('activity/search/latest')
+    fetch('http://localhost:8080/chill-tribe/activity/search/latest')
         .then(resp => {
             if (resp.ok) {
                 return resp.json();

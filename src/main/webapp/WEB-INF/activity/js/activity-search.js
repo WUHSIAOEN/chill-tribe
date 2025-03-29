@@ -55,7 +55,7 @@ $(function () {
         let cityName = urlParams.get("city");
         let cityId = cityObj[cityName];
 
-        fetch(`filter/city/${cityId}`)
+        fetch(`http://localhost:8080/chill-tribe/activity/filter/city/${cityId}`)
             .then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -65,7 +65,12 @@ $(function () {
                 }
             })
             .then(activityCards => {
-                console.log(activityCards);
+
+                let resultCount = activityCards.length;
+                let resultCountText = `顯示 ${resultCount} 結果`;
+
+                $("#result-count").text(resultCountText);
+
                 $("#search-activities").empty();
 
                 activityCards.forEach(activityCard => {
@@ -198,7 +203,7 @@ $(function () {
             })
             .catch(({ message }) => console.log(message));
     } else {
-        fetch(`SearchActivities?${urlParams.toString()}`)
+        fetch(`http://localhost:8080/chill-tribe/activity/SearchActivities?${urlParams.toString()}`)
             .then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -208,10 +213,15 @@ $(function () {
                 }
             })
             .then(activityCards => {
+
+                let resultCount = activityCards.length;
+                let resultCountText = `共顯示 ${resultCount} 筆活動`;
+
+                $("#result-count").text(resultCountText);
+
                 $("#search-activities").empty();
 
                 activityCards.forEach(activityCard => {
-                    // console.log(activityCard.activityImages[0].imageName);
 
                     let activity_card_html = `
                     <!-- Single Property 以一個活動為單位-->
