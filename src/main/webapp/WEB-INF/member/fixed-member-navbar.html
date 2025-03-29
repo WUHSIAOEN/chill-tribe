@@ -109,10 +109,10 @@
             if (member.photobase64 == null) {
 // 				member_navbar_photo_base64.src = 'https://placehold.co/500x500';
                 member_navbar_photo_base64.src = '../activity/asset/no-image.jpg';
-                console.log("照片是空的");
+//                 console.log("照片是空的");
             } else {
                 member_navbar_photo_base64.src = 'data:image/png;base64,' + member.photobase64;
-                console.log("77777有照片囉");
+//                 console.log("77777有照片囉");
             }
 
             if (member.membername != null) {
@@ -126,10 +126,10 @@
 
 
     let baseUrl = window.location.origin + '/' + window.location.pathname.split('/')[1];
-    console.log(baseUrl);
+//     console.log(baseUrl);
     let chilltribeLink = baseUrl + '/chilltribe.html';
     let indexhref = baseUrl + '/chilltribe.html';
-    console.log(chilltribeLink);
+//     console.log(chilltribeLink);
     member_logo_href.setAttribute('href', chilltribeLink);
     member_index_href.setAttribute('href', chilltribeLink);
 

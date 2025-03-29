@@ -267,20 +267,20 @@
 
 	<script>
 		const zip_code_1 = document.getElementById("zip_code_1");
-		console.log('zip_code_1：' + zip_code_1.textContent);
+// 		console.log('zip_code_1：' + zip_code_1.textContent);
 		const city_district_1 = document.getElementById("city_district_1");
-		console.log('city_district_1：' + city_district_1.textContent);
+// 		console.log('city_district_1：' + city_district_1.textContent);
 		const address_1 = document.getElementById("address_1");
-		console.log('address_1：' + address_1.textContent);
+// 		console.log('address_1：' + address_1.textContent);
 		const member_id = document.getElementById("member_id");
 		const city_id_1 = document.getElementById("city_id_1");
-		console.log('city_id_1：' + city_id_1.textContent);
+// 		console.log('city_id_1：' + city_id_1.textContent);
 		const district_id_1 = document.getElementById("district_id_1");
-		console.log('district_id_1：' + district_id_1.textContent);
+// 		console.log('district_id_1：' + district_id_1.textContent);
 		const address_default_1 = document.getElementById("address_default_1");
-		console.log('address_default_1：' + address_default_1.textContent);
+// 		console.log('address_default_1：' + address_default_1.textContent);
 		const tag_1 = document.getElementById("tag_1");
-		console.log('tag_1：' + tag_1.textContent);
+// 		console.log('tag_1：' + tag_1.textContent);
 // 		const memberid = sessionStorage.getItem('memberid');
 		const memberid = localStorage.getItem('memberid');
 
@@ -321,26 +321,29 @@
 		fetch(`findaddress/${memberid}`)
 			.then(resp => resp.json())
 			.then(member => {
-				console.log(member);
+				if (!member) return; 
+// 				console.log(member);
 				member_id.value = member.member_id;
 				address_member_id.value = member.member_id;
 				zip_code_1.textContent = member.district_id;
-				console.log('zip_code_1：' + zip_code_1.textContent);
+// 				console.log('zip_code_1：' + zip_code_1.textContent);
 				district_id_1.textContent = member.district_id;
-				console.log('district_id_1：' + district_id_1.textContent);
+// 				console.log('district_id_1：' + district_id_1.textContent);
 				city_id_1.textContent = member.city_id;
-				console.log('city_id_1：' + city_id_1.textContent);
+// 				console.log('city_id_1：' + city_id_1.textContent);
 				address_1.textContent = member.address;
-				console.log('address_1：' + address_1.textContent);
+// 				console.log('address_1：' + address_1.textContent);
 				tag_1.textContent = member.tag;
-				console.log('tag_1：' + tag_1.textContent);
-				console.log(member.city_name);
-				console.log(member.district_name);
+// 				console.log('tag_1：' + tag_1.textContent);
+// 				console.log(member.city_name);
+// 				console.log(member.district_name);
 				city_district_1.textContent = `${member.city_name}  ${member.district_name}`;
-				console.log('city_district_1：' + city_district_1.textContent);
-				console.log('address_default_1：' + address_default_1.textContent);
+// 				console.log('city_district_1：' + city_district_1.textContent);
+// 				console.log('address_default_1：' + address_default_1.textContent);
 
-			});
+			})
+			
+			.catch(() => {}); 
 
 		// debugger;
 // 		fetch(`findaddressall/${memberid}`)
