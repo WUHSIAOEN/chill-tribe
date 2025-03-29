@@ -67,7 +67,7 @@ $(function () {
         let cityName = urlParams.get("city");
         let cityId = cityObj[cityName];
 
-        fetch(`http://localhost:8080/chill-tribe/activity/filter/city/${cityId}`)
+        fetch(`${APP_CONFIG.BASE_URL}activity/filter/city/${cityId}`)
             .then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -132,13 +132,13 @@ $(function () {
                                     <!-- 活動圖片放這裡 -->
                                     <div class="list-img-slide">
                                         <div class="clior" id="imageContainer">
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[0]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[1]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[2]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
                                         </div>
@@ -159,7 +159,7 @@ $(function () {
                                             </div>
                                             <div class="_card_list_flex">
                                                 <div class="_card_flex_01">
-                                                    <h3 class="listing-name"><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}" class="prt-link-detail">${activityCard.activityName}</a></h3>
+                                                    <h3 class="listing-name"><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}" class="prt-link-detail">${activityCard.activityName}</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@ $(function () {
             })
             .catch(({ message }) => console.log(message));
     } else {
-        fetch(`http://localhost:8080/chill-tribe/activity/SearchActivities?${urlParams.toString()}`)
+        fetch(`${APP_CONFIG.BASE_URL}activity/SearchActivities?${urlParams.toString()}`)
             .then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -280,13 +280,13 @@ $(function () {
                                     <!-- 活動圖片放這裡 -->
                                     <div class="list-img-slide">
                                         <div class="clior" id="imageContainer">
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[0]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[1]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
-                                            <div><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"><img
+                                            <div><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"><img
                                                         src="${activityCard?.activityImages?.[2]?.imageBase64 || '../activity/asset/no-image.jpg'}"
                                                         class="img-fluid mx-auto" alt="" /></a></div>
                                         </div>
@@ -307,7 +307,7 @@ $(function () {
                                             </div>
                                             <div class="_card_list_flex">
                                                 <div class="_card_flex_01">
-                                                    <h3 class="listing-name"><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}" class="prt-link-detail">${activityCard.activityName}</a></h3>
+                                                    <h3 class="listing-name"><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}" class="prt-link-detail">${activityCard.activityName}</a></h3>
                                                 </div>
                                             </div>
                                         </div>
