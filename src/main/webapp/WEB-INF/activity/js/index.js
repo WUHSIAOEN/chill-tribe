@@ -118,15 +118,12 @@ $(function () {
                                 <div class="listing-detail-wrapper-box">
                                     <div
                                         class="listing-detail-wrapper d-flex align-items-center justify-content-between">
-                                        <div class="listing-short-detail">
+                                        <div class="listing-short-detail footer-first">
                                             <span class="label bg-light-danger text-danger d-inline-flex mb-1">${activityCard.category}</span>
                                             <h4 class="listing-name mb-0"><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
                                             <div class="fr-can-rating data-rating-id="${index}">
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
+                                                <i class="fas fa-star fs-xs filled"></i>
+                                                <span class="perfect">${commentAverageStar}</span>
                                                 <span class="reviews_text fs-sm text-muted ms-2">(${commentCount} 則評論)</span>
                                             </div>
 
