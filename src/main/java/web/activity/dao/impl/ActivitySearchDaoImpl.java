@@ -255,18 +255,97 @@ public class ActivitySearchDaoImpl implements ActivitySearchDao {
 				supplier.setSupplier_id(rs.getInt("supplier_id"));
 				supplier.setSupplier_name(rs.getString("supplier_name"));
 				activity.setSupplier(supplier);
-//				activity.setSupplierId(rs.getInt("supplier_id"));
-//				activity.setSupplierName(rs.getString("supplier_name"));
 				city.setCityId(rs.getInt("city_id"));
 				city.setCityName(rs.getString("city_name"));
 				activity.setCity(city);
 				district.setDistrictId(rs.getInt("district_id"));
 				district.setDistricName(rs.getString("district_name"));
 				activity.setDistrict(district);
-//				activity.setCityId(rs.getInt("city_id"));
-//				activity.setCityName(rs.getString("city_name"));
-//				activity.setDistrictId(rs.getInt("district_id"));
-//				activity.setDistrictName(rs.getString("district_name"));
+				activity.setAddress(rs.getString("address"));
+				activity.setUnitPrice(rs.getInt("unit_price"));
+				activity.setMinParticipants(rs.getInt("min_participants"));
+				activity.setMaxParticipants(rs.getInt("max_participants"));
+				activity.setCategory(rs.getString("category"));
+				activity.setStartDateTime(rs.getTimestamp("start_date_time"));
+				activity.setEndDateTime(rs.getTimestamp("end_date_time"));
+				activity.setStatus(rs.getInt("status"));
+				activity.setApproved(rs.getInt("approved"));
+				activity.setInventoryCount(rs.getInt("inventory_count"));
+				activity.setCreateTime(rs.getTimestamp("create_time"));
+				list.add(activity);
+			}
+//			System.out.println(list.size());
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<Activities> selectByNameCatgoryCity(String actname, String catgory, String cityName) {
+		int offset = 0; // 用偏移量
+		StringBuilder sql = new StringBuilder("SELECT * FROM activities AS act"
+				+ " JOIN suppliers AS spl" + " ON act.supplier_id = spl.supplier_id"
+				+ " JOIN cities AS ct ON act.city_id = ct.city_id"
+				+ " JOIN districts AS dstx ON act.district_id = dstx.district_id"
+				+ " WHERE 1=1"); 
+		// 判斷是否每個參數都有值
+		if (cityName != "") {
+			sql.append(" AND ct.city_name = ?");
+		}
+		if (catgory != "") {
+			sql.append(" AND act.category = ?");
+		}
+		if (actname != "") {
+			String[] keywords = actname.split("");
+			int index = 0;
+			while (index < keywords.length) {
+				sql.append(" AND act.activity_name LIKE ?");
+				index ++;
+			}
+		}
+		sql.append(";");
+//		System.out.println(sql);
+		
+		try (Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			) {
+			if (cityName != "") {
+				pstmt.setString(1, cityName);
+				offset++;
+			}
+			if (catgory != "") {
+				pstmt.setString(1 + offset, catgory);
+				offset++;
+			}
+			if (actname != "") {
+				String[] keywords = actname.split("");
+				for (String kw : keywords) {
+					pstmt.setString(1 + offset, '%' + kw + '%');
+					offset++;
+				}
+			}
+//			System.out.println(pstmt);
+			List<Activities> list = new ArrayList<>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Activities activity = new Activities();
+				Supplier supplier = new Supplier();
+				City city = new City();
+				District district = new District();
+				activity.setActivityId(rs.getInt("activity_id"));
+				activity.setActivityName(rs.getString("activity_name"));
+				supplier.setSupplier_id(rs.getInt("supplier_id"));
+				supplier.setSupplier_name(rs.getString("supplier_name"));
+				activity.setSupplier(supplier);
+				city.setCityId(rs.getInt("city_id"));
+				city.setCityName(rs.getString("city_name"));
+				activity.setCity(city);
+				district.setDistrictId(rs.getInt("district_id"));
+				district.setDistricName(rs.getString("district_name"));
+				activity.setDistrict(district);
 				activity.setAddress(rs.getString("address"));
 				activity.setUnitPrice(rs.getInt("unit_price"));
 				activity.setMinParticipants(rs.getInt("min_participants"));

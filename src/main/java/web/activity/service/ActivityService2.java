@@ -18,4 +18,7 @@ public interface ActivityService2 {
 		
 		// 查詢活動卡片 - 根據搜尋條件
 		List<Activities> searchActivityByFilter(String actname, String category, String region);
+		
+		// 查詢活動卡片 - 根據搜尋條件(search-activities.html)
+		List<Activities> FilterAllActivity(String actname, String category, String cityName);
 }
