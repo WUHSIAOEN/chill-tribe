@@ -4,11 +4,6 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import web.activity.dao.ActivityDao;
 import web.activity.dao.ActivitySearchDao;
 import web.activity.dao.impl.ActivitySearchDaoImpl;
 import web.activity.service.ActivityService2;
