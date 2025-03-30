@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<title>ChillTribe - 我的地址</title>
+	<link rel="shortcut icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
 
 	<!-- Custom CSS -->
 	<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -231,6 +232,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+		
+	<script src="../core/constant.js"></script>
 
 	<script>
 		// navbar load
@@ -318,7 +321,7 @@
 
 			$('#tr_01').css('display', 'none');
 // 		debugger;
-		fetch(`findaddress/${memberid}`)
+		fetch(`${APP_CONFIG.BASE_URL}findaddress/${memberid}`)
 			.then(resp => resp.json())
 			.then(member => {
 				

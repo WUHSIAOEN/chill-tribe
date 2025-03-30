@@ -53,7 +53,7 @@ document.querySelector('button#build').addEventListener('click', () => {
 			return;
 		}
 
-	fetch(`${APP_CONFIG.BASE_URL}/member/register`, {
+	fetch(`${APP_CONFIG.BASE_URL}member/register`, {
 //	fetch('register', {
 		method: 'POST',
 		headers: {
@@ -79,7 +79,12 @@ document.querySelector('button#build').addEventListener('click', () => {
 			            title: "註冊成功",
 			            text: "恭喜您，註冊成功囉！",
 						footer: '<a href="http://localhost:8080/chill-tribe/chilltribe.html">前往首頁</a>'
-			        });
+						}).then((result) => {
+						  if (result.isConfirmed) {
+						    const loginModal = new bootstrap.Modal(document.getElementById('login'));
+						    loginModal.show();
+						  }
+					});
 			    } else {
 			        Swal.fire({
 			            icon: "error",

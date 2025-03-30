@@ -145,6 +145,8 @@
 <input type="hidden" id="img_member_id" value="">
 <input type="hidden" id="member_id" value="">
 
+<script src="../core/constant.js"></script>
+
 <script>
 
 	const photo_base64 = document.getElementById('photo_base64');
@@ -154,7 +156,7 @@
 
 
 	// 	fetch('find')
-	fetch(`http://localhost:8080/chill-tribe/member/find/${memberid}`)
+	fetch(`${APP_CONFIG.BASE_URL}member/find/${memberid}`)
 // 	fetch(`find/${memberid}`)
 		// fetch(`find/${img_member_id.value}`)
 		.then(resp => resp.json())
@@ -205,7 +207,7 @@
 		//         const member_id = document.getElementById('member_id');
 // 		console.log(img_member_id.value);
 
-		fetch(`http://localhost:8080/chill-tribe/member/memberimg`, {
+		fetch(`${APP_CONFIG.BASE_URL}member/memberimg`, {
 // 		fetch('memberimg', {
 			method: 'POST',
 			headers: {
