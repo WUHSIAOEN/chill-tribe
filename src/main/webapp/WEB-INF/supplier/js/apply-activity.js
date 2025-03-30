@@ -100,7 +100,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
   console.log("Sending JSON text:", JSON.stringify(requestData));
 
   // 申請活動 - Post
-  fetch("http://localhost:8080/chill-tribe/supplier/applyAct", {
+  fetch(`${APP_CONFIG.BASE_URL}supplier/applyAct`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -119,13 +119,13 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`)
+        fetch(`${APP_CONFIG.BASE_URL}supplier/applyAct/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 POST 請求來提交圖片 - Post
-            fetch(`http://localhost:8080/chill-tribe/supplier/applyAct/${activityId}`, {
+            fetch(`${APP_CONFIG.BASE_URL}supplier/applyAct/${activityId}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
