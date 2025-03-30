@@ -78,9 +78,9 @@
 							<div class="form-submit"
 								style="display: flex; justify-content: space-between; align-items: center;">
 								<h4 class="block-title">購物車</h4>
-								<button class="btn btn-primary rounded px-3" type="button">
+								<!-- <button class="btn btn-primary rounded px-3" type="button">
 									<i class="fa-solid fa-trash-can me-4"></i> 清空購物車
-								</button>
+								</button> -->
 							</div>
 
 							<div class="block-body">
@@ -116,7 +116,7 @@
 													<td>
 														<input type="number" class="form-control text-center mx-2 item-quantity" value="1" min="1" max="10" />
 													</td>
-													<td class="action">
+													<td class="action deleteBtn">
 														<a href="#" class="delete"><i class="fa-solid fa-trash-can"></i>
 															Delete</a>
 													</td>
@@ -139,7 +139,7 @@
 									</div> -->
 								</div>
 								<div class="d-flex justify-content-between p-3">
-									<button class="btn btn-primary rounded px-4" type="button">
+									<button id="act-list" class="btn btn-primary rounded px-4" type="button">
 										<i class="fa fa-arrow-circle-left pr-2" aria-hidden="true">
 											繼續選購</i></button>
 									<button id="checkout" class="btn btn-primary rounded px-4" type="button">
@@ -216,6 +216,7 @@
 	</script>
 
 	<!-- ============================自定義js============================== -->
+	<script src="../core/constant.js"></script>
 	<script src="./js/shopping-cart.js"></script>
 
 </body>
