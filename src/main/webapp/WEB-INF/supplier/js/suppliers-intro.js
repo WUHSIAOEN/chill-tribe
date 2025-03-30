@@ -5,7 +5,7 @@ function getSupplierIdFromURL() {
 
 const supplier_id = getSupplierIdFromURL();
 
-fetch(`http://localhost:8080/chill-tribe/supplier/supplierfind/${supplier_id}`)
+fetch(`${APP_CONFIG.BASE_URL}supplier/supplierfind/${supplier_id}`)
   .then(response => response.json())
   .then(data => {
     console.log("從後端獲取的數據:", data);

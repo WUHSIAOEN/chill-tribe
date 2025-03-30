@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChillTribe - 總活動列表</title>
+  <link rel="icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
+	<link rel="shortcut icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -310,7 +312,7 @@
   function fetchAllActivity(table) {
     const supplierId = getSupplierId();
 
-    fetch(`http://localhost:8080/chill-tribe/activities/supplier/${supplierId}`)
+    fetch(`${APP_CONFIG.BASE_URL}activities/supplier/${supplierId}`)
     .then(response => response.json())
     .then(data => {
       console.log("從 後端 獲取的數據:", data);
@@ -405,7 +407,7 @@
       console.log("要取消的活動 ID:", activityId);
       const requestData = {activityId: activityId, status: 0};
 
-      fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`, {
+      fetch(`${APP_CONFIG.BASE_URL}activities/${activityId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -426,5 +428,6 @@
     }
   });
 </script>
+<script src="http://localhost:8080/chill-tribe/core/constant.js"></script>
 </body>
 </html>

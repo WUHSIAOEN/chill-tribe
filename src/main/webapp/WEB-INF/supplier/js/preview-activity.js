@@ -8,7 +8,7 @@ const activityId = getActivityIdFromURL();
 function fetchActivityById(activityId) {
   
 
-  fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`)
+  fetch(`${APP_CONFIG.BASE_URL}supplier/activities/edit/${activityId}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("從 後端獲取的數據:", data);
@@ -141,7 +141,7 @@ document
   const images = window.base64Images;
   const requestData = newActivityData();
 
-  fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`, {
+  fetch(`${APP_CONFIG.BASE_URL}supplier/activities/edit/${activityId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -160,13 +160,13 @@ document
         }));
   
         // 首先獲取活動資料 - Get
-        fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}`)
+        fetch(`${APP_CONFIG.BASE_URL}supplier/activities/edit/${activityId}`)
           .then(response => response.json())
           .then(activity => {
             console.log('活動信息:', activity);
   
             // 然後發送第二次 PUT 請求來修改圖片
-            fetch(`http://localhost:8080/chill-tribe/supplier/activities/edit/${activityId}/images`, {
+            fetch(`${APP_CONFIG.BASE_URL}supplier/activities/edit/${activityId}/images`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

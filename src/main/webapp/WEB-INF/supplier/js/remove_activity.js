@@ -5,7 +5,7 @@ function getActivityIdFromURL() {
 }
 
 function fetchActivityById(id) {
-  fetch(`/chill-tribe/activity/findActivityById?id=${id}`)
+  fetch(`${APP_CONFIG.BASE_URL}activity/findActivityById?id=${id}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("從 Servlet 獲取的數據:", data);
@@ -43,7 +43,7 @@ document
   });
 
 function removeActivityById(id) {
-  fetch(`/chill-tribe/activity/remove?id=${id}`)
+  fetch(`${APP_CONFIG.BASE_URL}activity/remove?id=${id}`)
     .then((resp) => resp.json())
     .then((body) => {
       location.reload();
