@@ -3,14 +3,14 @@
 <Context>
 
     <Resource name="jdbc/chilltribe" type="javax.sql.DataSource"
- 	driverClassName="com.mysql.cj.jdbc.Driver"
- 	jdbcUrl="jdbc:mysql://localhost:3306/chilltribe_prod_restore"
- 	username="root"
-    password="123456"
-    factory="com.zaxxer.hikari.HikariJNDIFactory"
-    dataSource.cachePrepStmts="true"
-    dataSource.prepStmtCacheSize="250"
-    dataSource.prepStmtCacheSqlLimit="2048"
-  /> 
-  
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              jdbcUrl="jdbc:mysql://localhost:3306/chilltribe_prod"
+              username="root"
+              password="123456"
+              factory="com.zaxxer.hikari.HikariJNDIFactory"
+              dataSource.cachePrepStmts="true"
+              dataSource.prepStmtCacheSize="250"
+              dataSource.prepStmtCacheSqlLimit="2048"
+    />
+
 </Context>
