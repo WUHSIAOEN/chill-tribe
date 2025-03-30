@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>供應商個人資料</title>
+  <link rel="shortcut icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -282,6 +283,7 @@
 <script src="../admin/dist/js/demo.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../core/constant.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -335,7 +337,7 @@
   const supplier_id = sessionStorage.getItem('supplier_id');
 
 //   debugger;
-  fetch(`supplierfind/${supplier_id}`)
+  fetch(`${APP_CONFIG.BASE_URL}supplierfind/${supplier_id}`)
 //   fetch('supplierfind')
     .then(resp => resp.json())
     .then(supplier => {
@@ -369,7 +371,7 @@
       console.log(img_supplier_id.value);
 
 //   debugger;
-  fetch('supplierimg', {
+  fetch('${APP_CONFIG.BASE_URL}supplierimg', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -405,7 +407,7 @@
 		$('#btn_update').on("click", function(){
 			console.log("觸發更新按鈕囉！");
 			event.preventDefault();
-		fetch('supplieredit', {
+		fetch(`${APP_CONFIG.BASE_URL}supplieredit`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'

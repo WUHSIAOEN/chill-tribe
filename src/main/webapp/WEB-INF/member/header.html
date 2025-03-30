@@ -125,6 +125,8 @@
 <input type="hidden" id="img_member_header_id" value="">
 <input type="hidden" id="member_id" value="">
 
+<script src="../core/constant.js"></script>
+
 
 <script>
 	const member_header_photo_base64 = document.getElementById('member_header_photo_base64');
@@ -149,7 +151,7 @@
 	// 			fetch(`find/${img_member_header_id.value}`)
 	// 			fetch(`/chill-tribe/member/find/${img_member_header_id}`)
 	function setmembername(a) {
-		fetch(`http://localhost:8080/chill-tribe/member/find/${a}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/find/${a}`)
 // 		fetch(`find/${a}`)
 			.then(resp => resp.json())
 			.then(member => {
@@ -212,7 +214,7 @@
 		document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
 		// 登出發後端
-		fetch(`http://localhost:8080/chill-tribe/member/logout`, {
+		fetch(`${APP_CONFIG.BASE_URL}member/logout`, {
 // 		fetch(`member/logout`, {
 			method: 'DELETE'
 		});

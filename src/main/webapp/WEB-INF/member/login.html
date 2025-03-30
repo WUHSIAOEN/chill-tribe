@@ -79,6 +79,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../core/constant.js"></script>
 <script>
 
 	const email = document.querySelector('#loginemail');
@@ -202,7 +203,7 @@
 
 		// 一般登入發後端請求開始
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`http://localhost:8080/chill-tribe/member/login/${email.value}/${password.value}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${password.value}`)
 // 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
@@ -293,7 +294,7 @@
 		localStorage.setItem("btn_google", false);
 	// Google查詢開始
 // 	window.onload = function () {
-		fetch(`http://localhost:8080/chill-tribe/googlelogin/findGoogleEmail`)
+		fetch(`${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail`)
 			.then(response => {
 				return response.json();
 			})

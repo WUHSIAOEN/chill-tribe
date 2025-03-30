@@ -86,6 +86,8 @@
 <input type="hidden" id="img_member_navbar_id" value="">
 <input type="hidden" id="member_id" value="">
 
+<script src="../core/constant.js"></script>
+
 <script>
     const member_navbar_photo_base64 = document.getElementById('member_header_photo_base64');
     const username = document.querySelector('#member_name');
@@ -99,7 +101,7 @@
     const membername = document.querySelector('#member_name');
 
     // 	fetch('find')
-    fetch(`http://localhost:8080/chill-tribe/member/find/${memberid}`)
+    fetch(`${APP_CONFIG.BASE_URL}member/find/${memberid}`)
         // 	fetch(`find/${memberid}`)
         // fetch(`find/${img_member_navbar_id.value}`)
         .then(resp => resp.json())
@@ -141,7 +143,7 @@
         localStorage.clear();
         document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
-        fetch(`http://localhost:8080/chill-tribe/member/logout`, {
+        fetch(`${APP_CONFIG.BASE_URL}member/logout`, {
 // 		fetch(`member/logout`, {
             method: 'DELETE'
         });
