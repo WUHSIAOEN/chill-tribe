@@ -96,7 +96,7 @@
 								<tbody>
 
 									<!-- Item #1 -->
-									<tr>
+									<tr id="tr_01">
 										<td class="property-container">
 
 											<div class="title">
@@ -316,11 +316,12 @@
 
 
 
-
+			$('#tr_01').css('display', 'none');
 // 		debugger;
 		fetch(`findaddress/${memberid}`)
 			.then(resp => resp.json())
 			.then(member => {
+				
 				if (!member) return; 
 // 				console.log(member);
 				member_id.value = member.member_id;
@@ -340,7 +341,9 @@
 				city_district_1.textContent = `${member.city_name}  ${member.district_name}`;
 // 				console.log('city_district_1：' + city_district_1.textContent);
 // 				console.log('address_default_1：' + address_default_1.textContent);
-
+				$('#tr_01').css('display', ''); 
+				$('#add_addresses').css('display', 'none');
+				
 			})
 			
 			.catch(() => {}); 
