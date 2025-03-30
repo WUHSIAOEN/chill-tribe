@@ -3,6 +3,7 @@ const password = document.querySelector('#password');
 const cpassword = document.querySelector('#cPassword');
 const phone = document.querySelector('#phone');
 const email = document.querySelector('#email');
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 document.querySelector('button#build').addEventListener('click', () => {
 	console.log("觸發");
@@ -15,6 +16,15 @@ document.querySelector('button#build').addEventListener('click', () => {
 		});
 		return;
 	}
+	
+	if (email.value.indexOf('@') === -1) {
+			Swal.fire({
+				icon: "error",
+				title: "Oh...糟糕",
+				text: "Email格式不正確",
+			});
+			return;
+		}
 
 	if (password.value.length < 4 || password.value.length > 12) {
 		Swal.fire({
@@ -33,8 +43,17 @@ document.querySelector('button#build').addEventListener('click', () => {
 						});
 		return;
 	}
+	
+	if (phone.value === "") {
+			Swal.fire({
+								icon: "error",
+								title: "Oh...糟糕",
+								text: "請重新輸入手機號碼",
+							});
+			return;
+		}
 
-	fetch(`http://localhost:8080/chill-tribe/member/register`, {
+	fetch(`${APP_CONFIG.BASE_URL}member/register`, {
 //	fetch('register', {
 		method: 'POST',
 		headers: {
@@ -60,7 +79,12 @@ document.querySelector('button#build').addEventListener('click', () => {
 			            title: "註冊成功",
 			            text: "恭喜您，註冊成功囉！",
 						footer: '<a href="http://localhost:8080/chill-tribe/chilltribe.html">前往首頁</a>'
-			        });
+						}).then((result) => {
+						  if (result.isConfirmed) {
+						    const loginModal = new bootstrap.Modal(document.getElementById('login'));
+						    loginModal.show();
+						  }
+					});
 			    } else {
 			        Swal.fire({
 			            icon: "error",

@@ -47,7 +47,12 @@
 		<!-- Top header  -->
 		<!-- ============================================================== -->
 		<!-- Start Navigation -->
-		<header id="header"></header>
+		<!-- <header id="header"></header> -->
+		<div class="header header-light head-shadow">
+			<div class="container">
+				<nav id="navigation" class="navigation navigation-landscape"></nav>
+			</div>
+		</div>
 		<!-- End Navigation -->
 		<!-- ============================================================== -->
 		<!-- Top header  -->
@@ -126,7 +131,7 @@
 										<div class="form-group">
 											<div class="position-relative">
 												<input type="text" class="form-control rounded-3 ps-5"
-													placeholder="活動關鍵字搜尋...">
+													placeholder="活動關鍵字搜尋..." id="search-act-name">
 												<div class="position-absolute top-50 start-0 translate-middle-y ms-2">
 													<span class="svg-icon text-primary svg-icon-2hx">
 														<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -162,124 +167,129 @@
 													<div class="single_filter_card">
 														<div class="card-body pt-0">
 															<div class="inner_widget_link">
-																<ul class="no-ul-list filter-list">
+																<ul class="no-ul-list filter-list" id="city-select">
+																	<li class="form-check">
+																		<input id="22" class="form-check-input"
+																			name="where" type="radio" value="" checked>
+																		<label for="b9" class="form-check-label">全部</label>
+																	</li>
 																	<li class="form-check">
 																		<input id="1" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="基隆市">
 																		<label for="b1"
 																			class="form-check-label">基隆市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="2" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="臺北市">
 																		<label for="b1"
 																			class="form-check-label">台北市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="3" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="新北市">
 																		<label for="b2"
 																			class="form-check-label">新北市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="4" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="桃園市">
 																		<label for="b3"
 																			class="form-check-label">桃園市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="5" class="form-check-input"
-																			name="where" type="radio" checked>
+																			name="where" type="radio" value="新竹市">
 																		<label for="b4"
 																			class="form-check-label">新竹市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="6" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="新竹縣">
 																		<label for="b5"
 																			class="form-check-label">新竹縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="7" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="苗栗縣">
 																		<label for="b6"
 																			class="form-check-label">苗栗縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="8" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="臺中市">
 																		<label for="b7"
 																			class="form-check-label">台中市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="9" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="彰化縣">
 																		<label for="b8"
 																			class="form-check-label">彰化縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="10" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="南投縣">
 																		<label for="b9" class="form-check-label">南投縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="11" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="雲林縣">
 																		<label for="b9" class="form-check-label">雲林縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="12" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="嘉義市">
 																		<label for="b9" class="form-check-label">嘉義市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="13" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="嘉義縣">
 																		<label for="b9" class="form-check-label">嘉義縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="14" class="form-check-input"
-																			name="where" type="radio">
-																		<label for="b9" class="form-check-label">台南市</label>
+																			name="where" type="radio" value="台南市">
+																		<label for="b9" class="form-check-label">臺南市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="15" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="高雄市">
 																		<label for="b9" class="form-check-label">高雄市</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="16" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="屏東縣">
 																		<label for="b9" class="form-check-label">屏東縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="17" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="宜蘭縣">
 																		<label for="b9" class="form-check-label">宜蘭縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="18" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="花蓮縣">
 																		<label for="b9" class="form-check-label">花蓮縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="19" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="臺東縣">
 																		<label for="b9" class="form-check-label">臺東縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="20" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="澎湖縣">
 																		<label for="b9" class="form-check-label">澎湖縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="21" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="金門縣">
 																		<label for="b9" class="form-check-label">金門縣</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="22" class="form-check-input"
-																			name="where" type="radio">
+																			name="where" type="radio" value="連江縣">
 																		<label for="b9" class="form-check-label">連江縣</label>
 																	</li>
 																</ul>
@@ -306,41 +316,41 @@
 													<div class="single_filter_card">
 														<div class="card-body pt-0">
 															<div class="inner_widget_link">
-																<ul class="no-ul-list filter-list">
+																<ul class="no-ul-list filter-list" id="category-select">
+																	<li class="form-check">
+																		<input id="c6" class="form-check-input"
+																			name="ptype" type="radio" value="" checked>
+																		<label for="c6"
+																			class="form-check-label">全部</label>
+																	</li>
 																	<li class="form-check">
 																		<input id="c1" class="form-check-input"
-																			name="ptype" type="radio">
+																			name="ptype" type="radio" value="運動">
 																		<label for="c1"
 																			class="form-check-label">運動</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="c2" class="form-check-input"
-																			name="ptype" type="radio">
+																			name="ptype" type="radio" value="文藝">
 																		<label for="c2" class="form-check-label">文藝</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="c3" class="form-check-input"
-																			name="ptype" type="radio">
+																			name="ptype" type="radio" value="娛樂">
 																		<label for="c3"
 																			class="form-check-label">娛樂</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="c4" class="form-check-input"
-																			name="ptype" type="radio" checked>
+																			name="ptype" type="radio" value="音樂">
 																		<label for="c4"
 																			class="form-check-label">音樂</label>
 																	</li>
 																	<li class="form-check">
 																		<input id="c5" class="form-check-input"
-																			name="ptype" type="radio">
+																			name="ptype" type="radio" value="美食">
 																		<label for="c5"
 																			class="form-check-label">美食</label>
-																	</li>
-																	<li class="form-check">
-																		<input id="c6" class="form-check-input"
-																			name="ptype" type="radio">
-																		<label for="c6"
-																			class="form-check-label">全部</label>
 																	</li>
 																</ul>
 															</div>
@@ -420,7 +430,7 @@
 									</div>
 
 									<div class="form-group filter_button">
-										<button type="submit" class="btn btn btn-primary rounded full-width">搜尋</button>
+										<button type="submit" class="btn btn btn-primary rounded full-width" id="filter-activities">搜尋</button>
 									</div>
 								</div>
 							</div>
@@ -742,6 +752,7 @@
 	<!-- ============================================================== -->
 	<script src="../vendors/jquery/jquery-3.7.1.min.js"></script>
 	<!-- 自己刻 -->
+	<script src="../core/constant.js"></script> 
 	<script src="js/activity-search.js"></script>
 	<!-- 自己刻↑ -->
 
@@ -769,7 +780,7 @@
 	<!-- ============================================================== -->
 
 	<script>
-		$('#header').load('../member/header.html');
+		$('#navigation').load('../member/fixed-member-navbar.html');
 
 		// 載入 footer.html
 		$('#footer').load('../member/footer.html');

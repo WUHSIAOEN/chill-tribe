@@ -78,6 +78,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../core/constant.js"></script>
 <script>
 
 	const email = document.querySelector('#loginemail');
@@ -149,7 +150,7 @@
 		console.log("發送登入請求");
 
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`http://localhost:8080/chill-tribe/member/login/${email.value}/${password.value}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${password.value}`)
 // 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
@@ -199,13 +200,13 @@
 		localStorage.setItem("btn_google", true);
 		console.log("Google登入按鈕觸發");
 		// 先跳轉到 Google 認證頁面
-		location.href = "http://localhost:8080/chill-tribe/anotherOauthLogin";
+		location.href = "${APP_CONFIG.BASE_URL}anotherOauthLogin";
 	});
 
 
 	if (localStorage.getItem("btn_google") == "true") {
 		localStorage.setItem("btn_google", false);
-		fetch('googlelogin/findGoogleEmail')
+		fetch('${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail')
 			.then(response => {
 				return response.json();
 			})
@@ -227,7 +228,7 @@
 									icon: "error",
 									title: "Oh...糟糕",
 									text: "請先註冊Chill Tribe的會員帳號，才能使用Google登入!",
-									footer: '<a href="http://localhost:8080/chill-tribe/member/member-register.html">前往註冊</a>'
+									footer: '<a href="${APP_CONFIG.BASE_URL}member/member-register.html">前往註冊</a>'
 								});
 							});
 							console.log("googlebtn=true,memberid==null");

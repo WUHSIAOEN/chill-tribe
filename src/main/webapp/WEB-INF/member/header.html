@@ -7,7 +7,7 @@
 		<nav id="navigation" class="navigation navigation-landscape">
 			<div class="nav-header">
 				<a class="nav-brand text-logo" id="logo_href"
-					href="/chilltribe.html"> <img src="http://localhost:8080/chill-tribe/star-logo-nobg.png"
+					href="/chilltribe.html"> <img src="${APP_CONFIG.BASE_URL}star-logo-nobg.png"
 					style="width: 40px; height: 40px;" />
 					<h5 class="fs-3 fw-bold ms-1 my-0">ChillTribe</h5>
 				</a>
@@ -40,7 +40,7 @@
 						href="../chilltribe.html">首頁<span class="submenu-indicator"></span></a></li>
 
 					<li><a id="index_href_search-activities"
-						href="../activity/search-activities.html">活動列表<span
+						href="../activity/search-activities.html?search-activity-name=&category=all&region=all">活動列表<span
 							class="submenu-indicator"></span></a></li>
 
 					<li><a id="index_href_contact"
@@ -125,6 +125,8 @@
 <input type="hidden" id="img_member_header_id" value="">
 <input type="hidden" id="member_id" value="">
 
+<script src="../core/constant.js"></script>
+
 
 <script>
 	const member_header_photo_base64 = document.getElementById('member_header_photo_base64');
@@ -149,7 +151,7 @@
 	// 			fetch(`find/${img_member_header_id.value}`)
 	// 			fetch(`/chill-tribe/member/find/${img_member_header_id}`)
 	function setmembername(a) {
-		fetch(`http://localhost:8080/chill-tribe/member/find/${a}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/find/${a}`)
 // 		fetch(`find/${a}`)
 			.then(resp => resp.json())
 			.then(member => {
@@ -160,10 +162,10 @@
 // 					member_header_photo_base64.src = 'https://placehold.co/500x500';
 // 					member_header_photo_base64.src = 'https://imgur.com/a/jDrbFs9';
 					member_header_photo_base64.src = 'http://localhost:8080/chill-tribe/activity/asset/no-image.jpg';
-					console.log("照片是空的");
+// 					console.log("照片是空的");
 				} else {
 					member_header_photo_base64.src = 'data:image/png;base64,' + member.photobase64;
-					console.log("77777有照片囉");
+// 					console.log("77777有照片囉");
 				}
 
 				if (member.membername != null) {
@@ -212,7 +214,7 @@
 		document.cookie = "JSESSIONID=; Path=/chill-tribe; Expires=Thu, 01 Jan 1970 00:00:00 GMT;";
 
 		// 登出發後端
-		fetch(`http://localhost:8080/chill-tribe/member/logout`, {
+		fetch(`${APP_CONFIG.BASE_URL}member/logout`, {
 // 		fetch(`member/logout`, {
 			method: 'DELETE'
 		});

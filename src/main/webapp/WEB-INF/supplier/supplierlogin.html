@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChillTribe - 供應商登入頁面</title>
+  <link rel="shortcut icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -82,6 +83,7 @@
 <script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../admin/dist/js/adminlte.min.js"></script>
+<script src="../core/constant.js"></script>
 
 <script>
 		
@@ -130,7 +132,7 @@
     console.log("發送登入請求");
     
 // 	debugger;
-    fetch(`http://localhost:8080/chill-tribe/supplier/supplierlogin/${loginemail.value}/${loginpassword.value}`)
+    fetch(`${APP_CONFIG.BASE_URL}supplier/supplierlogin/${loginemail.value}/${loginpassword.value}`)
 //     fetch('supplierlogin', {
 //       method: 'POST',
 //       headers: {

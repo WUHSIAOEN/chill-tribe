@@ -94,6 +94,7 @@ $(function () {
 
             // 右邊供應商資訊
             $('#supplier-img').attr('src', tickets[0]?.activity.supplier.image?.imageBase64 || '../activity/asset/no-image.jpg');
+            $('#supplier-name').attr('href', `${APP_CONFIG.BASE_URL}supplier/suppliers-intro.html?id=${tickets[0]?.activity.supplier.supplier_id}`);
             $('#supplier-name').text(tickets[0]?.activity.supplier.supplier_name);
             $('#supplier-phone').text(tickets[0]?.activity.supplier.phone);
             $('#msg-contact-email').val(tickets[0]?.order.contactMail);

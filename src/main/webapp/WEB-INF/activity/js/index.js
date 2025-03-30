@@ -1,5 +1,7 @@
 $(function () {
 
+    // let projectURL = "http://localhost:8080/chill-tribe/";
+
     // Claude 產的 要解決動態綁定的問題 - 待詢問
     // $(document).on('load orientationchange resize scroll', '.slick-initialized', function (e) {
     //      console.log('Event triggered:', e.type);
@@ -64,7 +66,7 @@ $(function () {
 
     // ============== 查詢活動卡片資料到即將開始活動 ==============
 
-    fetch('http://localhost:8080/chill-tribe/activity/search/latest')
+    fetch(`${APP_CONFIG.BASE_URL}activity/search/latest`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -106,7 +108,7 @@ $(function () {
                         <div class="property-listing property-1 bg-white p-2 rounded">
 
                             <div class="listing-img-wrapper">
-                                <a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}">
+                                <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}">
                                     <img src="${activityCard.activityImages[0]?.imageBase64 || './activity/asset/no-image.jpg'}" class="img-fluid mx-auto rounded" alt="" />
                                 </a>
                             </div>
@@ -116,15 +118,12 @@ $(function () {
                                 <div class="listing-detail-wrapper-box">
                                     <div
                                         class="listing-detail-wrapper d-flex align-items-center justify-content-between">
-                                        <div class="listing-short-detail">
+                                        <div class="listing-short-detail footer-first">
                                             <span class="label bg-light-danger text-danger d-inline-flex mb-1">${activityCard.category}</span>
-                                            <h4 class="listing-name mb-0"><a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
+                                            <h4 class="listing-name mb-0"><a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}">${activityCard.activityName}</a></h4>
                                             <div class="fr-can-rating data-rating-id="${index}">
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
-                                                <i class="fas fa-star fs-xs"></i>
+                                                <i class="fas fa-star fs-xs filled"></i>
+                                                <span class="perfect">${commentAverageStar}</span>
                                                 <span class="reviews_text fs-sm text-muted ms-2">(${commentCount} 則評論)</span>
                                             </div>
 
@@ -163,7 +162,7 @@ $(function () {
                                                 class="fa-solid fa-location-pin me-1"></i>${activityCard.address}</span>
                                     </div>
                                     <div class="listing-detail-btn">
-                                        <a href="http://localhost:8080/chill-tribe/activity/single-activity.html?id=${activityCard.activityId}"
+                                        <a href="${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${activityCard.activityId}"
                                             class="btn btn-sm px-4 fw-medium btn-primary">查看活動</a>
                                     </div>
                                 </div>
@@ -218,7 +217,7 @@ $(function () {
         params.append("category", category);
         params.append("region", region);
 
-        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
@@ -240,7 +239,7 @@ $(function () {
         params.append("category", category);
         params.append("region", "");
 
-        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })
@@ -258,7 +257,7 @@ $(function () {
         let params = new URLSearchParams();
         params.append("city", city);
 
-        let url = `http://localhost:8080/chill-tribe/activity/search-activities.html`;
+        let url = `${APP_CONFIG.BASE_URL}activity/search-activities.html`;
 
         window.location.href = `${url}?${params.toString()}`;
     })

@@ -110,11 +110,11 @@ public class Activities extends Core{
     private Integer inventoryCount;
     
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @Column(name = "INVENTORY_UPDATE_TIME")
+    @Column(name = "INVENTORY_UPDATE_TIME", insertable = false)
     private Timestamp inventoryUpdateTime;
     
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @Column(name = "CREATE_TIME")
+    @Column(name = "CREATE_TIME", insertable = false)
     private Timestamp createTime;
 
     private String latitude;
