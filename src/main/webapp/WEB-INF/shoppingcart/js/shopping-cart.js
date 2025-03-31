@@ -184,7 +184,7 @@ $(function () {
         localStorage.setItem('checkoutActivity', JSON.stringify(checkoutActivity));
 
         // 導向結帳頁面
-        window.location.href = `${APP_CONFIG.BASE_URL}/chill-tribe/order/order-form.html`;
+        window.location.href = `${APP_CONFIG.BASE_URL}order/order-form.html`;
     });
 
 
