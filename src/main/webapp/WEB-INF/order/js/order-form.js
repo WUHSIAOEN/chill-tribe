@@ -48,7 +48,7 @@ $(function () {
     // console.log(getMemberData().memberid);
 
     // 取得會員基本資料
-    fetch(`/chill-tribe/member/find/${getMemberData()}`)
+    fetch(`${APP_CONFIG.BASE_URL}member/find/${getMemberData()}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -68,7 +68,7 @@ $(function () {
     // 要先抓到活動資訊放到右邊活動資訊卡
     // URI 要改`/chill-tribe/supplier/applyAct/${activityId}`
     const activityId = getOrderData().activityId;
-    fetch(`/chill-tribe/supplier/applyAct/${activityId}`)
+    fetch(`${APP_CONFIG.BASE_URL}supplier/applyAct/${activityId}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -135,7 +135,7 @@ $(function () {
 
         if (getOrderData().orderStatus === "no_payment_required") {
             // 送出訂單
-            fetch("/chill-tribe/orders/order/orderWithoutPayment", {
+            fetch(`${APP_CONFIG.BASE_URL}orders/order/orderWithoutPayment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderObj),
@@ -159,7 +159,7 @@ $(function () {
                 })
         } else {
             // 送出訂單
-            fetch("/chill-tribe/orders/order/orderWithPayment", {
+            fetch(`${APP_CONFIG.BASE_URL}orders/order/orderWithPayment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderObj),

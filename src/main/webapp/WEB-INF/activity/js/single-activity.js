@@ -7,7 +7,7 @@ function getActivityIdFromURL() {
 const activityId = getActivityIdFromURL();
 
 function fetchActivityById(activityId) {
-  fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`)
+  fetch(`${APP_CONFIG.BASE_URL}activities/${activityId}`)
   .then(response => response.json())
   .then(data => {
     console.log("從 後端 獲取的數據:", data);
@@ -229,7 +229,7 @@ document
     });
     const requestData = ShoppingCartItems();
     console.log("送出的資料:", requestData);
-    fetch(`http://localhost:8080/chill-tribe/cart/${activityId}`, {
+    fetch(`${APP_CONFIG.BASE_URL}cart/${activityId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -278,7 +278,7 @@ document
       // footer: '<a href="#">Why do I have this issue?</a>'
     });
     console.log("送出的資料:", requestMyforitesData);
-    fetch(`http://localhost:8080/chill-tribe/myfavorites/${activityId}`, {
+    fetch(`${APP_CONFIG.BASE_URL}myfavorites/${activityId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -357,7 +357,7 @@ document.getElementById('commentBtn').addEventListener('click', function(event) 
     });
       if (userConfirmed) {
         console.log("送出的資料:", reviewData);
-        fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`, {
+        fetch(`${APP_CONFIG.BASE_URL}activities/${activityId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

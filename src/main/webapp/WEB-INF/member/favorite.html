@@ -7,7 +7,9 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <title>ChillTribe - 收藏</title>
-
+<link rel="icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
+				<link rel="shortcut icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
+				
 <!-- Custom CSS -->
 <link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
 
@@ -193,6 +195,8 @@
 	<!----- 載入第三方的提醒視窗 ----->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+	<script src="http://localhost:8080/chill-tribe/core/constant.js"></script>
+
 	<script>
 
 		function getMemberId() {
@@ -204,7 +208,7 @@
 
 		const memberData = getMemberId();
 
-    fetch(`http://localhost:8080/chill-tribe/myfavorites/member/${memberData}`)
+    fetch(`${APP_CONFIG.BASE_URL}myfavorites/member/${memberData}`)
        .then(response => response.json())
         .then(data => {
 					console.log("從後端獲取的數據:", data);
@@ -282,7 +286,7 @@
 				console.log("要刪除的商品 ID:", myFavoriteId);
 				const requestData = {myFavoriteId: myFavoriteId};
 	
-				fetch(`http://localhost:8080/chill-tribe/myfavorites/${myFavoriteId}`, {
+				fetch(`${APP_CONFIG.BASE_URL}myfavorites/${myFavoriteId}`, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
