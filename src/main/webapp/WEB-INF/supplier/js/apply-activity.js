@@ -137,7 +137,7 @@ document.getElementById("submitBtn").addEventListener("click", function (event) 
                 console.log('圖片上傳成功:', uploadedPictures);
                 
                 // 上傳成功後跳轉到活動總攬頁面
-                window.location.href = "http://localhost:8080/chill-tribe/supplier/activitySpList.html";
+                window.location.href = "../supplier/activitySpList.html";
               })
               .catch(error => console.error('圖片上傳失敗:', error));
           })

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChillTribe - 個別供應商活動列表</title>
-  <link rel="icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
-	<link rel="shortcut icon" href="http://localhost:8080/chill-tribe/star-logo-nobg.png" type="image/png">
+  <link rel="icon" href="../star-logo-nobg.png" type="image/png">
+	<link rel="shortcut icon" href="../star-logo-nobg.png" type="image/png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -313,7 +313,7 @@
 
 <!----- 載入第三方的提醒視窗 ----->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="../core/constant.js"></script>
 <script>
   $(function () {
     var table = $("#example2").DataTable({
@@ -331,7 +331,7 @@
 
   // 動態抓取資料並加入 DataTable
   function fetchAllActivity(table) {
-    fetch("http://localhost:8080/chill-tribe/activities")
+    fetch(`${APP_CONFIG.BASE_URL}/activities`)
     .then(response => response.json())
     .then(data => {
       // console.log("從 Servlet 獲取的數據:", data);
@@ -425,7 +425,7 @@
       console.log("要取消的活動 ID:", activityId);
       const requestData = {activityId: activityId, status: 0};
 
-      fetch(`http://localhost:8080/chill-tribe/activities/${activityId}`, {
+      fetch(`${APP_CONFIG.BASE_URL}activities/${activityId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -447,6 +447,6 @@
     }
   });
 </script>
-<script src="http://localhost:8080/chill-tribe/core/constant.js"></script>
+<script src="../core/constant.js"></script>
 </body>
 </html>
