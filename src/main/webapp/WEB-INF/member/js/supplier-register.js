@@ -63,7 +63,7 @@ document.querySelector('button#build').addEventListener('click', () => {
 		return;
 	}
 
-	fetch('../supplier/register', {
+	fetch(`${APP_CONFIG.BASE_URL}supplier/register`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

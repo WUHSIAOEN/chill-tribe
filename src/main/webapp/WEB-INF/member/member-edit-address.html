@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<title>ChillTribe - 一般會員修改地址</title>
+	<link rel="shortcut icon" href="/chill-tribe/star-logo-nobg.png" type="image/png">
 
 	<!-- Custom CSS -->
 	<link href="../Full_Resido/_html/assets/css/styles.css" rel="stylesheet">
@@ -172,6 +173,7 @@
 	<script src="../Full_Resido/_html/assets/js/lightbox.js"></script>
 	<script src="../Full_Resido/_html/assets/js/imagesloaded.js"></script>
 
+	<script src="../core/constant.js"></script>
 	<script>
 		// navbar load
 		$("#navigation").load("fixed-member-navbar.html");
@@ -226,7 +228,7 @@
 
 
 		
-		fetch(`findaddress/${memberid}`)
+		fetch(`${APP_CONFIG.BASE_URL}/member/findaddress/${memberid}`)
 		.then(resp => resp.json())
 		.then(member => {
 			console.log(member);
@@ -283,7 +285,7 @@
 
 
 
-			fetch(`memberaddressedit`, {
+			fetch(`${APP_CONFIG.BASE_URL}/member/memberaddressedit`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -308,6 +310,11 @@
 							icon: "success",
 							title: "成功",
 							text: "恭喜您，修改地址成功囉！",
+							  confirmButtonText: '確定',
+							}).then((result) => {
+							  if (result.isConfirmed) {
+							    window.location.href = `${APP_CONFIG.BASE_URL}member/member-addresses.html`;
+							  }
 						});
 					} else {
 						Swal.fire({

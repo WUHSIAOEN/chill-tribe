@@ -14,7 +14,7 @@
 		<div class="modal-body">
 			<h4 class="modal-header-title">登入</h4>
 			<div class="d-flex align-items-center justify-content-center mb-3">
-			<img src="http://localhost:8080/chill-tribe/star-logo-nobg.png"style="width: 40px; height: 40px;">
+			<img src="${APP_CONFIG.BASE_URL}star-logo-nobg.png"style="width: 40px; height: 40px;">
 <!-- 				<span class="svg-icon text-primary svg-icon-2hx"> <svg width="80" height="80" viewBox="0 0 24 24" -->
 <!-- 						fill="none" xmlns="http://www.w3.org/2000/svg"> -->
 <!-- 						<path -->
@@ -79,6 +79,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../core/constant.js"></script>
 <script>
 
 	const email = document.querySelector('#loginemail');
@@ -202,7 +203,7 @@
 
 		// 一般登入發後端請求開始
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`http://localhost:8080/chill-tribe/member/login/${email.value}/${password.value}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${password.value}`)
 // 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
@@ -293,7 +294,7 @@
 		localStorage.setItem("btn_google", false);
 	// Google查詢開始
 // 	window.onload = function () {
-		fetch(`http://localhost:8080/chill-tribe/googlelogin/findGoogleEmail`)
+		fetch(`${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail`)
 			.then(response => {
 				return response.json();
 			})
