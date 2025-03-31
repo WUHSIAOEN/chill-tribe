@@ -31,7 +31,7 @@ $(function () {
     console.log(urlParams.toString());
     let orderId = urlParams.get('orderId');
 
-    fetch(`/chill-tribe/orders/order/${orderId}`)
+    fetch(`${APP_CONFIG.BASE_URL}orders/order/${orderId}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -72,7 +72,7 @@ $(function () {
             $("#order-total").text(totalPrice);
             activityId = orders.activityId;
 
-            return fetch(`/chill-tribe/supplier/applyAct/${activityId}`);
+            return fetch(`${APP_CONFIG.BASE_URL}supplier/applyAct/${activityId}`);
         })
         .then(resp => {
             if (resp.ok) {
