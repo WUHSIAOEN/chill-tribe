@@ -25,7 +25,7 @@ public class OrderforpayServiceImpl implements OrderforpayService{
         String OrderNo = String.format("ORD%06d", orderId);
         
         // 自己新增 - 整理ClientBackURL
-        String clientBackURL = "http://localhost:8080/chill-tribe/order/order-details.html?orderId=" + orderId;
+        String clientBackURL = "http://57.180.64.29:8080/chill-tribe/order/order-details.html?orderId=" + orderId;
         
 
         // 訂單編號一定要英文+數字 不然會出錯~~~
@@ -38,7 +38,7 @@ public class OrderforpayServiceImpl implements OrderforpayService{
         aioCheckOutALL.setTradeDesc("購物網站支付"); // 訂單描述
         aioCheckOutALL.setItemName(activityName); // 商品名稱
         aioCheckOutALL.setClientBackURL(clientBackURL); // 客戶端返回的 URL
-        aioCheckOutALL.setReturnURL("http://localhost:8080/chill-tribe/member/member-register.html"); // 返回的URL
+        aioCheckOutALL.setReturnURL("http://57.180.64.29:8080/chill-tribe/member/member-register.html"); // 返回的URL
         aioCheckOutALL.setNeedExtraPaidInfo("N"); // 不需要額外支付資訊
 
         try {
