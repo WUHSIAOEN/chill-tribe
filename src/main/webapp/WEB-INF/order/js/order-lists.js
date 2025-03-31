@@ -46,7 +46,7 @@ $(function () {
 
     // 將會員購物車內容撈回來
     // path 要再改成從session 取得
-    fetch(`/chill-tribe/orders/order/list/${getMemberData()}`)
+    fetch(`${APP_CONFIG.BASE_URL}orders/order/list/${getMemberData()}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -86,7 +86,7 @@ $(function () {
                                 <img src="${orderItems[i].activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg'}" alt="">
                                 <ul class="title" style="padding-left: 0; width: 1rem;">
                                     <li>
-                                        <h4><a href="http://localhost:8080/chill-tribe/order/order-info.html?orderId=${orderItems[i].orderId}" class="order-act-name">${orderItems[i].activity.activityName}</a></h4>
+                                        <h4><a href="${APP_CONFIG.BASE_URL}order/order-info.html?orderId=${orderItems[i].orderId}" class="order-act-name">${orderItems[i].activity.activityName}</a></h4>
                                     </li>
                                     <li><span>訂單編號</span></li>
                                     <li><span>訂購日期</span></li>

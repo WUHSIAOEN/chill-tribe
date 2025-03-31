@@ -32,7 +32,7 @@ $(function () {
     let urlParams = new URLSearchParams(window.location.search);
     let orderId = urlParams.get('orderId');
 
-    fetch(`/chill-tribe/orders/order/tickets/${orderId}`)
+    fetch(`${APP_CONFIG.BASE_URL}orders/order/tickets/${orderId}`)
         .then(resp => {
             if (resp.ok) {
                 return resp.json();
@@ -44,7 +44,7 @@ $(function () {
         .then(tickets => {
             console.log(tickets);
 
-            $('#activity-name').attr('href', `http://localhost:8080/chill-tribe/activity/single-activity.html?id=${tickets[0]?.activityId}`);
+            $('#activity-name').attr('href', `${APP_CONFIG.BASE_URL}activity/single-activity.html?id=${tickets[0]?.activityId}`);
             $('#activity-img').attr('src', tickets[0]?.activity.activityImages[0]?.imageBase64 || '../activity/asset/no-image.jpg');
             $('#activity-name').text(tickets[0]?.activity?.activityName);
             let orderSerial = formatSerialNumber(tickets[0]?.order?.orderId, "ORD");
