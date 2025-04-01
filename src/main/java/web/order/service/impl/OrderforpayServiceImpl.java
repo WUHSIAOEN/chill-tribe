@@ -32,7 +32,7 @@ public class OrderforpayServiceImpl implements OrderforpayService{
         // 綠界要的資料
         AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
 //        aioCheckOutALL.setMerchantTradeNo("Order" + "t010"); // 訂單ID
-        aioCheckOutALL.setMerchantTradeNo(OrderNo + "chilltribe"); // 訂單ID
+        aioCheckOutALL.setMerchantTradeNo(OrderNo + "chil"); // 訂單ID
         aioCheckOutALL.setMerchantTradeDate(orderDate); // 訂單日期
         aioCheckOutALL.setTotalAmount(String.valueOf(totalPrice)); // 訂單總金額
         aioCheckOutALL.setTradeDesc("購物網站支付"); // 訂單描述

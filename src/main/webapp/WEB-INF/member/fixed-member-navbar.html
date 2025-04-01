@@ -1,6 +1,6 @@
 <div class="nav-header">
     <a class="nav-brand text-logo" id="member_logo_href" href="/chilltribe.html">
-        <img src="../star-logo-nobg.png" style="width: 40px; height: 40px;"/>
+        <img src="../star-logo-nobg.png" style="width: 40px; height: 40px;" id="logo-img"/>
         <h5 class="fs-3 fw-bold ms-1 my-0">ChillTribe</h5>
     </a>
     <div class="nav-toggle"></div>
@@ -86,7 +86,15 @@
 <input type="hidden" id="img_member_navbar_id" value="">
 <input type="hidden" id="member_id" value="">
 
+
 <script src="../core/constant.js"></script>
+<script>
+
+$(function () {
+    $("#logo-img").attr("src", `${APP_CONFIG.BASE_URL}star-logo-nobg.png`)
+});
+
+</script>
 
 <script>
     const member_navbar_photo_base64 = document.getElementById('member_header_photo_base64');
