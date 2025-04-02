@@ -23,7 +23,7 @@ $(function () {
     // ============== 自訂函式↑ =================
 
     // 瀏覽訂單的網頁a 標籤
-    $("#review-orders").attr("href", `${APP_CONFIG.BASE_URL}`);
+    $("#review-orders").attr("href", `${APP_CONFIG.BASE_URL}order/order-lists.html`);
     
 
 
