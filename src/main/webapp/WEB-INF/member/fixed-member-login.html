@@ -63,7 +63,7 @@
 			<div class="modal-divider">
 				<span>或其他登入方式</span>
 			</div>
-			<div class="social-login mb-3">
+			<div class="social-login mb-3" id="div_google">
 				<ul>
 					<li><a href="#" class="btn connect-google" id="btn_googlelogin">
 							<i class="ti-google"></i>Google+</a></li>
@@ -200,14 +200,18 @@
 		googlebtn = true;
 		localStorage.setItem("btn_google", true);
 		console.log("Google登入按鈕觸發");
+		// console.log(APP_CONFIG.BASE_URL);
 		// 先跳轉到 Google 認證頁面
-		location.href = "${APP_CONFIG.BASE_URL}anotherOauthLogin";
+		let url = `${APP_CONFIG.BASE_URL}anotherOauthLogin`
+		// console.log(url);
+		location.href = url;
 	});
 
 
 	if (localStorage.getItem("btn_google") == "true") {
 		localStorage.setItem("btn_google", false);
-		fetch('${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail')
+		console.log(APP_CONFIG.BASE_URL);
+		fetch(`${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail`)
 			.then(response => {
 				return response.json();
 			})
@@ -229,7 +233,7 @@
 									icon: "error",
 									title: "Oh...糟糕",
 									text: "請先註冊Chill Tribe的會員帳號，才能使用Google登入!",
-									footer: '<a href="${APP_CONFIG.BASE_URL}member/member-register.html">前往註冊</a>'
+									footer: `<a href="${APP_CONFIG.BASE_URL}member/member-register.html">前往註冊</a>`
 								});
 							});
 							console.log("googlebtn=true,memberid==null");

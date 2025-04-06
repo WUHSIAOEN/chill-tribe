@@ -193,7 +193,7 @@ function ShoppingCartItems() {
   const quantity = parseInt(document.getElementById("quantity")?.value) || 1;
   const unitPrice = parseInt(document.getElementById("unitPrice-2").textContent);
   // const totalPrice = quantity * unitPrice;
-  const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
+  const memberId = parseInt(document.getElementById("member_id")?.value) || 3;
   console.log(activityId, quantity, unitPrice);
   return {
     activityId,
@@ -253,7 +253,7 @@ document
 // 新增活動商品到我的最愛
 function MyFavoritesItems() {
   const activityId = parseInt(getActivityIdFromURL()) || 1;
-  const memberId = parseInt(document.getElementById("member_id")?.value) || 1;
+  const memberId = parseInt(document.getElementById("member_id")?.value) || 3;
   console.log(activityId, memberId);
 
   return {

@@ -22,7 +22,9 @@ $(function () {
 
     // ============== 自訂函式↑ =================
 
-
+    // 瀏覽訂單的網頁a 標籤
+    $("#review-orders").attr("href", `${APP_CONFIG.BASE_URL}order/order-lists.html`);
+    
 
 
     // 抓活動資訊 - 這邊應該要發fetch 去查訂單的活動資訊

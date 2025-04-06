@@ -258,6 +258,7 @@
 				})
 				.then(body => {
 					const { successful, errMsg } = body;
+					console.log(body);
 					if (successful) {
 						Swal.fire({
 							icon: "success",
