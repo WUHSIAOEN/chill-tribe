@@ -195,6 +195,8 @@
 			return;
 		}
 
+		 const encodedPassword = encodeURIComponent(password.value);
+		
 		console.log("發送的資料：", {
 			email: email.value,
 			password: password.value,
@@ -203,7 +205,7 @@
 
 		// 一般登入發後端請求開始
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${password.value}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${encodedPassword}`)
 // 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
