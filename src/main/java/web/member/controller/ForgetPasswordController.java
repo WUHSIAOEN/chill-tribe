@@ -34,7 +34,6 @@ public class ForgetPasswordController {
 	@Autowired
 	private MemberService service;
 	
-    
 	@PutMapping
 	public Member memberforgetpassword(@RequestBody Member member) {
 		
@@ -44,7 +43,6 @@ public class ForgetPasswordController {
 			member.setSuccessful(false);
 			return member;
 		}
-
 		
 		member = service.forgetpassowrd(member);
 		
@@ -61,9 +59,13 @@ public class ForgetPasswordController {
 		String recipient = member.getEmail();
 		// 主旨
 		String subject = "忘記密碼通知";
+		
+		// 取得亂碼
+		String newPassword = member.getPassword(); 
+		
 		// 內容
 		String bodyHTML =
-				"<html>" + "<head></head>" + "<body>" + "<h1>提供您預設密碼：chilltribe202</h1>"
+				"<html>" + "<head></head>" + "<body>" + "<h1>提供您預設密碼：" + newPassword + "</h1>"
 				+ "<p><a href='http://localhost:8080/chill-tribe/chilltribe.html'> 請點擊此連結回到首頁 </a></p>" + "</body>" + "</html>";
 		sendEmail.send(sesv2Client, sender, recipient, subject, bodyHTML);
 		}

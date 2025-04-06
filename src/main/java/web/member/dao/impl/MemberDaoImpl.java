@@ -1,5 +1,6 @@
 package web.member.dao.impl;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -166,15 +167,16 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int forgetpassword(String email) {
+	public int forgetpassword(String email, String newPassword) {
 		final String hql = "UPDATE Member SET PASSWORD = :password WHERE email = :email";
-		String newPassword = "chilltribe202";  
 		Query<?> query = session.createQuery(hql.toString());
 		return query
 	    	.setParameter("password", newPassword)
 			.setParameter("email", email)
 			.executeUpdate();
 	}
+	
+	
 
 	@Override
 	public int updatepassword(Member member) {

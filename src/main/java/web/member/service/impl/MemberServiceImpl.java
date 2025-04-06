@@ -1,5 +1,6 @@
 package web.member.service.impl;
 
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -154,10 +155,25 @@ public class MemberServiceImpl implements MemberService {
 		String email = member.getEmail();
 		if (memberDao.selectByEmail(email) != null) {
 			System.out.println("有這個Email");
-			memberDao.forgetpassword(email);
+			String newPassword = generateRandomPassword(10);
+			memberDao.forgetpassword(email, newPassword);
+			member.setPassword(newPassword);
 			return member;
 		}
-		return member;
+		return null;
+	}
+	
+	private String generateRandomPassword(int length) {
+	    String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+	    SecureRandom random = new SecureRandom();
+	    
+	    StringBuilder password = new StringBuilder(length);
+	    for (int i = 0; i < length; i++) {
+	        int index = random.nextInt(chars.length());
+	        password.append(chars.charAt(index));
+	    }
+	    
+	    return password.toString();
 	}
 
 	@Override
