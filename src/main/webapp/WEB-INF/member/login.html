@@ -294,7 +294,7 @@
 		localStorage.setItem("btn_google", false);
 	// Google查詢開始
 // 	window.onload = function () {
-		fetch(`${APP_CONFIG.BASE_URL}googlelogin/findGoogleEmail`)
+		fetch("http://localhost:8080/chill-tribe/googlelogin/findGoogleEmail")
 			.then(response => {
 				return response.json();
 			})
