@@ -29,7 +29,7 @@ public interface MemberDao {
 	
 	Member selectimg(String photo_base64);
 	
-	int forgetpassword(String email);
+	int forgetpassword(String email, String newPassword);
 	
 	int updatepassword(Member member);
 	

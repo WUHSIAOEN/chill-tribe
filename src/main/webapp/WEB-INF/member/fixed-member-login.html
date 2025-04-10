@@ -142,6 +142,7 @@
 			return;
 		}
 
+		 const encodedPassword = encodeURIComponent(password.value);
 
 
 		console.log("發送的資料：", {
@@ -151,7 +152,7 @@
 		console.log("發送登入請求");
 
 		// to do list ...要判斷如果不是在member路徑底下(首頁)，如果不是要用別的
-		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${password.value}`)
+		fetch(`${APP_CONFIG.BASE_URL}member/login/${email.value}/${encodedPassword}`)
 // 		fetch(`login/${email.value}/${password.value}`)
 			// 			, {
 			// 				method: 'POST',
@@ -221,6 +222,7 @@
 					console.log("GoogleEmail", data.email);
 					sessionStorage.setItem('memberid', data.memberid);
 					console.log("memberid", data.memberid);
+					localStorage.setItem('memberid', data.memberid);
 					//                 sessionStorage.setItem('name', data.name);
 					//             	sessionStorage.setItem('Access Token:', data.access_token);
 					setmembername(data.memberid);
